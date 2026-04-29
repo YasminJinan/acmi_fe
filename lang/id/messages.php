@@ -191,5 +191,8 @@ return [
 'cta_desc' => 'Bergabunglah dengan jaringan pemimpin yang mendorong pertumbuhan bisnis dan kepemimpinan Indonesia. Jadilah bagian dari perubahan.',
 'cta_btn' => 'Ajukan Profil Anda Sekarang',
 'cta_note' => 'Proses kurasi dalam 5-7 hari kerja • Tanpa komitmen awal',
+'asal' => 'Jakarta Selatan, DKI Jakarta, Indonesia',
+'tautan' => 'Quick Links'
+
 
 ];

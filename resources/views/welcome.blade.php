@@ -315,80 +315,83 @@
     </div>
 </section>
 
-{{-- PROGRAM UNGGULAN SECTION --}}
-<section class="py-24 bg-white dark:bg-gray-900 px-6 transition-colors duration-500 overflow-hidden">
-    <div class="max-w-7xl mx-auto">
-        
-        {{-- Header dengan AOS --}}
-        <div class="text-center mb-10" data-aos="fade-up">
-            <span class="inline-block px-4 py-1.5 rounded-full border border-orange-100 dark:border-orange-500/20 bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-[10px] font-bold mb-6 tracking-[0.2em] uppercase">
-                {{ __('messages.program_badge') }}
-            </span>
-            <h2 class="text-4xl md:text-5xl font-poppins text-gray-900 dark:text-white leading-tight">
-                <span class="font-light">{{ __('messages.program_title_1') }}</span><br>
-                <span class="font-serif font-bold italic text-orange-500">{{ __('messages.program_title_2') }}</span>
-            </h2>
-
-            <div class="w-20 h-1.5 bg-orange-500 mx-auto mt-4  rounded-full opacity-20"></div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            @php
-                $programs = [
-                    ['icon' => 'fa-users-viewfinder', 'title' => __('messages.program_1_title'), 'desc' => __('messages.program_1_desc'), 'is_featured' => false],
-                    ['icon' => 'fa-graduation-cap', 'title' => __('messages.program_2_title'), 'desc' => __('messages.program_2_desc'), 'is_featured' => false],
-                    ['icon' => 'fa-calendar-check', 'title' => __('messages.program_3_title'), 'desc' => __('messages.program_3_desc'), 'is_featured' => false],
-                    ['icon' => 'fa-plane-departure', 'title' => __('messages.program_4_title'), 'desc' => __('messages.program_4_desc'), 'is_featured' => true],
-                    ['icon' => 'fa-user-group', 'title' => __('messages.program_5_title'), 'desc' => __('messages.program_5_desc'), 'is_featured' => false],
-                    ['icon' => 'fa-lightbulb', 'title' => 'Inovasi Digital', 'desc' => 'Mendorong transformasi digital bagi seluruh anggota CEO.', 'is_featured' => false],
-                ];
-            @endphp
-
-            @foreach($programs as $index => $program)
-            <div 
-                data-aos="fade-up" 
-                data-aos-delay="{{ $index * 100 }}"
-                class="group relative p-1 transition-all duration-500"
-            >
-                {{-- Border Gradient Effect on Hover --}}
-                <div class="absolute inset-0 bg-gradient-to-br from-orange-400 to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-[2.5rem]"></div>
-                
-                <div class="relative h-full bg-[#f8f9fb] dark:bg-white/[0.03] border {{ $program['is_featured'] ? 'border-orange-500/30' : 'border-transparent' }} p-10 rounded-[2.3rem] hover:bg-white dark:hover:bg-gray-800/50 hover:shadow-[0_30px_60px_-15px_rgba(255,145,0,0.15)] transition-all duration-500 flex flex-col justify-between">
-                    
-                    <div>
-                        {{-- Icon: Floating Style --}}
-                        <div class="w-16 h-16 {{ $program['is_featured'] ? 'bg-orange-500 shadow-orange-500/40' : 'bg-gray-900 dark:bg-orange-500/10' }} rounded-2xl flex items-center justify-center text-white {{ $program['is_featured'] ? '' : 'dark:text-orange-500' }} mb-8 shadow-xl group-hover:-translate-y-2 transition-all duration-500">
-                            <i class="fa-solid {{ $program['icon'] }} text-2xl"></i>
-                        </div>
-
-                        {{-- Title --}}
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white font-poppins mb-4 leading-snug">
-                            {{ $program['title'] }}
-                        </h3>
-                        
-                        {{-- Desc --}}
-                        <p class="text-gray-500 dark:text-gray-400 leading-relaxed font-poppins text-sm line-clamp-3 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors">
-                            {{ $program['desc'] }}
-                        </p>
+{{-- EXCLUSIVE MEMBERSHIP SECTION --}}
+<section class="py-24 bg-white dark:bg-gray-900 transition-colors duration-500 overflow-hidden">
+    {{-- Kita kasih px-12 sampai px-20 biar kontennya nggak nempel tembok --}}
+    <div class="max-w-7xl mx-auto px-12 md:px-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+            
+            {{-- Sisi Kiri: Informasi --}}
+            <div class="space-y-8" data-aos="fade-right">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-100 dark:border-orange-500/20 bg-orange-50/50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-bold mb-6 shadow-sm uppercase tracking-[0.2em]">
+                        <i class="fa-regular fa-shield-check"></i>
+                        <span>{{ __('messages.membership_badge') }}</span>
                     </div>
+                    
+                    <h2 class="text-4xl md:text-5xl font-poppins text-slate-900 dark:text-white leading-[1.1]">
+                        <span class="font-semibold tracking-tight">{{ __('messages.membership_title_1') }}</span><br>
+                        <span class="font-serif font-bold italic text-orange-500">{{ __('messages.membership_title_2') }}</span>
+                    </h2>
+                    
+                    <p class="mt-6 text-gray-500 dark:text-gray-400 text-sm md:text-base font-poppins leading-relaxed max-w-lg">
+                        {{ __('messages.membership_desc') }}
+                    </p>
+                </div>
 
-
-                    {{-- Featured Badge --}}
-                    @if($program['is_featured'])
-                        <div class="absolute top-6 right-6">
-                            <span class="flex h-3 w-3">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
-                            </span>
+                {{-- Checklist Features --}}
+                <ul class="space-y-4">
+                    @foreach(__('messages.membership_features') as $feature)
+                    <li class="flex items-start gap-3 text-slate-700 dark:text-gray-300 font-poppins text-sm group">
+                        <div class="flex-shrink-0 w-5 h-5 border-2 border-orange-400 dark:border-orange-500/50 rounded-full flex items-center justify-center mt-0.5 group-hover:bg-orange-500 group-hover:border-orange-500 transition-all duration-300">
+                            <i class="fa-solid fa-check text-[8px] text-orange-500 group-hover:text-white"></i>
                         </div>
-                    @endif
+                        <span class="group-hover:text-gray-900 dark:group-hover:text-white transition-colors">{{ $feature }}</span>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+
+            {{-- Sisi Kanan: Card CTA --}}
+            <div class="relative flex justify-center lg:justify-end" data-aos="fade-left">
+                {{-- Decorative Glow --}}
+                <div class="absolute -top-10 -right-10 w-64 h-64 bg-orange-500/10 blur-[100px] rounded-full"></div>
+                
+                {{-- Main Card --}}
+                <div class="relative group bg-[#f8f9fb] dark:bg-white/[0.03] border border-gray-100 dark:border-white/10 p-8 md:p-12 rounded-[3rem] w-full max-w-[380px] text-center shadow-xl backdrop-blur-sm transition-all duration-500">
+                    
+                    {{-- Icon Container --}}
+                    <div class="relative w-20 h-20 mx-auto mb-8">
+                        <div class="absolute inset-0 bg-orange-500/20 rounded-2xl blur-2xl group-hover:blur-3xl transition-all"></div>
+                        <div class="relative w-full h-full bg-orange-500 rounded-[1.5rem] flex items-center justify-center transform -rotate-12 group-hover:rotate-0 transition-all shadow-lg shadow-orange-500/20">
+                            <i class="fa-solid fa-shield-halved text-2xl text-white"></i>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white font-poppins mb-3">
+                        {{ __('messages.membership_cta_title') }}
+                    </h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-xs font-poppins leading-relaxed mb-8">
+                        {{ __('messages.membership_cta_desc') }}
+                    </p>
+                    
+                    <button class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-2xl shadow-lg shadow-orange-500/30 transition-all active:scale-95 text-sm flex items-center justify-center gap-2">
+                        {{ __('messages.membership_cta_btn') }}
+                        <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                    
+                    <p class="mt-6 text-[11px] text-gray-400 dark:text-gray-500 font-poppins">
+                        {{ __('messages.membership_partner') }} 
+                        <a href="#" class="text-orange-500 font-bold hover:underline decoration-1 underline-offset-4">
+                            {{ __('messages.membership_contact') }}
+                        </a>
+                    </p>
                 </div>
             </div>
-            @endforeach
+
         </div>
     </div>
 </section>
-
 
 <section class="bg-white dark:bg-gray-900 py-24 px-6 md:px-10 transition-colors duration-500 overflow-hidden"
    x-data="{

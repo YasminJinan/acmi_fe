@@ -180,5 +180,7 @@ return [
     'cta_desc' => 'Join a network of leaders driving business and leadership growth in Indonesia. Be part of the change.',
     'cta_btn' => 'Apply Now',
     'cta_note' => 'Curation process takes 5–7 working days • No initial commitment',
+    'asal' => 'South Jakarta, Jakarta Special Capital Region, Indonesia',
+    'tautan' => 'Tautan Cepat'
 
 ];
