@@ -3,11 +3,12 @@
 return [
 
     // NAV
-    'nav_profile' => 'Profile',
+    
     'nav_board' => 'Board',
-    'nav_members' => 'Members',
+    'nav_products' => 'Products',
     'nav_gallery' => 'Gallery',
-    'nav_ontopic' => 'On Topic',
+    'nav_membership' => 'Membership',
+    'nav_ontopic' => 'On Topik',
 
     // HERO
     'hero_badge' => 'Association of CEOs & Executives Indonesia',

@@ -4,12 +4,12 @@ return [
 
     // NAV
     // NAV
-    'nav_profile' => 'Profil',
-    'nav_board' => 'Pengurus',
-    'nav_members' => 'Anggota',
-    'nav_gallery' => 'Galeri',
+    
+    'nav_board' => 'Board',
+    'nav_products' => 'Produk',
+    'nav_gallery' => 'Gallery',
+    'nav_membership' => 'Membership',
     'nav_ontopic' => 'On Topik',
-
     // HERO
     'hero_badge' => 'Asosiasi CEO & Eksekutif Indonesia',
     'hero_title_1' => 'Bersinergi, Bertumbuh,',

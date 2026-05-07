@@ -61,7 +61,7 @@
     </style>
 </head>
 
-<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex flex-col min-h-screen">
+<body class="bg-white dark:bg-[#0a0a0b] text-gray-900 dark:text-gray-100 flex flex-col min-h-screen">
     <x-navbar />
     <main class="flex-grow">@yield('content')</main>
     <x-footer />

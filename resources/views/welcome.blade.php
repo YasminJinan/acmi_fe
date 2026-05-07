@@ -4,7 +4,6 @@
 
 @section('content')
 {{-- HERO SECTION --}}
-{{-- HERO SECTION --}}
 <section class="relative h-screen flex items-center justify-center overflow-hidden">
     {{-- BACKGROUND VIDEO --}}
     <div class="absolute inset-0 w-full h-full">
@@ -14,7 +13,9 @@
     </div>
 
     {{-- OVERLAY --}}
-    <div class="absolute inset-0 bg-gradient-to-b from-white/30 via-white/80 to-white/90 dark:from-black/40 dark:via-gray-900/80 dark:to-gray-900"></div>
+    <div class="absolute inset-0 bg-gradient-to-b 
+    from-white/30 via-white/80 to-white 
+    dark:from-[#0a0a0b]/40 dark:via-[#0a0a0b]/80 dark:to-[#0a0a0b]"></div>
 
     <div class="relative z-10 text-center px-6 max-w-4xl">
        
@@ -97,7 +98,7 @@
 </section>
 
 {{-- PARTNER SECTION --}}
-<section class="relative py-24 bg-white dark:bg-gray-900 overflow-hidden">
+<section class="relative py-24 bg-white dark:bg-[#0a0a0b] overflow-hidden transition-colors duration-500">
     <div class="container mx-auto px-6">
         <div class="text-center mb-12" data-aos="fade-up">
             <h2 class="text-orange-500 dark:text-orange-400 text-xs font-bold tracking-[0.2em] uppercase mb-3">
@@ -126,7 +127,7 @@
 </section>
 
 {{-- EVENT BANNER (Fixed for Dark Mode) --}}
-<section class="bg-white dark:bg-gray-900 px-6 md:px-10 pt-10 pb-6">
+<section class="bg-white dark:bg-[#0a0a0b] px-6 md:px-10 pt-10 pb-6">
     <div class="max-w-7xl mx-auto">
         <div class="bg-[#f5f5f7] dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between shadow-sm gap-6">
             <div class="flex items-center gap-5">
@@ -157,7 +158,7 @@
 </section>
 
 {{-- CHALLENGE SECTION --}}
-<section class="bg-white dark:bg-gray-900 px-6 md:px-10 py-24 transition-colors duration-500 overflow-hidden">
+<section class="bg-white dark:bg-[#0a0a0b] px-6 md:px-10 py-24 transition-colors duration-500 overflow-hidden">
     <div class="max-w-7xl mx-auto flex flex-col gap-16">
         
         {{-- Header Section --}}
@@ -219,7 +220,7 @@
     </div>
 </section>
 {{-- SOLUTION SECTION --}}
-<section class="relative min-h-screen w-full flex items-center justify-center py-24 px-6 overflow-hidden transition-colors duration-500 bg-white dark:bg-gray-900">
+<section class="relative min-h-screen w-full flex items-center justify-center py-24 px-6 overflow-hidden transition-colors duration-500 bg-white dark:bg-[#0a0a0b]">
     
     {{-- Background with Parallax Effect --}}
     <div class="absolute inset-0 z-0" data-aos="fade-in" data-aos-duration="2000">
@@ -316,7 +317,7 @@
 </section>
 
 {{-- EXCLUSIVE MEMBERSHIP SECTION --}}
-<section class="py-24 bg-white dark:bg-gray-900 transition-colors duration-500 overflow-hidden">
+<section class="py-24 bg-white dark:bg-[#0a0a0b] transition-colors duration-500 overflow-hidden">
     {{-- Kita kasih px-12 sampai px-20 biar kontennya nggak nempel tembok --}}
     <div class="max-w-7xl mx-auto px-12 md:px-20">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
@@ -393,251 +394,116 @@
     </div>
 </section>
 
-<section class="bg-white dark:bg-gray-900 py-24 px-6 md:px-10 transition-colors duration-500 overflow-hidden"
+
+{{-- SECTION PRODUK ANGGOTA --}}
+<section class="bg-white dark:bg-[#0a0a0b] py-16 px-6 md:px-10 transition-colors duration-500 overflow-hidden"
    x-data="{
         search: '',
         category: 'Semua',
-        showDetail: false,
-        selectedProduct: null,
-        products: [
-            {
-                title: 'Premium Business Suite',
-                company: 'PT Teknologi Maju',
-                ceo: 'Budi Santoso',
-                category: 'Software',
-                desc: 'Premium Business Suite adalah platform manajemen bisnis all-in-one yang menggabungkan ERP, CRM, dan analitik dalam satu ekosistem terpadu.',
-                img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015',
-                website: 'https://teknologimaju.co.id',
-                address: 'Menara BCA Lt. 35, Jakarta',
-                features: ['ERP Terintegrasi', 'CRM & Sales Pipeline', 'Business Intelligence']
-            },
-            {
-                title: 'Green Energy Solutions',
-                company: 'PT Energi Hijau Indonesia',
-                ceo: 'Dewi Kusuma',
-                category: 'Energi',
-                desc: 'Green Energy Solutions menyediakan solusi energi terbarukan komprehensif mulai dari konsultasi, instalasi panel surya, hingga maintenance untuk sektor industri dan komersial. Komitmen kami terhadap keberlanjutan membantu perusahaan mengurangi carbon footprint.',
-                img: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2072',
-                website: 'https://energihijau.co.id',
-                email: 'contact@energihijau.co.id',
-                phone: '+62 21 555 0202',
-                address: 'Green Tower Lt. 20, Jakarta Selatan',
-                features: ['Panel Surya Premium', 'Konsultasi Energi', 'Maintenance 24/7', 'ROI Calculator', 'Carbon Credit Trading']
-            },
-            {
-                title: 'Premium Coffee Beans',
-                company: 'PT Kopi Nusantara',
-                ceo: 'Agus Wijaya',
-                category: 'F&B',
-                desc: 'PT Kopi Nusantara menghadirkan biji kopi single-origin premium dari perkebunan terbaik di Aceh, Toraja, dan Flores. Dengan proses roasting artisanal dan quality control ketat, kami melayani kebutuhan kopi premium untuk hotel, restoran, dan korporasi.',
-                img: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=2000',
-                website: 'https://kopinusantara.co.id',
-                email: 'order@kopinusantara.co.id',
-                phone: '+62 21 555 0303',
-                address: 'Jl. Sudirman Kav. 52, Jakarta',
-                features: ['Single Origin', 'Artisanal Roasting', 'B2B Supply', 'Custom Blend', 'Cupping Session']
-            },
-            {
-                title: 'Smart Manufacturing System',
-                company: 'PT Industri Cerdas',
-                ceo: 'Ratna Permata',
-                category: 'Manufaktur',
-                desc: 'Smart Manufacturing System menghadirkan revolusi Industri 4.0 ke lantai produksi Anda. Dengan kombinasi AI, IoT, dan robotika, kami mengoptimalkan proses manufaktur, meningkatkan kualitas produk, dan mengurangi downtime hingga 80%.',
-                img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070',
-                website: 'https://industricerdas.co.id',
-                email: 'sales@industricerdas.co.id',
-                phone: '+62 21 555 0404',
-                address: 'Kawasan Industri MM2100, Bekasi',
-                features: ['AI Quality Control', 'IoT Monitoring', 'Predictive Maintenance', 'Digital Twin', 'Real-time Analytics']
-            },
-            {
-                title: 'Luxury Property Collection',
-                company: 'PT Properti Prima',
-                ceo: 'Herman Tanoto',
-                category: 'Properti',
-                desc: 'PT Properti Prima mengembangkan hunian mewah dan properti komersial premium di lokasi-lokasi strategis Indonesia. Dengan standar internasional dan desain award-winning, setiap proyek kami mencerminkan kemewahan dan kenyamanan terbaik.',
-                img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000',
-                website: 'https://propertiprima.co.id',
-                email: 'inquiry@propertiprima.co.id',
-                phone: '+62 21 555 0505',
-                address: 'Pacific Place Lt. 42, Jakarta',
-                features: ['Lokasi Premium', 'Desain Award-Winning', 'Smart Home', 'Concierge Service', 'Investment Grade']
-            },
-            {
-                title: 'Fintech Payment Gateway',
-                company: 'PT Digital Finance',
-                ceo: 'Linda Hartono',
-                category: 'Fintech',
-                desc: 'PT Digital Finance menyediakan payment gateway enterprise-grade yang mendukung berbagai metode pembayaran digital. Platform kami memproses jutaan transaksi per hari dengan keamanan tingkat bank dan uptime 99.99%.',
-                img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2000',
-                website: 'https://digitalfinance.co.id',
-                email: 'partnership@digitalfinance.co.id',
-                phone: '+62 21 555 0606',
-                address: 'Equity Tower Lt. 28, Jakarta',
-                features: ['Multi-Payment Support', 'Bank-Grade Security', '99.99% Uptime', 'Real-time Settlement', 'API Integration']
-            }
-        ]
-    }"
+        products: @js($products),
+        get filteredProducts() {
+            return this.products.filter(p => {
+                const matchSearch = p.title.toLowerCase().includes(this.search.toLowerCase()) || 
+                                    p.company.toLowerCase().includes(this.search.toLowerCase());
+                const matchCategory = this.category === 'Semua' || p.category === this.category;
+                return matchSearch && matchCategory;
+            });
+        }
+    }">
 
-    < class="max-w-7xl mx-auto">
-        {{-- Hapus div x-data yang kosong tadi, langsung masuk ke Header --}}
+    <div class="max-w-7xl mx-auto">
         
-       {{-- HEADER --}}
-       <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-xs font-semibold mb-6 border border-orange-100 dark:border-orange-500/20">
+        {{-- HEADER - Dikurangi margin bawahnya (mb-10) --}}
+        <div class="text-center max-w-3xl mx-auto mb-10" data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-[10px] font-semibold mb-4 border border-orange-100 dark:border-orange-500/20">
                 <i class="fa-solid fa-box-open animate-pulse"></i> Produk Anggota
             </div>
-            <h2 class="text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white leading-tight">
-                Produk & Layanan dari <br>
+            <h2 class="text-5xl md:text-5xl font-semibold text-gray-900 dark:text-white leading-tight">
+                Produk & Layanan <br>
                 <span class="text-orange-500 font-serif italic font-bold">Anggota ACMI</span>
             </h2>
-            <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm md:text-base">
-                Temukan produk dan layanan berkualitas dari perusahaan yang dipimpin oleh anggota ACMI.
-            </p>
-        </div>
 
-
-     {{-- GRID PRODUK --}}
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <template x-for="(product, index) in products.filter(p => (category === 'Semua' || p.category === category) && (p.title.toLowerCase().includes(search.toLowerCase()) || p.company.toLowerCase().includes(search.toLowerCase())))" :key="product.title">
-        <div 
-            x-show="true"
-            x-transition:enter="transition ease-[cubic-bezier(0.34,1.56,0.64,1)] duration-500"
-            x-transition:enter-start="opacity-0 scale-95 translate-y-4"
-            x-transition:enter-end="opacity-100 scale-100 translate-y-0"
-            class="group flex flex-col"
-        >
-            <div class="relative bg-white dark:bg-white/5 rounded-3xl overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:-translate-y-2 flex flex-col h-full">
-                
-                {{-- Image: Dikecilkan tingginya --}}
-                <div class="relative h-[200px] overflow-hidden">
-                    <img :src="product.img" class="w-full h-full object-cover transition duration-[1.5s] ease-out group-hover:scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
-                    {{-- Badge: Lebih kecil & di pojok --}}
-                    <div class="absolute top-4 left-4">
-                        <span class="bg-white/95 dark:bg-slate-900/90 backdrop-blur-md text-orange-500 text-[9px] px-3 py-1.5 rounded-lg font-bold uppercase tracking-wider shadow-sm" x-text="product.category"></span>
-                    </div>
+            {{-- SEARCH & FILTER BAR - Dibuat lebih ramping (py-3) --}}
+            <div class="mt-6 flex flex-col md:flex-row gap-3 justify-center">
+                <div class="relative group md:w-72">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xs group-focus-within:text-orange-500 transition-colors"></i>
+                    <input type="text" x-model="search" placeholder="Cari produk..." 
+                           class="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white text-sm transition-all">
                 </div>
-
-                {{-- Content: Padding disesuaikan (p-5) --}}
-<div class="p-5 flex flex-col flex-grow">
-    {{-- Judul: Margin-bottom dikecilkan ke mb-1 --}}
-    <h3 class="text-lg font-poppins font-bold text-gray-900 dark:text-white mb-1 leading-tight group-hover:text-orange-500 transition-colors" x-text="product.title"></h3>
-    
-    {{-- Deskripsi: Margin-bottom dari mb-8 jadi mb-4, text lebih rapat --}}
-    <p class="text-gray-500 dark:text-gray-400 text-[13px] leading-snug mb-4 line-clamp-2" x-text="product.desc"></p>
-    
-    <div class="mt-auto">
-        {{-- Info Perusahaan: Padding & Margin dikecilkan --}}
-        <div class="flex items-center gap-3 p-2.5 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5 mb-3">
-            <div class="w-8 h-8 flex-shrink-0 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 text-[10px] font-bold" x-text="product.ceo.charAt(0)"></div>
-            <div class="min-w-0"> {{-- min-w-0 biar truncate jalan --}}
-                <p class="text-gray-900 dark:text-gray-200 font-bold text-[11px] truncate" x-text="product.company"></p>
-                <p class="text-gray-400 text-[9px] uppercase tracking-tighter truncate">CEO: <span x-text="product.ceo"></span></p>
-            </div>
-        </div>
-        
-        {{-- Button: Lebih ringkas --}}
-        <button @click="selectedProduct = product; showDetail = true" 
-            class="w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-xs font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 active:scale-95 group/btn">
-            Detail Bisnis <i class="fa-solid fa-arrow-right-long ml-1.5 transition-transform group-hover/btn:translate-x-1"></i>
-        </button>
-    </div>
-</div>
-            </div>
-        </div>
-    </template>
-</div>
-
-        {{-- MODAL DETAIL: Luxury Reveal --}}
-        <template x-teleport="body">
-            <div x-show="showDetail" class="fixed inset-0 z- overflow-hidden flex items-center justify-center p-4">
-                {{-- Backdrop --}}
-                <div x-show="showDetail" 
-                     x-transition:enter="transition ease-out duration-500"
-                     x-transition:enter-start="opacity-0"
-                     x-transition:enter-end="opacity-100"
-                     x-transition:leave="transition ease-in duration-400"
-                     x-transition:leave-start="opacity-100"
-                     x-transition:leave-end="opacity-0"
-                     @click="showDetail = false"
-                     class="absolute inset-0 bg-slate-900/80 backdrop-blur-xl"></div>
                 
-                {{-- Modal Container --}}
-                <div x-show="showDetail" 
-                     x-transition:enter="transition ease-[cubic-bezier(0.34,1.56,0.64,1)] duration-600"
-                     x-transition:enter-start="opacity-0 scale-95 translate-y-12"
-                     x-transition:enter-end="opacity-100 scale-100 translate-y-0"
-                     x-transition:leave="transition ease-in duration-300"
-                     x-transition:leave-start="opacity-100 scale-100"
-                     x-transition:leave-end="opacity-0 scale-95"
-                     class="bg-white dark:bg-gray-900 w-full max-w-5xl max-h-[90vh] rounded-[3rem] overflow-hidden shadow-2xl relative border dark:border-white/10 flex flex-col md:flex-row">
-                    
-                    {{-- Left Side: Image & Features (Scrollable) --}}
-                    <div class="md:w-5/12 bg-gray-50 dark:bg-black/20 p-8 overflow-y-auto custom-scrollbar">
-                        <img :src="selectedProduct?.img" class="rounded-[2rem] w-full aspect-square object-cover shadow-2xl mb-8">
+                <select x-model="category" 
+                        class="px-6 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white text-sm cursor-pointer appearance-none">
+                    <option value="Semua">Semua Kategori</option>
+                    <option value="Software">Software</option>
+                    <option value="Energi">Energi</option>
+                    <option value="F&B">F&B</option>
+                    <option value="Manufaktur">Manufaktur</option>
+                    <option value="Properti">Properti</option>
+                    <option value="Fintech">Fintech</option>
+                </select>
+            </div>
+        </div>
+
+        {{-- GRID PRODUK - Gap dikurangi (gap-6) --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <template x-for="product in filteredProducts" :key="product.slug">
+                <div class="group flex flex-col" data-aos="fade-up">
+                    <div class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
                         
-                        <div class="space-y-6">
-                            <h4 class="font-bold text-gray-900 dark:text-white text-xs uppercase tracking-widest">Core Features</h4>
-                            <div class="grid gap-3">
-                                <template x-for="feature in selectedProduct?.features">
-                                    <div class="flex items-center gap-3 p-4 bg-white dark:bg-white/5 rounded-2xl border border-gray-100 dark:border-white/10 transition-transform hover:scale-[1.02]">
-                                        <i class="fa-solid fa-check-double text-orange-500 text-xs"></i>
-                                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300" x-text="feature"></span>
+                        {{-- Image Badge Kategori - Tinggi dikurangi (h-[180px]) --}}
+                        <div class="relative h-[180px] overflow-hidden">
+                            <img :src="product.img" :alt="product.title" class="w-full h-full object-cover group-hover:scale-110 transition duration-[1.5s] ease-out">
+                            <div class="absolute top-4 left-4">
+                                <span class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-orange-600 dark:text-orange-400 text-[9px] px-3 py-1.5 rounded-lg font-black uppercase tracking-widest shadow-lg" x-text="product.category"></span>
+                            </div>
+                        </div>
+
+                        {{-- Content - Padding dikurangi (p-6) --}}
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-lg font-poppins font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-500 transition-colors line-clamp-1" x-text="product.title"></h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-xs mb-4 line-clamp-2 leading-relaxed" x-text="product.desc"></p>
+                            
+                            <div class="mt-auto">
+                                {{-- Business Info Card - Lebih compact (p-3) --}}
+                                <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 mb-4 border border-transparent group-hover:border-orange-500/20 transition-all">
+                                    <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center text-[10px] font-black shadow-lg shadow-orange-500/20 flex-shrink-0" x-text="product.ceo.charAt(0)"></div>
+                                    <div class="min-w-0">
+                                        <p class="text-gray-900 dark:text-gray-200 font-bold text-[11px] truncate" x-text="product.company"></p>
+                                        <p class="text-gray-400 text-[9px] uppercase tracking-tighter">CEO: <span class="text-gray-500 dark:text-gray-300" x-text="product.ceo"></span></p>
                                     </div>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Right Side: Info & Form --}}
-                    <div class="md:w-7/12 p-10 md:p-14 overflow-y-auto custom-scrollbar relative">
-                        <button @click="showDetail = false" class="absolute top-8 right-8 text-gray-400 hover:text-orange-500 transition-colors">
-                            <i class="fa-solid fa-circle-xmark text-3xl"></i>
-                        </button>
-
-                        <span class="text-orange-500 text-[10px] font-black uppercase tracking-[0.3em]" x-text="selectedProduct?.category"></span>
-                        <h2 class="text-4xl font-poppins font-bold text-gray-900 dark:text-white mt-2 mb-6" x-text="selectedProduct?.title"></h2>
-                        <p class="text-gray-500 dark:text-gray-400 leading-relaxed mb-10" x-text="selectedProduct?.desc"></p>
-
-                        <div class="grid grid-cols-2 gap-6 mb-12">
-                            <div class="space-y-1">
-                                <p class="text-[10px] text-gray-400 font-bold uppercase">Website</p>
-                                <p class="text-sm font-bold text-gray-800 dark:text-gray-200" x-text="selectedProduct?.website"></p>
-                            </div>
-                            <div class="space-y-1">
-                                <p class="text-[10px] text-gray-400 font-bold uppercase">Office</p>
-                                <p class="text-sm font-bold text-gray-800 dark:text-gray-200" x-text="selectedProduct?.address"></p>
-                            </div>
-                        </div>
-
-                        {{-- Action Form --}}
-                        <div class="bg-orange-500 p-1 rounded-[2.5rem]">
-                            <div class="bg-white dark:bg-gray-800 rounded-[2.4rem] p-8">
-                                <h3 class="text-xl font-bold mb-6 flex items-center gap-3 text-gray-900 dark:text-white">
-                                    <i class="fa-solid fa-envelope-open-text text-orange-500"></i> Kirim Inkuiri
-                                </h3>
-                                <form class="space-y-4">
-                                    <input type="text" placeholder="Nama Bisnis Anda" class="w-full p-4 rounded-xl bg-gray-50 dark:bg-gray-900 border-none text-sm outline-none focus:ring-2 focus:ring-orange-500 transition-all">
-                                    <textarea placeholder="Bagaimana kami bisa membantu Anda?" rows="3" class="w-full p-4 rounded-xl bg-gray-50 dark:bg-gray-900 border-none text-sm outline-none focus:ring-2 focus:ring-orange-500 transition-all resize-none"></textarea>
-                                    <button class="w-full py-4 bg-orange-500 text-white rounded-xl font-bold hover:shadow-lg hover:shadow-orange-500/30 transition-all">Hubungi Sekarang</button>
-                                </form>
+                                </div>
+                                
+                                {{-- Tombol Detail - Lebih ramping (py-3) --}}
+                                <a :href="'/products/' + product.slug"
+                                   class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
+                                    Lihat Detail Bisnis 
+                                    <i class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
+            </template>
+        </div>
+
+        {{-- Empty State --}}
+        <div x-show="filteredProducts.length === 0" x-cloak class="text-center py-24" data-aos="fade-up">
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-white/5 text-gray-400 mb-6">
+                <i class="fa-solid fa-magnifying-glass text-2xl"></i>
             </div>
-        </template>
-    
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Produk Tidak Ditemukan</h3>
+            <p class="text-gray-500 dark:text-gray-400 mt-2">Coba gunakan kata kunci lain atau pilih kategori yang berbeda.</p>
+        </div>
 
-
-<style>
-    .custom-scrollbar::-webkit-scrollbar { width: 5px; }
-    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: #f97316; border-radius: 10px; }
-</style>
     </div>
+
+    {{-- Styling Khusus untuk Scrollbar & Alpine Cloak --}}
+    <style>
+        [x-cloak] { display: none !important; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #f97316; border-radius: 10px; }
+    </style>
 </section>
 {{-- TESTIMONIAL SECTION --}}
 <section 
@@ -646,13 +512,14 @@
         labelMore: '{{ __('messages.testimonial_more') }}',
         labelLess: '{{ __('messages.testimonial_less') }}'
     }" 
-    class="relative py-20 overflow-hidden transition-colors duration-500 bg-white dark:bg-gray-900"
+    class="relative py-20 overflow-hidden transition-colors duration-500 bg-white dark:bg-[#0a0a0b]"
 >
     {{-- Background Image & Overlay --}}
-    <div class="absolute inset-0 z-0">
+  <div class="absolute inset-0 z-0">
         <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80" 
-             class="w-full h-full object-cover opacity-20 dark:opacity-10" alt="Office Background">
-        <div class="absolute inset-0 bg-gradient-to-b from-white via-white/90 to-white dark:from-gray-900 dark:via-gray-900/95 dark:to-gray-900"></div>
+             class="w-full h-full object-cover opacity-10 dark:opacity-[0.03]" alt="Office Background">
+        {{-- Gradasi disesuaikan ke #0a0a0b --}}
+        <div class="absolute inset-0 bg-gradient-to-b from-white/90 via-white to-white/90 dark:from-[#0a0a0b]/95 dark:via-[#0a0a0b] dark:to-[#0a0a0b]/95"></div>
     </div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6">
@@ -751,92 +618,14 @@
 </section>
 {{-- Pastikan Yasmin sudah pasang script Alpine.js di head atau sebelum </body> --}}
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-{{-- EXCLUSIVE MEMBERSHIP SECTION --}}
-<section class="py-24 bg-white dark:bg-gray-900 px-6 transition-colors duration-500 overflow-hidden">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        
-        {{-- Sisi Kiri: Informasi --}}
-      <div class="space-y-8 lg:max-w-xl lg:ml-auto" data-aos="fade-right">
-            <div>
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-100 dark:border-orange-500/20 bg-orange-50/50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-bold mb-6 shadow-sm uppercase tracking-[0.2em]">
-                    <i class="fa-regular fa-shield-check"></i>
-                    <span>{{ __('messages.membership_badge') }}</span>
-                </div>
-                
-                <h2 class="text-4xl md:text-5xl font-poppins text-slate-900 dark:text-white leading-[1.1]">
-                    <span class="font-semibold tracking-tight">{{ __('messages.membership_title_1') }}</span><br>
-                    <span class="font-serif font-bold italic text-orange-500">{{ __('messages.membership_title_2') }}</span>
-                </h2>
-                
-                <p class="mt-6 text-gray-500 dark:text-gray-400 text-base md:text-lg font-poppins leading-relaxed max-w-xl">
-                    {{ __('messages.membership_desc') }}
-                </p>
-            </div>
-
-            {{-- Checklist Features --}}
-            <ul class="space-y-5">
-                @php
-                    $features = __('messages.membership_features');
-                @endphp
-
-                @foreach($features as $feature)
-                <li class="flex items-start gap-4 text-slate-700 dark:text-gray-300 font-poppins text-sm md:text-base group">
-                    <div class="flex-shrink-0 w-6 h-6 border-2 border-orange-400 dark:border-orange-500/50 rounded-full flex items-center justify-center mt-0.5 group-hover:bg-orange-500 group-hover:border-orange-500 transition-all duration-300 shadow-sm">
-                        <i class="fa-solid fa-check text-[10px] text-orange-500 group-hover:text-white transition-colors"></i>
-                    </div>
-                    <span class="group-hover:text-gray-900 dark:group-hover:text-white transition-colors">{{ $feature }}</span>
-                </li>
-                @endforeach
-            </ul>
-        </div>
-
-        {{-- Sisi Kanan: Card CTA --}}
-        <div class="relative flex justify-center lg:justify-end" data-aos="fade-left">
-            {{-- Decorative Background Glow --}}
-            <div class="absolute -top-10 -right-10 w-72 h-72 bg-orange-500/10 blur-[120px] rounded-full"></div>
-            
-        
-            {{-- Main Card --}}
-            <div class="relative group bg-[#f8f9fb] dark:bg-white/[0.03] border border-gray-100 dark:border-white/10 p-10 md:p-14 rounded-[3.5rem] w-full max-w-md text-center shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] dark:shadow-none backdrop-blur-sm transition-all duration-500 hover:border-orange-500/30">
-                
-                {{-- Animated Icon Container --}}
-                <div class="relative w-24 h-24 mx-auto mb-10">
-                    <div class="absolute inset-0 bg-orange-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
-                    <div class="relative w-full h-full bg-orange-500 rounded-[2rem] flex items-center justify-center transform -rotate-12 group-hover:rotate-0 transition-all duration-500 shadow-xl shadow-orange-500/20">
-                        <i class="fa-solid fa-shield-halved text-3xl text-white"></i>
-                    </div>
-                </div>
-                
-                <h3 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white font-poppins mb-4 tracking-tight">
-                    {{ __('messages.membership_cta_title') }}
-                </h3>
-                <p class="text-gray-500 dark:text-gray-400 text-sm font-poppins leading-relaxed mb-10 px-2">
-                    {{ __('messages.membership_cta_desc') }}
-                </p>
-
-                <button class="w-full bg-orange-500 hover:bg-orange-600 text-white font-black py-5 rounded-2xl shadow-lg shadow-orange-500/40 transition-all duration-300 flex items-center justify-center gap-3 group active:scale-95 text-base">
-                    {{ __('messages.membership_cta_btn') }}
-                    <i class="fa-solid fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
-                </button>
-
-                <p class="mt-8 text-xs md:text-sm text-gray-400 dark:text-gray-500 font-poppins">
-                    {{ __('messages.membership_partner') }} 
-                    <a href="#" class="text-orange-500 font-bold hover:underline decoration-2 underline-offset-4 transition-all">
-                        {{ __('messages.membership_contact') }}
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
 {{-- FAQ SECTION --}}
-<section class="relative py-24 px-6 overflow-hidden bg-white dark:bg-gray-900 transition-colors duration-500">
-    {{-- Background logic tetap sama --}}
+<section class="relative py-24 px-6 overflow-hidden bg-white dark:bg-[#0a0a0b] transition-colors duration-500">
+    {{-- Background logic --}}
     <div class="absolute inset-0 z-0">
         <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80" 
-             class="w-full h-full object-cover opacity-10 dark:opacity-[0.05]" alt="">
-        <div class="absolute inset-0 bg-gradient-to-b from-white/90 via-white to-white/90 dark:from-gray-900/95 dark:via-gray-900 dark:to-gray-900/95"></div>
+             class="w-full h-full object-cover opacity-10 dark:opacity-[0.03]" alt="">
+        {{-- Overlay Gradasi disesuaikan ke hitam pekat #0a0a0b --}}
+        <div class="absolute inset-0 bg-gradient-to-b from-white/90 via-white to-white/90 dark:from-[#0a0a0b]/95 dark:via-[#0a0a0b] dark:to-[#0a0a0b]/95"></div>
     </div>
 
     <div class="relative z-10 max-w-4xl mx-auto">
@@ -875,7 +664,7 @@
                 :class="open ? 'translate-y-[-4px]' : ''"
             >
                 <div 
-                    class="relative overflow-hidden rounded-[2rem] border transition-all duration-500 bg-white/70 dark:bg-white/5 backdrop-blur-xl"
+                    class="relative overflow-hidden rounded-[2rem] border transition-all duration-500 bg-white/70 dark:bg-white/[0.03] backdrop-blur-xl"
                     :class="open ? 'border-orange-500/30 shadow-2xl shadow-orange-500/10' : 'border-slate-100 dark:border-white/10 shadow-sm'"
                 >
                     <button 
@@ -914,17 +703,16 @@
             @endforeach
         </div>
 
-        {{-- Footer Call to Action tetap di sini --}}
+        {{-- Footer Call to Action (Optional space if you have one) --}}
     </div>
 </section>
-
 {{-- GALLERY SECTION --}}
 <section x-data="{ 
     activeCategory: 'Semua',
     filter(category) {
         this.activeCategory = category;
     }
-}" class="bg-white dark:bg-gray-900 py-24 px-6 md:px-10 transition-colors duration-500 overflow-hidden">
+}" class="bg-white dark:bg-[#0a0a0b] py-24 px-6 md:px-10 transition-colors duration-500 overflow-hidden">
     
     <div class="max-w-7xl mx-auto text-center">
         {{-- Header dengan Animate On Scroll --}}
@@ -1075,7 +863,7 @@ function hideItem(item) {
 </script>
 
 {{-- INSTAGRAM FEED SECTION --}}
-<section class="py-24 bg-white dark:bg-gray-900 px-6 transition-colors duration-500 overflow-hidden">
+<section class="py-24 bg-white dark:bg-[#0a0a0b] px-6 transition-colors duration-500 overflow-hidden">
     <div class="max-w-7xl mx-auto">
         {{-- Header dengan Animasi Fade Up --}}
         <div class="text-center mb-16" data-aos="fade-up" data-aos-duration="1000">
@@ -1159,7 +947,7 @@ function hideItem(item) {
     }
 </style>
 {{-- FINAL CTA SECTION --}}
-<section class="relative py-24 px-6 overflow-hidden bg-white dark:bg-gray-900 transition-colors duration-500">
+<section class="relative py-24 px-6 overflow-hidden bg-white dark:bg-[#0a0a0b]gal transition-colors duration-500">
     <div class="relative z-10 max-w-5xl mx-auto">
         <div 
             data-aos="fade-up"

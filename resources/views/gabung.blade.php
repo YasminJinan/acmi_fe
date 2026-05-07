@@ -57,33 +57,33 @@
                 
                 <h2 class="text-3xl font-poppins font-bold text-slate-900 mb-10 relative">Formulir Pendaftaran</h2>
 
-                <form action="#" method="POST" class="space-y-8 relative">
+                <form action="#" method="POST" class="space-y-10 relative">
                     @csrf
                     
                     {{-- Section: Informasi Pribadi --}}
-                    <div class="space-y-4">
-                        <h3 class="text-[10px] font-bold text-orange-500 uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
-                            <span class="w-8 h-[1px] bg-orange-200"></span> Informasi Pribadi
+                    <div class="space-y-5">
+                        <h3 class="text-xs font-bold text-orange-500 uppercase tracking-widest mb-4">
+                            Informasi Pribadi
                         </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <input type="text" placeholder="Nama Lengkap" class="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-sm">
-                            <input type="email" placeholder="Email" class="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-sm">
-                            <input type="tel" placeholder="Nomor Telepon" class="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-sm">
-                            <input type="url" placeholder="LinkedIn Profile" class="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-sm">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <input type="text" placeholder="Nama Lengkap" class="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-xs">
+                            <input type="email" placeholder="Email" class="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-xs">
+                            <input type="tel" placeholder="Nomor Telepon" class="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-xs">
+                            <input type="url" placeholder="LinkedIn Profile" class="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-xs">
                         </div>
                     </div>
 
                     {{-- Section: Informasi Perusahaan --}}
-                    <div class="space-y-4">
-                        <h3 class="text-[10px] font-bold text-orange-500 uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
-                            <span class="w-8 h-[1px] bg-orange-200"></span> Informasi Perusahaan
+                    <div class="space-y-5">
+                        <h3 class="text-xs font-bold text-orange-500 uppercase tracking-widest mb-4">
+                            Informasi Perusahaan
                         </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <input type="text" placeholder="Nama Perusahaan" class="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-sm">
-                            <input type="text" placeholder="Jabatan" class="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-sm">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <input type="text" placeholder="Nama Perusahaan" class="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-xs">
+                            <input type="text" placeholder="Jabatan" class="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-xs">
                             
-                            <select class="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-sm text-gray-500 appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f97316%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1.25rem_center] bg-no-repeat">
-                                <option disabled selected>Industri</option>
+                            <select class="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-xs text-gray-400 appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f97316%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1.25rem_center] bg-no-repeat">
+                                <option disabled selected>Pilih Industri</option>
                                 <option>Teknologi & Software</option>
                                 <option>Keuangan & Fintech</option>
                                 <option>Manufaktur</option>
@@ -97,9 +97,9 @@
                                 <option>Lainnya</option>
                             </select>
 
-                            <input type="url" placeholder="Website Perusahaan" class="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-sm">
+                            <input type="url" placeholder="Website Perusahaan" class="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-xs">
 
-                            <select class="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-sm text-gray-500 appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f97316%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1.25rem_center] bg-no-repeat">
+                            <select class="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-xs text-gray-400 appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f97316%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1.25rem_center] bg-no-repeat">
                                 <option disabled selected>Jumlah Karyawan</option>
                                 <option>1-50 Karyawan</option>
                                 <option>51-200 Karyawan</option>
@@ -108,7 +108,7 @@
                                 <option>1000+ Karyawan</option>
                             </select>
 
-                            <select class="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-sm text-gray-500 appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f97316%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1.25rem_center] bg-no-repeat">
+                            <select class="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-xs text-gray-400 appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f97316%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1.25rem_center] bg-no-repeat">
                                 <option disabled selected>Annual Revenue</option>
                                 <option>< IDR 10 Miliar</option>
                                 <option>IDR 10 - 50 Miliar</option>
@@ -120,18 +120,18 @@
                     </div>
 
                     {{-- Section: Motivasi --}}
-                    <div class="space-y-4">
-                        <h3 class="text-[10px] font-bold text-orange-500 uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
-                            <span class="w-8 h-[1px] bg-orange-200"></span> Motivasi & Referral
+                    <div class="space-y-5">
+                        <h3 class="text-xs font-bold text-orange-500 uppercase tracking-widest mb-4">
+                            Motivasi & Referral
                         </h3>
-                        <div class="space-y-4">
-                            <textarea rows="4" placeholder="Mengapa Anda tertarik bergabung dengan ACMI?" class="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-sm"></textarea>
-                            <input type="text" placeholder="Direferensikan oleh (opsional)" class="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-sm">
+                        <div class="space-y-3">
+                            <textarea rows="4" placeholder="Mengapa Anda tertarik bergabung dengan ACMI?" class="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-xs"></textarea>
+                            <input type="text" placeholder="Direferensikan oleh (opsional)" class="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition font-poppins text-xs">
                         </div>
                     </div>
 
                     {{-- Submit --}}
-                    <div class="pt-6">
+                    <div class="pt-4">
                         <button type="submit" class="w-full py-5 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl font-bold flex items-center justify-center gap-3 shadow-xl shadow-orange-100 transition-all duration-300 transform hover:-translate-y-1">
                             <i class="fa-solid fa-paper-plane text-sm"></i>
                             <span class="font-poppins uppercase tracking-widest text-sm">Ajukan Pendaftaran</span>

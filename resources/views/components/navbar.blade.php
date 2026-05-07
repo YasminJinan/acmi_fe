@@ -14,17 +14,29 @@
 
         {{-- LOGO --}}
         <div class="flex-shrink-0">
-            <img x-show="isDark" x-cloak src="{{ asset('assets/logo_light.png') }}" class="h-9 md:h-11 object-contain transition-all" :class="scrolled ? 'h-8 md:h-9' : 'h-9 md:h-11'" alt="Logo ACMI"/>
-            <img x-show="!isDark" src="{{ asset('assets/logo-acmi-new.svg') }}" class="h-9 md:h-11 object-contain transition-all" :class="scrolled ? 'h-8 md:h-9' : 'h-9 md:h-11'" alt="Logo ACMI"/>
+            <a href="{{ url('/') }}" class="block hover:opacity-80 transition-opacity">
+        <img x-show="isDark" x-cloak 
+             src="{{ asset('assets/logo_light.png') }}" 
+             class="h-9 md:h-11 object-contain transition-all" 
+             :class="scrolled ? 'h-8 md:h-9' : 'h-9 md:h-11'" 
+             alt="Logo ACMI"/>
+             
+        <img x-show="!isDark" 
+             src="{{ asset('assets/logo-acmi-new.svg') }}" 
+             class="h-9 md:h-11 object-contain transition-all" 
+             :class="scrolled ? 'h-8 md:h-9' : 'h-9 md:h-11'" 
+             alt="Logo ACMI"/>
+    </a>
         </div>
 
         {{-- Navigasi Desktop (Sama seperti sebelumnya) --}}
         <div class="hidden lg:flex items-center gap-8 text-sm font-poppins text-gray-700 dark:text-gray-200">
-            <a href="#" class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_profile') }}</a>
-            <a href="#" class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_board') }}</a>
-            <a href="#" class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_members') }}</a>
-            <a href="#" class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_gallery') }}</a>
-            <a href="#" class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_ontopic') }}</a>
+            
+            <a href="{{ route('board') }}" class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_board') }}</a>
+            <a href="{{ route('products') }}" class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_products') }}</a>            
+            <a href="{{ route('gallerysec') }}" class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_gallery') }}</a>
+            <a href="{{ route('membership') }}" class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_membership') }}</a>
+            <a href="{{ route('ontopic') }}" class="py-2 hover:text-orange-500 transition border-b border-gray-100 dark:border-white/5 cursor-pointer">{{ __('messages.nav_ontopic') }}</a>
         </div>
 
         {{-- Action Buttons (Sama seperti sebelumnya) --}}
