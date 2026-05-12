@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('title', 'Membership — ACMI')
+@section('meta_description', 'Bergabunglah dengan komunitas eksklusif CEO Indonesia. Dapatkan akses ke networking, masterclass, dan peluang bisnis strategis.')
+@section('meta_keywords', 'acmi membership, daftar acmi, join acmi, member ceo indonesia')
+@section('canonical', url('/membership'))
 
 @section('content')
 <!-- Swiper.js CSS -->

@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('title', 'Gallery — ACMI')
+@section('meta_description', 'Dokumentasi kegiatan, event, dan momen eksklusif komunitas CEO dan eksekutif ACMI Indonesia.')
+@section('meta_keywords', 'acmi gallery, foto event acmi, dokumentasi acmi')
+@section('canonical', url('/gallery'))
 
 @section('content')
 <section x-data="{ 

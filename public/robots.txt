@@ -1,2 +1,11 @@
 User-agent: *
-Disallow:
+Allow: /
+
+# Blokir halaman yang tidak perlu diindeks
+Disallow: /admin
+Disallow: /cms
+Disallow: /login
+Disallow: /register
+Disallow: /lang/ 
+
+Sitemap: https://acmi.id/sitemap.xml

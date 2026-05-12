@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('title', 'On Topik — ACMI')
+@section('meta_description', 'Artikel, insight, dan perspektif terkini dari para pemimpin bisnis Indonesia bersama ACMI.')
+@section('meta_keywords', 'acmi artikel, on topik acmi, insight bisnis indonesia')
+@section('canonical', url('/ontopic'))
 
 @section('content')
 

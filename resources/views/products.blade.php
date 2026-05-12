@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('title', 'Products & Services — ACMI')
+@section('meta_description', 'Temukan berbagai produk dan layanan eksklusif ACMI untuk mendukung pertumbuhan bisnis dan kepemimpinan Anda.')
+@section('meta_keywords', 'acmi products, layanan acmi, program ceo')
+@section('canonical', url('/products'))
 
 @section('content')
 
