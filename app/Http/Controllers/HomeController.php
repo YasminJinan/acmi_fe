@@ -6,22 +6,22 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+// IMPORT ProductController
 use App\Http\Controllers\ProductController;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        // Pakai v5 biar bener-bener fresh setelah ganti .env
-        $posts = Cache::remember('instagram_posts_v5', 60 * 120, function () {
+        // 1. LOGIC INSTAGRAM (KODE KAMU)
+        $posts = Cache::remember('instagram_posts_apify_v3', 60 * 120, function () {
             try {
                 $apiUrl = env('APIFY_INSTAGRAM_URL');
-                $response = Http::timeout(30)->get($apiUrl);
+                $response = Http::get($apiUrl);
 
                 if ($response->successful()) {
                     $data = $response->json();
-                    $items = isset($data['data']) ? $data['data'] : $data;
-                    $items = is_array($items) ? $items : [];
+                    $items = is_array($data) ? $data : [];
 
                     return collect($items)->take(6)->map(function ($item) {
                         $mediaType = 'IMAGE';
@@ -31,40 +31,30 @@ class HomeController extends Controller
                             $mediaType = 'CAROUSEL_ALBUM';
                         }
 
-                        $remoteUrl = $item['displayUrl'] ?? ($item['thumbnailUrl'] ?? null);
-                        $finalUrl = "https://ui-avatars.com/api/?name=ACMI&background=f97316&color=fff&size=600";
+                        $remoteUrl = $item['displayUrl'] ?? null;
+                        $finalUrl = "https://placehold.co/600x600?text=Download+Gagal";
 
                         if ($remoteUrl) {
                             $filename = 'ig_' . ($item['id'] ?? Str::random(10)) . '.jpg';
-                            $path = 'instagram/' . $filename;
-
-                            // Pastikan folder ada
+                            
                             if (!Storage::disk('public')->exists('instagram')) {
                                 Storage::disk('public')->makeDirectory('instagram');
                             }
 
-                            // Download jika belum ada
-                            if (!Storage::disk('public')->exists($path)) {
-                                $ch = curl_init($remoteUrl);
-                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                                curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');
-                                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-                                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                                curl_setopt($ch, CURLOPT_TIMEOUT, 20);
-                                $imageData = curl_exec($ch);
-                                $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-                                curl_close($ch);
+                            $path = 'instagram/' . $filename;
 
-                                if ($httpCode == 200 && $imageData) {
-                                    Storage::disk('public')->put($path, $imageData);
-                                    $finalUrl = asset('storage/' . $path);
-                                } else {
-                                    // Jika cURL gagal, pakai remote URL langsung (terakhir kali)
-                                    $finalUrl = $remoteUrl;
+                            if (!Storage::disk('public')->exists($path)) {
+                                try {
+                                    $imageContent = Http::get($remoteUrl)->body();
+                                    if ($imageContent) {
+                                        Storage::disk('public')->put($path, $imageContent);
+                                    }
+                                } catch (\Exception $e) {
+                                    // Fail silent
                                 }
-                            } else {
-                                $finalUrl = asset('storage/' . $path);
                             }
+                            
+                            $finalUrl = asset('storage/' . $path);
                         }
 
                         return [
@@ -73,20 +63,23 @@ class HomeController extends Controller
                             'commentCount'  => $item['commentsCount'] ?? 0,
                             'permalink'     => $item['url'] ?? "#",
                             'mediaType'     => $mediaType,
-                            'prunedCaption' => Str::limit($item['caption'] ?? '', 100),
+                            'prunedCaption' => substr($item['caption'] ?? '', 0, 100),
                         ];
                     })->all();
                 }
                 return [];
             } catch (\Exception $e) {
-                \Log::error("Instagram Fetch Error: " . $e->getMessage());
                 return [];
             }
         });
 
+        // 2. LOGIC PRODUK (TAMBAHKAN INI)
+        // Ambil data produk dari ProductController agar welcome.blade.php tidak error
         $productController = new ProductController();
         $products = $productController->getRawData();
 
+        // 3. RETURN SEMUA DATA KE VIEW
+        $posts = collect($posts);
         return view('welcome', compact('posts', 'products'));
     }
 }

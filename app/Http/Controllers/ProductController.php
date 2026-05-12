@@ -31,7 +31,7 @@ class ProductController extends Controller
         }
 
         // Return sebagai object supaya di blade bisa pakai format $product->title
-        return view('product-detail', ['product' => (object)$product]);
+        return view('products', ['product' => (object)$product]);
     }
 
     /**
