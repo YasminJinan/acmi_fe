@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('title', 'Board of Directors — ACMI')
+@section('meta_keywords', 'acmi board, pengurus acmi, direktur acmi')
+@section('meta_description', 'Kenali jajaran Board of Directors ACMI, para pemimpin bisnis terbaik yang mengelola komunitas CEO Indonesia.')
+@section('og_title', 'Tentang Kami — ACMI')
+@section('og_description', 'Kenali lebih dalam tentang ACMI, visi, misi, dan tim di baliknya.')
+@section('canonical', url('/board'))
+
+
 @section('content')
 <section class="relative bg-white dark:bg-[#0a0a0b] py-10 md:py-48 overflow-hidden transition-colors duration-500">
 

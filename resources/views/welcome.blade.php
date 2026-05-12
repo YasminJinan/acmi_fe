@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'ACMI - Bersinergi Memimpin Indonesia')
 
+{{-- SEO: sesuaikan dengan @yield yang ada di layout --}}
+@section('title', 'ACMI - Bersinergi Memimpin Indonesia')
+@section('meta_description', 'Komunitas eksklusif CEO dan eksekutif terbaik Indonesia. Networking, knowledge sharing, dan business opportunities.')
+@section('meta_keywords', 'acmi, ceo indonesia, komunitas eksekutif, leadership indonesia')
+@section('og_image', asset('images/OG-ACMI.png'))
+@section('canonical', url('/'))
 @section('content')
+
 {{-- HERO SECTION --}}
 <section class="relative h-screen flex items-center justify-center overflow-hidden">
     {{-- BACKGROUND VIDEO --}}
@@ -387,6 +393,7 @@
                 </div>
             </div>
 
+         {{-- Sisi Kanan: Kartu (Diperbesar & Digeser ke Kiri) --}}
            {{-- Sisi Kanan: Kartu (Diperbesar & Digeser ke Kiri) --}}
             <div class="relative flex justify-center lg:justify-start lg:ml-12" data-aos="fade-left">
                 {{-- Decorative Glow diperbesar mengikuti kartu --}}
@@ -711,15 +718,15 @@
         </div>
     </div>
 
-    <style>
-        @keyframes bounce-slow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .animate-bounce-slow {
-            animation: bounce-slow 4s infinite ease-in-out;
-        }
-    </style>
+   <style>
+
+    @@keyframes bounce-slow {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+</style>
+
 </section>
 {{-- Pastikan Yasmin sudah pasang script Alpine.js di head atau sebelum </body> --}}
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -968,89 +975,52 @@ function hideItem(item) {
 </script>
 
 {{-- INSTAGRAM FEED SECTION --}}
-<section class="py-24 bg-white dark:bg-[#0a0a0b] px-6 transition-colors duration-500 overflow-hidden">
-    <div class="max-w-7xl mx-auto">
-        {{-- Header dengan Animasi Fade Up --}}
-        <div class="text-center mb-16" data-aos="fade-up" data-aos-duration="1000">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-100 dark:border-orange-500/20 bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-xs font-semibold mb-6 shadow-sm">
-                <i class="fa-brands fa-instagram animate-pulse"></i>
-                <span>{{ __('messages.instagram_badge') }}</span>
+<section class="py-20 bg-[#FAF9F6]"> <!-- Contoh warna cream ala Korea -->
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          @forelse($posts as $post)
+    <div class="group overflow-hidden rounded-2xl bg-white shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl">
+        {{-- Gunakan ?? untuk menghindari error "Undefined array key" --}}
+        <a href="{{ $post['url'] ?? $post['link'] ?? '#' }}" target="_blank">
+        
+            <!-- Thumbnail Post -->
+            <div class="aspect-square overflow-hidden">
+                <img src="{{ $post['image'] ?? $post['thumbnail'] ?? asset('images/placeholder.jpg') }}" 
+                     alt="{{ $post['title'] ?? 'Instagram Post' }}" 
+                     class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
             </div>
-            <h2 class="text-4xl md:text-5xl font-poppins text-slate-900 dark:text-white leading-tight">
-                <span class="font-semibold">{{ __('messages.instagram_title_1') }}</span><br>
-                <span class="font-serif font-bold italic text-orange-500">{{ __('messages.instagram_title_2') }}</span>
-            </h2>
-        </div>
-
-        {{-- Grid Postingan dengan Staggered Animation --}}
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            @forelse($posts as $index => $post)
-                <a href="{{ $post['permalink'] }}" target="_blank" 
-                   data-aos="fade-up" 
-                   data-aos-delay="{{ $index * 100 }}"
-                   class="group relative aspect-square overflow-hidden rounded-[2.5rem] bg-slate-100 dark:bg-white/5 border border-slate-100 dark:border-white/10 transition-all duration-700 hover:-translate-y-3">
-                    
-                    {{-- Image dengan Smooth Zoom & Slight Rotate --}}
-                    <img 
-                        src="{{ $post['mediaUrl'] }}" 
-                        alt="{{ $post['prunedCaption'] ?? 'ACMI Instagram Post' }}" 
-                        class="w-full h-full object-cover transition duration-[1.5s] ease-out group-hover:scale-110 group-hover:rotate-1"
-                    >
-
-                    {{-- Overlay: Glassmorphism yang dihaluskan --}}
-                    <div class="absolute inset-0 bg-orange-600/40 dark:bg-orange-500/60 backdrop-blur-[4px] opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center gap-8">
-                        <div class="flex flex-col items-center gap-1 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
-                            <i class="fa-solid fa-heart text-2xl drop-shadow-md"></i>
-                            <span class="font-poppins font-bold text-lg">{{ number_format($post['likeCount'] ?? 0) }}</span>
-                        </div>
-                        <div class="flex flex-col items-center gap-1 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-150">
-                            <i class="fa-solid fa-comment text-2xl drop-shadow-md"></i>
-                            <span class="font-poppins font-bold text-lg">{{ number_format($post['commentCount'] ?? 0) }}</span>
-                        </div>
-                    </div>
-
-                    {{-- Type Indicator Badge --}}
-                    <div class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-                        @if($post['mediaType'] === 'VIDEO')
-                            <i class="fa-solid fa-play text-xs"></i>
-                        @elseif($post['mediaType'] === 'CAROUSEL_ALBUM')
-                            <i class="fa-solid fa-images text-xs"></i>
-                        @else
-                            <i class="fa-solid fa-camera text-xs"></i>
-                        @endif
-                    </div>
-                </a>
-            @empty
-                {{-- Empty State tetap simple --}}
-                <div class="col-span-full text-center py-20 bg-slate-50 dark:bg-white/5 rounded-[2.5rem] border-2 border-dashed border-slate-200 dark:border-white/10">
-                    <p class="text-slate-400 dark:text-gray-500 font-poppins italic">{{ __('messages.instagram_error') }}</p>
-                </div>
-            @endforelse
-        </div>
-
-        {{-- Button Follow dengan Hover Effect yang lebih "Playful" --}}
-        <div class="mt-20 text-center" data-aos="zoom-in">
-            <a href="https://www.instagram.com/acmi_official/" target="_blank" 
-               class="inline-flex items-center gap-4 px-12 py-4 bg-slate-900 dark:bg-orange-500 text-white rounded-2xl font-bold font-poppins hover:bg-orange-500 dark:hover:bg-orange-600 transition-all duration-500 shadow-xl hover:shadow-orange-500/20 group overflow-hidden relative">
-                
-                <span class="relative z-10">Follow @acmi_official</span>
-                <i class="fa-brands fa-instagram text-2xl relative z-10 group-hover:rotate-[360deg] transition-transform duration-700"></i>
-                
-                {{-- Shine Effect on Hover --}}
-                <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
-            </a>
+            
+            <!-- Info Post -->
+            <div class="p-6">
+                <p class="text-xs text-gray-400 mb-2 uppercase tracking-widest">
+                    {{-- Pastikan date_published ada sebelum di-parse --}}
+                    {{ isset($post['date_published']) ? \Carbon\Carbon::parse($post['date_published'])->format('d M Y') : 'Recent Post' }}
+                </p>
+                <h3 class="text-lg font-medium text-gray-800 line-clamp-2 leading-relaxed">
+                    {{-- Baris 992: Gunakan ?? agar tidak error jika title kosong --}}
+                    {{ $post['title'] ?? $post['content_text'] ?? 'ACMI Post' }}
+                </h3>
+            </div>
+        </a>
+    </div>
+@empty
+    <p class="text-center col-span-3 text-gray-400">Gagal memuat postingan atau feed kosong.</p>
+@endforelse
         </div>
     </div>
 </section>
 
 <style>
-    @keyframes shimmer {
+    @@keyframes shimmer {
         100% { transform: translateX(100%); }
     }
+
     .animate-shimmer {
         animation: shimmer 1.5s infinite;
     }
 </style>
+
+
 {{-- FINAL CTA SECTION --}}
 <section class="relative py-24 px-6 overflow-hidden bg-[#fafafa] dark:bg-[#0a0a0b] transition-colors duration-500">
     
