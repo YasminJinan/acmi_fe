@@ -56,11 +56,11 @@
                 <i class="fa-solid fa-globe text-xs"></i> {{ $label }}
             </a>
 
-            <button href="/gabung" class=" hidden md:block bg-orange-500 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md hover:scale-105 transition-all">
+            <a href="/gabung" class=" hidden md:block bg-orange-500 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md hover:scale-105 transition-all">
                 {{ __('messages.btn_join') }}
-            </button>
+            </a>
 
-            <button href="/gabung" @click="mobileMenuOpen = !mobileMenuOpen" 
+            <button href="/gabung" @click="mobileMenuOpen = !mobileMenuOpen"
                     class="lg:hidden w-9 h-9 flex items-center justify-center rounded-full bg-white/50 dark:bg-white/10 border border-gray-200 dark:border-white/20 text-gray-700 dark:text-white">
                 <i :class="mobileMenuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'"></i>
             </button>

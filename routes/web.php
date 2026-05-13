@@ -4,6 +4,7 @@ use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController; 
+use App\Http\Controllers\WebhookController; 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
@@ -69,3 +70,5 @@ Route::get('/lang/{locale}', function ($locale) {
     session(['locale' => $locale]);
     return redirect()->back();
 })->name('lang.switch');
+
+Route::post('/webhook/cms', [WebhookController::class, 'handle']);

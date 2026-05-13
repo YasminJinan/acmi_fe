@@ -36,8 +36,8 @@ return [
     ],
 
     'cms' => [
-    'api_url'        => env('CMS_API_URL'),
-    'webhook_secret' => env('CMS_WEBHOOK_SECRET'),
-],
+        'api_url'        => env('CMS_API_URL'),
+        'webhook_secret' => env('CMS_WEBHOOK_SECRET'),
+    ],
 
 ];
