@@ -524,7 +524,7 @@
             }
         });
     </script>
-
+    
     <style>
         .swiper-pagination-bullet {
             width: 10px;

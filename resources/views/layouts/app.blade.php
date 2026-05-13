@@ -36,17 +36,19 @@
     <meta name="twitter:site" content="@{{ 'ACMI_Indonesia' }}">
 
     {{-- Schema JSON-LD --}}
+    @verbatim
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Asosiasi CEO Mastermind Indonesia",
-  "alternateName": "ACMI",
-  "url": "{{ config('app.url') }}",
-  "logo": "{{ asset('logo-acmi-new') }}",
-  "description": "ACMI (Asosiasi CEO Mastermind Indonesia) adalah wadah eksklusif bagi para pemimpin industri untuk berjejaring, belajar, dan tumbuh bersama melalui kolaborasi strategis."
-}
-</script>
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Asosiasi CEO Mastermind Indonesia",
+      "alternateName": "ACMI",
+      "url": "{{ config('app.url') }}",
+      "logo": "{{ asset('logo-acmi-new') }}",
+      "description": "ACMI (Asosiasi CEO Mastermind Indonesia) adalah wadah eksklusif bagi para pemimpin industri untuk berjejaring, belajar, dan tumbuh bersama melalui kolaborasi strategis."
+    }
+    </script>
+    @endverbatim
 
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     {{-- Fonts --}}
@@ -84,6 +86,7 @@
     </script>
     <script src="//unpkg.com/alpinejs" defer></script>
 
+    @verbatim
     <style>
         .font-poppins {
             font-family: 'Poppins', sans-serif;
@@ -123,6 +126,7 @@
             animation: float-slow 12s ease-in-out infinite;
         }
     </style>
+    @endverbatim
 </head>
 
 <body class="bg-white dark:bg-[#0a0a0b] text-gray-900 dark:text-gray-100 flex flex-col min-h-screen">
