@@ -1,17 +1,22 @@
 <?php
+
 namespace App\Services;
+
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+
 class CmsApiService
 {
     private $client;
+
     public function __construct()
     {
         $this->client = Http::baseUrl(config('services.cms.api_url'))
             ->timeout(5)
             ->retry(3, 100);
     }
+
     public function getArticles(int $page = 1): array
     {
         return Cache::remember("articles:page:{$page}", 300, function () use ($page) {
@@ -24,6 +29,7 @@ class CmsApiService
             }
         });
     }
+
     public function getArticle(string $slug): ?array
     {
         return Cache::remember("article:{$slug}", 600, function () use ($slug) {
@@ -36,6 +42,7 @@ class CmsApiService
             }
         });
     }
+
     public function getFaqs(): array
     {
         return Cache::remember('faqs', 600, function () {
@@ -48,6 +55,7 @@ class CmsApiService
             }
         });
     }
+
     public function getServices(): array
     {
         return Cache::remember('services', 600, function () {
@@ -60,6 +68,7 @@ class CmsApiService
             }
         });
     }
+
     public function getGallery(): array
     {
         return Cache::remember('gallery', 600, function () {
@@ -72,6 +81,7 @@ class CmsApiService
             }
         });
     }
+
     public function getPartners(): array
     {
         return Cache::remember('partners', 600, function () {

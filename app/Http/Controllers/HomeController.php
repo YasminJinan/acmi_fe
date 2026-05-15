@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CmsApiService;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-// IMPORT ProductController
-use App\Http\Controllers\ProductController;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        // 1. LOGIC INSTAGRAM (KODE KAMU)
+        $cms = new CmsApiService();
+
+        // Data dari CMS
+        $products = $cms->getServices();
+        $faqs     = $cms->getFaqs();
+        $gallery  = $cms->getGallery();
+        $partners = $cms->getPartners();
+
+        // Instagram (tetap pakai logic yang sudah ada)
         $posts = Cache::remember('instagram_posts_apify_v3', 60 * 120, function () {
             try {
                 $apiUrl = env('APIFY_INSTAGRAM_URL');
@@ -36,7 +43,7 @@ class HomeController extends Controller
 
                         if ($remoteUrl) {
                             $filename = 'ig_' . ($item['id'] ?? Str::random(10)) . '.jpg';
-                            
+
                             if (!Storage::disk('public')->exists('instagram')) {
                                 Storage::disk('public')->makeDirectory('instagram');
                             }
@@ -49,11 +56,9 @@ class HomeController extends Controller
                                     if ($imageContent) {
                                         Storage::disk('public')->put($path, $imageContent);
                                     }
-                                } catch (\Exception $e) {
-                                    // Fail silent
-                                }
+                                } catch (\Exception $e) {}
                             }
-                            
+
                             $finalUrl = asset('storage/' . $path);
                         }
 
@@ -73,13 +78,14 @@ class HomeController extends Controller
             }
         });
 
-        // 2. LOGIC PRODUK (TAMBAHKAN INI)
-        // Ambil data produk dari ProductController agar welcome.blade.php tidak error
-        $productController = new ProductController();
-        $products = $productController->getRawData();
-
-        // 3. RETURN SEMUA DATA KE VIEW
         $posts = collect($posts);
-        return view('welcome', compact('posts', 'products'));
+
+        return view('welcome', compact(
+            'posts',
+            'products',
+            'faqs',
+            'gallery',
+            'partners'
+        ));
     }
 }

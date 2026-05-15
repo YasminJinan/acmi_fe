@@ -2,7 +2,8 @@
 
 {{-- SEO --}}
 @section('title', 'ACMI - Bersinergi Memimpin Indonesia')
-@section('meta_description', 'Komunitas eksklusif CEO dan eksekutif terbaik Indonesia. Networking, knowledge sharing,
+@section('meta_description',
+    'Komunitas eksklusif CEO dan eksekutif terbaik Indonesia. Networking, knowledge sharing,
     dan business opportunities.')
 @section('meta_keywords', 'acmi, ceo indonesia, komunitas eksekutif, leadership indonesia')
 @section('og_image', asset('images/OG-ACMI.png'))
@@ -524,7 +525,7 @@
             }
         });
     </script>
-    
+
     <style>
         .swiper-pagination-bullet {
             width: 10px;
@@ -556,8 +557,9 @@
             get filteredProducts() {
                 return this.products.filter(p => {
                     const matchSearch = p.title.toLowerCase().includes(this.search.toLowerCase()) ||
-                        p.company.toLowerCase().includes(this.search.toLowerCase());
-                    const matchCategory = this.category === 'Semua' || p.category === this.category;
+                        p.company_name.toLowerCase().includes(this.search.toLowerCase());
+                    const matchCategory = this.category === 'Semua' ||
+                        (Array.isArray(p.category) ? p.category.includes(this.category) : p.category === this.category);
                     return matchSearch && matchCategory;
                 });
             }
@@ -599,53 +601,71 @@
 
             {{-- Grid Produk --}}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <template x-for="product in filteredProducts" :key="product.slug">
+                <template x-for="product in filteredProducts" :key="product.id">
                     <div class="group flex flex-col" data-aos="fade-up">
-                        <div
-                            class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
-
+                        <div class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
+            
+                            {{-- Image --}}
                             <div class="relative h-[180px] overflow-hidden">
-                                <img :src="product.img" :alt="product.title"
-                                    class="w-full h-full object-cover group-hover:scale-110 transition duration-[1.5s] ease-out">
+                                <img :src="product.image"
+                                     :alt="product.title"
+                                     class="w-full h-full object-cover group-hover:scale-110 transition duration-[1.5s] ease-out">
                                 <div class="absolute top-4 left-4">
-                                    <span
-                                        class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-orange-600 dark:text-orange-400 text-[9px] px-3 py-1.5 rounded-lg font-black uppercase tracking-widest shadow-lg"
-                                        x-text="product.category"></span>
+                                    <span class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-orange-600 dark:text-orange-400 text-[9px] px-3 py-1.5 rounded-lg font-black uppercase tracking-widest shadow-lg"
+                                          x-text="Array.isArray(product.category) ? product.category[0] : product.category">
+                                    </span>
                                 </div>
                             </div>
-
+            
+                            {{-- Content --}}
                             <div class="p-6 flex flex-col flex-grow">
                                 <h3 class="text-lg font-poppins font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-500 transition-colors line-clamp-1"
-                                    x-text="product.title"></h3>
+                                    x-text="product.title">
+                                </h3>
                                 <p class="text-gray-500 dark:text-gray-400 text-xs mb-4 line-clamp-2 leading-relaxed"
-                                    x-text="product.desc"></p>
-
+                                   x-text="product.description">
+                                </p>
+            
                                 <div class="mt-auto">
-                                    <div
-                                        class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 mb-4 border border-transparent group-hover:border-orange-500/20 transition-all">
+                                    {{-- Business Info --}}
+                                    <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 mb-4 border border-transparent group-hover:border-orange-500/20 transition-all">
                                         <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center text-[10px] font-black shadow-lg shadow-orange-500/20 flex-shrink-0"
-                                            x-text="product.ceo.charAt(0)"></div>
+                                             x-text="product.ceo_name ? product.ceo_name.charAt(0) : '?'">
+                                        </div>
                                         <div class="min-w-0">
                                             <p class="text-gray-900 dark:text-gray-200 font-bold text-[11px] truncate"
-                                                x-text="product.company"></p>
-                                            <p class="text-gray-400 text-[9px] uppercase tracking-tighter">CEO: <span
-                                                    class="text-gray-500 dark:text-gray-300" x-text="product.ceo"></span>
+                                               x-text="product.company_name">
+                                            </p>
+                                            <p class="text-gray-400 text-[9px] uppercase tracking-tighter">
+                                                CEO: <span class="text-gray-500 dark:text-gray-300"
+                                                           x-text="product.ceo_name">
+                                                </span>
                                             </p>
                                         </div>
                                     </div>
-
+            
+                                    {{-- Button --}}
                                     <a :href="'/products/' + product.slug"
-                                        class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
+                                       class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
                                         Lihat Detail Bisnis
-                                        <i
-                                            class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
+                                        <i class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
                                     </a>
                                 </div>
                             </div>
-
+            
                         </div>
                     </div>
                 </template>
+            
+                {{-- Empty State --}}
+                <div x-show="filteredProducts.length === 0" x-cloak
+                     class="col-span-3 text-center py-24">
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-white/5 text-gray-400 mb-6">
+                        <i class="fa-solid fa-magnifying-glass text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">Produk Tidak Ditemukan</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2">Coba gunakan kata kunci lain.</p>
+                </div>
             </div>
 
             {{-- Empty State --}}
@@ -888,7 +908,7 @@
 
             {{-- Accordion --}}
             <div class="space-y-5">
-                @php
+                {{-- @php
                     $faqs = [
                         ['q' => __('messages.faq_1_q'), 'a' => __('messages.faq_1_a')],
                         ['q' => __('messages.faq_2_q'), 'a' => __('messages.faq_2_a')],
@@ -897,7 +917,7 @@
                         ['q' => __('messages.faq_5_q'), 'a' => __('messages.faq_5_a')],
                         ['q' => __('messages.faq_6_q'), 'a' => __('messages.faq_6_a')],
                     ];
-                @endphp
+                @endphp --}}
 
                 @foreach ($faqs as $index => $faq)
                     <div x-data="{ open: false }" data-aos="fade-up" data-aos-delay="{{ $index * 50 }}"
@@ -913,7 +933,7 @@
                                 <span class="font-poppins font-semibold text-[15px] md:text-lg transition-all duration-500"
                                     :class="open ? 'text-orange-500' :
                                         'text-slate-700 dark:text-gray-200 group-hover:text-orange-500'">
-                                    {{ $faq['q'] }}
+                                    {{ $faq['question'] }}
                                 </span>
                                 <div class="flex-shrink-0 ml-4 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
                                     :class="open ? 'bg-orange-500 rotate-[135deg] shadow-lg shadow-orange-500/30' :
@@ -931,7 +951,7 @@
                                     </div>
                                     <p
                                         class="text-sm md:text-base text-gray-500 dark:text-gray-400 font-poppins leading-relaxed">
-                                        {{ $faq['a'] }}
+                                        {{ $faq['answer'] }}
                                     </p>
                                 </div>
                             </div>
