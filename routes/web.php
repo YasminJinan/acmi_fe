@@ -4,6 +4,7 @@ use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController; 
+use App\Http\Controllers\PostController; 
 use App\Http\Controllers\WebhookController; 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
@@ -62,6 +63,9 @@ Route::get('/board', function () {
 })->name('board');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
+
+Route::get('/ontopic', [PostController::class, 'index'])->name('ontopic');
+Route::get('/ontopic/{slug}', [PostController::class, 'show'])->name('ontopic.show');
 
 Route::get('/lang/{locale}', function ($locale) {
     if (!in_array($locale, ['en', 'id'])) {

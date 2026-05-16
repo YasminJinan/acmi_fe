@@ -94,4 +94,14 @@ class CmsApiService
             }
         });
     }
+
+    public function getPosts()
+    {
+        return $this->get('/articles');
+    }
+
+    public function getPost($slug)
+    {
+        return $this->get('/articles/' . $slug);
+    }
 }
