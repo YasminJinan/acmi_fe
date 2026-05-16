@@ -9,7 +9,7 @@
 @section('og_image', asset('images/OG-ACMI.png'))
 @section('canonical', url('/'))
 
-@section('content')
+@section('content').   
 
     {{-- HERO SECTION --}}
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
@@ -54,6 +54,11 @@
             </h1>
 
             {{-- Deskripsi --}}
+
+
+
+
+            
             <p data-aos="fade-up" data-aos-delay="400"
                 class="mt-6 text-gray-600 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto">
                 {{ __('messages.hero_desc') }}
