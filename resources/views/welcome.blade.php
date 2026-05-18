@@ -12,7 +12,6 @@
 
 @section('content').
 
-
     {{-- HERO SECTION --}}
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
 

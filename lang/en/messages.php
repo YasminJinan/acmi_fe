@@ -28,7 +28,7 @@ return [
     'milestone_2022_desc' => 'Membership surpassed 300 CEOs, covering expansion into 15 different industry sectors.',
     'milestone_2024_title' => 'Largest Annual Summit',
     'milestone_2024_desc' => 'The peak celebration with 500+ participants from national corporate top leaders.',
-// News/Feed Page (Main Feed)
+     // News/Feed Page (Main Feed)
     'feed_title' => 'For you',
     'feed_subtitle' => 'Special coverage and curated news selected for you today.',
     
