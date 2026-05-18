@@ -9,6 +9,7 @@
 @section('og_image', asset('images/OG-ACMI.png'))
 @section('canonical', url('/'))
 
+
 @section('content')   
 
     {{-- HERO SECTION --}}
@@ -58,7 +59,7 @@
 
 
 
-            
+
             <p data-aos="fade-up" data-aos-delay="400"
                 class="mt-6 text-gray-600 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto">
                 {{ __('messages.hero_desc') }}
@@ -608,64 +609,67 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <template x-for="product in filteredProducts" :key="product.id">
                     <div class="group flex flex-col" data-aos="fade-up">
-                        <div class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
-            
+                        <div
+                            class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
+
                             {{-- Image --}}
                             <div class="relative h-[180px] overflow-hidden">
-                                <img :src="product.image"
-                                     :alt="product.title"
-                                     class="w-full h-full object-cover group-hover:scale-110 transition duration-[1.5s] ease-out">
+                                <img :src="product.image" :alt="product.title"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition duration-[1.5s] ease-out">
                                 <div class="absolute top-4 left-4">
-                                    <span class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-orange-600 dark:text-orange-400 text-[9px] px-3 py-1.5 rounded-lg font-black uppercase tracking-widest shadow-lg"
-                                          x-text="Array.isArray(product.category) ? product.category[0] : product.category">
+                                    <span
+                                        class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-orange-600 dark:text-orange-400 text-[9px] px-3 py-1.5 rounded-lg font-black uppercase tracking-widest shadow-lg"
+                                        x-text="Array.isArray(product.category) ? product.category[0] : product.category">
                                     </span>
                                 </div>
                             </div>
-            
+
                             {{-- Content --}}
                             <div class="p-6 flex flex-col flex-grow">
                                 <h3 class="text-lg font-poppins font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-500 transition-colors line-clamp-1"
                                     x-text="product.title">
                                 </h3>
                                 <p class="text-gray-500 dark:text-gray-400 text-xs mb-4 line-clamp-2 leading-relaxed"
-                                   x-text="product.description">
+                                    x-text="product.description">
                                 </p>
-            
+
                                 <div class="mt-auto">
                                     {{-- Business Info --}}
-                                    <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 mb-4 border border-transparent group-hover:border-orange-500/20 transition-all">
+                                    <div
+                                        class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 mb-4 border border-transparent group-hover:border-orange-500/20 transition-all">
                                         <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center text-[10px] font-black shadow-lg shadow-orange-500/20 flex-shrink-0"
-                                             x-text="product.ceo_name ? product.ceo_name.charAt(0) : '?'">
+                                            x-text="product.ceo_name ? product.ceo_name.charAt(0) : '?'">
                                         </div>
                                         <div class="min-w-0">
                                             <p class="text-gray-900 dark:text-gray-200 font-bold text-[11px] truncate"
-                                               x-text="product.company_name">
+                                                x-text="product.company_name">
                                             </p>
                                             <p class="text-gray-400 text-[9px] uppercase tracking-tighter">
                                                 CEO: <span class="text-gray-500 dark:text-gray-300"
-                                                           x-text="product.ceo_name">
+                                                    x-text="product.ceo_name">
                                                 </span>
                                             </p>
                                         </div>
                                     </div>
-            
+
                                     {{-- Button --}}
                                     <a :href="'/products/' + product.slug"
-                                       class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
+                                        class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
                                         Lihat Detail Bisnis
-                                        <i class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
+                                        <i
+                                            class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
                                     </a>
                                 </div>
                             </div>
-            
+
                         </div>
                     </div>
                 </template>
-            
+
                 {{-- Empty State --}}
-                <div x-show="filteredProducts.length === 0" x-cloak
-                     class="col-span-3 text-center py-24">
-                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-white/5 text-gray-400 mb-6">
+                <div x-show="filteredProducts.length === 0" x-cloak class="col-span-3 text-center py-24">
+                    <div
+                        class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-white/5 text-gray-400 mb-6">
                         <i class="fa-solid fa-magnifying-glass text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white">Produk Tidak Ditemukan</h3>
@@ -972,19 +976,47 @@
     {{-- GALLERY SECTION --}}
     <section x-data="{
         activeCategory: 'Semua',
-        filter(category) { this.activeCategory = category; }
-    }"
+        galleries: [],
+        isLoading: true,
+        filter(category) {
+            this.activeCategory = category;
+        },
+        init() {
+            fetch('http://localhost:8000/api/public/gallery')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        this.galleries = data.data;
+                    }
+                    this.isLoading = false;
+                })
+                .catch(err => {
+                    console.error('Error memuat galeri:', err);
+                    this.isLoading = false;
+                });
+            }
+        }"
         class="bg-white dark:bg-[#0a0a0b] py-24 px-6 md:px-10 transition-colors duration-500 overflow-hidden">
 
-        <div class="max-w-7xl mx-auto text-center">
+        {{-- Background Glow Effects --}}
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div
+                class="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-orange-500/5 dark:bg-orange-500/10 rounded-full blur-[150px]">
+            </div>
+            <div
+                class="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-orange-600/5 dark:bg-orange-900/10 rounded-full blur-[100px]">
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto text-center relative z-10">
 
             {{-- Header --}}
-            <div data-aos="fade-up" class="mb-5">
+            <div data-aos="fade-up" class="mb-5 mt-10">
                 <div
-                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-xs font-bold tracking-widest uppercase mb-6 border border-orange-100 dark:border-orange-500/20">
-                    <i class="fa-solid fa-camera-retro animate-bounce"></i>
-                    {{ __('messages.gallery_badge') }}
+                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-xs font-semibold mb-6 border border-orange-100 dark:border-orange-500/20">
+                    <i class="fa-solid fa-bolt-lightning animate-pulse"></i> Activity Gallery
                 </div>
+
                 <h2 class="text-4xl md:text-5xl text-gray-900 dark:text-white font-poppins leading-tight">
                     <span class="font-semibold">{{ __('messages.gallery_title_1') }}</span> <br>
                     <span class="font-serif font-bold italic text-orange-500">{{ __('messages.gallery_title_2') }}</span>
@@ -994,6 +1026,7 @@
             {{-- Filter Categories --}}
             <div class="flex flex-wrap justify-center gap-3 mb-10" data-aos="fade-up" data-aos-delay="100">
                 @php
+                    // Filter ini masih statis, bisa didinamiskan ke depannya jika butuh
                     $categories = ['Semua', 'Summit', 'Masterclass', 'ACMI SPORT', 'ACMI Bersama 2024', 'Reuni 2024'];
                 @endphp
                 @foreach ($categories as $category)
@@ -1008,80 +1041,47 @@
                 @endforeach
             </div>
 
+            {{-- State Loading --}}
+            <template x-if="isLoading">
+                <div class="flex justify-center items-center py-20">
+                    <i class="fa-solid fa-spinner fa-spin text-3xl text-orange-500"></i>
+                </div>
+            </template>
+
             {{-- Gallery Grid --}}
-            <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+            <template x-if="!isLoading">
+                <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 text-left" id="gallery-grid">
 
-                {{-- Summit --}}
-                <div x-show="activeCategory === 'Semua' || activeCategory === 'Summit'"
-                    x-transition:enter="transition ease-out duration-500"
-                    x-transition:enter-start="opacity-0 scale-90 translate-y-4"
-                    x-transition:enter-end="opacity-100 scale-100 translate-y-0" class="break-inside-avoid">
-                    <div
-                        class="group relative overflow-hidden rounded-[2.5rem] bg-gray-100 dark:bg-white/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/10">
-                        <img src="{{ asset('assets/bersama1.jpeg') }}"
-                            class="w-full h-auto min-h-[400px] object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-orange-600/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-10">
-                            <p
-                                class="text-white font-poppins font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                ACMI Annual Summit 2024</p>
-                        </div>
-                    </div>
-                </div>
+                    {{-- Looping Data --}}
+                    <template x-for="item in galleries" :key="item.id">
 
-                {{-- Masterclass --}}
-                <div x-show="activeCategory === 'Semua' || activeCategory === 'Masterclass'"
-                    x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 scale-90"
-                    x-transition:enter-end="opacity-100 scale-100" class="break-inside-avoid">
-                    <div
-                        class="group relative overflow-hidden rounded-[2.5rem] bg-gray-100 dark:bg-white/5 transition-all duration-500 hover:-translate-y-2">
-                        <img src="{{ asset('assets/acmi talk.jpg') }}"
-                            class="w-full h-auto min-h-[300px] object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-orange-600/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-10 text-left">
-                            <p
-                                class="text-white font-poppins font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                CEO Masterclass Series</p>
-                        </div>
-                    </div>
-                </div>
+                        {{-- Logika Filter: Tampil jika 'Semua' ATAU nama kategori API cocok dengan activeCategory --}}
+                        <div x-show="activeCategory === 'Semua' || (item.category && activeCategory === item.category.name)"
+                            x-transition:enter="transition ease-out duration-500"
+                            x-transition:enter-start="opacity-0 scale-90 translate-y-4"
+                            x-transition:enter-end="opacity-100 scale-100 translate-y-0" class="break-inside-avoid">
 
-                {{-- ACMI Sport --}}
-                @php $sportImages = ['sport.jpeg', 'sport2.jpeg', 'sport3.jpeg']; @endphp
-                @foreach ($sportImages as $img)
-                    <div x-show="activeCategory === 'Semua' || activeCategory === 'ACMI SPORT'"
-                        x-transition:enter="transition ease-out duration-500 delay-[100ms]" class="break-inside-avoid">
-                        <div
-                            class="group relative overflow-hidden rounded-[2.5rem] bg-gray-100 dark:bg-white/5 transition-all duration-500 hover:-translate-y-2">
-                            <img src="{{ asset('assets/' . $img) }}"
-                                class="w-full h-auto min-h-[300px] object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110">
                             <div
-                                class="absolute inset-0 bg-gradient-to-t from-orange-600/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-10 text-left">
-                                <p
-                                    class="text-white font-poppins font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                    ACMI Sport Moment</p>
+                                class="group relative overflow-hidden rounded-[2.5rem] bg-gray-100 dark:bg-white/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/10">
+
+                                {{-- Gambar dari API --}}
+                                <img :src="item.image"
+                                    class="w-full h-auto min-h-[300px] object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
+                                    alt="ACMI Gallery">
+
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-orange-600/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-10">
+                                    {{-- Judul dari API --}}
+                                    <p class="text-white font-poppins font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
+                                        x-text="item.title || 'ACMI Moment'"></p>
+                                </div>
+
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    </template>
 
-                {{-- Reuni 2024 --}}
-                <div x-show="activeCategory === 'Semua' || activeCategory === 'Reuni 2024'"
-                    x-transition:enter="transition ease-out duration-500" class="break-inside-avoid">
-                    <div
-                        class="group relative overflow-hidden rounded-[2.5rem] bg-gray-100 dark:bg-white/5 transition-all duration-500 hover:-translate-y-2">
-                        <img src="{{ asset('assets/galeri2.jpg') }}"
-                            class="w-full h-auto min-h-[350px] object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-orange-600/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-10 text-left">
-                            <p
-                                class="text-white font-poppins font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                Reuni Moment</p>
-                        </div>
-                    </div>
                 </div>
-
-            </div>
+            </template>
 
             {{-- Button Selengkapnya --}}
             <div class="text-center mt-20" data-aos="fade-up">
@@ -1091,37 +1091,66 @@
                     <i class="fa-solid fa-arrow-right-long transition-transform group-hover:translate-x-2"></i>
                 </a>
             </div>
-
         </div>
     </section>
 
     {{-- INSTAGRAM FEED SECTION --}}
-    <section class="py-20 bg-[#FAF9F6]">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                @forelse ($posts as $post)
-                    <div
-                        class="group overflow-hidden rounded-2xl bg-white shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl">
-                        <a href="{{ $post['url'] ?? ($post['link'] ?? '#') }}" target="_blank">
-                            <div class="aspect-square overflow-hidden">
-                                <img src="{{ $post['image'] ?? ($post['thumbnail'] ?? asset('images/placeholder.jpg')) }}"
-                                    alt="{{ $post['title'] ?? 'Instagram Post' }}"
-                                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
+    <section class="relative py-24 bg-white dark:bg-[#0a0a0b] transition-colors duration-500 overflow-hidden">
+        <div class="container mx-auto px-6">
+
+            {{-- Header Section --}}
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div
+                    class="inline-block px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-bold mb-4 uppercase tracking-[0.2em] border border-orange-100 dark:border-orange-500/20">
+                    Social Connect
+                </div>
+                <h2 class="text-3xl md:text-5xl leading-tight text-gray-900 dark:text-white font-poppins">
+                    <span class="font-semibold tracking-tight">Ikuti Aktivitas</span>
+                    <span class="font-serif font-bold italic text-orange-500">Terbaru Kami</span>
+                </h2>
+                <div class="h-1 w-12 bg-orange-500 mx-auto rounded-full mt-4"></div>
+            </div>
+
+            {{-- Grid Feed --}}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                @forelse ($posts as $index => $post)
+                    <div data-aos="fade-up" data-aos-delay="{{ $index * 100 }}"
+                        class="group relative overflow-hidden rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 transition-all duration-500 hover:bg-white dark:hover:bg-white/10 hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:-translate-y-2">
+                        
+                        <a href="{{ $post['url'] ?? ($post['link'] ?? '#') }}" target="_blank" class="block">
+                            
+                            {{-- Image Container --}}
+                            <div class="aspect-square overflow-hidden relative">
+                                 <img src="{{ $post['image'] ?? ($post['thumbnail'] ?? asset('images/placeholder.jpg')) }}"
+        alt="{{ $post['title'] ?? 'Instagram Post' }}"
+        class="h-full w-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-75">
+                            
                             </div>
-                            <div class="p-6">
-                                <p class="text-xs text-gray-400 mb-2 uppercase tracking-widest">
-                                    {{ isset($post['date_published']) ? \Carbon\Carbon::parse($post['date_published'])->format('d M Y') : 'Recent Post' }}
-                                </p>
-                                <h3 class="text-lg font-medium text-gray-800 line-clamp-2 leading-relaxed">
+
+                            {{-- Content --}}
+                            <div class="p-6 relative">
+                                <div class="flex items-center justify-between mb-3">
+                                    <p class="text-[10px] font-bold text-orange-500 dark:text-orange-400 uppercase tracking-widest font-poppins">
+                                        {{ isset($post['date_published']) ? \Carbon\Carbon::parse($post['date_published'])->format('d M Y') : 'Recent Post' }}
+                                    </p>
+                                    <i class="fa-brands fa-instagram text-gray-400 dark:text-gray-600 text-sm group-hover:text-orange-500 transition-colors"></i>
+                                </div>
+                                <h3 class="text-base font-medium text-gray-800 dark:text-gray-200 line-clamp-2 leading-relaxed font-poppins group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors">
                                     {{ $post['title'] ?? ($post['content_text'] ?? 'ACMI Post') }}
                                 </h3>
                             </div>
                         </a>
                     </div>
                 @empty
-                    <p class="text-center col-span-3 text-gray-400">Gagal memuat postingan atau feed kosong.</p>
+                    <div class="text-center col-span-3 py-12" data-aos="fade-up">
+                        <div class="w-16 h-16 bg-gray-100 dark:bg-white/5 text-gray-400 rounded-full flex items-center justify-center text-xl mx-auto mb-4">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <p class="text-sm font-poppins text-gray-400 dark:text-gray-500">Gagal memuat postingan atau feed kosong.</p>
+                    </div>
                 @endforelse
             </div>
+            
         </div>
     </section>
 
