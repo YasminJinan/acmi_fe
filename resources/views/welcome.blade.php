@@ -10,6 +10,7 @@
 @section('canonical', url('/'))
 
 
+
 @section('content')   
 
     {{-- HERO SECTION --}}
