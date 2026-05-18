@@ -40,15 +40,12 @@ Route::get('/gallery', function () {
 
 Route::get('/products/{slug}', [ProductController::class, 'show'])->name('product.show');
 
-Route::get('/ontopic/{slug}', [ArticleController::class, 'show'])->name('article.show');
+Route::get('/ontopic', [ArticleController::class, 'index'])->name('ontopic');
+Route::get('/ontopic/{slug}', [ArticleController::class, 'show'])->name('ontopic.show');
 
 Route::get('/gabung', function () {
     return view('gabung');
 });
-
-Route::get('/ontopic', function () {
-    return view('ontopic');
-})->name('ontopic');
 
 Route::get('/membership', function () {
     return view('membership');
@@ -63,9 +60,6 @@ Route::get('/board', function () {
 })->name('board');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
-
-Route::get('/ontopic', [PostController::class, 'index'])->name('ontopic');
-Route::get('/ontopic/{slug}', [PostController::class, 'show'])->name('ontopic.show');
 
 Route::get('/lang/{locale}', function ($locale) {
     if (!in_array($locale, ['en', 'id'])) {

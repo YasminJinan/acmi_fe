@@ -6,6 +6,14 @@ use App\Services\CmsApiService;
 
 class ArticleController extends Controller
 {
+    public function index()
+    {
+        $cms = new CmsApiService();
+        $articles = $cms->getArticles(request('page', 1));
+
+        return view('ontopic', compact('articles'));
+    }
+
     public function show(string $slug)
     {
         $cms = new CmsApiService();

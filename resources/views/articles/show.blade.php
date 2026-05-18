@@ -9,27 +9,27 @@
 
 @section('schema')
     <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "Article",
-          "headline": "{{ $article['title'] }}",
-          "image": "{{ $article['thumbnail_url'] }}",
-          "author": {
-            "@type": "Person",
-            "name": "{{ $article['author_name'] ?? 'Admin' }}"
-          },
-          "publisher": {
-            "@type": "Organization",
-            "name": "ACMI",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "{{ asset('assets/logo-acmi-new.svg') }}"
-            }
-          },
-          "datePublished": "{{ $article['created_at'] }}",
-          "dateModified": "{{ $article['updated_at'] ?? $article['created_at'] }}",
-          "description": "{{ Str::limit(strip_tags($article['excerpt'] ?? $article['content']), 155) }}"
-        }
+        <?php echo json_encode([
+            '@context' => 'https://schema.org',
+            '@type' => 'Article',
+            'headline' => $article['title'],
+            'image' => $article['thumbnail_url'],
+            'author' => [
+                '@type' => 'Person',
+                'name' => $article['author_name'] ?? 'Admin',
+            ],
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => 'ACMI',
+                'logo' => [
+                    '@type' => 'ImageObject',
+                    'url' => asset('assets/logo-acmi-new.svg'),
+                ],
+            ],
+            'datePublished' => $article['published_at'],
+            'dateModified' => $article['updated_at'] ?? $article['published_at'],
+            'description' => Str::limit(strip_tags($article['excerpt'] ?? $article['content']), 155),
+        ]); ?>
     </script>
 @endsection
 
@@ -50,7 +50,7 @@
             <div class="flex items-center space-x-4 text-gray-600 dark:text-gray-400">
                 <span class="flex items-center">
                     <i class="far fa-calendar-alt mr-2"></i>
-                    {{ \Carbon\Carbon::parse($article['created_at'])->format('d M Y') }}
+                    {{ \Carbon\Carbon::parse($article['published_at'])->format('d M Y') }}
                 </span>
                 <span class="flex items-center">
                     <i class="far fa-user mr-2"></i>
@@ -66,7 +66,7 @@
         </div>
 
         {{-- Content Body --}}
-        <div class="prose prose-lg dark:prose-invert max-w-none font-poppins leading-relaxed">
+        <div class="prose prose-lg dark:prose-invert max-w-none">
             {!! $article['content'] !!}
         </div>
 

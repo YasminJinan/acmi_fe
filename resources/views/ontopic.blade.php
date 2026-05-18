@@ -88,9 +88,9 @@
                     </header>
 
                     <div class="space-y-10">
-                        @foreach ($posts['data'] as $post)
+                        @foreach ($articles['data'] as $article)
                             <article class="group cursor-pointer">
-                                <a href="{{ route('ontopic.show', $post['slug']) }}">
+                                <a href="{{ route('ontopic.show', $article['slug']) }}">
                                     <div
                                         class="relative overflow-hidden rounded-[2.5rem] border transition-all duration-500 
                                         bg-white dark:bg-[#0d1117] border-slate-200 dark:border-white/5 
@@ -98,8 +98,8 @@
 
                                         {{-- Gambar --}}
                                         <div class="relative h-80 overflow-hidden">
-                                            <img src="{{ $post['thumbnail_url'] }}"
-                                                alt="{{ $post['image_alt'] ?? $post['title'] }}"
+                                            <img src="{{ $article['thumbnail_url'] }}"
+                                                alt="{{ $article['image_alt'] ?? $article['title'] }}"
                                                 class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
                                             <div
                                                 class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent dark:from-[#0d1117] opacity-90 dark:opacity-100">
@@ -109,7 +109,7 @@
                                                 <span
                                                     class="backdrop-blur-md text-[10px] uppercase tracking-widest px-4 py-2 rounded-full font-bold border 
                                                     bg-white/60 dark:bg-black/40 border-slate-200 dark:border-white/10 text-slate-800 dark:text-white">
-                                                    {{ \Carbon\Carbon::parse($post['published_at'])->locale('id')->isoFormat('D MMMM YYYY') }}
+                                                    {{ \Carbon\Carbon::parse($article['published_at'])->locale('id')->isoFormat('D MMMM YYYY') }}
                                                 </span>
                                             </div>
                                         </div>
@@ -119,10 +119,10 @@
                                             <h2
                                                 class="text-2xl md:text-3xl font-extrabold leading-tight mb-3 transition-colors duration-300
                                                 text-slate-900 dark:text-white group-hover:text-orange-500">
-                                                {{ $post['title'] }}
+                                                {{ $article['title'] }}
                                             </h2>
                                             <p class="text-sm text-slate-500 dark:text-slate-400">
-                                                {{ $post['excerpt'] }}
+                                                {{ $article['excerpt'] }}
                                             </p>
                                         </div>
                                     </div>

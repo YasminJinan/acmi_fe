@@ -22,6 +22,12 @@ class CmsApiService
         return Cache::remember("articles:page:{$page}", 300, function () use ($page) {
             try {
                 $response = $this->client->get('/articles', ['page' => $page]);
+                //debug
+                Log::info('CMS Response:', [
+                    'status' => $response->status(),
+                    'url' => $response->effectiveUri(),
+                    'body' => $response->body()
+                ]);
                 return $response->successful() ? $response->json() : [];
             } catch (\Exception $e) {
                 Log::error('CMS getArticles gagal: ' . $e->getMessage());
@@ -93,15 +99,5 @@ class CmsApiService
                 return [];
             }
         });
-    }
-
-    public function getPosts()
-    {
-        return $this->get('/articles');
-    }
-
-    public function getPost($slug)
-    {
-        return $this->get('/articles/' . $slug);
     }
 }
