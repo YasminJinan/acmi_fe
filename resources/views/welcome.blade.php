@@ -916,17 +916,6 @@
 
             {{-- Accordion --}}
             <div class="space-y-5">
-                {{-- @php
-                    $faqs = [
-                        ['q' => __('messages.faq_1_q'), 'a' => __('messages.faq_1_a')],
-                        ['q' => __('messages.faq_2_q'), 'a' => __('messages.faq_2_a')],
-                        ['q' => __('messages.faq_3_q'), 'a' => __('messages.faq_3_a')],
-                        ['q' => __('messages.faq_4_q'), 'a' => __('messages.faq_4_a')],
-                        ['q' => __('messages.faq_5_q'), 'a' => __('messages.faq_5_a')],
-                        ['q' => __('messages.faq_6_q'), 'a' => __('messages.faq_6_a')],
-                    ];
-                @endphp --}}
-
                 @foreach ($faqs as $index => $faq)
                     <div x-data="{ open: false }" data-aos="fade-up" data-aos-delay="{{ $index * 50 }}"
                         class="group transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]"
@@ -1209,9 +1198,7 @@
                     class="mt-8 text-[10px] md:text-xs font-poppins tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500 opacity-70">
                     — {{ __('messages.cta_note') }} —
                 </p>
-
             </div>
         </div>
     </section>
-
 @endsection
