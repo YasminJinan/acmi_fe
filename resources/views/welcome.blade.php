@@ -9,7 +9,8 @@
 @section('og_image', asset('images/OG-ACMI.png'))
 @section('canonical', url('/'))
 
-@section('content').
+
+@section('content')   
 
     {{-- HERO SECTION --}}
     <section class="relative h-screen flex items-center justify-center overflow-hidden">

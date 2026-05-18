@@ -9,7 +9,7 @@ return [
     'cta_btn_apply' => 'Apply for Membership',
     'cta_btn_contact' => 'Contact Us',
     
-// TIMELINE SECTION
+    // TIMELINE SECTION
     'history_badge' => 'Our Legacy',
     'history_title_1' => 'The Journey of',
     'history_subtitle' => 'Key milestones in our history of building the Indonesian business ecosystem.',
