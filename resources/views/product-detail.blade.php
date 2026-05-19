@@ -20,10 +20,12 @@
 
                     <div class="grid grid-cols-2 gap-4">
                         @foreach ($product->gallery as $img)
-                            <div class="rounded-2xl overflow-hidden h-40 border border-gray-800">
-                                <img src="{{ $img }}"
-                                    class="w-full h-full object-cover hover:scale-105 transition duration-500">
-                            </div>
+                            @if ($img !== $product->image)
+                                <div class="rounded-2xl overflow-hidden h-40 border border-gray-800">
+                                    <img src="{{ $img }}"
+                                        class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                                </div>
+                            @endif
                         @endforeach
                     </div>
 

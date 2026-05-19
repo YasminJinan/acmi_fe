@@ -11,7 +11,7 @@
 
 
 
-@section('content')   
+@section('content')
 
     {{-- HERO SECTION --}}
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
@@ -118,10 +118,29 @@
     </section>
 
 
-    {{-- PARTNER SECTION --}}
-    <section class="relative py-24 bg-white dark:bg-[#0a0a0b] overflow-hidden transition-colors duration-500">
+    {{-- PARTNER SECTION DINAMIS DARI CMS --}}
+    <section x-data="{
+        partners: [],
+        isLoading: true,
+        init() {
+            fetch('http://localhost:8000/api/public/partners')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        this.partners = data.data;
+                    }
+                    this.isLoading = false;
+                })
+                .catch(err => {
+                    console.error('Error memuat data partner:', err);
+                    this.isLoading = false;
+                });
+        }
+    }"
+        class="relative py-24 bg-white dark:bg-[#0a0a0b] overflow-hidden transition-colors duration-500">
         <div class="container mx-auto px-6">
 
+            {{-- Header Title --}}
             <div class="text-center mb-12" data-aos="fade-up">
                 <h2 class="text-orange-500 dark:text-orange-400 text-xs font-bold tracking-[0.2em] uppercase mb-3">
                     {{ __('messages.partner_title') }}
@@ -129,20 +148,52 @@
                 <div class="h-1 w-12 bg-orange-500 mx-auto rounded-full"></div>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
-                @foreach (['BCA', 'TELKOM', 'PERTAMINA', 'ASTRA', 'INDOFOOD', 'SINARMAS'] as $index => $partner)
-                    <div data-aos="fade-up" data-aos-delay="{{ $index * 100 }}"
-                        class="group relative bg-gray-50 dark:bg-white/5 backdrop-blur-sm rounded-2xl py-8 px-4 border border-gray-100 dark:border-white/10 flex items-center justify-center transition-all duration-500 hover:bg-white dark:hover:bg-white/10 hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:-translate-y-2">
-                        <div
-                            class="absolute inset-0 bg-orange-500/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-500">
-                        </div>
-                        <p
-                            class="font-bold text-gray-400 dark:text-gray-500 group-hover:text-orange-500 dark:group-hover:text-orange-400 text-lg tracking-wider transition-colors duration-300">
-                            {{ $partner }}
-                        </p>
-                    </div>
-                @endforeach
-            </div>
+            {{-- State Loading --}}
+            <template x-if="isLoading">
+                <div class="flex justify-center items-center py-10">
+                    <i class="fa-solid fa-spinner fa-spin text-3xl text-orange-500"></i>
+                </div>
+            </template>
+
+            {{-- Grid Partner Dinamis --}}
+            <template x-if="!isLoading && partners.length > 0">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
+
+                    {{-- Looping Data Partner dari API --}}
+                    <template x-for="(partner, index) in partners" :key="partner.id || index">
+
+                        {{-- Anchor Tag yang disesuaikan dengan key 'link' --}}
+                        <a :href="partner.link ? partner.link : 'javascript:void(0)'"
+                            :target="partner.link ? '_blank' : '_self'"
+                            class="group relative bg-gray-50 dark:bg-white/5 backdrop-blur-sm rounded-2xl py-8 px-4 border border-gray-100 dark:border-white/10 flex items-center justify-center transition-all duration-500 hover:bg-white dark:hover:bg-white/10 hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:-translate-y-2 cursor-pointer">
+
+                            <div
+                                class="absolute inset-0 bg-orange-500/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-500">
+                            </div>
+
+                            {{-- Gambar Logo yang disesuaikan dengan key 'image' --}}
+                            <template x-if="partner.image">
+                                <img :src="partner.image" :alt="partner.name"
+                                    class="max-h-12 w-auto object-contain grayscale group-hover:grayscale-0 transition-all duration-300">
+                            </template>
+
+                            {{-- Teks Jika Logo Kosong --}}
+                            <template x-if="!partner.image">
+                                <p class="font-bold text-gray-400 dark:text-gray-500 group-hover:text-orange-500 dark:group-hover:text-orange-400 text-lg tracking-wider transition-colors duration-300"
+                                    x-text="partner.name">
+                                </p>
+                            </template>
+
+                        </a>
+                    </template>
+
+                </div>
+            </template>
+
+            {{-- Jika CMS masih kosong --}}
+            <template x-if="!isLoading && partners.length === 0">
+                <p class="text-center text-gray-500 text-sm font-poppins">Mitra belum ditambahkan.</p>
+            </template>
 
         </div>
     </section>
@@ -984,8 +1035,8 @@
                     console.error('Error memuat galeri:', err);
                     this.isLoading = false;
                 });
-            }
-        }"
+        }
+    }"
         class="bg-white dark:bg-[#0a0a0b] py-24 px-6 md:px-10 transition-colors duration-500 overflow-hidden">
 
         {{-- Background Glow Effects --}}
@@ -1106,26 +1157,29 @@
                 @forelse ($posts as $index => $post)
                     <div data-aos="fade-up" data-aos-delay="{{ $index * 100 }}"
                         class="group relative overflow-hidden rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 transition-all duration-500 hover:bg-white dark:hover:bg-white/10 hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:-translate-y-2">
-                        
+
                         <a href="{{ $post['url'] ?? ($post['link'] ?? '#') }}" target="_blank" class="block">
-                            
+
                             {{-- Image Container --}}
                             <div class="aspect-square overflow-hidden relative">
-                                 <img src="{{ $post['image'] ?? ($post['thumbnail'] ?? asset('images/placeholder.jpg')) }}"
-        alt="{{ $post['title'] ?? 'Instagram Post' }}"
-        class="h-full w-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-75">
-                            
+                                <img src="{{ $post['image'] ?? ($post['thumbnail'] ?? asset('images/placeholder.jpg')) }}"
+                                    alt="{{ $post['title'] ?? 'Instagram Post' }}"
+                                    class="h-full w-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-75">
+
                             </div>
 
                             {{-- Content --}}
                             <div class="p-6 relative">
                                 <div class="flex items-center justify-between mb-3">
-                                    <p class="text-[10px] font-bold text-orange-500 dark:text-orange-400 uppercase tracking-widest font-poppins">
+                                    <p
+                                        class="text-[10px] font-bold text-orange-500 dark:text-orange-400 uppercase tracking-widest font-poppins">
                                         {{ isset($post['date_published']) ? \Carbon\Carbon::parse($post['date_published'])->format('d M Y') : 'Recent Post' }}
                                     </p>
-                                    <i class="fa-brands fa-instagram text-gray-400 dark:text-gray-600 text-sm group-hover:text-orange-500 transition-colors"></i>
+                                    <i
+                                        class="fa-brands fa-instagram text-gray-400 dark:text-gray-600 text-sm group-hover:text-orange-500 transition-colors"></i>
                                 </div>
-                                <h3 class="text-base font-medium text-gray-800 dark:text-gray-200 line-clamp-2 leading-relaxed font-poppins group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors">
+                                <h3
+                                    class="text-base font-medium text-gray-800 dark:text-gray-200 line-clamp-2 leading-relaxed font-poppins group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors">
                                     {{ $post['title'] ?? ($post['content_text'] ?? 'ACMI Post') }}
                                 </h3>
                             </div>
@@ -1133,14 +1187,16 @@
                     </div>
                 @empty
                     <div class="text-center col-span-3 py-12" data-aos="fade-up">
-                        <div class="w-16 h-16 bg-gray-100 dark:bg-white/5 text-gray-400 rounded-full flex items-center justify-center text-xl mx-auto mb-4">
+                        <div
+                            class="w-16 h-16 bg-gray-100 dark:bg-white/5 text-gray-400 rounded-full flex items-center justify-center text-xl mx-auto mb-4">
                             <i class="fa-brands fa-instagram"></i>
                         </div>
-                        <p class="text-sm font-poppins text-gray-400 dark:text-gray-500">Gagal memuat postingan atau feed kosong.</p>
+                        <p class="text-sm font-poppins text-gray-400 dark:text-gray-500">Gagal memuat postingan atau feed
+                            kosong.</p>
                     </div>
                 @endforelse
             </div>
-            
+
         </div>
     </section>
 
