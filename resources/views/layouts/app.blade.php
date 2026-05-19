@@ -16,7 +16,11 @@
     <meta name="keywords" content="@yield('meta_keywords', 'ACMI, Asosiasi CEO Mastermind Indonesia, komunitas CEO Indonesia, network pengusaha, mastermind bisnis')">
     <meta name="robots" content="@yield('meta_robots', 'index, follow')">
     <link rel="canonical" href="{{ $canonical }}">
-
+ {{-- Favicon --}}
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/favicon.png') }}">
+    
     <meta property="og:type" content="{{ $ogType }}">
     <meta property="og:title" content="@yield('title', 'ACMI')">
     <meta property="og:description" content="@yield('meta_description', 'ACMI (Asosiasi CEO Mastermind Indonesia) adalah wadah eksklusif bagi para pemimpin industri untuk berjejaring, belajar, dan tumbuh bersama melalui kolaborasi strategis.')">

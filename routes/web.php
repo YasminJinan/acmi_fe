@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'id'])) {
+        session(['locale' => $locale]);
+
+    }
+    return redirect()->back();
+})->name('lang.switch');
+
+
 Route::get('/sitemap.xml', function () {
     $path = public_path('sitemap.xml');
     if (!File::exists($path)) {
