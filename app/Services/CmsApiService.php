@@ -56,17 +56,15 @@ class CmsApiService
         });
     }
 
-    public function getArticles(int $page = 1): array
+    public function getArticles(int $page = 1, ?string $category = null): array
     {
-        return Cache::remember("articles:page:{$page}", 300, function () use ($page) {
+        $key = "articles:page:{$page}:cat:{$category}";
+        return Cache::remember($key, 300, function () use ($page, $category) {
             try {
-                $response = $this->client->get('/articles', ['page' => $page]);
-                //debug
-                Log::info('CMS Response:', [
-                    'status' => $response->status(),
-                    'url' => $response->effectiveUri(),
-                    'body' => $response->body()
-                ]);
+                $params = ['page' => $page];
+                if ($category) $params['category'] = $category;
+
+                $response = $this->client->get('/articles', $params);
                 return $response->successful() ? $response->json() : [];
             } catch (\Exception $e) {
                 Log::error('CMS getArticles gagal: ' . $e->getMessage());
@@ -84,6 +82,19 @@ class CmsApiService
             } catch (\Exception $e) {
                 Log::error("CMS getArticle [{$slug}] gagal: " . $e->getMessage());
                 return null;
+            }
+        });
+    }
+
+    public function getCategories(): array
+    {
+        return Cache::remember('categories', 600, function () {
+            try {
+                $response = $this->client->get('/categories');
+                return $response->successful() ? $response->json('data') : [];
+            } catch (\Exception $e) {
+                Log::error('CMS getCategories gagal: ' . $e->getMessage());
+                return [];
             }
         });
     }
