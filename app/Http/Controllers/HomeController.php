@@ -15,14 +15,12 @@ class HomeController extends Controller
     {
         $cms = new CmsApiService();
 
-        // Data dari CMS
         $products = $cms->getServices();
         $faqs     = $cms->getFaqs();
         $gallery  = $cms->getGallery();
         $partners = $cms->getPartners();
 
-        // Instagram (tetap pakai logic yang sudah ada)
-        $posts = Cache::remember('instagram_posts_apify_v3', 60 * 120, function () {
+        $posts = Cache::remember('instagram_posts_apify_v3', 60 * 30, function () {
             try {
                 $apiUrl = env('APIFY_INSTAGRAM_URL');
                 $response = Http::timeout(10)->get($apiUrl); // ← tambah timeout
@@ -70,12 +68,6 @@ class HomeController extends Controller
 
         $posts = collect($posts);
 
-        return view('welcome', compact(
-            'posts',
-            'products',
-            'faqs',
-            'gallery',
-            'partners'
-        ));
+        return view('welcome', compact('posts', 'products', 'faqs', 'gallery', 'partners'));
     }
 }
