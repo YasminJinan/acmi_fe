@@ -11,3 +11,22 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+
+article .prose h1,
+article .prose h2,
+article .prose h3,
+article .prose h4,
+article .prose h5,
+article .prose h6 {
+    font-size: revert;
+    font-weight: revert;
+    margin-top: revert;
+    margin-bottom: revert;
+    line-height: revert;
+}
+
+article .prose p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

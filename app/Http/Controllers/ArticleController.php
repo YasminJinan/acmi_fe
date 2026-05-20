@@ -3,26 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Services\CmsApiService;
+use Illuminate\Support\Facades\Http;
 
 class ArticleController extends Controller
 {
     public function index()
     {
         $cms = new CmsApiService();
-        $articles = $cms->getArticles(request('page', 1));
+        $articles = $cms->getArticles(request('page', 1), request('category'));
+        $categories = $cms->getCategories();
 
-        return view('ontopic', compact('articles'));
+        return view('ontopic', compact('articles', 'categories'));
     }
 
     public function show(string $slug)
     {
-        $cms = new CmsApiService();
-        $article = $cms->getArticle($slug);
-
-        if (!$article) {
-            abort(404);
+        // Memanggil API backend
+        $response = Http::get("http://localhost:8000/api/public/articles/{$slug}");
+        
+        if ($response->successful() && $response->json('success')) {
+            $article = $response->json('data');
+            return view('ontopic-detail', compact('article'));
         }
 
-        return view('articles.show', compact('article'));
+        abort(404);
     }
+    
 }

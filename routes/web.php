@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController; 
 use App\Http\Controllers\PostController; 
 use App\Http\Controllers\WebhookController; 
+use App\Http\Controllers\OnTopicController; 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
@@ -51,6 +52,7 @@ Route::get('/products/{slug}', [ProductController::class, 'show'])->name('produc
 
 Route::get('/ontopic', [ArticleController::class, 'index'])->name('ontopic');
 Route::get('/ontopic/{slug}', [ArticleController::class, 'show'])->name('ontopic.show');
+// Route::get('/ontopic/{slug}', [ArticleController::class, 'show'])->name('ontopic.detail');
 
 Route::get('/gabung', function () {
     return view('gabung');

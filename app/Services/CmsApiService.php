@@ -17,17 +17,54 @@ class CmsApiService
             ->retry(3, 100);
     }
 
-    public function getArticles(int $page = 1): array
+    public function getInstagramPosts(): array
     {
-        return Cache::remember("articles:page:{$page}", 300, function () use ($page) {
+        return Cache::remember('instagram_posts', 3600, function () {
             try {
-                $response = $this->client->get('/articles', ['page' => $page]);
-                //debug
-                Log::info('CMS Response:', [
-                    'status' => $response->status(),
-                    'url' => $response->effectiveUri(),
-                    'body' => $response->body()
-                ]);
+                $response = Http::timeout(15)
+                    ->get('https://api.apify.com/v2/acts/apify~instagram-scraper/runs/last/dataset/items', [
+                        'token' => config('services.apify.token'),
+                        'limit' => 6,
+                    ]);
+
+                if (!$response->successful()) return [];
+
+                $items = $response->json();
+
+                return collect($items)->take(6)->map(function ($item) {
+                    $remoteUrl = $item['displayUrl'] ?? null;
+                    $cacheKey = 'ig_image:' . md5($remoteUrl);
+                    $localUrl = cache()->get($cacheKey);
+
+                    if (!$localUrl && $remoteUrl) {
+                        $localUrl = route('ig.proxy', ['url' => $remoteUrl]);
+                        \App\Jobs\DownloadInstagramImage::dispatch($remoteUrl, $cacheKey);
+                    }
+
+                    return [
+                        'image'         => $localUrl ?? 'https://placehold.co/600x600?text=No+Image',
+                        'url'           => $item['url'] ?? '#',
+                        'title'         => substr($item['caption'] ?? 'ACMI Post', 0, 80),
+                        'likesCount'    => $item['likesCount'] ?? 0,
+                        'commentsCount' => $item['commentsCount'] ?? 0,
+                    ];
+                })->all();
+            } catch (\Exception $e) {
+                Log::error('Instagram fetch gagal: ' . $e->getMessage());
+                return [];
+            }
+        });
+    }
+
+    public function getArticles(int $page = 1, ?string $category = null): array
+    {
+        $key = "articles:page:{$page}:cat:{$category}";
+        return Cache::remember($key, 300, function () use ($page, $category) {
+            try {
+                $params = ['page' => $page];
+                if ($category) $params['category'] = $category;
+
+                $response = $this->client->get('/articles', $params);
                 return $response->successful() ? $response->json() : [];
             } catch (\Exception $e) {
                 Log::error('CMS getArticles gagal: ' . $e->getMessage());
@@ -45,6 +82,19 @@ class CmsApiService
             } catch (\Exception $e) {
                 Log::error("CMS getArticle [{$slug}] gagal: " . $e->getMessage());
                 return null;
+            }
+        });
+    }
+
+    public function getCategories(): array
+    {
+        return Cache::remember('categories', 600, function () {
+            try {
+                $response = $this->client->get('/categories');
+                return $response->successful() ? $response->json('data') : [];
+            } catch (\Exception $e) {
+                Log::error('CMS getCategories gagal: ' . $e->getMessage());
+                return [];
             }
         });
     }

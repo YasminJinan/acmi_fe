@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', 'On Topik — ACMI')
-@section('meta_description', 'Artikel, insight, dan perspektif terkini dari para pemimpin bisnis Indonesia bersama
+@section('meta_description',
+    'Artikel, insight, dan perspektif terkini dari para pemimpin bisnis Indonesia bersama
     ACMI.')
 @section('meta_keywords', 'acmi artikel, on topik acmi, insight bisnis indonesia')
 @section('canonical', url('/ontopic'))
@@ -19,12 +20,12 @@
                 <!-- 1. KIRI: FLOATING CATEGORY BAR (Adaptive Backdrop) -->
                 <aside
                     class="hidden md:flex flex-col gap-4 sticky top-32 h-fit z-20 p-2.5 rounded-3xl border transition-all duration-500
-                bg-white/80 dark:bg-[#121829]/40 backdrop-blur-2xl border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                        bg-white/80 dark:bg-[#121829]/40 backdrop-blur-2xl border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
 
                     <!-- Utama (Gradient Tetap Menyala) -->
-                    <a href="#"
-                        class="group relative sidebar-icon bg-gradient-to-br from-orange-400 to-orange-600 shadow-lg shadow-orange-500/20 text-white transform hover:scale-110 active:scale-95 transition-all">
-                        <i class="fas fa-newspaper text-[1.1rem]"></i>
+                    <a href="{{route('ontopic')}}"
+                        class="group relative sidebar-icon shadow-lg shadow-orange-500/20 text-white transform hover:scale-110 active:scale-95 transition-all ">
+                        <i class="fas fa-home text-[1.1rem]"></i>
                         <span
                             class="absolute left-16 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300 bg-orange-600 text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-xl whitespace-nowrap pointer-events-none text-white">
                             {{ __('messages.cat_utama') }}
@@ -32,44 +33,27 @@
                     </a>
 
                     @php
-                        $categories = [
-                            ['icon' => 'fa-volleyball-ball', 'label' => 'cat_sport'],
-                            ['icon' => 'fa-briefcase', 'label' => 'cat_bisnis'],
-                            ['icon' => 'fa-users', 'label' => 'cat_social'],
-                            ['icon' => 'fa-leaf', 'label' => 'cat_lifestyle'],
+                        $categoryIcons = [
+                            'Edukasi Bisnis' => 'fa-graduation-cap',
+                            'Artikel' => 'fa-newspaper',
+                            'Promo' => 'fa-tags',
+                            'Networking' => 'fa-users',
+                            'Event' => 'fa-calendar-alt',
+                            'Pengumuman' => 'fa-bullhorn',
+                            'Press Release' => 'fa-file-alt',
                         ];
                     @endphp
 
                     @foreach ($categories as $cat)
-                        <a href="#"
+                        <a href="{{ route('ontopic', ['category' => $cat['slug']]) }}"
                             class="group relative sidebar-icon transition-all transform hover:scale-110
-                    text-slate-500 dark:text-slate-400 hover:text-orange-500 dark:hover:text-white hover:bg-orange-500/10">
-                            <i class="fas {{ $cat['icon'] }}"></i>
+                            {{ request('category') === $cat['slug']
+                                ? 'text-orange-500'
+                                : 'text-slate-500 dark:text-slate-400 hover:text-orange-500 dark:hover:text-white hover:bg-orange-500/10' }}">
+                            <i class="fas {{ $categoryIcons[$cat['name']] ?? 'fa-tag' }}"></i>
                             <span
                                 class="absolute left-16 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300 bg-slate-800 text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-xl whitespace-nowrap pointer-events-none border border-white/5 text-white">
-                                {{ __('messages.' . $cat['label']) }}
-                            </span>
-                        </a>
-                    @endforeach
-
-                    <hr class="border-slate-200 dark:border-white/5 mx-2 my-1">
-
-                    @php
-                        $regions = [
-                            ['icon' => 'fa-sun', 'label' => 'region_east'],
-                            ['icon' => 'fa-map', 'label' => 'region_central'],
-                            ['icon' => 'fa-moon', 'label' => 'region_west'],
-                        ];
-                    @endphp
-
-                    @foreach ($regions as $reg)
-                        <a href="#"
-                            class="group relative sidebar-icon transition-all
-                    text-slate-400 dark:text-slate-500 hover:text-orange-600 dark:hover:text-orange-400">
-                            <i class="fas {{ $reg['icon'] }} text-xs"></i>
-                            <span
-                                class="absolute left-16 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300 bg-orange-600 text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-xl whitespace-nowrap pointer-events-none text-white">
-                                {{ __('messages.' . $reg['label']) }}
+                                {{ $cat['name'] }}
                             </span>
                         </a>
                     @endforeach
@@ -225,7 +209,7 @@
             @apply bg-slate-300 dark:bg-slate-800 rounded-full hover:bg-orange-500;
         }
     </style>
-    @endsection@extends('layouts.app')
+@endsection
 
 @section('content')
 
