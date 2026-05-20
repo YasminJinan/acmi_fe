@@ -8,6 +8,11 @@
     <div class="max-w-5xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             
+
+
+
+
+
             {{-- KOLOM KIRI: TEKS & BENEFIT --}}
             <div class="space-y-8 lg:sticky lg:top-32">
                 {{-- Badge --}}
