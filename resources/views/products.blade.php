@@ -36,7 +36,7 @@
         {{-- HEADER --}}
         <div class="relative z-10 text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-xs font-semibold mb-6 border border-orange-100 dark:border-orange-500/20">
-                <i class="fa-solid fa-box-open animate-pulse"></i> {{ __('messages.badge') }}
+                <i class="fa-solid fa-box-open animate-pulse"></i> {{ __('messages.badgee') }}
             </div>
             <h2 class="text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white leading-tight">
                 {{ __('messages.title_1') }} <br>
