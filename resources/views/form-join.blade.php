@@ -59,81 +59,91 @@
                     <h2 class="text-3xl font-poppins font-bold text-slate-900 mb-2">Formulir Aplikasi</h2>
                     <p class="text-gray-400 text-sm mb-12 font-poppins">Estimasi waktu pengisian: 3 menit</p>
 
-                    <form action="#" method="POST" class="space-y-12">
+                    <form action="{{ route('form.store') }}" method="POST" class="space-y-12">
                         @csrf
-                        
-                        {{-- Section: Profil Pribadi --}}
+                    
+                        {{-- Success/Error Alert --}}
+                        @if(session('success'))
+                            <div class="p-4 bg-green-50 border border-green-200 rounded-2xl text-green-700 text-sm font-poppins">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if(session('error'))
+                            <div class="p-4 bg-red-50 border border-red-200 rounded-2xl text-red-700 text-sm font-poppins">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                    
+                        {{-- Section 01: Informasi Pribadi --}}
                         <div class="space-y-6">
                             <div class="flex items-center gap-4">
                                 <span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white text-[10px] font-bold">01</span>
                                 <h3 class="text-xs font-bold text-slate-900 uppercase tracking-widest">Informasi Pribadi</h3>
                                 <div class="h-[1px] flex-grow bg-gray-100"></div>
                             </div>
-                            
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="space-y-2">
-                                    <input type="text" placeholder="Nama Lengkap" 
-                                        class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 placeholder:text-gray-400">
-                                </div>
-                                <div class="space-y-2">
-                                    <input type="email" placeholder="Email Profesional" 
-                                        class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 placeholder:text-gray-400">
-                                </div>
-                                <div class="space-y-2">
-                                    <input type="tel" placeholder="WhatsApp (Aktif)" 
-                                        class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 placeholder:text-gray-400">
-                                </div>
-                                <div class="space-y-2">
-                                    <input type="url" placeholder="LinkedIn Profile URL" 
-                                        class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 placeholder:text-gray-400">
-                                </div>
+                                <input type="text" name="name" value="{{ old('name') }}" placeholder="Nama Lengkap"
+                                    class="w-full px-6 py-4 bg-gray-50 border {{ $errors->has('name') ? 'border-red-400' : 'border-transparent' }} rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 placeholder:text-gray-400">
+                                @error('name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                    
+                                <input type="email" name="email" value="{{ old('email') }}" placeholder="Email Profesional"
+                                    class="w-full px-6 py-4 bg-gray-50 border {{ $errors->has('email') ? 'border-red-400' : 'border-transparent' }} rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 placeholder:text-gray-400">
+                                @error('email') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                    
+                                <input type="tel" name="phone" value="{{ old('phone') }}" placeholder="WhatsApp (Aktif)"
+                                    class="w-full px-6 py-4 bg-gray-50 border {{ $errors->has('phone') ? 'border-red-400' : 'border-transparent' }} rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 placeholder:text-gray-400">
+                                @error('phone') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                    
+                                <input type="url" name="linkedin" value="{{ old('linkedin') }}" placeholder="LinkedIn Profile URL"
+                                    class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 placeholder:text-gray-400">
                             </div>
                         </div>
-
-                        {{-- Section: Profil Bisnis --}}
+                    
+                        {{-- Section 02: Informasi Bisnis --}}
                         <div class="space-y-6">
                             <div class="flex items-center gap-4">
                                 <span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white text-[10px] font-bold">02</span>
                                 <h3 class="text-xs font-bold text-slate-900 uppercase tracking-widest">Informasi Bisnis</h3>
                                 <div class="h-[1px] flex-grow bg-gray-100"></div>
                             </div>
-
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <input type="text" placeholder="Nama Perusahaan" 
+                                <input type="text" name="company" value="{{ old('company') }}" placeholder="Nama Perusahaan"
                                     class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 placeholder:text-gray-400">
-                                
-                                <input type="text" placeholder="Jabatan Saat Ini" 
+                    
+                                <input type="text" name="position" value="{{ old('position') }}" placeholder="Jabatan Saat Ini"
                                     class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 placeholder:text-gray-400">
-                                
-                                <select class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f97316%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1.5rem_center] bg-no-repeat">
-                                    <option disabled selected>Sektor Industri</option>
-                                    <option>Teknologi</option>
-                                    <option>Manufaktur</option>
-                                    <option>F&B / Retail</option>
-                                    <option>Energi</option>
+                    
+                                <select name="industry"
+                                    class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all font-poppins text-sm text-slate-900 appearance-none">
+                                    <option disabled {{ old('industry') ? '' : 'selected' }}>Sektor Industri</option>
+                                    <option {{ old('industry') == 'Teknologi' ? 'selected' : '' }}>Teknologi</option>
+                                    <option {{ old('industry') == 'Manufaktur' ? 'selected' : '' }}>Manufaktur</option>
+                                    <option {{ old('industry') == 'F&B / Retail' ? 'selected' : '' }}>F&B / Retail</option>
+                                    <option {{ old('industry') == 'Energi' ? 'selected' : '' }}>Energi</option>
                                 </select>
-
-                                <select class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f97316%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1.5rem_center] bg-no-repeat">
-                                    <option disabled selected>Skala Pendapatan Tahunan</option>
-                                    <option>Di atas Rp 10 Miliar</option>
-                                    <option>Di atas Rp 100 Miliar</option>
-                                    <option>Di atas Rp 1 Triliun</option>
+                    
+                                <select name="revenue"
+                                    class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all font-poppins text-sm text-slate-900 appearance-none">
+                                    <option disabled {{ old('revenue') ? '' : 'selected' }}>Skala Pendapatan Tahunan</option>
+                                    <option {{ old('revenue') == 'Di atas Rp 10 Miliar' ? 'selected' : '' }}>Di atas Rp 10 Miliar</option>
+                                    <option {{ old('revenue') == 'Di atas Rp 100 Miliar' ? 'selected' : '' }}>Di atas Rp 100 Miliar</option>
+                                    <option {{ old('revenue') == 'Di atas Rp 1 Triliun' ? 'selected' : '' }}>Di atas Rp 1 Triliun</option>
                                 </select>
                             </div>
                         </div>
-
-                        {{-- Section: Motivasi --}}
+                    
+                        {{-- Section 03: Visi & Aspirasi --}}
                         <div class="space-y-6">
                             <div class="flex items-center gap-4">
                                 <span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white text-[10px] font-bold">03</span>
                                 <h3 class="text-xs font-bold text-slate-900 uppercase tracking-widest">Visi & Aspirasi</h3>
                                 <div class="h-[1px] flex-grow bg-gray-100"></div>
                             </div>
-                            <textarea rows="4" placeholder="Apa kontribusi atau value yang ingin Anda bagikan dalam komunitas ini?" 
-                                class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 placeholder:text-gray-400 resize-none"></textarea>
+                            <textarea name="message" rows="4" placeholder="Apa kontribusi atau value yang ingin Anda bagikan dalam komunitas ini?"
+                                class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all font-poppins text-sm text-slate-900 placeholder:text-gray-400 resize-none">{{ old('message') }}</textarea>
                         </div>
-
-                        {{-- Submit Button --}}
+                    
+                        {{-- Submit --}}
                         <div class="pt-6">
                             <button type="submit" class="group relative w-full overflow-hidden py-5 bg-slate-900 text-white rounded-2xl font-bold transition-all duration-300 hover:shadow-2xl hover:shadow-slate-200">
                                 <div class="absolute inset-0 w-0 bg-orange-500 transition-all duration-[400ms] ease-out group-hover:w-full"></div>
@@ -142,9 +152,6 @@
                                     <i class="fa-solid fa-arrow-right-long text-xs transition-transform duration-300 group-hover:translate-x-2"></i>
                                 </div>
                             </button>
-                            <p class="text-center text-[10px] text-gray-400 mt-8 font-poppins uppercase tracking-widest leading-relaxed">
-                                Keanggotaan bersifat selektif. <br> Keputusan tim kurasi ACMI bersifat mutlak.
-                            </p>
                         </div>
                     </form>
                 </div>

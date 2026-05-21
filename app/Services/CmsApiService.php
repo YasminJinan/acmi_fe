@@ -154,14 +154,26 @@ class CmsApiService
     public function submitInbound(array $data): array
     {
         try {
-            $response = Http::baseUrl(config('services.cms.api_url'))
-                ->timeout(10)
-                ->post('/inbound', $data);
+            $response = $this->client->post('/inbound', $data);
 
-            return $response->json() ?? ['success' => false, 'message' => 'Gagal mengirim data'];
+            if ($response->successful()) {
+                return [
+                    'success' => true,
+                    'data'    => $response->json()
+                ];
+            }
+
+            return [
+                'success' => false,
+                'message' => 'Gagal: ' . $response->status(),
+                'errors'  => $response->json('errors') ?? []
+            ];
         } catch (\Exception $e) {
             Log::error('CMS submitInbound gagal: ' . $e->getMessage());
-            return ['success' => false, 'message' => 'Server error, coba lagi nanti'];
+            return [
+                'success' => false,
+                'message' => 'Server error, coba lagi nanti'
+            ];
         }
     }
 }

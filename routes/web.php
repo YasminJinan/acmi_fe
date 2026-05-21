@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\FormJoinController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController; 
@@ -52,9 +53,8 @@ Route::get('/ontopic', [ArticleController::class, 'index'])->name('ontopic');
 Route::get('/ontopic/{slug}', [ArticleController::class, 'show'])->name('ontopic.show');
 // Route::get('/ontopic/{slug}', [ArticleController::class, 'show'])->name('ontopic.detail');
 
-Route::get('/form-join', function () {
-    return view('form-join');
-});
+Route::get('/form-join', [FormJoinController::class, 'index'])->name('form');
+Route::post('/form-join', [FormJoinController::class, 'store'])->name('form.store');
 
 Route::get('/membership', function () {
     return view('membership');
