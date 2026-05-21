@@ -66,7 +66,7 @@
 
             {{-- Buttons --}}
             <div data-aos="fade-up" data-aos-delay="600" class="mt-8 flex justify-center gap-4 flex-wrap">
-                <a href="/gabung"
+                <a href="/form-join"
                     class="px-6 py-3 bg-orange-500 text-white rounded-lg font-semibold shadow-lg hover:scale-105 transition-transform duration-300 inline-block">
                     {{ __('messages.btn_join') }}
                 </a>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Gabung Keanggotaan - ACMI')
+@section('title', 'Join Membership - ACMI')
 
 @section('content')
 <section class="min-h-screen bg-[#FBFBFC] pt-32 pb-20 px-6">
