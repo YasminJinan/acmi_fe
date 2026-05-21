@@ -25,6 +25,32 @@
 
         <div class="max-w-7xl mx-auto">
 
+        {{-- BACKGROUND DECORATION --}}
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div class="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-orange-500/5 dark:bg-orange-500/10 rounded-full blur-[150px]"></div>
+            <div class="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-orange-600/5 dark:bg-orange-900/10 rounded-full blur-[100px]"></div>
+        </div>
+        
+        {{-- HEADER --}}
+        <div class="relative z-10 text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-xs font-semibold mb-6 border border-orange-100 dark:border-orange-500/20">
+                <i class="fa-solid fa-box-open animate-pulse"></i> {{ __('messages.badgee') }}
+            </div>
+            <h2 class="text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white leading-tight">
+                {{ __('messages.title_1') }} <br>
+                <span class="text-orange-500 font-serif italic font-bold">{{ __('messages.title_2') }}</span>
+            </h2>
+            <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm md:text-base">
+                {{ __('messages.description') }}
+            </p>
+
+            {{-- SEARCH & FILTER BAR --}}
+            <div class="mt-10 flex flex-col md:flex-row gap-4 justify-center">
+                <div class="relative group md:w-80">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-orange-500 transition-colors"></i>
+                    <input type="text" x-model="search" placeholder="{{ __('messages.search_placeholder') }}" 
+                           class="w-full pl-12 pr-6 py-4 rounded-2xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white transition-all">
+
             {{-- Header --}}
             <div class="text-center max-w-3xl mx-auto mb-10" data-aos="fade-up">
                 <div

@@ -2,6 +2,111 @@
 
 return [
 
+    // -------------------------
+    // BADGE & HEADER
+    // -------------------------
+    'badge'       => 'Keanggotaan Eksklusif',
+    'headline_1'  => 'Bergabung dengan',
+    'headline_em' => 'Komunitas CEO',
+    'headline_2'  => 'Terbaik Indonesia',
+    'subheadline' => 'Lengkapi formulir pendaftaran di bawah ini. Tim kurasi kami akan meninjau profil Anda dan menghubungi dalam 5–7 hari kerja.',
+ 
+    // -------------------------
+    // BENEFIT LIST (Kolom Kiri)
+    // -------------------------
+    'benefits' => [
+        'Akses penuh ke seluruh program ACMI',
+        'CEO Roundtable bulanan',
+        'Masterclass eksklusif dengan pakar global',
+        'Networking dengan 500+ CEO Indonesia',
+        'Business mission internasional',
+        'Resource center & insight industri',
+    ],
+ 
+    // -------------------------
+    // FORM — JUDUL
+    // -------------------------
+    'form_title'    => 'Formulir Pendaftaran',
+    'form_subtitle' => 'Estimasi waktu pengisian: 3 menit',
+ 
+    // -------------------------
+    // FORM — SECTION LABELS
+    // -------------------------
+    'section_personal' => 'Informasi Pribadi',
+    'section_company'  => 'Informasi Perusahaan',
+    'section_motive'   => 'Motivasi & Referral',
+ 
+    // -------------------------
+    // FORM — PLACEHOLDER PRIBADI
+    // -------------------------
+    'placeholder_name'     => 'Nama Lengkap',
+    'placeholder_email'    => 'Email',
+    'placeholder_phone'    => 'Nomor Telepon',
+    'placeholder_linkedin' => 'LinkedIn Profile',
+ 
+    // -------------------------
+    // FORM — PLACEHOLDER PERUSAHAAN
+    // -------------------------
+    'placeholder_company'  => 'Nama Perusahaan',
+    'placeholder_position' => 'Jabatan',
+    'placeholder_website'  => 'Website Perusahaan',
+ 
+    // -------------------------
+    // FORM — SELECT INDUSTRI
+    // -------------------------
+    'select_industry'  => 'Pilih Industri',
+    'industry_options' => [
+        'Teknologi & Software',
+        'Keuangan & Fintech',
+        'Manufaktur',
+        'Properti & Real Estate',
+        'F&B',
+        'Energi & Resources',
+        'Retail & E-commerce',
+        'Healthcare',
+        'Media & Entertainment',
+        'Logistik & Supply Chain',
+        'Lainnya',
+    ],
+ 
+    // -------------------------
+    // FORM — SELECT KARYAWAN
+    // -------------------------
+    'select_employees'  => 'Jumlah Karyawan',
+    'employees_options' => [
+        '1–50 Karyawan',
+        '51–200 Karyawan',
+        '201–500 Karyawan',
+        '501–1000 Karyawan',
+        '1000+ Karyawan',
+    ],
+ 
+
+
+    
+    // -------------------------
+    // FORM — SELECT REVENUE
+    // -------------------------
+    'select_revenue'  => 'Annual Revenue',
+    'revenue_options' => [
+        '< IDR 10 Miliar',
+        'IDR 10 – 50 Miliar',
+        'IDR 50 – 200 Miliar',
+        'IDR 200 Miliar – 1 Triliun',
+        '> IDR 1 Triliun',
+    ],
+ 
+    // -------------------------
+    // FORM — MOTIVASI & REFERRAL
+    // -------------------------
+    'placeholder_motivation' => 'Mengapa Anda tertarik bergabung dengan ACMI?',
+    'placeholder_referral'   => 'Direferensikan oleh (opsional)',
+ 
+    // -------------------------
+    // FORM — SUBMIT & DISCLAIMER
+    // -------------------------
+    'submit_btn' => 'Ajukan Pendaftaran',
+    'disclaimer' => 'Dengan mendaftar, Anda menyetujui proses kurasi eksklusif oleh tim ACMI Indonesia.',
     // CTA JOIN SECTION
     'cta_title_1' => 'Siap Bergabung dengan',
     'cta_title_2' => 'ACMI?',
@@ -43,7 +148,7 @@ return [
     'region_west' => 'Barat',
 
     // products page
-    'badge' => 'Portofolio Ekosistem',
+    'badgee' => 'Portofolio Ekosistem',
     'title_1' => 'Inovasi & Solusi dari',
     'title_2' => 'Sinergi Anggota ACMI',
     'description' => 'Eksplorasi ragam unit bisnis dan layanan unggulan yang dipimpin oleh para kurator industri dalam jaringan eksklusif ACMI.',
