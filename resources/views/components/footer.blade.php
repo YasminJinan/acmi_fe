@@ -2,7 +2,7 @@
 <footer class="bg-white dark:bg-gray-950 pt-24 pb-12 px-6 md:px-20 transition-colors duration-500 border-t border-gray-100 dark:border-white/5">
     <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
-            
+ 
             {{-- Brand Column --}}
             <div class="md:col-span-5">
                 <div class="flex items-center gap-4 mb-8">
@@ -17,37 +17,70 @@
                 <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed max-w-sm mb-8 font-poppins">
                     {{ __('messages.hero_desc') }}
                 </p>
-                
-                {{-- Social Media - Full Color Highlight --}}
+ 
+                {{-- Social Media --}}
                 <div class="flex gap-4">
-                    <a href="https://linkedin.com/company/acmiofficial" target="_blank" class="w-10 h-10 border border-gray-200 dark:border-white/10 rounded-xl flex items-center justify-center text-gray-400 dark:text-gray-500 hover:text-white hover:bg-[#0077b5] hover:border-[#0077b5] transition-all duration-300 hover:-translate-y-1 shadow-sm">
+                    <a href="https://linkedin.com/company/acmiofficial" target="_blank"
+                        class="w-10 h-10 border border-gray-200 dark:border-white/10 rounded-xl flex items-center justify-center text-gray-400 dark:text-gray-500 hover:text-white hover:bg-[#0077b5] hover:border-[#0077b5] transition-all duration-300 hover:-translate-y-1 shadow-sm">
                         <i class="fa-brands fa-linkedin-in"></i>
                     </a>
-                    <a href="https://instagram.com/acmi.official" target="_blank" class="w-10 h-10 border border-gray-200 dark:border-white/10 rounded-xl flex items-center justify-center text-gray-400 dark:text-gray-500 hover:text-white hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:border-transparent transition-all duration-300 hover:-translate-y-1 shadow-sm">
+                    <a href="https://instagram.com/acmi.official" target="_blank"
+                        class="w-10 h-10 border border-gray-200 dark:border-white/10 rounded-xl flex items-center justify-center text-gray-400 dark:text-gray-500 hover:text-white hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:border-transparent transition-all duration-300 hover:-translate-y-1 shadow-sm">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
-                    <a href="https://youtube.com/@acmiofficial" target="_blank" class="w-10 h-10 border border-gray-200 dark:border-white/10 rounded-xl flex items-center justify-center text-gray-400 dark:text-gray-500 hover:text-white hover:bg-[#ff0000] hover:border-[#ff0000] transition-all duration-300 hover:-translate-y-1 shadow-sm">
+                    <a href="https://youtube.com/@acmiofficial" target="_blank"
+                        class="w-10 h-10 border border-gray-200 dark:border-white/10 rounded-xl flex items-center justify-center text-gray-400 dark:text-gray-500 hover:text-white hover:bg-[#ff0000] hover:border-[#ff0000] transition-all duration-300 hover:-translate-y-1 shadow-sm">
                         <i class="fa-brands fa-youtube"></i>
                     </a>
                 </div>
             </div>
-
-            {{-- Quick Links - Sesuaikan Navbar --}}
+ 
+            {{-- Quick Links --}}
             <div class="md:col-span-3">
                 <h4 class="font-bold text-slate-900 dark:text-white mb-8 font-poppins relative inline-block text-sm uppercase tracking-wider">
                     {{ __('messages.tautan') }}
                     <span class="absolute -bottom-2 left-0 w-6 h-1 bg-orange-500 rounded-full"></span>
                 </h4>
                 <ul class="space-y-4">
-                    <li><a href="#" class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group"><i class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i> {{ __('messages.nav_board') }}</a></li>
-                    <li><a href="#" class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group"><i class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i> {{ __('messages.nav_products') }}</a></li>
-                    <li><a href="#" class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group"><i class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i> {{ __('messages.nav_gallery') }}</a></li>
-                    <li><a href="#" class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group"><i class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i> {{ __('messages.nav_membership') }}</a></li>
-                    <li><a href="#" class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group"><i class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i> {{ __('messages.nav_ontopic') }}</a></li>
+                    <li>
+                        <a href="{{ route('board') }}"
+                            class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group">
+                            <i class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i>
+                            {{ __('messages.nav_board') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('products') }}"
+                            class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group">
+                            <i class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i>
+                            {{ __('messages.nav_products') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('gallery') }}"
+                            class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group">
+                            <i class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i>
+                            {{ __('messages.nav_gallery') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('membership') }}"
+                            class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group">
+                            <i class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i>
+                            {{ __('messages.nav_membership') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('ontopic') }}"
+                            class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group">
+                            <i class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i>
+                            {{ __('messages.nav_ontopic') }}
+                        </a>
+                    </li>
                 </ul>
             </div>
-
-            {{-- Contact Info - ACMI Official Location --}}
+ 
+            {{-- Contact Info --}}
             <div class="md:col-span-4">
                 <h4 class="font-bold text-slate-900 dark:text-white mb-8 font-poppins relative inline-block text-sm uppercase tracking-wider">
                     {{ __('messages.membership_contact') }}
@@ -67,18 +100,25 @@
                         <div class="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500 transition-all duration-300">
                             <i class="fa-regular fa-envelope text-orange-500 group-hover:text-white transition-colors"></i>
                         </div>
-                        <span class="text-gray-500 dark:text-gray-400 text-sm font-medium group-hover:text-orange-500 transition-colors">admin@acmi.official.id</span>
+                        <a href="mailto:admin@acmi.official.id"
+                            class="text-gray-500 dark:text-gray-400 text-sm font-medium group-hover:text-orange-500 transition-colors">
+                            admin@acmi.official.id
+                        </a>
                     </li>
                     <li class="flex items-center gap-4 group">
                         <div class="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500 transition-all duration-300">
                             <i class="fa-brands fa-whatsapp text-orange-500 group-hover:text-white transition-colors"></i>
                         </div>
-                        <span class="text-gray-500 dark:text-gray-400 text-sm font-medium group-hover:text-orange-500 transition-colors">+62 811-1313-000</span>
+                        <a href="https://wa.me/628111313000" target="_blank"
+                            class="text-gray-500 dark:text-gray-400 text-sm font-medium group-hover:text-orange-500 transition-colors">
+                            +62 811-1313-000
+                        </a>
                     </li>
                 </ul>
             </div>
+ 
         </div>
-
+ 
         {{-- Bottom Copyright --}}
         <div class="pt-10 border-t border-gray-100 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
             <div class="space-y-1">
@@ -94,6 +134,6 @@
                 "{{ __('messages.hero_title_1') }} {{ __('messages.hero_title_2') }}"
             </p>
         </div>
+ 
     </div>
 </footer>
-

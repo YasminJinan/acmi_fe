@@ -1,15 +1,11 @@
-{{-- Update pada x-data untuk menambah state scroll --}}
 <div x-data="{ mobileMenuOpen: false, scrolled: false }" 
      x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 20 })"
-     {{-- Ganti 'absolute' menjadi 'fixed' --}}
      class="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-6xl z-50 transition-all duration-300"
-     {{-- Opsional: Membuat navbar sedikit naik saat di-scroll agar tidak terlalu memakan tempat --}}
      :class="scrolled ? 'top-2' : 'top-6'">    
     
     <div class="flex items-center justify-between px-4 md:px-6 py-3 rounded-full 
                 bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-gray-200 dark:border-white/10
                 shadow-lg transition-all duration-500"
-                {{-- Efek tambahan: Background jadi lebih pekat saat di-scroll --}}
                 :class="scrolled ? 'bg-white/80 dark:bg-black/80 py-2 shadow-xl' : 'bg-white/40 dark:bg-black/40 py-3'">
 
         {{-- LOGO --}}
@@ -29,7 +25,7 @@
     </a>
         </div>
 
-        {{-- Navigasi Desktop (Sama seperti sebelumnya) --}}
+        {{-- Navigasi Desktop --}}
         <div class="hidden lg:flex items-center gap-8 text-sm font-poppins text-gray-700 dark:text-gray-200">
             
             <a href="{{ route('board') }}" class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_board') }}</a>
@@ -39,7 +35,7 @@
             <a href="{{ route('ontopic') }}" class="py-2 hover:text-orange-500 transition border-b border-gray-100 dark:border-white/5 cursor-pointer">{{ __('messages.nav_ontopic') }}</a>
         </div>
 
-        {{-- Action Buttons (Sama seperti sebelumnya) --}}
+        {{-- Action Buttons --}}
         <div class="flex items-center gap-2 md:gap-3">
             <button @click="toggle()" type="button" class="w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white/50 dark:bg-white/10 border border-gray-200 dark:border-white/20 text-gray-700 dark:text-yellow-300 backdrop-blur-md transition-all hover:scale-110">
                 <i x-show="!isDark" class="fa-solid fa-moon text-xs md:text-sm"></i>
@@ -67,7 +63,7 @@
         </div> 
     </div>
 
-    {{-- Mobile Menu Dropdown (Tambahkan margin top sedikit agar tidak menempel saat scrolled) --}}
+    {{-- Mobile Menu Dropdown --}}
     <div x-show="mobileMenuOpen" 
          x-cloak
          @click.away="mobileMenuOpen = false"
