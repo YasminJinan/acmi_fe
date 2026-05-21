@@ -23,23 +23,24 @@ class HomeController extends Controller
                 if (!is_array($items)) return [];
 
                 return collect($items)->take(6)->map(function ($item) {
-    $remoteUrl = $item['displayUrl'] ?? null;
-    $cacheKey = 'ig_image:' . md5($remoteUrl);
-    // Cek apakah sudah ada versi lokal di cache
-    $localUrl = cache()->get($cacheKey);
-    if (!$localUrl && $remoteUrl) {
-        // Tampilkan remote dulu, download di background
-        $localUrl = route('ig.proxy', ['url' => $remoteUrl]);
-        DownloadInstagramImage::dispatch($remoteUrl, $cacheKey);
-    }
-    return [
-        'image'         => $localUrl ?? 'https://placehold.co/600x600?text=No+Image',
-        'url'           => $item['url'] ?? '#',
-        'title'         => substr($item['caption'] ?? 'ACMI Post', 0, 80),
-        'likesCount'    => $item['likesCount'] ?? 0,
-        'commentsCount' => $item['commentsCount'] ?? 0,
-    ];
-})->all();
+                $remoteUrl = $item['displayUrl'] ?? null;
+                $cacheKey = 'ig_image:' . md5($remoteUrl);
+                // Cek apakah sudah ada versi lokal di cache
+                $localUrl = cache()->get($cacheKey);
+                if (!$localUrl && $remoteUrl) {
+                    // Tampilkan remote dulu, download di background
+                    $localUrl = route('ig.proxy', ['url' => $remoteUrl]);
+                    DownloadInstagramImage::dispatch($remoteUrl, $cacheKey);
+                }
+                return [
+                    'image'         => $localUrl ?? 'https://placehold.co/600x600?text=No+Image',
+                    'url'           => $item['url'] ?? '#',
+                    'title'         => substr($item['caption'] ?? 'ACMI Post', 0, 80),
+                    'likesCount'    => $item['likesCount'] ?? 0,
+                    'commentsCount' => $item['commentsCount'] ?? 0,
+                ];
+
+            })->all();
 
             } catch (\Exception $e) {
                 return [];

@@ -6,8 +6,7 @@ use App\Services\CmsApiService;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+
 
 class HomeController extends Controller
 {
@@ -20,48 +19,53 @@ class HomeController extends Controller
         $gallery  = $cms->getGallery();
         $partners = $cms->getPartners();
 
-        $posts = Cache::remember('instagram_posts_apify_v3', 60 * 30, function () {
+        // 1. Variabel dibuat
+        $apiUrl = env('API_BACKEND_URL', 'http://172.16.4.143:8000') . '/api/public/instagram';
+
+        // 2. Tambahkan "use ($apiUrl)" agar variabelnya bisa masuk ke dalam fungsi
+        $posts = Cache::remember('instagram_posts_from_backend_v2', 60 * 5, function () use ($apiUrl) {
             try {
-                $apiUrl = env('APIFY_INSTAGRAM_URL');
-                $response = Http::timeout(10)->get($apiUrl); // ← tambah timeout
-        
-                if (!$response->successful()) return [];
-        
-                $items = $response->json();
-                if (!is_array($items)) return [];
-        
-                return collect($items)->take(6)->map(function ($item) {
-                    $remoteUrl = $item['displayUrl'] ?? null;
-                    $cacheKey  = 'ig_image:' . md5($remoteUrl ?? '');
-        
-                    // Cek apakah sudah ada versi lokal
-                    $localUrl = $remoteUrl ? cache()->get($cacheKey) : null;
-        
-                    if (!$localUrl && $remoteUrl) {
-                        // Pakai proxy dulu, download di background
-                        $localUrl = route('ig.proxy', ['url' => $remoteUrl]);
-                        \App\Jobs\DownloadInstagramImage::dispatch($remoteUrl, $cacheKey);
+                // 3. Masukkan variabelnya ke sini! (Sekarang pasti nyala di VS Code)
+                $response = Http::timeout(10)->get($apiUrl);
+
+                if (!$response->successful() || !$response->json('success')) {
+                    return [];
+                }
+
+                $items = $response->json('data');
+
+                return collect($items)->map(function ($item) {
+                    // Ambil path image mentah dari backend
+                    $rawImage = $item['image'] ?? '';
+
+                    // Native check: Jika sudah berawalan http (URL penuh), pakai langsung. 
+                    // Jika belum (hanya path lokal seperti storage/instagram/xxx.jpg), kita gabungkan dengan domain backend.
+                    // KODE YANG DI-UPDATE (Lebih Toleran dan Pintar)
+                    if (!empty($rawImage)) {
+                        // KONDISI A: Jika API Backend ngirim full URL (misal dari Apify langsung), pakai langsung.
+                        if (str_starts_with($rawImage, 'http://') || str_starts_with($rawImage, 'https://')) {
+                            $mediaUrl = $rawImage;
+                        } else {
+                            // KONDISI B: Jika API Backend ngirim path lokal (storage/instagram/xxx.jpg), gabungkan dengan IP Backend.
+                            $baseUrl = rtrim(env('API_BACKEND_URL', 'http://172.16.4.143:8000'), '/');
+                            $mediaUrl = $baseUrl . '/' . ltrim($rawImage, '/');
+                        }
+                    } else {
+                        // KONDISI C: Jika di database backend ternyata isinya null/kosong, baru lempar ke placeholder "No Image".
+                        $mediaUrl = 'https://placehold.co/600x600?text=No+Image';
                     }
-        
-                    $mediaType = 'IMAGE';
-                    if (isset($item['videoUrl'])) {
-                        $mediaType = 'VIDEO';
-                    } elseif (!empty($item['childPosts'])) {
-                        $mediaType = 'CAROUSEL_ALBUM';
-                    }
-        
+
                     return [
-                        'mediaUrl'      => $localUrl ?? 'https://placehold.co/600x600?text=No+Image',
-                        'likeCount'     => $item['likesCount'] ?? 0,
-                        'commentCount'  => $item['commentsCount'] ?? 0,
-                        'permalink'     => $item['url'] ?? '#',
-                        'mediaType'     => $mediaType,
-                        'prunedCaption' => substr($item['caption'] ?? '', 0, 100),
+                        'mediaUrl'      => $mediaUrl,
+                        'permalink'     => $item['post_url'] ?? '#',
+                        'prunedCaption' => \Illuminate\Support\Str::limit($item['caption'] ?? '', 100),
+                        'likeCount'     => $item['likes'] ?? 0,
+                        'commentCount'  => $item['comments'] ?? 0,
+                        'mediaType'     => 'IMAGE',
                     ];
                 })->all();
-        
             } catch (\Exception $e) {
-                Log::error('Instagram fetch gagal: ' . $e->getMessage());
+                Log::error('Gagal mengambil data dari Backend ACMI DB: ' . $e->getMessage());
                 return [];
             }
         });
