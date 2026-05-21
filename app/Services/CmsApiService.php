@@ -21,7 +21,7 @@ class CmsApiService
     {
         return Cache::remember('instagram_posts', 3600, function () {
             try {
-                $response = Http::timeout(15)
+                $response = Http::timeout(5)
                     ->get('https://api.apify.com/v2/acts/apify~instagram-scraper/runs/last/dataset/items', [
                         'token' => config('services.apify.token'),
                         'limit' => 6,
@@ -149,5 +149,19 @@ class CmsApiService
                 return [];
             }
         });
+    }
+
+    public function submitInbound(array $data): array
+    {
+        try {
+            $response = Http::baseUrl(config('services.cms.api_url'))
+                ->timeout(10)
+                ->post('/inbound', $data);
+
+            return $response->json() ?? ['success' => false, 'message' => 'Gagal mengirim data'];
+        } catch (\Exception $e) {
+            Log::error('CMS submitInbound gagal: ' . $e->getMessage());
+            return ['success' => false, 'message' => 'Server error, coba lagi nanti'];
+        }
     }
 }

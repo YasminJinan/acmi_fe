@@ -1,6 +1,6 @@
 <?php
 
 use App\Http\Controllers\WebhookController;
-use Symfony\Component\Routing\Loader\Configurator\Routes;
+use Illuminate\Support\Facades\Route;
 
-Routes::post('/webhook/cms', [WebhookController::class, 'handle']);
+Route::Post('/webhook/cms', [WebhookController::class, 'handle']);

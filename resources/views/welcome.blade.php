@@ -1103,62 +1103,70 @@
         </div>
     </section>
 
-{{-- INSTAGRAM FEED SECTION --}}
-<section class="relative py-24 bg-white dark:bg-[#0a0a0b] transition-colors duration-500 overflow-hidden">
-    <div class="container mx-auto px-6">
+    {{-- INSTAGRAM FEED SECTION --}}
+    <section class="relative py-24 bg-white dark:bg-[#0a0a0b] transition-colors duration-500 overflow-hidden">
+        <div class="container mx-auto px-6">
 
-        {{-- Header Section --}}
-        <div class="text-center mb-16" data-aos="fade-up">
-            <div class="inline-block px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-bold mb-4 uppercase tracking-[0.2em] border border-orange-100 dark:border-orange-500/20">
-                Social Connect
+            {{-- Header Section --}}
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div
+                    class="inline-block px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-bold mb-4 uppercase tracking-[0.2em] border border border-orange-100 dark:border-orange-500/20">
+                    Social Connect
+                </div>
+                <h2 class="text-3xl md:text-5xl leading-tight text-gray-900 dark:text-white font-poppins">
+                    <span class="font-semibold tracking-tight">Ikuti Aktivitas</span>
+                    <span class="font-serif font-bold italic text-orange-500">Terbaru Kami</span>
+                </h2>
+                <div class="h-1 w-12 bg-orange-500 mx-auto rounded-full mt-4"></div>
             </div>
-            <h2 class="text-3xl md:text-5xl leading-tight text-gray-900 dark:text-white font-poppins">
-                <span class="font-semibold tracking-tight">Ikuti Aktivitas</span>
-                <span class="font-serif font-bold italic text-orange-500">Terbaru Kami</span>
-            </h2>
-            <div class="h-1 w-12 bg-orange-500 mx-auto rounded-full mt-4"></div>
-        </div>
 
             {{-- Grid Feed --}}
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                {{-- Menggunakan @forelse bawaan Blade dengan aman --}}
                 @forelse ($posts as $index => $post)
                     <div data-aos="fade-up" data-aos-delay="{{ $index * 100 }}"
                         class="group relative overflow-hidden rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 transition-all duration-500 hover:bg-white dark:hover:bg-white/10 hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:-translate-y-2">
-                        
-                        <a href="{{ $post['url'] ?? ($post['link'] ?? '#') }}" target="_blank" class="block">
-                            
+
+                        {{-- LINK DIRECT KE AKUN/POST INSTAGRAM (target="_blank" untuk security & user experience) --}}
+                        <a href="{{ $post['permalink'] ?? '#' }}" target="_blank" rel="noopener noreferrer"
+                            class="block">
+
                             {{-- Image Container --}}
                             <div class="aspect-square overflow-hidden relative">
-                                 <img src="{{ $post['image'] ?? ($post['thumbnail'] ?? asset('images/placeholder.jpg')) }}"
-        alt="{{ $post['title'] ?? 'Instagram Post' }}"
-        class="h-full w-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-75">
-                            
+                                <img src="{{ $post['mediaUrl'] ?? 'https://placehold.co/600x600?text=No+Image' }}"
+                                    alt="Instagram Post"
+                                    class="h-full w-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-75">
                             </div>
 
                             {{-- Content --}}
                             <div class="p-6 relative">
                                 <div class="flex items-center justify-between mb-3">
-                                    <p class="text-[10px] font-bold text-orange-500 dark:text-orange-400 uppercase tracking-widest font-poppins">
-                                        {{ isset($post['date_published']) ? \Carbon\Carbon::parse($post['date_published'])->format('d M Y') : 'Recent Post' }}
+                                    <p
+                                        class="text-[10px] font-bold text-orange-500 dark:text-orange-400 uppercase tracking-widest font-poppins">
+                                        Recent Post
                                     </p>
-                                    <i class="fa-brands fa-instagram text-gray-400 dark:text-gray-600 text-sm group-hover:text-orange-500 transition-colors"></i>
+                                    <i
+                                        class="fa-brands fa-instagram text-gray-400 dark:text-gray-600 text-sm group-hover:text-orange-500 transition-colors"></i>
                                 </div>
-                                <h3 class="text-base font-medium text-gray-800 dark:text-gray-200 line-clamp-2 leading-relaxed font-poppins group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors">
-                                    {{ $post['title'] ?? ($post['content_text'] ?? 'ACMI Post') }}
+                                <h3
+                                    class="text-base font-medium text-gray-800 dark:text-gray-200 line-clamp-2 leading-relaxed font-poppins group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors">
+                                    {{ $post['prunedCaption'] ?? 'ACMI Post' }}
                                 </h3>
                             </div>
                         </a>
                     </div>
                 @empty
-                    <div class="text-center col-span-3 py-12" data-aos="fade-up">
-                        <div class="w-16 h-16 bg-gray-100 dark:bg-white/5 text-gray-400 rounded-full flex items-center justify-center text-xl mx-auto mb-4">
+                    {{-- Fallback jika array $posts ternyata kosong atau cache belum terisi --}}
+                    <div class="text-center col-span-1 md:col-span-3 py-12" data-aos="fade-up">
+                        <div
+                            class="w-16 h-16 bg-gray-100 dark:bg-white/5 text-gray-400 rounded-full flex items-center justify-center text-xl mx-auto mb-4">
                             <i class="fa-brands fa-instagram"></i>
                         </div>
-                        <p class="text-sm font-poppins text-gray-400 dark:text-gray-500">Gagal memuat postingan atau feed kosong.</p>
+                        <p class="text-sm font-poppins text-gray-400 dark:text-gray-500">Gagal memuat postingan atau feed
+                            kosong.</p>
                     </div>
                 @endforelse
             </div>
-            
         </div>
     </section>
 
