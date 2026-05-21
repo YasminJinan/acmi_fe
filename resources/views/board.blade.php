@@ -11,8 +11,6 @@
 @section('content')
 <section class="relative bg-white dark:bg-[#0a0a0b] py-10 md:py-48 overflow-hidden transition-colors duration-500">
 
-
-
     {{-- Background Decorative Elements --}}
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div class="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-orange-500/5 dark:bg-orange-500/10 rounded-full blur-[150px]"></div>

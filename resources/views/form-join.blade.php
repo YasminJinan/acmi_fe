@@ -85,6 +85,7 @@
                             </div>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<<<<<<< HEAD
                                 <input type="text" name="name" value="{{ old('name') }}" placeholder="Nama Lengkap"
                                     class="w-full px-6 py-4 bg-gray-50 border {{ $errors->has('name') ? 'border-red-400' : 'border-transparent' }} rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 placeholder:text-gray-400">
                                 @error('name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
@@ -99,6 +100,27 @@
                     
                                 <input type="url" name="linkedin" value="{{ old('linkedin') }}" placeholder="LinkedIn Profile URL"
                                     class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 placeholder:text-gray-400">
+=======
+                                <div class="space-y-2">
+                                    <input type="text" placeholder="Nama Lengkap"
+                                        class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+                                </div>
+                                <div class="space-y-2">
+                                    <input type="email" placeholder="Email Profesional"
+                                        class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+                                </div>
+                               <div class="space-y-2">
+    <input type="text" 
+           placeholder="WhatsApp (Aktif)"
+           inputmode="numeric"
+           oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+           class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+</div>
+                                <div class="space-y-2">
+                                    <input type="url" placeholder="LinkedIn Profile URL"
+                                        class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+                                </div>
+>>>>>>> 9cddc1f (fix form-join)
                             </div>
                         </div>
 
@@ -110,6 +132,7 @@
                                 <div class="h-[1px] flex-grow bg-gray-100 dark:bg-white/10 transition-colors duration-300"></div>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<<<<<<< HEAD
                                 <input type="text" name="company" value="{{ old('company') }}" placeholder="Nama Perusahaan"
                                     class="w-full px-6 py-4 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-orange-500/5 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 placeholder:text-gray-400">
                     
@@ -131,12 +154,55 @@
                                     <option class="dark:bg-[#111113]" {{ old('revenue') == 'Di atas Rp 10 Miliar' ? 'selected' : '' }}>Di atas Rp 10 Miliar</option>
                                     <option class="dark:bg-[#111113]" {{ old('revenue') == 'Di atas Rp 100 Miliar' ? 'selected' : '' }}>Di atas Rp 100 Miliar</option>
                                     <option class="dark:bg-[#111113]" {{ old('revenue') == 'Di atas Rp 1 Triliun' ? 'selected' : '' }}>Di atas Rp 1 Triliun</option>
+=======
+                                <input type="text" placeholder="Nama Perusahaan"
+                                    class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+
+                                <input type="text" placeholder="Jabatan Saat Ini"
+                                    class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+
+                                <select class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f97316%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1.5rem_center] bg-no-repeat">
+                                    <option disabled selected class="dark:bg-[#111113] dark:text-gray-400">Sektor Industri</option>
+                                    <option class="dark:bg-[#111113]">Teknologi & Software </option>
+                                    <option class="dark:bg-[#111113]">Keuangan & Fintech</option>
+                                    <option class="dark:bg-[#111113]">Manufaktur</option>
+                                    <option class="dark:bg-[#111113]">Properti & Real Estate</option>
+                                    <option class="dark:bg-[#111113]">F&B</option>
+                                    <option class="dark:bg-[#111113]">Energi & Resources</option>
+                                    <option class="dark:bg-[#111113]">Retail & E-commerce</option>
+                                    <option class="dark:bg-[#111113]">Healthcare</option>
+                                    <option class="dark:bg-[#111113]">Media & Entertainment</option>
+                                    <option class="dark:bg-[#111113]">Logistik & Supply Chain</option>
+                                    <option class="dark:bg-[#111113]">Lainnya</option>
+                                </select>
+
+                                <input type="text" placeholder="Website Perusahaan"
+                                    class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+
+                                 <select class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f97316%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1.5rem_center] bg-no-repeat">
+                                    <option disabled selected class="dark:bg-[#111113] dark:text-gray-400">Jumlah Karyawan</option>
+                                    <option class="dark:bg-[#111113]">1-50 Karyawan</option>
+                                    <option class="dark:bg-[#111113]">51-200 Karyawan</option>
+                                    <option class="dark:bg-[#111113]">201-500 Karyawan</option>
+                                    <option class="dark:bg-[#111113]">501-1000 Karyawan</option>
+                                    <option class="dark:bg-[#111113]">1000+ Karyawan</option>
+                                </select>
+
+                                <select class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f97316%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1.5rem_center] bg-no-repeat">
+                                    <option disabled selected class="dark:bg-[#111113] dark:text-gray-400">Skala Pendapatan Tahunan</option>
+                                    <option class="dark:bg-[#111113]">< IDR 10 Miliar</option>
+                                    <option class="dark:bg-[#111113]">IDR 10 - 50 Miliar</option>
+                                    <option class="dark:bg-[#111113]">IDR 50 - 200 Miliar</option>
+                                    <option class="dark:bg-[#111113]">IDR 200 Miliar - 1 Triliun</option>
+                                    <option class="dark:bg-[#111113]">> IDR 1 Triliun</option>
+>>>>>>> 9cddc1f (fix form-join)
                                 </select>
                             </div>
                         </div>
                     
                         {{-- Section 03: Visi & Aspirasi --}}
                         <div class="space-y-6">
+<<<<<<< HEAD
                             <div class="flex items-center gap-4">
                                 <span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-bold transition-colors duration-300">03</span>
                                 <h3 class="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-widest transition-colors duration-300">Visi & Aspirasi</h3>
@@ -147,6 +213,29 @@
                         </div>
                     
                         {{-- Submit --}}
+=======
+    <div class="flex items-center gap-4">
+        <span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-bold transition-colors duration-300">03</span>
+        <h3 class="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-widest transition-colors duration-300">Motivasi & Referral</h3>
+        <div class="h-[1px] flex-grow bg-gray-100 dark:bg-white/10 transition-colors duration-300"></div>
+    </div>
+    
+    <!-- Bungkus kedua input agar memiliki jarak yang rapi -->
+    <div class="space-y-4">
+        <!-- Textarea Motivasi -->
+        <textarea rows="4" placeholder="Mengapa anda tertarik bergabung dengan ACMI?*"
+            class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600 resize-none"></textarea>
+
+        <!-- Column Kecil / Input Referral (Opsional) -->
+        <div class="max-w-md"> 
+            <input type="text" placeholder="Direferensikan oleh (opsional)"
+                class="w-full px-6 py-3 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+        </div>
+    </div>
+</div>
+
+                        {{-- Submit Button --}}
+>>>>>>> 9cddc1f (fix form-join)
                         <div class="pt-6">
                             <button type="submit" class="group relative w-full overflow-hidden py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-bold transition-all duration-300 hover:shadow-2xl hover:shadow-slate-200 dark:hover:shadow-orange-900/20">
                                 <div class="absolute inset-0 w-0 bg-orange-500 transition-all duration-[400ms] ease-out group-hover:w-full"></div>
