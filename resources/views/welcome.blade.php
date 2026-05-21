@@ -11,20 +11,20 @@
 
 @section('content')
 
-    {{-- HERO SECTION --}}
-    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+   {{-- HERO SECTION --}}
+    <section class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b]">
 
         {{-- Background Video --}}
         <div class="absolute inset-0 w-full h-full">
-            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-100">
                 <source src="{{ asset('videos/hero-bg.mp4') }}" type="video/mp4">
             </video>
         </div>
 
-        {{-- Overlay --}}
+        {{-- Overlay (Diperhalus untuk Light Mode agar video tetap hidup & teks kontras) --}}
         <div
             class="absolute inset-0 bg-gradient-to-b
-        from-white/30 via-white/80 to-white
+        from-white/20 via-white/60 to-gray-50
         dark:from-[#0a0a0b]/40 dark:via-[#0a0a0b]/80 dark:to-[#0a0a0b]">
         </div>
 
@@ -32,7 +32,7 @@
 
             {{-- Badge --}}
             <div data-aos="zoom-in"
-                class="inline-block px-6 py-1.5 rounded-full bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-[0_8px_32px_0_rgba(255,145,0,0.1)] mb-6 transition-all duration-500 hover:border-orange-400/50 group">
+                class="inline-block px-6 py-1.5 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-[0_8px_32px_0_rgba(255,145,0,0.08)] mb-6 transition-all duration-500 hover:border-orange-400/50 group">
                 <div class="flex items-center gap-2">
                     <span class="relative flex h-2 w-2">
                         <span
@@ -40,43 +40,38 @@
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
                     </span>
                     <span
-                        class="text-orange-500 text-xs font-poppins font-semibold uppercase tracking-widest group-hover:text-orange-400 transition-colors">
+                        class="text-orange-600 dark:text-orange-500 text-xs font-poppins font-semibold uppercase tracking-widest group-hover:text-orange-500 transition-colors">
                         {{ __('messages.hero_badge') }}
                     </span>
                 </div>
             </div>
 
-            {{-- Judul --}}
+            {{-- Judul (Warna teks gray-900 dipertegas) --}}
             <h1 data-aos="fade-up" data-aos-delay="200"
-                class="text-4xl md:text-7xl leading-tight text-gray-900 dark:text-white">
+                class="text-4xl md:text-7xl leading-tight text-gray-950 dark:text-white drop-shadow-sm">
                 <span class="font-poppins font-semibold">{{ __('messages.hero_title_1') }}</span><br>
-                <span class="font-serif font-bold italic text-orange-500">{{ __('messages.hero_title_2') }}</span>
+                <span class="font-serif font-bold italic text-orange-600 dark:text-orange-500">{{ __('messages.hero_title_2') }}</span>
             </h1>
 
-            {{-- Deskripsi --}}
-
-
-
-
-
+            {{-- Deskripsi (Warna diubah ke gray-700 agar lebih terbaca di light mode) --}}
             <p data-aos="fade-up" data-aos-delay="400"
-                class="mt-6 text-gray-600 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto">
+                class="mt-6 text-gray-700 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed">
                 {{ __('messages.hero_desc') }}
             </p>
 
-            {{-- Buttons --}}
+            {{-- Buttons (Perbaikan hover state pada light mode) --}}
             <div data-aos="fade-up" data-aos-delay="600" class="mt-8 flex justify-center gap-4 flex-wrap">
                 <a href="/gabung"
-                    class="px-6 py-3 bg-orange-500 text-white rounded-lg font-semibold shadow-lg hover:scale-105 transition-transform duration-300 inline-block">
+                    class="px-6 py-3 bg-orange-600 dark:bg-orange-500 text-white rounded-lg font-semibold shadow-md shadow-orange-500/20 hover:bg-orange-700 dark:hover:bg-orange-600 hover:scale-105 transition-all duration-300 inline-block">
                     {{ __('messages.btn_join') }}
                 </a>
-                <button
-                    class="px-6 py-3 border border-orange-400 text-orange-500 rounded-lg font-semibold hover:bg-orange-50/10 hover:scale-105 transition-transform duration-300">
-                    {{ __('messages.btn_explore') }}
-                </button>
+              <a href="{{ route('ontopic') }}"
+   class="inline-block px-6 py-3 border border-orange-400 text-orange-500 rounded-lg font-semibold hover:bg-orange-50/10 hover:scale-105 transition-transform duration-300">
+    {{ __('messages.btn_explore') }}
+</a>
             </div>
 
-            {{-- Stats --}}
+            {{-- Stats (Card dibuat lebih menonjol di light mode dengan border halus) --}}
             <div class="mt-14 grid grid-cols-3 gap-4 max-w-3xl mx-auto">
                 @php
                     $stats = [
@@ -88,7 +83,7 @@
 
                 @foreach ($stats as $index => $stat)
                     <div data-aos="flip-up" data-aos-delay="{{ 800 + $index * 100 }}"
-                        class="bg-white/60 dark:bg-white/5 backdrop-blur-lg rounded-xl py-4 border border-white/40 dark:border-white/10 shadow-xl"
+                        class="bg-white/80 dark:bg-white/5 backdrop-blur-lg rounded-xl py-4 border border-gray-200/60 dark:border-white/10 shadow-lg shadow-gray-200/50 dark:shadow-none"
                         x-data="{
                             current: 0,
                             target: {{ $stat['target'] }},
@@ -104,10 +99,10 @@
                                 window.requestAnimationFrame(step);
                             }
                         }" x-init="start()">
-                        <p class="text-2xl font-semibold font-poppins text-gray-900 dark:text-white">
+                        <p class="text-2xl font-bold font-poppins text-gray-950 dark:text-white">
                             <span x-text="current">0</span>{{ $stat['suffix'] }}
                         </p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 font-poppins">{{ $stat['label'] }}</p>
+                        <p class="text-xs text-gray-600 dark:text-gray-400 font-poppins mt-0.5">{{ $stat['label'] }}</p>
                     </div>
                 @endforeach
             </div>
@@ -197,39 +192,60 @@
     </section>
 
 
-    {{-- EVENT BANNER --}}
+   {{-- EVENT BANNER --}}
     <section class="bg-white dark:bg-[#0a0a0b] px-6 md:px-10 pt-10 pb-6">
         <div class="max-w-7xl mx-auto">
             <div
-                class="bg-[#f5f5f7] dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between shadow-sm gap-6">
+                class="relative overflow-hidden bg-gradient-to-br from-orange-50/60 via-[#f8f9fa] to-white dark:from-white/5 dark:via-white/5 dark:to-white/5 border border-orange-100 dark:border-white/10 rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between shadow-md shadow-orange-500/[0.02] dark:shadow-none gap-6 group">
+                
+                {{-- Dekorasi Ikon Background (Hanya pemanis visual samar) --}}
+                <div class="absolute -right-6 -bottom-6 text-orange-500/5 dark:text-white/5 text-9xl pointer-events-none transform -rotate-12 transition-transform duration-500 group-hover:scale-110">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </div>
 
-                <div class="flex items-center gap-5">
+                {{-- Sisi Kiri: Info Event --}}
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 w-full md:w-auto">
                     <div
-                        class="w-14 h-14 bg-orange-100 dark:bg-orange-500/20 text-orange-500 rounded-xl flex items-center justify-center text-xl">
-                        <i class="fa-solid fa-sparkles"></i>
+                        class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 dark:from-orange-500/20 dark:to-orange-600/20 text-white dark:text-orange-400 rounded-xl flex items-center justify-center text-xl shadow-md shadow-orange-500/20 dark:shadow-none shrink-0">
+                        <i class="fa-solid fa-bolt-lightning animate-pulse"></i>
                     </div>
                     <div>
                         <span
-                            class="text-xs font-semibold bg-orange-100 dark:bg-orange-500/20 text-orange-500 px-3 py-1 rounded-full uppercase tracking-wider">
-                            {{ __('messages.event_badge') }}
+                            class="inline-flex items-center gap-1.5 text-xs font-bold bg-orange-100/80 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400 px-3 py-1 rounded-full uppercase tracking-wider">
+                            <i class="fa-solid fa-sparkles text-[10px]"></i> {{ __('messages.event_badge') }}
                         </span>
-                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white mt-2">
-                            {{ __('messages.event_title') }}</h2>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 flex items-center gap-2">
-                            {{ __('messages.event_date') }}
-                            <i class="fa-regular fa-calendar"></i>
-                        </p>
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-2 font-poppins tracking-tight">
+                            {{ __('messages.event_title') }}
+                        </h2>
+                        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1.5 text-sm text-gray-600 dark:text-gray-400">
+                            <p class="flex items-center gap-2">
+                                <i class="fa-regular fa-calendar-days text-orange-500 dark:text-orange-400"></i>
+                                {{ __('messages.event_date') }}
+                            </p>
+                            <span class="hidden sm:inline text-gray-300 dark:text-gray-700">•</span>
+                            <p class="flex items-center gap-1.5">
+                                <i class="fa-solid fa-location-dot text-gray-400 dark:text-gray-500"></i>
+                                <span class="text-xs">Live / Hybrid</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-6">
-                    <div class="text-right hidden sm:block">
-                        <p class="text-xs text-gray-400">Early Bird Discount</p>
-                        <p class="text-orange-500 font-bold text-lg">30% OFF</p>
+                {{-- Sisi Kanan: Promo & CTA Button --}}
+                <div class="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto border-t border-gray-100 dark:border-white/5 pt-4 md:pt-0 md:border-none">
+                    <div class="text-left md:text-right flex items-center md:flex-col gap-2 md:gap-0">
+                        <p class="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1 md:justify-end">
+                            <i class="fa-solid fa-tags text-orange-400 md:hidden"></i> Early Bird Discount
+                        </p>
+                        <p class="text-orange-600 dark:text-orange-400 font-black text-xl tracking-tight flex items-center gap-1">
+                            30% OFF <i class="fa-solid fa-fire text-sm animate-bounce hidden md:inline-block"></i>
+                        </p>
                     </div>
+                    
                     <button
-                        class="bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold px-6 py-3 rounded-lg flex items-center gap-2 transition duration-300">
-                        {{ __('messages.event_cta') }} <i class="fa-solid fa-arrow-right text-xs"></i>
+                        class="bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-sm font-semibold px-6 py-3.5 rounded-xl flex items-center gap-2.5 shadow-md shadow-orange-600/10 dark:shadow-none hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ml-auto md:ml-0">
+                        <span>{{ __('messages.event_cta') }}</span> 
+                        <i class="fa-solid fa-arrow-right-long text-xs transition-transform group-hover:translate-x-1"></i>
                     </button>
                 </div>
 
@@ -306,10 +322,7 @@
                             </p>
                         </div>
 
-                        <div
-                            class="mt-6 flex justify-end opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-2 group-hover:translate-x-0">
-                            <i class="fa-solid fa-arrow-right-long text-orange-500 text-sm"></i>
-                        </div>
+                      
                     </div>
                 @endforeach
             </div>
@@ -317,17 +330,16 @@
         </div>
     </section>
 
-
-    {{-- SOLUTION SECTION --}}
+{{-- SOLUTION SECTION --}}
     <section
         class="relative min-h-screen w-full flex items-center justify-center py-24 px-6 overflow-hidden transition-colors duration-500 bg-white dark:bg-[#0a0a0b]">
 
-        {{-- Background --}}
+        {{-- Background Overlay Diperhalus agar Gambar & Gradien Menyatu --}}
         <div class="absolute inset-0 z-0" data-aos="fade-in" data-aos-duration="2000">
             <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
-                class="w-full h-full object-cover opacity-30 dark:opacity-20" alt="Office background">
+                class="w-full h-full object-cover opacity-20 dark:opacity-15" alt="Office background">
             <div
-                class="absolute inset-0 bg-gradient-to-tr from-white via-white/95 to-orange-50/30 dark:from-gray-900 dark:via-gray-900/98 dark:to-orange-500/5 transition-colors duration-500">
+                class="absolute inset-0 bg-gradient-to-tr from-white via-white/85 to-orange-100/40 dark:from-[#0a0a0b] dark:via-[#0a0a0b]/95 dark:to-orange-500/10 transition-colors duration-500">
             </div>
         </div>
 
@@ -336,93 +348,73 @@
             {{-- Left Side --}}
             <div class="space-y-12 lg:max-w-md xl:max-w-lg lg:ml-auto" data-aos="fade-right">
                 <div class="relative">
-                    <div class="absolute -left-6 top-0 w-1 h-24 bg-orange-500 rounded-full hidden md:block"></div>
+                    <div class="absolute -left-6 top-0 w-1 h-24 bg-orange-600 dark:bg-orange-500 rounded-full hidden md:block"></div>
 
                     <span
-                        class="inline-block px-4 py-1.5 rounded-full border border-orange-200 dark:border-orange-500/30 bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-bold mb-6 uppercase tracking-[0.2em]">
-                        {{ __('messages.solution_badge') }}
+                        class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-orange-200 dark:border-orange-500/30 bg-orange-50/80 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-bold mb-6 uppercase tracking-[0.2em]">
+                        <i class="fa-solid fa-lightbulb text-[9px]"></i> {{ __('messages.solution_badge') }}
                     </span>
 
-                    <h2 class="text-4xl md:text-6xl font-poppins font-bold text-gray-900 dark:text-white leading-[1.1]">
+                    <h2 class="text-4xl md:text-6xl font-poppins font-bold text-gray-950 dark:text-white leading-[1.1] tracking-tight">
                         ACMI:
-                        <span class="font-serif italic text-orange-500 block md:inline-block">Powerhouse</span><br
+                        <span class="font-serif italic text-orange-600 dark:text-orange-500 block md:inline-block">Powerhouse</span><br
                             class="hidden md:block">
                         <span class="font-light tracking-tight">{{ __('messages.solution_title') }}</span>
                     </h2>
 
                     <p
-                        class="mt-8 text-gray-600 dark:text-gray-400 text-base md:text-lg font-poppins max-w-lg leading-relaxed">
+                        class="mt-8 text-gray-700 dark:text-gray-400 text-base md:text-lg font-poppins max-w-lg leading-relaxed">
                         {{ __('messages.solution_desc') }}
                     </p>
                 </div>
 
-                <div class="grid grid-cols-2 gap-8 pt-10 border-t border-gray-100 dark:border-white/5">
+                <div class="grid grid-cols-2 gap-8 pt-10 border-t border-gray-200/60 dark:border-white/5">
                     <div class="group">
                         <p
-                            class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white font-poppins group-hover:text-orange-500 transition-colors duration-300">
-                            10<span class="text-orange-500">+</span>
+                            class="text-4xl md:text-5xl font-black text-gray-950 dark:text-white font-poppins group-hover:text-orange-600 dark:group-hover:text-orange-500 transition-colors duration-300">
+                            10<span class="text-orange-600 dark:text-orange-500">+</span>
                         </p>
-                        <p class="text-[11px] text-gray-400 dark:text-gray-500 font-bold uppercase tracking-widest mt-3">
+                        <p class="text-[11px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest mt-3 flex items-center gap-1.5">
                             {{ __('messages.solution_exp') }}
                         </p>
                     </div>
                     <div class="group">
                         <p
-                            class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white font-poppins group-hover:text-orange-500 transition-colors duration-300">
-                            50<span class="text-orange-500 text-3xl">T+</span>
+                            class="text-4xl md:text-5xl font-black text-gray-950 dark:text-white font-poppins group-hover:text-orange-600 dark:group-hover:text-orange-500 transition-colors duration-300">
+                            50<span class="text-orange-600 dark:text-orange-500 text-3xl">T+</span>
                         </p>
-                        <p class="text-[11px] text-gray-400 dark:text-gray-500 font-bold uppercase tracking-widest mt-3">
-                            {{ __('messages.solution_revenue') }}
+                        <p class="text-[11px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest mt-3 flex items-center gap-1.5">
+                         {{ __('messages.solution_revenue') }}
                         </p>
                     </div>
                 </div>
             </div>
 
-            {{-- Right Side --}}
+            {{-- Right Side (Cards) --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
-                <div class="absolute inset-0 bg-orange-500/5 blur-[120px] -z-10 rounded-full"></div>
+                <div class="absolute inset-0 bg-orange-500/[0.04] dark:bg-orange-500/5 blur-[120px] -z-10 rounded-full"></div>
 
                 @php
                     $solutions = [
-                        [
-                            'icon' => 'fa-share-nodes',
-                            'title' => __('messages.solution_1_title'),
-                            'desc' => __('messages.solution_1_desc'),
-                            'aos' => 'fade-down',
-                        ],
-                        [
-                            'icon' => 'fa-book-open',
-                            'title' => __('messages.solution_2_title'),
-                            'desc' => __('messages.solution_2_desc'),
-                            'aos' => 'fade-left',
-                        ],
-                        [
-                            'icon' => 'fa-bullhorn',
-                            'title' => __('messages.solution_3_title'),
-                            'desc' => __('messages.solution_3_desc'),
-                            'aos' => 'fade-right',
-                        ],
-                        [
-                            'icon' => 'fa-briefcase',
-                            'title' => __('messages.solution_4_title'),
-                            'desc' => __('messages.solution_4_desc'),
-                            'aos' => 'fade-up',
-                        ],
+                        ['icon' => 'fa-share-nodes', 'title' => __('messages.solution_1_title'), 'desc' => __('messages.solution_1_desc'), 'aos' => 'fade-down'],
+                        ['icon' => 'fa-book-open', 'title' => __('messages.solution_2_title'), 'desc' => __('messages.solution_2_desc'), 'aos' => 'fade-left'],
+                        ['icon' => 'fa-bullhorn', 'title' => __('messages.solution_3_title'), 'desc' => __('messages.solution_3_desc'), 'aos' => 'fade-right'],
+                        ['icon' => 'fa-briefcase', 'title' => __('messages.solution_4_title'), 'desc' => __('messages.solution_4_desc'), 'aos' => 'fade-up'],
                     ];
                 @endphp
 
                 @foreach ($solutions as $index => $sol)
                     <div data-aos="{{ $sol['aos'] }}" data-aos-delay="{{ $index * 100 }}"
-                        class="group bg-white/80 dark:bg-white/[0.03] backdrop-blur-xl p-8 rounded-[2rem] border border-white dark:border-white/5 shadow-[0_15px_40px_-15px_rgba(0,0,0,0.05)] dark:shadow-none hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-2 transition-all duration-500">
+                        class="group bg-white/90 dark:bg-white/[0.03] backdrop-blur-xl p-8 rounded-[2rem] border border-gray-200/50 dark:border-white/5 shadow-[0_15px_40px_-15px_rgba(249,115,22,0.06)] dark:shadow-none hover:shadow-xl hover:shadow-orange-500/[0.08] dark:hover:shadow-orange-500/10 hover:-translate-y-2 transition-all duration-500">
                         <div
-                            class="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 text-white rounded-2xl flex items-center justify-center text-xl mb-6 shadow-[0_10px_20px_rgba(249,115,22,0.2)] group-hover:rotate-6 transition-transform">
+                            class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-2xl flex items-center justify-center text-xl mb-6 shadow-md shadow-orange-500/20 dark:shadow-none group-hover:rotate-6 transition-transform">
                             <i class="fa-solid {{ $sol['icon'] }}"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-gray-900 dark:text-white font-poppins mb-3 tracking-tight">
+                        <h3 class="text-lg font-bold text-gray-950 dark:text-white font-poppins mb-3 tracking-tight">
                             {{ $sol['title'] }}
                         </h3>
                         <p
-                            class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed font-poppins group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors">
+                            class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-poppins group-hover:text-gray-800 dark:group-hover:text-gray-300 transition-colors">
                             {{ $sol['desc'] }}
                         </p>
                     </div>
@@ -433,130 +425,108 @@
     </section>
 
 
-    {{-- EXCLUSIVE MEMBERSHIP SECTION --}}
-    <section
-        class="py-16 md:py-20 bg-white dark:bg-[#0a0a0b] transition-colors duration-500 overflow-hidden mt-10 relative">
+{{-- EXCLUSIVE MEMBERSHIP SECTION --}}
+<section
+    class="relative py-20 md:py-28 bg-gradient-to-b from-white to-gray-50 dark:from-[#0a0a0b] dark:to-[#0c0c0e] transition-colors duration-500 overflow-hidden">
 
-        {{-- Decorative Background --}}
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-            <div
-                class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-orange-500/10 dark:bg-orange-500/20 rounded-full blur-[120px]">
-            </div>
-            <div
-                class="absolute bottom-[-5%] right-[-5%] w-[300px] h-[300px] bg-orange-600/5 dark:bg-orange-900/15 rounded-full blur-[100px]">
-            </div>
+    {{-- Decorative Background (Disesuaikan antara Light dan Dark) --}}
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div
+            class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-orange-500/[0.06] dark:bg-orange-500/10 rounded-full blur-[120px]">
         </div>
+        <div
+            class="absolute bottom-[-5%] right-[-5%] w-[300px] h-[300px] bg-orange-600/[0.03] dark:bg-orange-900/10 rounded-full blur-[100px]">
+        </div>
+    </div>
 
-        <div class="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div class="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-                {{-- Left: Info --}}
-                <div class="space-y-6" data-aos="fade-right">
-                    <div>
-                        <div
-                            class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-100 dark:border-orange-500/20 bg-orange-50/50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-bold mb-4 shadow-sm uppercase tracking-widest">
-                            <i class="fa-solid fa-shield-halved"></i>
-                            <span>{{ __('messages.membership_badge') }}</span>
-                        </div>
-
-                        <h2
-                            class="text-3xl md:text-4xl lg:text-5xl font-poppins text-slate-900 dark:text-white leading-tight">
-                            <span class="font-semibold tracking-tight">{{ __('messages.membership_title_1') }}</span><br>
-                            <span
-                                class="font-serif font-bold italic text-orange-500">{{ __('messages.membership_title_2') }}</span>
-                        </h2>
-
-                        <p
-                            class="mt-4 text-gray-500 dark:text-gray-400 text-base md:text-lg font-poppins leading-relaxed max-w-md">
-                            {{ __('messages.membership_desc') }}
-                        </p>
-                    </div>
-
-                    {{-- Checklist --}}
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3">
-                        @php
-                            $features = is_array(__('messages.membership_features'))
-                                ? __('messages.membership_features')
-                                : [];
-                        @endphp
-                        @foreach ($features as $feature)
-                            <li
-                                class="flex items-center gap-3 text-slate-700 dark:text-gray-300 font-poppins text-sm group">
-                                <div
-                                    class="flex-shrink-0 w-5 h-5 rounded-md bg-orange-100 dark:bg-orange-500/20 flex items-center justify-center group-hover:bg-orange-500 transition-colors duration-300">
-                                    <i
-                                        class="fa-solid fa-check text-[8px] text-orange-600 dark:text-orange-400 group-hover:text-white"></i>
-                                </div>
-                                <span
-                                    class="group-hover:text-orange-500 dark:group-hover:text-white transition-colors">{{ $feature }}</span>
-                            </li>
-                        @endforeach
-                    </ul>
-
-                    {{-- CTA --}}
-                    <div class="pt-4">
-                        <div class="flex flex-col sm:flex-row items-center gap-4">
-                            <button
-                                class="px-8 py-3.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl shadow-lg shadow-orange-500/30 transition-all hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 w-full sm:w-auto">
-                                {{ __('messages.membership_cta_btn') }}
-                                <i class="fa-solid fa-arrow-right-long transition-transform group-hover:translate-x-1"></i>
-                            </button>
-                        </div>
-                        <p class="mt-4 text-[11px] text-gray-400 font-poppins">
-                            *{{ __('messages.membership_partner') }}
-                            <a href="#"
-                                class="text-orange-500 font-bold hover:underline decoration-2 underline-offset-4 ml-1">
-                                {{ __('messages.membership_contact') }}
-                            </a>
-                        </p>
-                    </div>
-                </div>
-
-                {{-- Right: Card --}}
-                <div class="relative flex justify-center lg:justify-start lg:ml-12" data-aos="fade-left">
-                    <div class="absolute -top-12 -right-12 w-64 h-64 bg-orange-500/10 blur-[100px] rounded-full"></div>
-
+            {{-- Left: Info --}}
+            <div class="space-y-8" data-aos="fade-right">
+                <div>
+                    {{-- Badge --}}
                     <div
-                        class="relative group bg-[#f8f9fb] dark:bg-white/[0.03] border border-gray-100 dark:border-white/10 p-10 md:p-14 rounded-[3rem] w-full max-w-[420px] text-center shadow-2xl backdrop-blur-sm transition-all duration-500 hover:border-orange-500/30">
-
-                        <div class="relative w-20 h-20 mx-auto mb-10">
-                            <div
-                                class="absolute inset-0 bg-orange-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all">
-                            </div>
-                            <div
-                                class="relative w-full h-full bg-orange-500 rounded-[1.5rem] flex items-center justify-center transform -rotate-6 group-hover:rotate-0 transition-all shadow-lg shadow-orange-500/25">
-                                <i class="fa-solid fa-shield-halved text-3xl text-white"></i>
-                            </div>
-                        </div>
-
-                        <h3 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white font-poppins mb-4">
-                            {{ __('messages.membership_cta_title') }}
-                        </h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm font-poppins leading-relaxed mb-10 px-2">
-                            {{ __('messages.membership_cta_desc') }}
-                        </p>
-
-                        <button
-                            class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-2xl shadow-lg shadow-orange-500/40 transition-all active:scale-95 text-base flex items-center justify-center gap-3">
-                            {{ __('messages.membership_cta_btn') }}
-                            <i class="fa-solid fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
-                        </button>
-
-                        <p
-                            class="mt-8 text-[12px] text-gray-400 dark:text-gray-500 font-poppins uppercase tracking-[0.1em]">
-                            {{ __('messages.membership_partner') }}
-                            <a href="#"
-                                class="text-orange-500 font-bold hover:underline decoration-2 underline-offset-4 ml-1">
-                                {{ __('messages.membership_contact') }}
-                            </a>
-                        </p>
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-200 dark:border-orange-500/20 bg-orange-50/80 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-bold mb-5 shadow-sm uppercase tracking-widest font-poppins">
+                        <i class="fa-solid fa-shield-halved text-[11px]"></i>
+                        <span>{{ __('messages.membership_badge') }}</span>
                     </div>
+
+                    {{-- Title --}}
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-poppins text-gray-950 dark:text-white leading-[1.15] tracking-tight">
+                        <span class="font-light">{{ __('messages.membership_title_1') }}</span>
+                        <span class="block font-serif font-bold italic text-orange-600 dark:text-orange-500 mt-1 selection:bg-orange-500/20">
+                           {{ __('messages.membership_title_2') }}
+                        </span>
+                    </h2>
+
+                    {{-- Description --}}
+                    <p class="mt-6 text-gray-600 dark:text-gray-400 text-base md:text-lg font-poppins leading-relaxed max-w-md">
+                        {{ __('messages.membership_desc') }}
+                    </p>
                 </div>
 
-            </div>
-        </div>
-    </section>
+                {{-- Checklist dengan Hover Efek Oranye Premium --}}
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+                    @php
+                        $features = is_array(__('messages.membership_features')) ? __('messages.membership_features') : [];
+                    @endphp
+                    @foreach ($features as $feature)
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-poppins text-sm group cursor-default">
+                            <div class="flex-shrink-0 w-5 h-5 rounded-md bg-orange-100/80 dark:bg-orange-500/20 flex items-center justify-center group-hover:bg-orange-600 dark:group-hover:bg-orange-500 transition-colors duration-300 shadow-sm">
+                                <i class="fa-solid fa-check text-[9px] text-orange-600 dark:text-orange-400 group-hover:text-white transition-colors duration-300"></i>
+                            </div>
+                            <span class="group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-200">
+                                {{ $feature }}
+                            </span>
+                        </li>
+                    @endforeach
+                </ul>
 
+                {{-- CTA --}}
+                <div class="pt-2 group/btn">
+                    <div class="flex flex-col sm:flex-row items-center gap-4">
+                       <a href="{{ url('/gabung') }}"
+   class="px-8 py-4 bg-orange-600 dark:bg-orange-500 hover:bg-orange-700 dark:hover:bg-orange-600 text-white font-bold font-poppins rounded-xl shadow-lg shadow-orange-600/20 dark:shadow-none transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 w-full sm:w-auto">
+    {{ __('messages.membership_cta_btn') }}
+    <i class="fa-solid fa-arrow-right-long transition-transform duration-300 group-hover/btn:translate-x-1.5"></i>
+</a>
+                    </div>         
+                </div>
+            </div>
+
+            {{-- Right: Card Luxury Glassmorphism --}}
+            <div class="relative flex justify-center lg:justify-end" data-aos="fade-left">
+                {{-- Glow effect di belakang card --}}
+                <div class="absolute -top-12 -right-12 w-72 h-72 bg-orange-500/[0.08] dark:bg-orange-500/[0.12] blur-[100px] rounded-full pointer-events-none"></div>
+
+                <div
+                    class="relative group bg-gradient-to-b from-white to-gray-50/50 dark:from-white/[0.04] dark:to-white/[0.01] border border-gray-200/80 dark:border-white/[0.08] p-10 md:p-12 rounded-[2.5rem] w-full max-w-[380px] text-center shadow-xl shadow-gray-200/50 dark:shadow-none backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:rotate-1 hover:border-orange-500/30 dark:hover:border-orange-500/30 hover:shadow-2xl hover:shadow-orange-500/[0.06] dark:hover:shadow-orange-500/[0.04]">
+
+                    {{-- Icon Container Premium dengan Efek Pulse Lambat --}}
+                    <div class="relative w-20 h-20 mx-auto mb-8 flex items-center justify-center bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-500/10 dark:to-orange-500/20 text-orange-600 dark:text-orange-400 rounded-2xl shadow-inner group-hover:scale-110 transition-transform duration-500">
+                        <i class="fa-solid fa-gem text-3xl animate-pulse [animation-duration:3s]"></i>
+                    </div>
+                    
+                    {{-- Card Content --}}
+                    <h4 class="text-gray-900 dark:text-white font-bold font-poppins text-xl tracking-tight">
+                        VIP Access Pass
+                    </h4>
+                    <p class="text-gray-500 dark:text-gray-400 text-xs font-poppins mt-3 px-2 leading-relaxed">
+                        Unlock ultimate network with top-tier industrial leaders and global CEOs.
+                    </p>
+                    
+                    {{-- Divider & Bottom Label --}}
+                    <div class="mt-8 pt-6 border-t border-gray-100 dark:border-white/[0.06] flex items-center justify-center gap-2 text-[11px] font-bold tracking-widest text-orange-600 dark:text-orange-400 uppercase">
+                        <span>Exclusive Tier</span>
+                        <i class="fa-solid fa-star text-[9px] animate-spin [animation-duration:10s]"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
     {{-- Swiper Script --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
@@ -1193,62 +1163,56 @@
     </section>
 
     {{-- FINAL CTA SECTION --}}
-    <section class="relative py-24 px-6 overflow-hidden bg-[#fafafa] dark:bg-[#0a0a0b] transition-colors duration-500">
+<section class="relative py-24 px-6 overflow-hidden bg-[#fafafa] dark:bg-[#0a0a0b] transition-colors duration-500">
 
-        <div
-            class="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-orange-500/10 blur-[140px] rounded-full">
-        </div>
+    {{-- Ambient Glow --}}
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-orange-500/10 blur-[140px] rounded-full pointer-events-none"></div>
 
-        <div class="relative z-10 max-w-5xl mx-auto">
-            <div data-aos="fade-up" data-aos-duration="1200"
-                class="relative rounded-[3rem] p-12 md:p-20 text-center bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/[0.08] shadow-[0_10px_60px_rgba(0,0,0,0.06)] dark:shadow-[0_10px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all duration-700 hover:border-orange-500/30">
+    <div class="relative z-10 max-w-5xl mx-auto">
+        <div data-aos="fade-up" data-aos-duration="1200"
+            class="relative rounded-[2.5rem] md:rounded-[3rem] p-10 md:p-20 text-center bg-white dark:bg-white/[0.03] border border-gray-200/60 dark:border-white/[0.08] shadow-[0_10px_60px_rgba(0,0,0,0.04)] dark:shadow-[0_10px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all duration-700 hover:border-orange-500/30">
 
-                {{-- Badge --}}
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 dark:bg-white/[0.04] border border-orange-100 dark:border-white/10 mb-8 transition-all duration-500 hover:scale-105">
-                    <span class="text-orange-400 text-[10px]">✦</span>
-                    <span
-                        class="text-orange-500 text-[10px] font-bold tracking-[0.2em] uppercase">{{ __('messages.cta_badge') }}</span>
-                </div>
-
-                {{-- Title --}}
-                <h2 class="text-4xl md:text-5xl leading-tight mb-6 font-poppins">
-                    <span
-                        class="block font-semibold text-gray-900 dark:text-white transition-all duration-700 hover:tracking-tight">
-                        {{ __('messages.cta_title_1') }}
-                    </span>
-                    <span class="font-serif font-bold italic text-orange-500">{{ __('messages.cta_title_2') }}</span>
-                </h2>
-
-                {{-- Description --}}
-                <p
-                    class="text-gray-600 dark:text-gray-400/80 text-base md:text-lg font-poppins max-w-2xl mx-auto mb-12 leading-relaxed px-4">
-                    {{ __('messages.cta_desc') }}
-                </p>
-
-                {{-- Button --}}
-                <div class="relative group inline-block">
-                    <div
-                        class="absolute -inset-1 bg-orange-500 rounded-[2rem] blur-xl opacity-20 group-hover:opacity-50 transition duration-1000 group-hover:duration-200">
-                    </div>
-                    <a href="#"
-                        class="relative flex items-center gap-4 bg-orange-500 hover:bg-orange-400 text-white font-bold px-12 py-5 rounded-[2rem] transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-y-1.5 group-hover:shadow-2xl group-hover:shadow-orange-500/40">
-                        <span class="font-poppins tracking-wide">{{ __('messages.cta_btn') }}</span>
-                        <div class="relative w-5 h-5 overflow-hidden">
-                            <i
-                                class="fa-solid fa-arrow-right absolute inset-0 transition-all duration-500 group-hover:translate-x-full opacity-100 group-hover:opacity-0 flex items-center justify-center"></i>
-                            <i
-                                class="fa-solid fa-arrow-right absolute inset-0 -left-full transition-all duration-500 group-hover:left-0 opacity-0 group-hover:opacity-100 flex items-center justify-center"></i>
-                        </div>
-                    </a>
-                </div>
-
-                {{-- Footer Note --}}
-                <p
-                    class="mt-8 text-[10px] md:text-xs font-poppins tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500 opacity-70">
-                    — {{ __('messages.cta_note') }} —
-                </p>
+            {{-- Badge --}}
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-200 dark:border-orange-500/20 bg-orange-50/80 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-bold mb-8 shadow-sm uppercase tracking-widest font-poppins transition-transform duration-500 hover:scale-105">
+                <i class="fa-solid fa-bolt-lightning text-[10px]"></i>
+                <span>Langkah Terakhir</span>
             </div>
+
+            {{-- Title --}}
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl leading-[1.15] mb-6 font-poppins text-gray-950 dark:text-white tracking-tight">
+                <span class="font-light block">Siap Mengakselerasi Bisnis Anda?</span>
+                <span class="font-serif font-bold italic text-orange-600 dark:text-orange-500 mt-1 block">
+                    Gabung Komunitas Eksklusif Sekarang
+                </span>
+            </h2>
+
+            {{-- Description --}}
+            <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg font-poppins max-w-2xl mx-auto mb-12 leading-relaxed px-4">
+                Dapatkan akses langsung ke jaringan global, peluang investasi strategis, dan wawasan industri kelas atas yang tidak akan Anda temukan di tempat lain.
+            </p>
+
+            {{-- Button --}}
+            <div class="relative group inline-block">
+                {{-- Glow effect di belakang tombol saat di-hover --}}
+                <div class="absolute -inset-1 bg-orange-500 rounded-xl blur-xl opacity-20 group-hover:opacity-40 transition duration-500"></div>
+                
+                <a href="{{ url('/gabung') }}"
+                    class="relative flex items-center justify-center gap-4 bg-orange-600 dark:bg-orange-500 hover:bg-orange-700 dark:hover:bg-orange-600 text-white font-bold font-poppins px-10 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 active:scale-95 shadow-lg shadow-orange-600/20 dark:shadow-none w-full sm:w-auto">
+                    <span>Mulai Akses VIP Anda</span>
+                    
+                    {{-- Animasi panah bergerak mewah --}}
+                    <div class="relative w-5 h-5 overflow-hidden flex items-center justify-center">
+                        <i class="fa-solid fa-arrow-right absolute transition-all duration-500 group-hover:translate-x-full opacity-100 group-hover:opacity-0"></i>
+                        <i class="fa-solid fa-arrow-right absolute -left-full transition-all duration-500 group-hover:left-0 opacity-0 group-hover:opacity-100"></i>
+                    </div>
+                </a>
+            </div>
+
+            {{-- Footer Note --}}
+            <p class="mt-8 text-[11px] font-poppins tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500">
+                — Kuota Terbatas untuk Batch Bulan Ini —
+            </p>
         </div>
-    </section>
+    </div>
+</section>
 @endsection
