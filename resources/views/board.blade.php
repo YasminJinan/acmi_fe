@@ -13,7 +13,7 @@
 
 
 
-    {{-- Background Decorative Elements (Symmetrical) --}}
+    {{-- Background Decorative Elements --}}
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div class="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-orange-500/5 dark:bg-orange-500/10 rounded-full blur-[150px]"></div>
         <div class="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-orange-600/5 dark:bg-orange-900/10 rounded-full blur-[100px]"></div>
@@ -57,27 +57,27 @@
 <section class="bg-white dark:bg-[#0a0a0b] py-12 md:py-20 transition-colors duration-500 overflow-hidden">
     <div class="container mx-auto px-6">
 
-        {{-- TITLE SECTION - Dibuat lebih rapat --}}
+        {{-- TITLE SECTION --}}
         <div class="max-w-3xl mx-auto text-center mb-10 md:mb-14">
             <div data-aos="fade-up" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-orange-500/20 bg-orange-500/5 text-orange-600 dark:text-orange-400 text-[10px] font-black mb-6 uppercase tracking-[0.2em]">
                 <span class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
                 </span>
-                <i class="fa-solid fa-bolt-lightning mr-1"></i> {{ __('messages.vm_badge') }}
+                <i class="fa-solid mr-1"></i> {{ __('messages.vm_badge') }}
             </div>
             
             <h2 data-aos="fade-up" data-aos-delay="100" class="text-3xl md:text-5xl font-regular font-poppins text-gray-900 dark:text-white leading-tight mb-4 tracking-tight">
                {{ __('messages.vm_title_1') }} 
-                <span class="font-serif italic font-regular text-orange-500">{{ __('messages.vm_title_2') }}</span>
+                <span class="font-serif italic font-semibold text-orange-500">{{ __('messages.vm_title_2') }}</span>
             </h2>
             
-            <p data-aos="fade-up" data-aos-delay="200" class="max-w-xl mx-auto text-gray-500 dark:text-gray-400 text-base font-light leading-relaxed">
+            <p data-aos="fade-up" data-aos-delay="200" class="max-w-xl mx-auto text-gray-500 dark:text-gray-400 text-base font-semibold leading-relaxed">
                {{ __('messages.vm_desc') }}
             </p>
         </div>
 
-        {{-- GRID SECTION - Menggunakan h-full agar tinggi sama --}}
+        {{-- GRID SECTION --}}
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto items-stretch">            
             
             {{-- Vision Card --}}
@@ -131,7 +131,7 @@
 {{-- BOARD OF DIRECTORS SECTION --}}
 <section class="relative py-24 lg:py-32 overflow-hidden bg-white dark:bg-[#0a0a0b] transition-colors duration-500">
     
-    {{-- Ambient Background Lights - Diperhalus --}}
+    {{-- Ambient Background Lights  --}}
     <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-[140px] -z-0 pointer-events-none opacity-50"></div>
     <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-600/10 rounded-full blur-[120px] -z-0 pointer-events-none opacity-50"></div>
 
@@ -149,10 +149,10 @@
             
             <h2 data-aos="fade-up" data-aos-delay="100" class=" font-poppins text-gray-900 dark:text-white leading-[1.1] mb-6 tracking-tight text-3xl md:text-5xl">
                 {{ __('messages.bod_title_1') }} <br>
-                <span class="font-serif italic font-light text-orange-500">{{ __('messages.bod_title_2') }}</span>
+                <span class="font-serif italic font-semibold text-orange-500">{{ __('messages.bod_title_2') }}</span>
             </h2>
             
-            <p data-aos="fade-up" data-aos-delay="200" class="max-w-2xl mx-auto text-gray-500 dark:text-gray-400 text-lg md:text-xl font-light leading-relaxed">
+            <p data-aos="fade-up" data-aos-delay="200" class="max-w-2xl mx-auto text-gray-500 dark:text-gray-400 text-lg md:text-xl font-semibold leading-relaxed">
                  {{ __('messages.bod_description') }}
             </p>
         </div>
@@ -160,7 +160,6 @@
         {{-- Board Members Grid --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @php
-                // Data tetap sama, hanya memastikan visualisasi konsisten
                 $boardMembers = [
                     ['role' => 'Ketua Umum', 'name' => 'Dr. Ir. Hendra Wijaya, MBA', 'company' => 'PT Nusantara Global Corp', 'desc' => 'Lebih dari 25 tahun pengalaman memimpin perusahaan multinasional. Pelopor transformasi digital nasional.', 'img' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800'],
                     ['role' => 'Wakil Ketua', 'name' => 'Siti Rahmawati, SE, MM', 'company' => 'PT Investasi Nusantara', 'desc' => 'Ahli keuangan korporasi dengan track record membangun 3 unicorn. Aktif mendorong peran wanita dalam kepemimpinan.', 'img' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800'],
@@ -210,7 +209,7 @@
                         {{ $member['company'] }}
                     </p>
                     
-                    <p class="text-[15px] text-gray-500 dark:text-gray-400 leading-relaxed font-light opacity-0 group-hover:opacity-100 h-0 group-hover:h-20 transition-all duration-500 overflow-hidden">
+                    <p class="text-[15px] text-gray-500 dark:text-gray-400 leading-relaxed font-semibold opacity-0 group-hover:opacity-100 h-0 group-hover:h-20 transition-all duration-500 overflow-hidden">
                         {{ $member['desc'] }}
                     </p>
                 </div>
@@ -359,7 +358,7 @@
 
                 {{-- Heading --}}
                 <h2 class="text-4xl md:text-5xl leading-tight mb-8 font-poppins">
-                    <span class="block font-semibold text-gray-900 dark:text-white">
+                    <span class="block font-regular text-gray-900 dark:text-white">
                         {{ __('messages.cta_title_1') }}
                     </span>
                     <span class="font-serif italic font-bold text-orange-500">
@@ -381,7 +380,7 @@
                 <div class="flex flex-col sm:flex-row items-center gap-5">
 
                     {{-- Primary Button --}}
-                    <a href="{{ url('/gabung') }}"
+                    <a href="{{ url('/form-join') }}"
                        class="group relative px-10 py-5
                               bg-orange-500 hover:bg-orange-400
                               text-white font-bold font-poppins

@@ -7,7 +7,6 @@
 @section('og_description', 'Kilasan perjalanan ekosistem ACMI dalam gambar.')
 @section('canonical', url('/gallery'))
 
-{{-- FIX 1: @push('styles') dipindah ke ATAS, sebelum @section('content') --}}
 @push('styles')
 <style>
     /* ---- Grid Masonry ---- */
@@ -155,10 +154,6 @@
 
 @section('content')
 
-{{--
-    FIX 3: Double quote " " di akhir tag x-data sudah dihapus
-    FIX 4: Tambah pt-24 md:pt-48 agar ada padding atas dari navbar
---}}
 <section
     class="relative bg-white dark:bg-[#0a0a0b] pt-24 md:pt-32 pb-24 md:pb-32 transition-colors duration-500 overflow-hidden"
     x-data="{
@@ -190,10 +185,6 @@
     <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-orange-500/5 dark:bg-orange-500/10 rounded-full blur-[140px] pointer-events-none -z-0 opacity-40"></div>
 
     <div class="container mx-auto px-6 relative z-10">
-
-        {{-- ==================== --}}
-        {{-- SECTION BADGE        --}}
-        {{-- ==================== --}}
         <div class="max-w-3xl mx-auto text-center mb-16">
             <div data-aos="fade-up" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-500/20 bg-orange-500/5 text-orange-600 dark:text-orange-400 text-[11px] font-black mb-6 uppercase tracking-[0.3em]">
                 <span class="relative flex h-2 w-2">
@@ -213,9 +204,6 @@
             </p>
         </div>
 
-        {{-- ======================= --}}
-        {{-- STATE: LOADING          --}}
-        {{-- ======================= --}}
         <template x-if="isLoading">
             <div class="flex justify-center items-center py-32">
                 <div class="text-center">
@@ -225,20 +213,9 @@
             </div>
         </template>
 
-        {{-- ======================= --}}
-        {{-- STATE: HAS DATA         --}}
-        {{-- ======================= --}}
+
         <template x-if="!isLoading && galleries.length > 0">
             <div>
-
-                {{--
-                    MASONRY GRID
-                    Pola span berdasarkan index:
-                    - idx 0 => item-wide  (span 2 kolom)
-                    - idx 3 => item-tall  (span 2 baris)
-                    - idx 6 => item-big   (span 2 kolom + 2 baris)
-                    Sisanya => 1x1 normal
-                --}}
                 <div class="gallery-masonry-grid">
                     <template x-for="(item, idx) in galleries" :key="item.id ?? idx">
                         <div
@@ -291,10 +268,7 @@
 
             </div>
         </template>
-
-        {{-- ======================= --}}
-        {{-- STATE: EMPTY            --}}
-        {{-- ======================= --}}
+        
         <template x-if="!isLoading && galleries.length === 0">
             <div class="text-center py-32">
                 <div class="w-20 h-20 rounded-[2rem] bg-gray-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-6">

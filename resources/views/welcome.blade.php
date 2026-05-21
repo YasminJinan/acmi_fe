@@ -21,7 +21,7 @@
             </video>
         </div>
 
-        {{-- Overlay (Diperhalus untuk Light Mode agar video tetap hidup & teks kontras) --}}
+        {{-- Overlay--}}
         <div
             class="absolute inset-0 bg-gradient-to-b
         from-white/20 via-white/60 to-gray-50
@@ -46,22 +46,22 @@
                 </div>
             </div>
 
-            {{-- Judul (Warna teks gray-900 dipertegas) --}}
+            {{-- Judul --}}
             <h1 data-aos="fade-up" data-aos-delay="200"
                 class="text-4xl md:text-7xl leading-tight text-gray-950 dark:text-white drop-shadow-sm">
                 <span class="font-poppins font-semibold">{{ __('messages.hero_title_1') }}</span><br>
                 <span class="font-serif font-bold italic text-orange-600 dark:text-orange-500">{{ __('messages.hero_title_2') }}</span>
             </h1>
 
-            {{-- Deskripsi (Warna diubah ke gray-700 agar lebih terbaca di light mode) --}}
+            {{-- Deskripsi--}}
             <p data-aos="fade-up" data-aos-delay="400"
                 class="mt-6 text-gray-700 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed">
                 {{ __('messages.hero_desc') }}
             </p>
 
-            {{-- Buttons (Perbaikan hover state pada light mode) --}}
+            {{-- Buttons--}}
             <div data-aos="fade-up" data-aos-delay="600" class="mt-8 flex justify-center gap-4 flex-wrap">
-                <a href="/gabung"
+                <a href="/form-join"
                     class="px-6 py-3 bg-orange-600 dark:bg-orange-500 text-white rounded-lg font-semibold shadow-md shadow-orange-500/20 hover:bg-orange-700 dark:hover:bg-orange-600 hover:scale-105 transition-all duration-300 inline-block">
                     {{ __('messages.btn_join') }}
                 </a>
@@ -71,7 +71,7 @@
 </a>
             </div>
 
-            {{-- Stats (Card dibuat lebih menonjol di light mode dengan border halus) --}}
+            {{-- Stats--}}
             <div class="mt-14 grid grid-cols-3 gap-4 max-w-3xl mx-auto">
                 @php
                     $stats = [
@@ -265,7 +265,7 @@
                     {{ __('messages.challenge_badge') }}
                 </div>
                 <h2 class="text-4xl md:text-5xl leading-tight text-gray-900 dark:text-white font-poppins">
-                    <span class="font-semibold tracking-tight">{{ __('messages.challenge_title_1') }}</span><br>
+                    <span class="font-regular tracking-tight">{{ __('messages.challenge_title_1') }}</span><br>
                     <span class="font-serif font-bold italic text-orange-500">{{ __('messages.challenge_title_2') }}</span>
                 </h2>
                 <p
@@ -334,7 +334,7 @@
     <section
         class="relative min-h-screen w-full flex items-center justify-center py-24 px-6 overflow-hidden transition-colors duration-500 bg-white dark:bg-[#0a0a0b]">
 
-        {{-- Background Overlay Diperhalus agar Gambar & Gradien Menyatu --}}
+        {{-- Background Overlay--}}
         <div class="absolute inset-0 z-0" data-aos="fade-in" data-aos-duration="2000">
             <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
                 class="w-full h-full object-cover opacity-20 dark:opacity-15" alt="Office background">
@@ -486,11 +486,11 @@
                 {{-- CTA --}}
                 <div class="pt-2 group/btn">
                     <div class="flex flex-col sm:flex-row items-center gap-4">
-                       <a href="{{ url('/gabung') }}"
-   class="px-8 py-4 bg-orange-600 dark:bg-orange-500 hover:bg-orange-700 dark:hover:bg-orange-600 text-white font-bold font-poppins rounded-xl shadow-lg shadow-orange-600/20 dark:shadow-none transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 w-full sm:w-auto">
-    {{ __('messages.membership_cta_btn') }}
-    <i class="fa-solid fa-arrow-right-long transition-transform duration-300 group-hover/btn:translate-x-1.5"></i>
-</a>
+                       <a href="{{ url('/form-join') }}"
+                          class="px-8 py-4 bg-orange-600 dark:bg-orange-500 hover:bg-orange-700 dark:hover:bg-orange-600 text-white font-bold font-poppins rounded-xl shadow-lg shadow-orange-600/20 dark:shadow-none transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 w-full sm:w-auto">
+                          {{ __('messages.membership_cta_btn') }}
+                         <i class="fa-solid fa-arrow-right-long transition-transform duration-300 group-hover/btn:translate-x-1.5"></i>
+                       </a>
                     </div>         
                 </div>
             </div>
@@ -523,7 +523,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
@@ -591,125 +590,106 @@
             }
         }">
 
-        <div class="max-w-7xl mx-auto">
-
-            {{-- Header --}}
-            <div class="text-center max-w-3xl mx-auto mb-10" data-aos="fade-up">
-                <div
-                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-[10px] font-semibold mb-4 border border-orange-100 dark:border-orange-500/20">
-                    <i class="fa-solid fa-box-open animate-pulse"></i> Produk Anggota
-                </div>
-                <h2 class="text-5xl md:text-5xl font-semibold text-gray-900 dark:text-white leading-tight">
-                    Produk & Layanan <br>
-                    <span class="text-orange-500 font-serif italic font-bold">Anggota ACMI</span>
-                </h2>
-
-                {{-- Search & Filter --}}
-                <div class="mt-6 flex flex-col md:flex-row gap-3 justify-center">
-                    <div class="relative group md:w-72">
-                        <i
-                            class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xs group-focus-within:text-orange-500 transition-colors"></i>
-                        <input type="text" x-model="search" placeholder="Cari produk..."
-                            class="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white text-sm transition-all">
-                    </div>
-                    <select x-model="category"
-                        class="px-6 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white text-sm cursor-pointer appearance-none">
-                        <option value="Semua">Semua Kategori</option>
-                        <option value="Software">Software</option>
-                        <option value="Energi">Energi</option>
-                        <option value="F&B">F&B</option>
-                        <option value="Manufaktur">Manufaktur</option>
-                        <option value="Properti">Properti</option>
-                        <option value="Fintech">Fintech</option>
-                    </select>
-                </div>
+       <div class="max-w-7xl mx-auto">
+ 
+    {{-- Header --}}
+    <div class="text-center max-w-3xl mx-auto mb-10" data-aos="fade-up">
+ 
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-[10px] font-semibold mb-4 border border-orange-100 dark:border-orange-500/20">
+            <i class="fa-solid fa-box-open animate-pulse"></i>
+            {{ __('messages.products_badge') }}
+        </div>
+ 
+         <h2 class="text-5xl md:text-5xl font-regular text-gray-900 dark:text-white leading-tight">
+            {{ __('messages.products_title_1') }} <br>
+            <span class="text-orange-500 font-serif italic font-bold">{{ __('messages.products_title_2') }}</span>
+        </h2>
+ 
+        {{-- Search & Filter --}}
+        <div class="mt-6 flex flex-col md:flex-row gap-3 justify-center">
+            <div class="relative group md:w-72">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xs group-focus-within:text-orange-500 transition-colors"></i>
+                <input type="text" x-model="search"
+                    placeholder="{{ __('messages.products_search_placeholder') }}"
+                    class="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white text-sm transition-all">
             </div>
-
-            {{-- Grid Produk --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <template x-for="product in filteredProducts" :key="product.id">
-                    <div class="group flex flex-col" data-aos="fade-up">
-                        <div
-                            class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
-
-                            {{-- Image --}}
-                            <div class="relative h-[180px] overflow-hidden">
-                                <img :src="product.image" :alt="product.title"
-                                    class="w-full h-full object-cover group-hover:scale-110 transition duration-[1.5s] ease-out">
-                                <div class="absolute top-4 left-4">
-                                    <span
-                                        class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-orange-600 dark:text-orange-400 text-[9px] px-3 py-1.5 rounded-lg font-black uppercase tracking-widest shadow-lg"
-                                        x-text="Array.isArray(product.category) ? product.category[0] : product.category">
-                                    </span>
-                                </div>
-                            </div>
-
-                            {{-- Content --}}
-                            <div class="p-6 flex flex-col flex-grow">
-                                <h3 class="text-lg font-poppins font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-500 transition-colors line-clamp-1"
-                                    x-text="product.title">
-                                </h3>
-                                <p class="text-gray-500 dark:text-gray-400 text-xs mb-4 line-clamp-2 leading-relaxed"
-                                    x-text="product.description">
-                                </p>
-
-                                <div class="mt-auto">
-                                    {{-- Business Info --}}
-                                    <div
-                                        class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 mb-4 border border-transparent group-hover:border-orange-500/20 transition-all">
-                                        <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center text-[10px] font-black shadow-lg shadow-orange-500/20 flex-shrink-0"
-                                            x-text="product.ceo_name ? product.ceo_name.charAt(0) : '?'">
-                                        </div>
-                                        <div class="min-w-0">
-                                            <p class="text-gray-900 dark:text-gray-200 font-bold text-[11px] truncate"
-                                                x-text="product.company_name">
-                                            </p>
-                                            <p class="text-gray-400 text-[9px] uppercase tracking-tighter">
-                                                CEO: <span class="text-gray-500 dark:text-gray-300"
-                                                    x-text="product.ceo_name">
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    {{-- Button --}}
-                                    <a :href="'/products/' + product.slug"
-                                        class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
-                                        Lihat Detail Bisnis
-                                        <i
-                                            class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
-                                    </a>
-                                </div>
-                            </div>
-
+ 
+            <select x-model="category"
+                class="px-6 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white text-sm cursor-pointer appearance-none">
+                @foreach(__('messages.products_categories') as $value => $label)
+                    <option value="{{ $value }}">{{ $label }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+ 
+    {{-- Grid Produk --}}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <template x-for="product in filteredProducts" :key="product.id">
+            <div class="group flex flex-col" data-aos="fade-up">
+                <div class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
+ 
+                    {{-- Image --}}
+                    <div class="relative h-[180px] overflow-hidden">
+                        <img :src="product.image" :alt="product.title"
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-[1.5s] ease-out">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-orange-600 dark:text-orange-400 text-[9px] px-3 py-1.5 rounded-lg font-black uppercase tracking-widest shadow-lg"
+                                x-text="Array.isArray(product.category) ? product.category[0] : product.category">
+                            </span>
                         </div>
                     </div>
-                </template>
-
-                {{-- Empty State --}}
-                <div x-show="filteredProducts.length === 0" x-cloak class="col-span-3 text-center py-24">
-                    <div
-                        class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-white/5 text-gray-400 mb-6">
-                        <i class="fa-solid fa-magnifying-glass text-2xl"></i>
+ 
+                    {{-- Content --}}
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-lg font-poppins font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-500 transition-colors line-clamp-1"
+                            x-text="product.title">
+                        </h3>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs mb-4 line-clamp-2 leading-relaxed"
+                            x-text="product.description">
+                        </p>
+ 
+                        <div class="mt-auto">
+                            {{-- Business Info --}}
+                            <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 mb-4 border border-transparent group-hover:border-orange-500/20 transition-all">
+                                <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center text-[10px] font-black shadow-lg shadow-orange-500/20 flex-shrink-0"
+                                    x-text="product.ceo_name ? product.ceo_name.charAt(0) : '?'">
+                                </div>
+                                <div class="min-w-0">
+                                    <p class="text-gray-900 dark:text-gray-200 font-bold text-[11px] truncate"
+                                        x-text="product.company_name">
+                                    </p>
+                                    <p class="text-gray-400 text-[9px] uppercase tracking-tighter">
+                                        {{ __('messages.products_ceo_label') }}: <span class="text-gray-500 dark:text-gray-300" x-text="product.ceo_name"></span>
+                                    </p>
+                                </div>
+                            </div>
+ 
+                            {{-- Button --}}
+                            <a :href="'/products/' + product.slug"
+                                class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
+                                {{ __('messages.products_detail_btn') }}
+                                <i class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
+                            </a>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">Produk Tidak Ditemukan</h3>
-                    <p class="text-gray-500 dark:text-gray-400 mt-2">Coba gunakan kata kunci lain.</p>
+ 
                 </div>
             </div>
-
-            {{-- Empty State --}}
-            <div x-show="filteredProducts.length === 0" x-cloak class="text-center py-24" data-aos="fade-up">
-                <div
-                    class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-white/5 text-gray-400 mb-6">
-                    <i class="fa-solid fa-magnifying-glass text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Produk Tidak Ditemukan</h3>
-                <p class="text-gray-500 dark:text-gray-400 mt-2">Coba gunakan kata kunci lain atau pilih kategori yang
-                    berbeda.</p>
+        </template>
+ 
+        {{-- Empty State (inside grid for col-span) --}}
+        <div x-show="filteredProducts.length === 0" x-cloak class="col-span-3 text-center py-24">
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-white/5 text-gray-400 mb-6">
+                <i class="fa-solid fa-magnifying-glass text-2xl"></i>
             </div>
-
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ __('messages.products_empty_title') }}</h3>
+            <p class="text-gray-500 dark:text-gray-400 mt-2">{{ __('messages.products_empty_desc') }}</p>
         </div>
-
+    </div>
+ 
+</div>
+        </div>
         <style>
             [x-cloak] {
                 display: none !important;
@@ -784,8 +764,8 @@
                     <i class="fa-solid fa-star text-[9px]"></i>
                     <span>{{ __('messages.testimonial_badge') }}</span>
                 </div>
-                <h2 class="text-4xl md:text-6xl font-poppins leading-tight text-slate-900 dark:text-white tracking-tight">
-                    <span class="font-bold">{{ __('messages.testimonial_title_1') }}</span> <br>
+                <h2 class="text-5xl md:text-5xl font-poppins leading-tight text-slate-900 dark:text-white tracking-tight">
+                    <span class="font-regular">{{ __('messages.testimonial_title_1') }}</span> <br>
                     <span class="font-serif font-bold italic text-orange-500 drop-shadow-sm">
                         {{ __('messages.testimonial_title_2') }} {{ __('messages.testimonial_title_3') }}
                     </span>
@@ -930,7 +910,7 @@
                     <span>{{ __('messages.faq_badge') }}</span>
                 </div>
                 <h2 class="text-4xl md:text-5xl font-poppins text-slate-900 dark:text-white leading-tight">
-                    <span class="font-semibold">{{ __('messages.faq_title_1') }}</span> <br>
+                    <span class="font-regular">{{ __('messages.faq_title_1') }}</span> <br>
                     <span class="font-serif font-bold italic text-orange-500">{{ __('messages.faq_title_2') }}</span>
                 </h2>
             </div>
@@ -1027,7 +1007,7 @@
                 </div>
 
                 <h2 class="text-4xl md:text-5xl text-gray-900 dark:text-white font-poppins leading-tight">
-                    <span class="font-semibold">{{ __('messages.gallery_title_1') }}</span> <br>
+                    <span class="font-regular">{{ __('messages.gallery_title_1') }}</span> <br>
                     <span class="font-serif font-bold italic text-orange-500">{{ __('messages.gallery_title_2') }}</span>
                 </h2>
             </div>
@@ -1113,10 +1093,10 @@
                     class="inline-block px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-bold mb-4 uppercase tracking-[0.2em] border border border-orange-100 dark:border-orange-500/20">
                     Social Connect
                 </div>
-                <h2 class="text-3xl md:text-5xl leading-tight text-gray-900 dark:text-white font-poppins">
-                    <span class="font-semibold tracking-tight">Ikuti Aktivitas</span>
-                    <span class="font-serif font-bold italic text-orange-500">Terbaru Kami</span>
-                </h2>
+                <h2 class="text-4xl md:text-5xl leading-tight text-gray-900 dark:text-white font-poppins">
+    <span class="font-regular tracking-tight">{{ __('messages.activity_title_1') }}</span>
+    <span class="font-serif font-bold italic text-orange-500">{{ __('messages.activity_title_2') }}</span>
+</h2>
                 <div class="h-1 w-12 bg-orange-500 mx-auto rounded-full mt-4"></div>
             </div>
 
@@ -1172,54 +1152,53 @@
 
     {{-- FINAL CTA SECTION --}}
 <section class="relative py-24 px-6 overflow-hidden bg-[#fafafa] dark:bg-[#0a0a0b] transition-colors duration-500">
-
+ 
     {{-- Ambient Glow --}}
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-orange-500/10 blur-[140px] rounded-full pointer-events-none"></div>
-
+ 
     <div class="relative z-10 max-w-5xl mx-auto">
         <div data-aos="fade-up" data-aos-duration="1200"
             class="relative rounded-[2.5rem] md:rounded-[3rem] p-10 md:p-20 text-center bg-white dark:bg-white/[0.03] border border-gray-200/60 dark:border-white/[0.08] shadow-[0_10px_60px_rgba(0,0,0,0.04)] dark:shadow-[0_10px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all duration-700 hover:border-orange-500/30">
-
+ 
             {{-- Badge --}}
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-200 dark:border-orange-500/20 bg-orange-50/80 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-bold mb-8 shadow-sm uppercase tracking-widest font-poppins transition-transform duration-500 hover:scale-105">
                 <i class="fa-solid fa-bolt-lightning text-[10px]"></i>
-                <span>Langkah Terakhir</span>
+                <span>{{ __('messages.cta_final_badge') }}</span>
             </div>
-
+ 
             {{-- Title --}}
             <h2 class="text-3xl sm:text-4xl lg:text-5xl leading-[1.15] mb-6 font-poppins text-gray-950 dark:text-white tracking-tight">
-                <span class="font-light block">Siap Mengakselerasi Bisnis Anda?</span>
+                <span class="font-regular block">{{ __('messages.cta_final_title_1') }}</span>
                 <span class="font-serif font-bold italic text-orange-600 dark:text-orange-500 mt-1 block">
-                    Gabung Komunitas Eksklusif Sekarang
+                    {{ __('messages.cta_final_title_2') }}
                 </span>
             </h2>
-
+ 
             {{-- Description --}}
             <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg font-poppins max-w-2xl mx-auto mb-12 leading-relaxed px-4">
-                Dapatkan akses langsung ke jaringan global, peluang investasi strategis, dan wawasan industri kelas atas yang tidak akan Anda temukan di tempat lain.
+                {{ __('messages.cta_final_desc') }}
             </p>
-
+ 
             {{-- Button --}}
             <div class="relative group inline-block">
-                {{-- Glow effect di belakang tombol saat di-hover --}}
                 <div class="absolute -inset-1 bg-orange-500 rounded-xl blur-xl opacity-20 group-hover:opacity-40 transition duration-500"></div>
-                
-                <a href="{{ url('/gabung') }}"
+ 
+                <a href="{{ url('/form-join') }}"
                     class="relative flex items-center justify-center gap-4 bg-orange-600 dark:bg-orange-500 hover:bg-orange-700 dark:hover:bg-orange-600 text-white font-bold font-poppins px-10 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 active:scale-95 shadow-lg shadow-orange-600/20 dark:shadow-none w-full sm:w-auto">
-                    <span>Mulai Akses VIP Anda</span>
-                    
-                    {{-- Animasi panah bergerak mewah --}}
+                    <span>{{ __('messages.cta_final_btn') }}</span>
+ 
                     <div class="relative w-5 h-5 overflow-hidden flex items-center justify-center">
                         <i class="fa-solid fa-arrow-right absolute transition-all duration-500 group-hover:translate-x-full opacity-100 group-hover:opacity-0"></i>
                         <i class="fa-solid fa-arrow-right absolute -left-full transition-all duration-500 group-hover:left-0 opacity-0 group-hover:opacity-100"></i>
                     </div>
                 </a>
             </div>
-
+ 
             {{-- Footer Note --}}
             <p class="mt-8 text-[11px] font-poppins tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500">
-                — Kuota Terbatas untuk Batch Bulan Ini —
+                {{ __('messages.cta_final_note') }}
             </p>
+ 
         </div>
     </div>
 </section>

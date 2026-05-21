@@ -2,12 +2,44 @@
 
 return [
 
+'products_desc' => 'Explore top products and services from ACMI members, ready to support your business growth.',
 
 
-
-
-
-    // -------------------------
+    // PRODUCTS SECTION
+    'products_badge'               => 'Member Products',
+    'products_title_1'             => 'Products & Services',
+    'products_title_2'             => 'ACMI Members',
+    'products_search_placeholder'  => 'Search products...',
+    'products_categories'          => [
+        'Semua'       => 'All Categories',
+        'Software'    => 'Software',
+        'Energi'      => 'Energy',
+        'F&B'         => 'F&B',
+        'Manufaktur'  => 'Manufacturing',
+        'Properti'    => 'Property',
+        'Fintech'     => 'Fintech',
+    ],
+    'products_ceo_label'           => 'CEO',
+    'products_detail_btn'          => 'View Business Detail',
+    'products_empty_title'         => 'No Products Found',
+    'products_empty_desc'          => 'Try using different keywords or select another category.',
+ 
+    // =============================================
+    // LATEST ACTIVITY — HEADING
+    // =============================================
+    'activity_title_1'             => 'Follow Our',
+    'activity_title_2'             => 'Latest Activities',
+ 
+    // =============================================
+    // CTA FINAL SECTION
+    // =============================================
+    'cta_final_badge'              => 'Final Step',
+    'cta_final_title_1'            => 'Ready to Accelerate Your Business?',
+    'cta_final_title_2'            => 'Join the Exclusive Community Now',
+    'cta_final_desc'               => 'Get direct access to a global network, strategic investment opportunities, and top-tier industry insights you won\'t find anywhere else.',
+    'cta_final_btn'                => 'Start Your VIP Access',
+    'cta_final_note'               => '— Limited Slots for This Month\'s Batch —',
+   // -------------------------
     // BADGE & HEADER
     // -------------------------
     'badge'       => 'Exclusive Membership',

@@ -2,6 +2,46 @@
 
 return [
 
+'products_desc' => 'Jelajahi produk dan layanan unggulan dari para anggota ACMI yang siap mendukung pertumbuhan bisnis Anda.',
+
+    // =============================================
+    // PRODUK ANGGOTA SECTION
+    // =============================================
+    'products_badge'               => 'Produk Anggota',
+    'products_title_1'             => 'Produk & Layanan',
+    'products_title_2'             => 'Anggota ACMI',
+    'products_search_placeholder'  => 'Cari produk...',
+    'products_categories'          => [
+        'Semua'       => 'Semua Kategori',
+        'Software'    => 'Software',
+        'Energi'      => 'Energi',
+        'F&B'         => 'F&B',
+        'Manufaktur'  => 'Manufaktur',
+        'Properti'    => 'Properti',
+        'Fintech'     => 'Fintech',
+    ],
+    'products_ceo_label'           => 'CEO',
+    'products_detail_btn'          => 'Lihat Detail Bisnis',
+    'products_empty_title'         => 'Produk Tidak Ditemukan',
+    'products_empty_desc'          => 'Coba gunakan kata kunci lain atau pilih kategori yang berbeda.',
+ 
+    // =============================================
+    // AKTIVITAS TERBARU — HEADING
+    // =============================================
+    'activity_title_1'             => 'Ikuti Aktivitas',
+    'activity_title_2'             => 'Terbaru Kami',
+ 
+    // =============================================
+    // CTA FINAL SECTION
+    // =============================================
+    'cta_final_badge'              => 'Langkah Terakhir',
+    'cta_final_title_1'            => 'Siap Mengakselerasi Bisnis Anda?',
+    'cta_final_title_2'            => 'Gabung Komunitas Eksklusif Sekarang',
+    'cta_final_desc'               => 'Dapatkan akses langsung ke jaringan global, peluang investasi strategis, dan wawasan industri kelas atas yang tidak akan Anda temukan di tempat lain.',
+    'cta_final_btn'                => 'Mulai Akses VIP Anda',
+    'cta_final_note'               => '— Kuota Terbatas untuk Batch Bulan Ini —',
+
+
     // -------------------------
     // BADGE & HEADER
     // -------------------------
