@@ -52,8 +52,8 @@ Route::get('/ontopic', [ArticleController::class, 'index'])->name('ontopic');
 Route::get('/ontopic/{slug}', [ArticleController::class, 'show'])->name('ontopic.show');
 // Route::get('/ontopic/{slug}', [ArticleController::class, 'show'])->name('ontopic.detail');
 
-Route::get('/gabung', function () {
-    return view('gabung');
+Route::get('/form-join', function () {
+    return view('form-join');
 });
 
 Route::get('/membership', function () {
