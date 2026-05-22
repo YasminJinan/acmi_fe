@@ -21,16 +21,19 @@ class FormJoinController extends Controller
             'company'  => 'nullable|string|max:255',
             'position' => 'nullable|string|max:255',
             'industry' => 'nullable|string|max:255',
-            'revenue'  => 'nullable|string|max:255',
-            'linkedin' => 'nullable|url|max:255',
+            'linkedin'    => 'nullable|url|max:255',
+            'company_url' => 'nullable|url|max:255',
+            'employees'   => 'nullable|string|max:255',
+            'revenue'     => 'nullable|string|max:255',
             'message'  => 'nullable|string',
         ]);
 
-        $cms = new \App\Services\CmsApiService();
+        $cms = new CmsApiService();
 
         $result = $cms->submitInbound($request->only([
             'name', 'email', 'phone', 'company', 
-            'position', 'industry', 'revenue', 'linkedin', 'message'
+            'position', 'industry', 'revenue', 'linkedin',
+            'company_url', 'employees', 'revenue', 'message'
         ]));
 
         if (isset($result['success']) && $result['success']) {
