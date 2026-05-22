@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Services\CmsApiService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -19,53 +20,47 @@ class HomeController extends Controller
         $gallery  = $cms->getGallery();
         $partners = $cms->getPartners();
 
-        // 1. Variabel dibuat
-        $apiUrl = env('API_BACKEND_URL', 'http://172.16.4.143:8000') . '/api/public/instagram';
-
-        // 2. Tambahkan "use ($apiUrl)" agar variabelnya bisa masuk ke dalam fungsi
-        $posts = Cache::remember('instagram_posts_from_backend_v2', 60 * 5, function () use ($apiUrl) {
+        $posts = Cache::remember('instagram_posts_v4', 60 * 60, function () {
             try {
-                // 3. Masukkan variabelnya ke sini! (Sekarang pasti nyala di VS Code)
-                $response = Http::timeout(10)->get($apiUrl);
+                $apiUrl = env('APIFY_INSTAGRAM_URL');
 
-                if (!$response->successful() || !$response->json('success')) {
+                if (empty($apiUrl)) {
+                    Log::error('APIFY_INSTAGRAM_URL belum diset di .env');
                     return [];
                 }
 
-                $items = $response->json('data');
+                $response = Http::timeout(15)->get($apiUrl);
 
-                return collect($items)->map(function ($item) {
-                    // Ambil path image mentah dari backend
-                    $rawImage = $item['image'] ?? '';
+                if (!$response->successful()) {
+                    Log::error('Apify gagal: ' . $response->status());
+                    return [];
+                }
 
-                    // Native check: Jika sudah berawalan http (URL penuh), pakai langsung. 
-                    // Jika belum (hanya path lokal seperti storage/instagram/xxx.jpg), kita gabungkan dengan domain backend.
-                    // KODE YANG DI-UPDATE (Lebih Toleran dan Pintar)
-                    if (!empty($rawImage)) {
-                        // KONDISI A: Jika API Backend ngirim full URL (misal dari Apify langsung), pakai langsung.
-                        if (str_starts_with($rawImage, 'http://') || str_starts_with($rawImage, 'https://')) {
-                            $mediaUrl = $rawImage;
-                        } else {
-                            // KONDISI B: Jika API Backend ngirim path lokal (storage/instagram/xxx.jpg), gabungkan dengan IP Backend.
-                            $baseUrl = rtrim(env('API_BACKEND_URL', 'http://172.16.4.143:8000'), '/');
-                            $mediaUrl = $baseUrl . '/' . ltrim($rawImage, '/');
-                        }
-                    } else {
-                        // KONDISI C: Jika di database backend ternyata isinya null/kosong, baru lempar ke placeholder "No Image".
-                        $mediaUrl = 'https://placehold.co/600x600?text=No+Image';
-                    }
+                $items = $response->json();
+
+                if (!is_array($items) || empty($items)) {
+                    return [];
+                }
+
+                return collect($items)->take(6)->map(function ($item) {
+                    $rawUrl = $item['displayUrl'] ?? null;
+
+                    // Proxy URL lewat server kita agar bisa bypass hotlink Instagram
+                    $mediaUrl = $rawUrl
+                        ? route('ig.proxy', ['url' => base64_encode($rawUrl)])
+                        : 'https://placehold.co/600x600?text=No+Image';
 
                     return [
                         'mediaUrl'      => $mediaUrl,
-                        'permalink'     => $item['post_url'] ?? '#',
-                        'prunedCaption' => \Illuminate\Support\Str::limit($item['caption'] ?? '', 100),
-                        'likeCount'     => $item['likes'] ?? 0,
-                        'commentCount'  => $item['comments'] ?? 0,
-                        'mediaType'     => 'IMAGE',
+                        'permalink'     => $item['url'] ?? '#',
+                        'prunedCaption' => Str::limit($item['caption'] ?? 'ACMI Post', 100),
+                        'likeCount'     => $item['likesCount'] ?? 0,
+                        'commentCount'  => $item['commentsCount'] ?? 0,
                     ];
                 })->all();
+
             } catch (\Exception $e) {
-                Log::error('Gagal mengambil data dari Backend ACMI DB: ' . $e->getMessage());
+                Log::error('Instagram error: ' . $e->getMessage());
                 return [];
             }
         });
@@ -73,5 +68,47 @@ class HomeController extends Controller
         $posts = collect($posts);
 
         return view('welcome', compact('posts', 'products', 'faqs', 'gallery', 'partners'));
+    }
+
+    /**
+     * Proxy gambar Instagram agar tidak kena hotlink block
+     */
+    public function igProxy(Request $request)
+    {
+        $encodedUrl = $request->query('url');
+
+        if (empty($encodedUrl)) {
+            abort(404);
+        }
+
+        $imageUrl = base64_decode($encodedUrl);
+
+        // Validasi: hanya boleh dari CDN Instagram
+        if (!str_contains($imageUrl, 'cdninstagram.com') && !str_contains($imageUrl, 'fbcdn.net')) {
+            abort(403);
+        }
+
+        try {
+            $response = Http::timeout(10)
+                ->withHeaders([
+                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                    'Referer'    => 'https://www.instagram.com/',
+                ])
+                ->get($imageUrl);
+
+            if (!$response->successful()) {
+                abort(404);
+            }
+
+            $contentType = $response->header('Content-Type') ?? 'image/jpeg';
+
+            return response($response->body(), 200)
+                ->header('Content-Type', $contentType)
+                ->header('Cache-Control', 'public, max-age=86400'); // cache 1 hari di browser
+
+        } catch (\Exception $e) {
+            Log::error('igProxy error: ' . $e->getMessage());
+            abort(500);
+        }
     }
 }

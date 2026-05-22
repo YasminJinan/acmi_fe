@@ -62,7 +62,9 @@
                     <p class="text-gray-400 dark:text-gray-500 text-sm mb-12 font-poppins transition-colors duration-300">Estimasi waktu pengisian: 3 menit</p>
 
                     <form action="#" method="POST" class="space-y-12">
+                    <form action="#" method="POST" class="space-y-12">
                         @csrf
+
 
                         {{-- Section 01: Informasi Pribadi --}}
                         <div class="space-y-6">
@@ -71,6 +73,7 @@
                                 <h3 class="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-widest transition-colors duration-300">Informasi Pribadi</h3>
                                 <div class="h-[1px] flex-grow bg-gray-100 dark:bg-white/10 transition-colors duration-300"></div>
                             </div>
+
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div class="space-y-2">
@@ -86,12 +89,17 @@
                                         class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
                                 </div>
                                 <div class="space-y-2">
+                                    <input type="tel" placeholder="WhatsApp (Aktif)"
+                                        class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+                                </div>
+                                <div class="space-y-2">
                                     <input type="url" placeholder="LinkedIn Profile URL"
                                         class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
                                 </div>
                             </div>
                         </div>
 
+                        {{-- Section 02: Informasi Bisnis --}}
                         {{-- Section 02: Informasi Bisnis --}}
                         <div class="space-y-6">
                             <div class="flex items-center gap-4">
@@ -150,11 +158,19 @@
                             <div class="flex items-center gap-4">
                                 <span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-bold transition-colors duration-300">03</span>
                                 <h3 class="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-widest transition-colors duration-300">Motivasi & Referral</h3>
+                                <h3 class="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-widest transition-colors duration-300">Motivasi & Referral</h3>
                                 <div class="h-[1px] flex-grow bg-gray-100 dark:bg-white/10 transition-colors duration-300"></div>
                             </div>
                             <textarea rows="4" placeholder="Mengapa anda tertarik bergabung dengan ACMI?*"
                                 class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600 resize-none"></textarea>
+                            <textarea rows="4" placeholder="Mengapa anda tertarik bergabung dengan ACMI?*"
+                                class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600 resize-none"></textarea>
 
+                                <div class="max-w-md"> <!-- max-w-md membuat kolom ini lebih kecil/tidak selebar textarea -->
+                                 <input type="text" placeholder="Direferensikan oleh (opsional)"
+                                     class="w-full px-6 py-3 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+                                </div>
+                        </div>
                                 <div class="max-w-md"> <!-- max-w-md membuat kolom ini lebih kecil/tidak selebar textarea -->
                                  <input type="text" placeholder="Direferensikan oleh (opsional)"
                                      class="w-full px-6 py-3 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">

@@ -27,19 +27,7 @@ Route::get('/sitemap.xml', function () {
     return response()->file($path, ['Content-Type' => 'application/xml']);
 });
 
-Route::get('/ig-proxy', function (Illuminate\Http\Request $request) {
-    $url = $request->query('url');
-    
-    if (!str_contains($url, 'fbcdn.net')) {
-        abort(403);
-    }
-
-    $response = Http::get($url);
-    
-    return response($response->body())
-        ->header('Content-Type', $response->header('Content-Type'))
-        ->header('Cache-Control', 'public, max-age=86400');
-})->name('ig.proxy');
+Route::get('/ig-proxy', [App\Http\Controllers\HomeController::class, 'igProxy'])->name('ig.proxy');
 
 Route::get('/', [HomeController::class, 'index']);
 
