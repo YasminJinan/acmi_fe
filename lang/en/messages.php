@@ -2,6 +2,60 @@
 
 return [
 
+
+   // =========================================================
+    //  BOARD OF DIRECTORS  —  ACMI 2024-2025
+    //  Blade: resources/views/acmi-board-section.blade.php
+    // =========================================================
+ 
+    // ── Header ──────────────────────────────────────────────
+    'bod_badge'       => 'Organizational Structure',
+    'bod_title_1'     => 'Board of Directors',
+    'bod_title_2'     => 'ACMI 2024–2025',
+    'bod_description' => 'Leaders dedicated to advancing the ACMI ecosystem from the central board to every regional branch.',
+ 
+    // ── Group: Dewan Pengurus Pusat ─────────────────────────
+    'bod_group_dpp_title'    => 'Central Board of Directors',
+    'bod_group_dpp_subtitle' => 'ACMI · 2024–2025',
+ 
+    // ── Group: Pengurus Pusat ───────────────────────────────
+    'bod_group_pusat_title'    => 'ACMI Executive Board',
+    'bod_group_pusat_subtitle' => 'Central · 2024–2025',
+ 
+    // ── Group: Wilayah Barat ────────────────────────────────
+    'bod_group_barat_title'    => 'ACMI Executive Board',
+    'bod_group_barat_subtitle' => 'Western Region · 2024–2025',
+ 
+    // ── Group: Wilayah Tengah ───────────────────────────────
+    'bod_group_tengah_title'    => 'ACMI Executive Board',
+    'bod_group_tengah_subtitle' => 'Central Region · 2024–2025',
+ 
+    // ── Group: Wilayah Timur ────────────────────────────────
+    'bod_group_timur_title'    => 'ACMI Executive Board',
+    'bod_group_timur_subtitle' => 'Eastern Region · 2024–2025',
+ 
+    // ── Roles ───────────────────────────────────────────────
+    'bod_role_ketua_umum'       => 'Chairman',
+    'bod_role_wakil_ketua_umum' => 'Vice Chairman',
+    'bod_role_sekjen'           => 'Secretary General',
+    'bod_role_wasekjen'         => 'Deputy Secretary General',
+    'bod_role_bendahara_umum'   => 'General Treasurer',
+    'bod_role_bisdev'           => 'Business Development',
+    'bod_role_keanggotaan'      => 'Membership',
+    'bod_role_legal'            => 'Legal',
+    'bod_role_ketua'            => 'Chairman',
+    'bod_role_wakil_ketua'      => 'Vice Chairman',
+    'bod_role_wabid_edukasi'    => 'Education Deputy',
+    'bod_role_digicom'          => 'Digicom',
+    'bod_role_wakil'            => 'Deputy',
+    'bod_role_bendahara'        => 'Treasurer',
+    'bod_role_humas'            => 'Public Relations',
+    'bod_role_bisdev_wil'       => 'Business Development',
+    'bod_role_edukasi'          => 'Education',
+ 
+    // ── Footer ──────────────────────────────────────────────
+    'bod_see_all' => 'View Full Organizational Structure',
+    
 'products_desc' => 'Explore top products and services from ACMI members, ready to support your business growth.',
 
 
@@ -273,7 +327,7 @@ return [
     'nav_board' => 'Board',
     'nav_products' => 'Products',
     'nav_gallery' => 'Gallery',
-    'nav_membership' => 'Membership',
+    'nav_manager' => 'Manager',
     'nav_ontopic' => 'On Topik',
 
     // HERO

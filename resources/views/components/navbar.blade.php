@@ -31,7 +31,7 @@
             <a href="{{ route('board') }}" class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_board') }}</a>
             <a href="{{ route('products') }}" class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_products') }}</a>            
             <a href="{{ route('gallerysec') }}" class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_gallery') }}</a>
-            <a href="{{ route('membership') }}" class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_membership') }}</a>
+            <a href="{{ route('acmi-manager') }}" class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_manager') }}</a>
             <a href="{{ route('ontopic') }}" class="py-2 hover:text-orange-500 transition border-b border-gray-100 dark:border-white/5 cursor-pointer">{{ __('messages.nav_ontopic') }}</a>
         </div>
 
