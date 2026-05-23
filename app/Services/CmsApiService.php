@@ -154,13 +154,22 @@ class CmsApiService
     public function submitInbound(array $data): array
     {
         try {
-            $response = $this->client->post('/inbound', $data);
+            $response = $this->client->post('/inbound', [
+                'name'           => $data['name'] ?? null,
+                'email'          => $data['email'] ?? null,
+                'phone'          => $data['phone'] ?? null,
+                'company'        => $data['company'] ?? null,
+                'position'       => $data['position'] ?? null,
+                'industry'       => $data['industry'] ?? null,
+                'company_url'    => $data['company_url'] ?? null,
+                'linkedin_url'   => $data['linkedin'] ?? null,
+                'employee_size'  => $data['employee_size'] ?? null,
+                'annual_revenue' => $data['annual_revenue'] ?? null,
+                'message'        => $data['message'] ?? null,
+            ]);
 
             if ($response->successful()) {
-                return [
-                    'success' => true,
-                    'data'    => $response->json()
-                ];
+                return ['success' => true, 'data' => $response->json()];
             }
 
             return [
@@ -170,10 +179,7 @@ class CmsApiService
             ];
         } catch (\Exception $e) {
             Log::error('CMS submitInbound gagal: ' . $e->getMessage());
-            return [
-                'success' => false,
-                'message' => 'Server error, coba lagi nanti'
-            ];
+            return ['success' => false, 'message' => $e->getMessage()];
         }
     }
 }

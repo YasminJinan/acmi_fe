@@ -243,12 +243,12 @@
                                 </div>
                             </div>
 
-                            {{-- Corner action button --}}
+                            {{-- Corner action button
                             <div class="gallery-corner-btn">
                                 <a href="#" class="gallery-action-btn" aria-label="Lihat detail">
                                     <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
                                 </a>
-                            </div>
+                            </div> --}}
 
                             {{-- Bottom accent line --}}
                             <div class="gallery-accent-line"></div>
