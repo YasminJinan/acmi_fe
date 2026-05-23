@@ -44,9 +44,9 @@ Route::get('/ontopic/{slug}', [ArticleController::class, 'show'])->name('ontopic
 Route::get('/form-join', [FormJoinController::class, 'index'])->name('form');
 Route::post('/form-join', [FormJoinController::class, 'store'])->name('form.store');
 
-Route::get('/membership', function () {
-    return view('membership');
-})->name('membership');
+Route::get('/acmi-manager', function () {
+    return view('acmi-manager');
+})->name('acmi-manager');
 
 Route::get('/gallerysec', function () {
     return view('gallerysec');

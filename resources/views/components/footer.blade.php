@@ -64,10 +64,10 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('membership') }}"
+                        <a href="{{ route('acmi-manager') }}"
                             class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group">
                             <i class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i>
-                            {{ __('messages.nav_membership') }}
+                            {{ __('messages.nav_manager') }}
                         </a>
                     </li>
                     <li>

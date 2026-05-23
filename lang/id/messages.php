@@ -2,6 +2,60 @@
 
 return [
 
+
+    // =========================================================
+    //  BOARD OF DIRECTORS  —  ACMI 2024-2025
+    //  Blade: resources/views/acmi-board-section.blade.php
+    // =========================================================
+ 
+    // ── Header ──────────────────────────────────────────────
+    'bod_badge'       => 'Struktur Organisasi',
+    'bod_title_1'     => 'Dewan Pengurus Pusat',
+    'bod_title_2'     => 'ACMI 2024–2025',
+    'bod_description' => 'Para pemimpin yang mendedikasikan diri untuk memajukan ekosistem ACMI dari tingkat pusat hingga wilayah.',
+ 
+    // ── Group: Dewan Pengurus Pusat ─────────────────────────
+    'bod_group_dpp_title'    => 'Dewan Pengurus Pusat',
+    'bod_group_dpp_subtitle' => 'ACMI · 2024–2025',
+ 
+    // ── Group: Pengurus Pusat ───────────────────────────────
+    'bod_group_pusat_title'    => 'Pengurus ACMI',
+    'bod_group_pusat_subtitle' => 'Pusat · 2024–2025',
+ 
+    // ── Group: Wilayah Barat ────────────────────────────────
+    'bod_group_barat_title'    => 'Pengurus ACMI',
+    'bod_group_barat_subtitle' => 'Wilayah Barat · 2024–2025',
+ 
+    // ── Group: Wilayah Tengah ───────────────────────────────
+    'bod_group_tengah_title'    => 'Pengurus ACMI',
+    'bod_group_tengah_subtitle' => 'Wilayah Tengah · 2024–2025',
+ 
+    // ── Group: Wilayah Timur ────────────────────────────────
+    'bod_group_timur_title'    => 'Pengurus ACMI',
+    'bod_group_timur_subtitle' => 'Wilayah Timur · 2024–2025',
+ 
+    // ── Roles ───────────────────────────────────────────────
+    'bod_role_ketua_umum'       => 'Ketua Umum ACMI',
+    'bod_role_wakil_ketua_umum' => 'Wakil Ketua Umum ACMI',
+    'bod_role_sekjen'           => 'Sekjen ACMI',
+    'bod_role_wasekjen'         => 'Wasekjen ACMI',
+    'bod_role_bendahara_umum'   => 'Bendahara Umum ACMI',
+    'bod_role_bisdev'           => 'Bisnis Development',
+    'bod_role_keanggotaan'      => 'Keanggotaan',
+    'bod_role_legal'            => 'Legal',
+    'bod_role_ketua'            => 'Ketua',
+    'bod_role_wakil_ketua'      => 'Wakil Ketua',
+    'bod_role_wabid_edukasi'    => 'Wabid Edukasi',
+    'bod_role_digicom'          => 'Digicom',
+    'bod_role_wakil'            => 'Wakil',
+    'bod_role_bendahara'        => 'Bendahara',
+    'bod_role_humas'            => 'Humas',
+    'bod_role_bisdev_wil'       => 'Bisdev',
+    'bod_role_edukasi'          => 'Edukasi',
+ 
+    // ── Footer ──────────────────────────────────────────────
+    'bod_see_all' => 'Lihat Seluruh Struktur Organisasi',
+
 'products_desc' => 'Jelajahi produk dan layanan unggulan dari para anggota ACMI yang siap mendukung pertumbuhan bisnis Anda.',
 
     // =============================================
@@ -279,7 +333,7 @@ return [
     'nav_board' => 'Board',
     'nav_products' => 'Produk',
     'nav_gallery' => 'Gallery',
-    'nav_membership' => 'Membership',
+    'nav_manager' => 'Manager',
     'nav_ontopic' => 'On Topik',
     // HERO
     'hero_badge' => 'Asosiasi CEO & Eksekutif Indonesia',

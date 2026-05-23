@@ -21,6 +21,7 @@ class HomeController extends Controller
         $partners = $cms->getPartners();
 
         $posts = Cache::remember('instagram_posts_v4', 60 * 60, function () {
+            
             try {
                 $apiUrl = env('APIFY_INSTAGRAM_URL');
 
