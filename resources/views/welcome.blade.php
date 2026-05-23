@@ -1086,8 +1086,6 @@
     {{-- INSTAGRAM FEED SECTION --}}
     <section class="relative py-24 bg-white dark:bg-[#0a0a0b] transition-colors duration-500 overflow-hidden">
         <div class="container mx-auto px-6">
-
-            {{-- Header Section --}}
             <div class="text-center mb-16" data-aos="fade-up">
                 <div
                     class="inline-block px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-bold mb-4 uppercase tracking-[0.2em] border border border-orange-100 dark:border-orange-500/20">
