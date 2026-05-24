@@ -157,6 +157,8 @@ Proses desain dilakukan melalui dua tahap menggunakan **Figma**:
 
 - [ ] **Analytics Dashboard** — Insight dan laporan performa platform
 - [ ] **Membership System** — Sistem keanggotaan terintegrasi
+- [ ] **SEO Testing** — Pengaplikasian SEO Testing
+- [ ] **Next Role CMS** — Role selain SuperAdmin
 - [ ] **Cloud Deployment** — Meningkatkan performa dan skalabilitas sistem
 
 
