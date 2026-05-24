@@ -10,17 +10,25 @@
     <section x-data="{
         activeCategory: 'Semua',
         galleries: [],
+        categories: ['Semua'], // akan diisi otomatis
         isLoading: true,
+    
         filter(category) {
             this.activeCategory = category;
         },
-        // Fungsi untuk memanggil API secara otomatis
+    
         init() {
             fetch('http://localhost:8000/api/public/gallery')
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
                         this.galleries = data.data;
+    
+                        // Ambil kategori unik dari data API
+                        const cats = data.data
+                            .map(item => item.category?.name)
+                            .filter(Boolean); // buang null/undefined
+                        this.categories = ['Semua', ...[...new Set(cats)]];
                     }
                     this.isLoading = false;
                 })
@@ -56,19 +64,18 @@
 
             {{-- Filter Categories (Tetap Statis atau bisa didinamiskan nanti) --}}
             <div class="flex flex-wrap justify-center gap-3 mb-10" data-aos="fade-up" data-aos-delay="100">
-                @php
-                    $categories = ['Semua', 'Summit', 'Masterclass', 'ACMI SPORT', 'ACMI Bersama 2024', 'Reuni 2024'];
-                @endphp
-                @foreach ($categories as $category)
-                    <button @click="filter('{{ $category }}')"
-                        :class="activeCategory === '{{ $category }}'
-                            ?
-                            'bg-orange-500 text-white shadow-md shadow-orange-500/20 ring-2 ring-orange-500 ring-offset-2 dark:ring-offset-gray-900' :
-                            'bg-white dark:bg-white/5 text-slate-500 dark:text-gray-400 border border-slate-200/60 dark:border-white/10 hover:border-orange-500 hover:text-orange-500'"
-                        class="relative px-6 py-2.5 rounded-xl text-sm font-poppins font-semibold transition-all duration-500 ease-out">
-                        {{ $category }}
-                    </button>
-                @endforeach
+                <div class="flex flex-wrap justify-center gap-3 mb-10" data-aos="fade-up" data-aos-delay="100">
+                    <template x-for="category in categories" :key="category">
+                        <button
+                            @click="filter(category)"
+                            :class="activeCategory === category
+                                ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20 ring-2 ring-orange-500 ring-offset-2 dark:ring-offset-gray-900'
+                                : 'bg-white dark:bg-white/5 text-slate-500 dark:text-gray-400 border border-slate-200/60 dark:border-white/10 hover:border-orange-500 hover:text-orange-500'"
+                            class="relative px-6 py-2.5 rounded-xl text-sm font-poppins font-semibold transition-all duration-500 ease-out"
+                            x-text="category">
+                        </button>
+                    </template>
+                </div>
             </div>
 
             {{-- State Loading --}}
@@ -86,7 +93,7 @@
                     {{-- Looping Data dari API --}}
                     <template x-for="item in galleries" :key="item.id">
                         {{-- Sesuaikan filter kategori dengan item.category.name (tambahkan pengamanan jika null) --}}
-                        <div x-show="activeCategory === 'Semua' || (item.category && activeCategory === item.category.name)"
+                        <div x-show="activeCategory === 'Semua' || item.category?.name === activeCategory"
                             x-transition:enter="transition ease-out duration-500"
                             x-transition:enter-start="opacity-0 scale-90 translate-y-4"
                             x-transition:enter-end="opacity-100 scale-100 translate-y-0" class="break-inside-avoid">

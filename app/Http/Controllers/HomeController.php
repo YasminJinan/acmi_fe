@@ -23,7 +23,8 @@ class HomeController extends Controller
         $posts = Cache::remember('instagram_posts_v4', 60 * 60, function () {
             
             try {
-                $apiUrl = env('APIFY_INSTAGRAM_URL');
+                // $apiUrl = env('APIFY_INSTAGRAM_URL');
+                $apiUrl = config('services.apify.instagram_url');
 
                 if (empty($apiUrl)) {
                     Log::error('APIFY_INSTAGRAM_URL belum diset di .env');

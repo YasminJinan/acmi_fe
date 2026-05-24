@@ -11,17 +11,18 @@
 
 @section('content')
 
-   {{-- HERO SECTION --}}
+    {{-- HERO SECTION --}}
     <section class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b]">
 
         {{-- Background Video --}}
         <div class="absolute inset-0 w-full h-full">
-            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-100">
+            <video autoplay muted loop playsinline
+                class="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-100">
                 <source src="{{ asset('videos/hero-bg.mp4') }}" type="video/mp4">
             </video>
         </div>
 
-        {{-- Overlay--}}
+        {{-- Overlay --}}
         <div
             class="absolute inset-0 bg-gradient-to-b
         from-white/20 via-white/60 to-gray-50
@@ -50,28 +51,29 @@
             <h1 data-aos="fade-up" data-aos-delay="200"
                 class="text-4xl md:text-7xl leading-tight text-gray-950 dark:text-white drop-shadow-sm">
                 <span class="font-poppins font-semibold">{{ __('messages.hero_title_1') }}</span><br>
-                <span class="font-serif font-bold italic text-orange-600 dark:text-orange-500">{{ __('messages.hero_title_2') }}</span>
+                <span
+                    class="font-serif font-bold italic text-orange-600 dark:text-orange-500">{{ __('messages.hero_title_2') }}</span>
             </h1>
 
-            {{-- Deskripsi--}}
+            {{-- Deskripsi --}}
             <p data-aos="fade-up" data-aos-delay="400"
                 class="mt-6 text-gray-700 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed">
                 {{ __('messages.hero_desc') }}
             </p>
 
-            {{-- Buttons--}}
+            {{-- Buttons --}}
             <div data-aos="fade-up" data-aos-delay="600" class="mt-8 flex justify-center gap-4 flex-wrap">
                 <a href="/form-join"
                     class="px-6 py-3 bg-orange-600 dark:bg-orange-500 text-white rounded-lg font-semibold shadow-md shadow-orange-500/20 hover:bg-orange-700 dark:hover:bg-orange-600 hover:scale-105 transition-all duration-300 inline-block">
                     {{ __('messages.btn_join') }}
                 </a>
-              <a href="{{ route('ontopic') }}"
-   class="inline-block px-6 py-3 border border-orange-400 text-orange-500 rounded-lg font-semibold hover:bg-orange-50/10 hover:scale-105 transition-transform duration-300">
-    {{ __('messages.btn_explore') }}
-</a>
+                <a href="{{ route('ontopic') }}"
+                    class="inline-block px-6 py-3 border border-orange-400 text-orange-500 rounded-lg font-semibold hover:bg-orange-50/10 hover:scale-105 transition-transform duration-300">
+                    {{ __('messages.btn_explore') }}
+                </a>
             </div>
 
-            {{-- Stats--}}
+            {{-- Stats --}}
             <div class="mt-14 grid grid-cols-3 gap-4 max-w-3xl mx-auto">
                 @php
                     $stats = [
@@ -192,14 +194,15 @@
     </section>
 
 
-   {{-- EVENT BANNER --}}
+    {{-- EVENT BANNER --}}
     <section class="bg-white dark:bg-[#0a0a0b] px-6 md:px-10 pt-10 pb-6">
         <div class="max-w-7xl mx-auto">
             <div
                 class="relative overflow-hidden bg-gradient-to-br from-orange-50/60 via-[#f8f9fa] to-white dark:from-white/5 dark:via-white/5 dark:to-white/5 border border-orange-100 dark:border-white/10 rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between shadow-md shadow-orange-500/[0.02] dark:shadow-none gap-6 group">
-                
+
                 {{-- Dekorasi Ikon Background (Hanya pemanis visual samar) --}}
-                <div class="absolute -right-6 -bottom-6 text-orange-500/5 dark:text-white/5 text-9xl pointer-events-none transform -rotate-12 transition-transform duration-500 group-hover:scale-110">
+                <div
+                    class="absolute -right-6 -bottom-6 text-orange-500/5 dark:text-white/5 text-9xl pointer-events-none transform -rotate-12 transition-transform duration-500 group-hover:scale-110">
                     <i class="fa-solid fa-calendar-check"></i>
                 </div>
 
@@ -217,7 +220,8 @@
                         <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-2 font-poppins tracking-tight">
                             {{ __('messages.event_title') }}
                         </h2>
-                        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1.5 text-sm text-gray-600 dark:text-gray-400">
+                        <div
+                            class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1.5 text-sm text-gray-600 dark:text-gray-400">
                             <p class="flex items-center gap-2">
                                 <i class="fa-regular fa-calendar-days text-orange-500 dark:text-orange-400"></i>
                                 {{ __('messages.event_date') }}
@@ -231,22 +235,25 @@
                     </div>
                 </div>
 
-                {{-- Sisi Kanan: Promo & CTA Button --}}
-                <div class="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto border-t border-gray-100 dark:border-white/5 pt-4 md:pt-0 md:border-none">
+                {{-- Promo & CTA Button --}}
+                <div
+                    class="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto border-t border-gray-100 dark:border-white/5 pt-4 md:pt-0 md:border-none">
                     <div class="text-left md:text-right flex items-center md:flex-col gap-2 md:gap-0">
-                        <p class="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1 md:justify-end">
+                        <p
+                            class="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1 md:justify-end">
                             <i class="fa-solid fa-tags text-orange-400 md:hidden"></i> Early Bird Discount
                         </p>
-                        <p class="text-orange-600 dark:text-orange-400 font-black text-xl tracking-tight flex items-center gap-1">
+                        <p
+                            class="text-orange-600 dark:text-orange-400 font-black text-xl tracking-tight flex items-center gap-1">
                             30% OFF <i class="fa-solid fa-fire text-sm animate-bounce hidden md:inline-block"></i>
                         </p>
                     </div>
-                    
-                    <button
+
+                    <a href="{{ route('form.store') }}"
                         class="bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-sm font-semibold px-6 py-3.5 rounded-xl flex items-center gap-2.5 shadow-md shadow-orange-600/10 dark:shadow-none hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ml-auto md:ml-0">
-                        <span>{{ __('messages.event_cta') }}</span> 
+                        <span>{{ __('messages.event_cta') }}</span>
                         <i class="fa-solid fa-arrow-right-long text-xs transition-transform group-hover:translate-x-1"></i>
-                    </button>
+                    </a>
                 </div>
 
             </div>
@@ -322,7 +329,7 @@
                             </p>
                         </div>
 
-                      
+
                     </div>
                 @endforeach
             </div>
@@ -330,11 +337,11 @@
         </div>
     </section>
 
-{{-- SOLUTION SECTION --}}
+    {{-- SOLUTION SECTION --}}
     <section
         class="relative min-h-screen w-full flex items-center justify-center py-24 px-6 overflow-hidden transition-colors duration-500 bg-white dark:bg-[#0a0a0b]">
 
-        {{-- Background Overlay--}}
+        {{-- Background Overlay --}}
         <div class="absolute inset-0 z-0" data-aos="fade-in" data-aos-duration="2000">
             <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
                 class="w-full h-full object-cover opacity-20 dark:opacity-15" alt="Office background">
@@ -348,16 +355,20 @@
             {{-- Left Side --}}
             <div class="space-y-12 lg:max-w-md xl:max-w-lg lg:ml-auto" data-aos="fade-right">
                 <div class="relative">
-                    <div class="absolute -left-6 top-0 w-1 h-24 bg-orange-600 dark:bg-orange-500 rounded-full hidden md:block"></div>
+                    <div
+                        class="absolute -left-6 top-0 w-1 h-24 bg-orange-600 dark:bg-orange-500 rounded-full hidden md:block">
+                    </div>
 
                     <span
                         class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-orange-200 dark:border-orange-500/30 bg-orange-50/80 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-bold mb-6 uppercase tracking-[0.2em]">
                         <i class="fa-solid fa-lightbulb text-[9px]"></i> {{ __('messages.solution_badge') }}
                     </span>
 
-                    <h2 class="text-4xl md:text-6xl font-poppins font-bold text-gray-950 dark:text-white leading-[1.1] tracking-tight">
+                    <h2
+                        class="text-4xl md:text-6xl font-poppins font-bold text-gray-950 dark:text-white leading-[1.1] tracking-tight">
                         ACMI:
-                        <span class="font-serif italic text-orange-600 dark:text-orange-500 block md:inline-block">Powerhouse</span><br
+                        <span
+                            class="font-serif italic text-orange-600 dark:text-orange-500 block md:inline-block">Powerhouse</span><br
                             class="hidden md:block">
                         <span class="font-light tracking-tight">{{ __('messages.solution_title') }}</span>
                     </h2>
@@ -374,7 +385,8 @@
                             class="text-4xl md:text-5xl font-black text-gray-950 dark:text-white font-poppins group-hover:text-orange-600 dark:group-hover:text-orange-500 transition-colors duration-300">
                             10<span class="text-orange-600 dark:text-orange-500">+</span>
                         </p>
-                        <p class="text-[11px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest mt-3 flex items-center gap-1.5">
+                        <p
+                            class="text-[11px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest mt-3 flex items-center gap-1.5">
                             {{ __('messages.solution_exp') }}
                         </p>
                     </div>
@@ -383,8 +395,9 @@
                             class="text-4xl md:text-5xl font-black text-gray-950 dark:text-white font-poppins group-hover:text-orange-600 dark:group-hover:text-orange-500 transition-colors duration-300">
                             50<span class="text-orange-600 dark:text-orange-500 text-3xl">T+</span>
                         </p>
-                        <p class="text-[11px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest mt-3 flex items-center gap-1.5">
-                         {{ __('messages.solution_revenue') }}
+                        <p
+                            class="text-[11px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest mt-3 flex items-center gap-1.5">
+                            {{ __('messages.solution_revenue') }}
                         </p>
                     </div>
                 </div>
@@ -392,14 +405,35 @@
 
             {{-- Right Side (Cards) --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
-                <div class="absolute inset-0 bg-orange-500/[0.04] dark:bg-orange-500/5 blur-[120px] -z-10 rounded-full"></div>
+                <div class="absolute inset-0 bg-orange-500/[0.04] dark:bg-orange-500/5 blur-[120px] -z-10 rounded-full">
+                </div>
 
                 @php
                     $solutions = [
-                        ['icon' => 'fa-share-nodes', 'title' => __('messages.solution_1_title'), 'desc' => __('messages.solution_1_desc'), 'aos' => 'fade-down'],
-                        ['icon' => 'fa-book-open', 'title' => __('messages.solution_2_title'), 'desc' => __('messages.solution_2_desc'), 'aos' => 'fade-left'],
-                        ['icon' => 'fa-bullhorn', 'title' => __('messages.solution_3_title'), 'desc' => __('messages.solution_3_desc'), 'aos' => 'fade-right'],
-                        ['icon' => 'fa-briefcase', 'title' => __('messages.solution_4_title'), 'desc' => __('messages.solution_4_desc'), 'aos' => 'fade-up'],
+                        [
+                            'icon' => 'fa-share-nodes',
+                            'title' => __('messages.solution_1_title'),
+                            'desc' => __('messages.solution_1_desc'),
+                            'aos' => 'fade-down',
+                        ],
+                        [
+                            'icon' => 'fa-book-open',
+                            'title' => __('messages.solution_2_title'),
+                            'desc' => __('messages.solution_2_desc'),
+                            'aos' => 'fade-left',
+                        ],
+                        [
+                            'icon' => 'fa-bullhorn',
+                            'title' => __('messages.solution_3_title'),
+                            'desc' => __('messages.solution_3_desc'),
+                            'aos' => 'fade-right',
+                        ],
+                        [
+                            'icon' => 'fa-briefcase',
+                            'title' => __('messages.solution_4_title'),
+                            'desc' => __('messages.solution_4_desc'),
+                            'aos' => 'fade-up',
+                        ],
                     ];
                 @endphp
 
@@ -425,107 +459,121 @@
     </section>
 
 
-{{-- EXCLUSIVE MEMBERSHIP SECTION --}}
-<section
-    class="relative py-20 md:py-28 bg-gradient-to-b from-white to-gray-50 dark:from-[#0a0a0b] dark:to-[#0c0c0e] transition-colors duration-500 overflow-hidden">
+    {{-- EXCLUSIVE MEMBERSHIP SECTION --}}
+    <section
+        class="relative py-20 md:py-28 bg-gradient-to-b from-white to-gray-50 dark:from-[#0a0a0b] dark:to-[#0c0c0e] transition-colors duration-500 overflow-hidden">
 
-    {{-- Decorative Background (Disesuaikan antara Light dan Dark) --}}
-    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div
-            class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-orange-500/[0.06] dark:bg-orange-500/10 rounded-full blur-[120px]">
+        {{-- Decorative Background (Disesuaikan antara Light dan Dark) --}}
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div
+                class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-orange-500/[0.06] dark:bg-orange-500/10 rounded-full blur-[120px]">
+            </div>
+            <div
+                class="absolute bottom-[-5%] right-[-5%] w-[300px] h-[300px] bg-orange-600/[0.03] dark:bg-orange-900/10 rounded-full blur-[100px]">
+            </div>
         </div>
-        <div
-            class="absolute bottom-[-5%] right-[-5%] w-[300px] h-[300px] bg-orange-600/[0.03] dark:bg-orange-900/10 rounded-full blur-[100px]">
-        </div>
-    </div>
 
-    <div class="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-            {{-- Left: Info --}}
-            <div class="space-y-8" data-aos="fade-right">
-                <div>
-                    {{-- Badge --}}
-                    <div
-                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-200 dark:border-orange-500/20 bg-orange-50/80 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-bold mb-5 shadow-sm uppercase tracking-widest font-poppins">
-                        <i class="fa-solid fa-shield-halved text-[11px]"></i>
-                        <span>{{ __('messages.membership_badge') }}</span>
-                    </div>
+                {{-- Left: Info --}}
+                <div class="space-y-8" data-aos="fade-right">
+                    <div>
+                        {{-- Badge --}}
+                        <div
+                            class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-200 dark:border-orange-500/20 bg-orange-50/80 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-bold mb-5 shadow-sm uppercase tracking-widest font-poppins">
+                            <i class="fa-solid fa-shield-halved text-[11px]"></i>
+                            <span>{{ __('messages.membership_badge') }}</span>
+                        </div>
 
-                    {{-- Title --}}
-                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-poppins text-gray-950 dark:text-white leading-[1.15] tracking-tight">
-                        <span class="font-light">{{ __('messages.membership_title_1') }}</span>
-                        <span class="block font-serif font-bold italic text-orange-600 dark:text-orange-500 mt-1 selection:bg-orange-500/20">
-                           {{ __('messages.membership_title_2') }}
-                        </span>
-                    </h2>
-
-                    {{-- Description --}}
-                    <p class="mt-6 text-gray-600 dark:text-gray-400 text-base md:text-lg font-poppins leading-relaxed max-w-md">
-                        {{ __('messages.membership_desc') }}
-                    </p>
-                </div>
-
-                {{-- Checklist dengan Hover Efek Oranye Premium --}}
-                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
-                    @php
-                        $features = is_array(__('messages.membership_features')) ? __('messages.membership_features') : [];
-                    @endphp
-                    @foreach ($features as $feature)
-                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-poppins text-sm group cursor-default">
-                            <div class="flex-shrink-0 w-5 h-5 rounded-md bg-orange-100/80 dark:bg-orange-500/20 flex items-center justify-center group-hover:bg-orange-600 dark:group-hover:bg-orange-500 transition-colors duration-300 shadow-sm">
-                                <i class="fa-solid fa-check text-[9px] text-orange-600 dark:text-orange-400 group-hover:text-white transition-colors duration-300"></i>
-                            </div>
-                            <span class="group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-200">
-                                {{ $feature }}
+                        {{-- Title --}}
+                        <h2
+                            class="text-3xl sm:text-4xl lg:text-5xl font-poppins text-gray-950 dark:text-white leading-[1.15] tracking-tight">
+                            <span class="font-light">{{ __('messages.membership_title_1') }}</span>
+                            <span
+                                class="block font-serif font-bold italic text-orange-600 dark:text-orange-500 mt-1 selection:bg-orange-500/20">
+                                {{ __('messages.membership_title_2') }}
                             </span>
-                        </li>
-                    @endforeach
-                </ul>
+                        </h2>
 
-                {{-- CTA --}}
-                <div class="pt-2 group/btn">
-                    <div class="flex flex-col sm:flex-row items-center gap-4">
-                       <a href="{{ url('/form-join') }}"
-                          class="px-8 py-4 bg-orange-600 dark:bg-orange-500 hover:bg-orange-700 dark:hover:bg-orange-600 text-white font-bold font-poppins rounded-xl shadow-lg shadow-orange-600/20 dark:shadow-none transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 w-full sm:w-auto">
-                          {{ __('messages.membership_cta_btn') }}
-                         <i class="fa-solid fa-arrow-right-long transition-transform duration-300 group-hover/btn:translate-x-1.5"></i>
-                       </a>
-                    </div>         
-                </div>
-            </div>
-
-            {{-- Right: Card Luxury Glassmorphism --}}
-            <div class="relative flex justify-center lg:justify-end" data-aos="fade-left">
-                {{-- Glow effect di belakang card --}}
-                <div class="absolute -top-12 -right-12 w-72 h-72 bg-orange-500/[0.08] dark:bg-orange-500/[0.12] blur-[100px] rounded-full pointer-events-none"></div>
-
-                <div
-                    class="relative group bg-gradient-to-b from-white to-gray-50/50 dark:from-white/[0.04] dark:to-white/[0.01] border border-gray-200/80 dark:border-white/[0.08] p-10 md:p-12 rounded-[2.5rem] w-full max-w-[380px] text-center shadow-xl shadow-gray-200/50 dark:shadow-none backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:rotate-1 hover:border-orange-500/30 dark:hover:border-orange-500/30 hover:shadow-2xl hover:shadow-orange-500/[0.06] dark:hover:shadow-orange-500/[0.04]">
-
-                    {{-- Icon Container Premium dengan Efek Pulse Lambat --}}
-                    <div class="relative w-20 h-20 mx-auto mb-8 flex items-center justify-center bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-500/10 dark:to-orange-500/20 text-orange-600 dark:text-orange-400 rounded-2xl shadow-inner group-hover:scale-110 transition-transform duration-500">
-                        <i class="fa-solid fa-gem text-3xl animate-pulse [animation-duration:3s]"></i>
+                        {{-- Description --}}
+                        <p
+                            class="mt-6 text-gray-600 dark:text-gray-400 text-base md:text-lg font-poppins leading-relaxed max-w-md">
+                            {{ __('messages.membership_desc') }}
+                        </p>
                     </div>
-                    
-                    {{-- Card Content --}}
-                    <h4 class="text-gray-900 dark:text-white font-bold font-poppins text-xl tracking-tight">
-                        VIP Access Pass
-                    </h4>
-                    <p class="text-gray-500 dark:text-gray-400 text-xs font-poppins mt-3 px-2 leading-relaxed">
-                        Unlock ultimate network with top-tier industrial leaders and global CEOs.
-                    </p>
-                    
-                    {{-- Divider & Bottom Label --}}
-                    <div class="mt-8 pt-6 border-t border-gray-100 dark:border-white/[0.06] flex items-center justify-center gap-2 text-[11px] font-bold tracking-widest text-orange-600 dark:text-orange-400 uppercase">
-                        <span>Exclusive Tier</span>
-                        <i class="fa-solid fa-star text-[9px] animate-spin [animation-duration:10s]"></i>
+
+                    {{-- Checklist dengan Hover Efek Oranye Premium --}}
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+                        @php
+                            $features = is_array(__('messages.membership_features'))
+                                ? __('messages.membership_features')
+                                : [];
+                        @endphp
+                        @foreach ($features as $feature)
+                            <li
+                                class="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-poppins text-sm group cursor-default">
+                                <div
+                                    class="flex-shrink-0 w-5 h-5 rounded-md bg-orange-100/80 dark:bg-orange-500/20 flex items-center justify-center group-hover:bg-orange-600 dark:group-hover:bg-orange-500 transition-colors duration-300 shadow-sm">
+                                    <i
+                                        class="fa-solid fa-check text-[9px] text-orange-600 dark:text-orange-400 group-hover:text-white transition-colors duration-300"></i>
+                                </div>
+                                <span
+                                    class="group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-200">
+                                    {{ $feature }}
+                                </span>
+                            </li>
+                        @endforeach
+                    </ul>
+
+                    {{-- CTA --}}
+                    <div class="pt-2 group/btn">
+                        <div class="flex flex-col sm:flex-row items-center gap-4">
+                            <a href="{{ url('/form-join') }}"
+                                class="px-8 py-4 bg-orange-600 dark:bg-orange-500 hover:bg-orange-700 dark:hover:bg-orange-600 text-white font-bold font-poppins rounded-xl shadow-lg shadow-orange-600/20 dark:shadow-none transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 w-full sm:w-auto">
+                                {{ __('messages.membership_cta_btn') }}
+                                <i
+                                    class="fa-solid fa-arrow-right-long transition-transform duration-300 group-hover/btn:translate-x-1.5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Right: Card Luxury Glassmorphism --}}
+                <div class="relative flex justify-center lg:justify-end" data-aos="fade-left">
+                    {{-- Glow effect di belakang card --}}
+                    <div
+                        class="absolute -top-12 -right-12 w-72 h-72 bg-orange-500/[0.08] dark:bg-orange-500/[0.12] blur-[100px] rounded-full pointer-events-none">
+                    </div>
+
+                    <div
+                        class="relative group bg-gradient-to-b from-white to-gray-50/50 dark:from-white/[0.04] dark:to-white/[0.01] border border-gray-200/80 dark:border-white/[0.08] p-10 md:p-12 rounded-[2.5rem] w-full max-w-[380px] text-center shadow-xl shadow-gray-200/50 dark:shadow-none backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:rotate-1 hover:border-orange-500/30 dark:hover:border-orange-500/30 hover:shadow-2xl hover:shadow-orange-500/[0.06] dark:hover:shadow-orange-500/[0.04]">
+
+                        {{-- Icon Container Premium dengan Efek Pulse Lambat --}}
+                        <div
+                            class="relative w-20 h-20 mx-auto mb-8 flex items-center justify-center bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-500/10 dark:to-orange-500/20 text-orange-600 dark:text-orange-400 rounded-2xl shadow-inner group-hover:scale-110 transition-transform duration-500">
+                            <i class="fa-solid fa-gem text-3xl animate-pulse [animation-duration:3s]"></i>
+                        </div>
+
+                        {{-- Card Content --}}
+                        <h4 class="text-gray-900 dark:text-white font-bold font-poppins text-xl tracking-tight">
+                            VIP Access Pass
+                        </h4>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs font-poppins mt-3 px-2 leading-relaxed">
+                            Unlock ultimate network with top-tier industrial leaders and global CEOs.
+                        </p>
+
+                        {{-- Divider & Bottom Label --}}
+                        <div
+                            class="mt-8 pt-6 border-t border-gray-100 dark:border-white/[0.06] flex items-center justify-center gap-2 text-[11px] font-bold tracking-widest text-orange-600 dark:text-orange-400 uppercase">
+                            <span>Exclusive Tier</span>
+                            <i class="fa-solid fa-star text-[9px] animate-spin [animation-duration:10s]"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
     {{-- Swiper Script --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
@@ -590,105 +638,115 @@
             }
         }">
 
-       <div class="max-w-7xl mx-auto">
- 
-    {{-- Header --}}
-    <div class="text-center max-w-3xl mx-auto mb-10" data-aos="fade-up">
- 
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-[10px] font-semibold mb-4 border border-orange-100 dark:border-orange-500/20">
-            <i class="fa-solid fa-box-open animate-pulse"></i>
-            {{ __('messages.products_badge') }}
-        </div>
- 
-         <h2 class="text-5xl md:text-5xl font-regular text-gray-900 dark:text-white leading-tight">
-            {{ __('messages.products_title_1') }} <br>
-            <span class="text-orange-500 font-serif italic font-bold">{{ __('messages.products_title_2') }}</span>
-        </h2>
- 
-        {{-- Search & Filter --}}
-        <div class="mt-6 flex flex-col md:flex-row gap-3 justify-center">
-            <div class="relative group md:w-72">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xs group-focus-within:text-orange-500 transition-colors"></i>
-                <input type="text" x-model="search"
-                    placeholder="{{ __('messages.products_search_placeholder') }}"
-                    class="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white text-sm transition-all">
-            </div>
- 
-            <select x-model="category"
-                class="px-6 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white text-sm cursor-pointer appearance-none">
-                @foreach(__('messages.products_categories') as $value => $label)
-                    <option value="{{ $value }}">{{ $label }}</option>
-                @endforeach
-            </select>
-        </div>
-    </div>
- 
-    {{-- Grid Produk --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <template x-for="product in filteredProducts" :key="product.id">
-            <div class="group flex flex-col" data-aos="fade-up">
-                <div class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
- 
-                    {{-- Image --}}
-                    <div class="relative h-[180px] overflow-hidden">
-                        <img :src="product.image" :alt="product.title"
-                            class="w-full h-full object-cover group-hover:scale-110 transition duration-[1.5s] ease-out">
-                        <div class="absolute top-4 left-4">
-                            <span class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-orange-600 dark:text-orange-400 text-[9px] px-3 py-1.5 rounded-lg font-black uppercase tracking-widest shadow-lg"
-                                x-text="Array.isArray(product.category) ? product.category[0] : product.category">
-                            </span>
-                        </div>
+        <div class="max-w-7xl mx-auto">
+
+            {{-- Header --}}
+            <div class="text-center max-w-3xl mx-auto mb-10" data-aos="fade-up">
+
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-[10px] font-semibold mb-4 border border-orange-100 dark:border-orange-500/20">
+                    <i class="fa-solid fa-box-open animate-pulse"></i>
+                    {{ __('messages.products_badge') }}
+                </div>
+
+                <h2 class="text-5xl md:text-5xl font-regular text-gray-900 dark:text-white leading-tight">
+                    {{ __('messages.products_title_1') }} <br>
+                    <span class="text-orange-500 font-serif italic font-bold">{{ __('messages.products_title_2') }}</span>
+                </h2>
+
+                {{-- Search & Filter --}}
+                <div class="mt-6 flex flex-col md:flex-row gap-3 justify-center">
+                    <div class="relative group md:w-72">
+                        <i
+                            class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xs group-focus-within:text-orange-500 transition-colors"></i>
+                        <input type="text" x-model="search"
+                            placeholder="{{ __('messages.products_search_placeholder') }}"
+                            class="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white text-sm transition-all">
                     </div>
- 
-                    {{-- Content --}}
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-lg font-poppins font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-500 transition-colors line-clamp-1"
-                            x-text="product.title">
-                        </h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-xs mb-4 line-clamp-2 leading-relaxed"
-                            x-text="product.description">
-                        </p>
- 
-                        <div class="mt-auto">
-                            {{-- Business Info --}}
-                            <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 mb-4 border border-transparent group-hover:border-orange-500/20 transition-all">
-                                <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center text-[10px] font-black shadow-lg shadow-orange-500/20 flex-shrink-0"
-                                    x-text="product.ceo_name ? product.ceo_name.charAt(0) : '?'">
-                                </div>
-                                <div class="min-w-0">
-                                    <p class="text-gray-900 dark:text-gray-200 font-bold text-[11px] truncate"
-                                        x-text="product.company_name">
-                                    </p>
-                                    <p class="text-gray-400 text-[9px] uppercase tracking-tighter">
-                                        {{ __('messages.products_ceo_label') }}: <span class="text-gray-500 dark:text-gray-300" x-text="product.ceo_name"></span>
-                                    </p>
-                                </div>
-                            </div>
- 
-                            {{-- Button --}}
-                            <a :href="'/products/' + product.slug"
-                                class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
-                                {{ __('messages.products_detail_btn') }}
-                                <i class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
-                            </a>
-                        </div>
-                    </div>
- 
+
+                    <select x-model="category"
+                        class="px-6 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white text-sm cursor-pointer appearance-none">
+                        @foreach (__('messages.products_categories') as $value => $label)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
-        </template>
- 
-        {{-- Empty State (inside grid for col-span) --}}
-        <div x-show="filteredProducts.length === 0" x-cloak class="col-span-3 text-center py-24">
-            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-white/5 text-gray-400 mb-6">
-                <i class="fa-solid fa-magnifying-glass text-2xl"></i>
+
+            {{-- Grid Produk --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <template x-for="product in filteredProducts" :key="product.id">
+                    <div class="group flex flex-col" data-aos="fade-up">
+                        <div
+                            class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
+
+                            {{-- Image --}}
+                            <div class="relative h-[180px] overflow-hidden">
+                                <img :src="product.image" :alt="product.title"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition duration-[1.5s] ease-out">
+                                <div class="absolute top-4 left-4">
+                                    <span
+                                        class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-orange-600 dark:text-orange-400 text-[9px] px-3 py-1.5 rounded-lg font-black uppercase tracking-widest shadow-lg"
+                                        x-text="Array.isArray(product.category) ? product.category[0] : product.category">
+                                    </span>
+                                </div>
+                            </div>
+
+                            {{-- Content --}}
+                            <div class="p-6 flex flex-col flex-grow">
+                                <h3 class="text-lg font-poppins font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-500 transition-colors line-clamp-1"
+                                    x-text="product.title">
+                                </h3>
+                                <p class="text-gray-500 dark:text-gray-400 text-xs mb-4 line-clamp-2 leading-relaxed"
+                                    x-text="product.description">
+                                </p>
+
+                                <div class="mt-auto">
+                                    {{-- Business Info --}}
+                                    <div
+                                        class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 mb-4 border border-transparent group-hover:border-orange-500/20 transition-all">
+                                        <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center text-[10px] font-black shadow-lg shadow-orange-500/20 flex-shrink-0"
+                                            x-text="product.ceo_name ? product.ceo_name.charAt(0) : '?'">
+                                        </div>
+                                        <div class="min-w-0">
+                                            <p class="text-gray-900 dark:text-gray-200 font-bold text-[11px] truncate"
+                                                x-text="product.company_name">
+                                            </p>
+                                            <p class="text-gray-400 text-[9px] uppercase tracking-tighter">
+                                                {{ __('messages.products_ceo_label') }}: <span
+                                                    class="text-gray-500 dark:text-gray-300"
+                                                    x-text="product.ceo_name"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {{-- Button --}}
+                                    <a :href="'/products/' + product.slug"
+                                        class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
+                                        {{ __('messages.products_detail_btn') }}
+                                        <i
+                                            class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </template>
+
+                {{-- Empty State (inside grid for col-span) --}}
+                <div x-show="filteredProducts.length === 0" x-cloak class="col-span-3 text-center py-24">
+                    <div
+                        class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-white/5 text-gray-400 mb-6">
+                        <i class="fa-solid fa-magnifying-glass text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ __('messages.products_empty_title') }}
+                    </h3>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2">{{ __('messages.products_empty_desc') }}</p>
+                </div>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ __('messages.products_empty_title') }}</h3>
-            <p class="text-gray-500 dark:text-gray-400 mt-2">{{ __('messages.products_empty_desc') }}</p>
+
         </div>
-    </div>
- 
-</div>
         </div>
         <style>
             [x-cloak] {
@@ -1092,9 +1150,9 @@
                     Social Connect
                 </div>
                 <h2 class="text-4xl md:text-5xl leading-tight text-gray-900 dark:text-white font-poppins">
-    <span class="font-regular tracking-tight">{{ __('messages.activity_title_1') }}</span>
-    <span class="font-serif font-bold italic text-orange-500">{{ __('messages.activity_title_2') }}</span>
-</h2>
+                    <span class="font-regular tracking-tight">{{ __('messages.activity_title_1') }}</span>
+                    <span class="font-serif font-bold italic text-orange-500">{{ __('messages.activity_title_2') }}</span>
+                </h2>
                 <div class="h-1 w-12 bg-orange-500 mx-auto rounded-full mt-4"></div>
             </div>
 
@@ -1149,55 +1207,64 @@
     </section>
 
     {{-- FINAL CTA SECTION --}}
-<section class="relative py-24 px-6 overflow-hidden bg-[#fafafa] dark:bg-[#0a0a0b] transition-colors duration-500">
- 
-    {{-- Ambient Glow --}}
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-orange-500/10 blur-[140px] rounded-full pointer-events-none"></div>
- 
-    <div class="relative z-10 max-w-5xl mx-auto">
-        <div data-aos="fade-up" data-aos-duration="1200"
-            class="relative rounded-[2.5rem] md:rounded-[3rem] p-10 md:p-20 text-center bg-white dark:bg-white/[0.03] border border-gray-200/60 dark:border-white/[0.08] shadow-[0_10px_60px_rgba(0,0,0,0.04)] dark:shadow-[0_10px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all duration-700 hover:border-orange-500/30">
- 
-            {{-- Badge --}}
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-200 dark:border-orange-500/20 bg-orange-50/80 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-bold mb-8 shadow-sm uppercase tracking-widest font-poppins transition-transform duration-500 hover:scale-105">
-                <i class="fa-solid fa-bolt-lightning text-[10px]"></i>
-                <span>{{ __('messages.cta_final_badge') }}</span>
-            </div>
- 
-            {{-- Title --}}
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl leading-[1.15] mb-6 font-poppins text-gray-950 dark:text-white tracking-tight">
-                <span class="font-regular block">{{ __('messages.cta_final_title_1') }}</span>
-                <span class="font-serif font-bold italic text-orange-600 dark:text-orange-500 mt-1 block">
-                    {{ __('messages.cta_final_title_2') }}
-                </span>
-            </h2>
- 
-            {{-- Description --}}
-            <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg font-poppins max-w-2xl mx-auto mb-12 leading-relaxed px-4">
-                {{ __('messages.cta_final_desc') }}
-            </p>
- 
-            {{-- Button --}}
-            <div class="relative group inline-block">
-                <div class="absolute -inset-1 bg-orange-500 rounded-xl blur-xl opacity-20 group-hover:opacity-40 transition duration-500"></div>
- 
-                <a href="{{ url('/form-join') }}"
-                    class="relative flex items-center justify-center gap-4 bg-orange-600 dark:bg-orange-500 hover:bg-orange-700 dark:hover:bg-orange-600 text-white font-bold font-poppins px-10 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 active:scale-95 shadow-lg shadow-orange-600/20 dark:shadow-none w-full sm:w-auto">
-                    <span>{{ __('messages.cta_final_btn') }}</span>
- 
-                    <div class="relative w-5 h-5 overflow-hidden flex items-center justify-center">
-                        <i class="fa-solid fa-arrow-right absolute transition-all duration-500 group-hover:translate-x-full opacity-100 group-hover:opacity-0"></i>
-                        <i class="fa-solid fa-arrow-right absolute -left-full transition-all duration-500 group-hover:left-0 opacity-0 group-hover:opacity-100"></i>
-                    </div>
-                </a>
-            </div>
- 
-            {{-- Footer Note --}}
-            <p class="mt-8 text-[11px] font-poppins tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500">
-                {{ __('messages.cta_final_note') }}
-            </p>
- 
+    <section class="relative py-24 px-6 overflow-hidden bg-[#fafafa] dark:bg-[#0a0a0b] transition-colors duration-500">
+
+        {{-- Ambient Glow --}}
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-orange-500/10 blur-[140px] rounded-full pointer-events-none">
         </div>
-    </div>
-</section>
+
+        <div class="relative z-10 max-w-5xl mx-auto">
+            <div data-aos="fade-up" data-aos-duration="1200"
+                class="relative rounded-[2.5rem] md:rounded-[3rem] p-10 md:p-20 text-center bg-white dark:bg-white/[0.03] border border-gray-200/60 dark:border-white/[0.08] shadow-[0_10px_60px_rgba(0,0,0,0.04)] dark:shadow-[0_10px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all duration-700 hover:border-orange-500/30">
+
+                {{-- Badge --}}
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-200 dark:border-orange-500/20 bg-orange-50/80 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-bold mb-8 shadow-sm uppercase tracking-widest font-poppins transition-transform duration-500 hover:scale-105">
+                    <i class="fa-solid fa-bolt-lightning text-[10px]"></i>
+                    <span>{{ __('messages.cta_final_badge') }}</span>
+                </div>
+
+                {{-- Title --}}
+                <h2
+                    class="text-3xl sm:text-4xl lg:text-5xl leading-[1.15] mb-6 font-poppins text-gray-950 dark:text-white tracking-tight">
+                    <span class="font-regular block">{{ __('messages.cta_final_title_1') }}</span>
+                    <span class="font-serif font-bold italic text-orange-600 dark:text-orange-500 mt-1 block">
+                        {{ __('messages.cta_final_title_2') }}
+                    </span>
+                </h2>
+
+                {{-- Description --}}
+                <p
+                    class="text-gray-600 dark:text-gray-400 text-base md:text-lg font-poppins max-w-2xl mx-auto mb-12 leading-relaxed px-4">
+                    {{ __('messages.cta_final_desc') }}
+                </p>
+
+                {{-- Button --}}
+                <div class="relative group inline-block">
+                    <div
+                        class="absolute -inset-1 bg-orange-500 rounded-xl blur-xl opacity-20 group-hover:opacity-40 transition duration-500">
+                    </div>
+
+                    <a href="{{ url('/form-join') }}"
+                        class="relative flex items-center justify-center gap-4 bg-orange-600 dark:bg-orange-500 hover:bg-orange-700 dark:hover:bg-orange-600 text-white font-bold font-poppins px-10 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 active:scale-95 shadow-lg shadow-orange-600/20 dark:shadow-none w-full sm:w-auto">
+                        <span>{{ __('messages.cta_final_btn') }}</span>
+
+                        <div class="relative w-5 h-5 overflow-hidden flex items-center justify-center">
+                            <i
+                                class="fa-solid fa-arrow-right absolute transition-all duration-500 group-hover:translate-x-full opacity-100 group-hover:opacity-0"></i>
+                            <i
+                                class="fa-solid fa-arrow-right absolute -left-full transition-all duration-500 group-hover:left-0 opacity-0 group-hover:opacity-100"></i>
+                        </div>
+                    </a>
+                </div>
+
+                {{-- Footer Note --}}
+                <p class="mt-8 text-[11px] font-poppins tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500">
+                    {{ __('messages.cta_final_note') }}
+                </p>
+
+            </div>
+        </div>
+    </section>
 @endsection
