@@ -1,58 +1,163 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+
+
+<h1 align="center">ACMI Site</h1>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  Platform digital terintegrasi untuk <strong>Asosiasi CEO Mastermind Indonesia (ACMI)</strong>,<br>
+  terdiri dari website publik dan CMS Dashboard untuk admin internal.
 </p>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📖 Tentang Project
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Platform ini dibangun untuk menyelesaikan dua permasalahan utama ACMI:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Pengelolaan data yang masih dilakukan secara **manual**
+- Belum adanya **media publikasi bisnis yang terpusat**
 
-## Learning Laravel
+Solusinya berupa sistem terintegrasi yang mencakup **CMS Dashboard** untuk admin internal dan **website publik** untuk pengguna eksternal.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ✨ Fitur Utama
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+- 📦 **Katalog Produk Mitra** — Menampilkan produk dan profil mitra secara publik
+- 📰 **Portal Berita** — Sistem publikasi berita dan artikel organisasi
+- 📝 **Inbound Form Pendaftaran** — Form pendaftaran kemitraan online yang terintegrasi
+- 📊 **Dashboard & Visualisasi Data** — Insight dan manajemen data internal
+- 🤝 **Sistem CRM** — Pengelolaan pendaftaran dan data mitra
+- ⚙️ **Content Management System** — Kelola konten tanpa perlu menyentuh kode program
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 🛠️ Tech Stack
+
+| Layer | Teknologi |
+|-------|-----------|
+| Backend Framework | Laravel |
+| Frontend Styling | Tailwind CSS |
+| Database | MySQL |
+| API | RESTful API |
+| API Testing | Postman |
+
+---
+
+## 👥 Tim Pengembang
+
+| Nama | Role |
+|------|------|
+| Nael Muna | Full Stack Developer |
+| Yasmin Jinan | Frontend Developer |
+| Nisrina Asad | Backend Developer |
+| Azka Syakirah | Backend Developer |
+
+---
+
+## 🎯 Target Pengguna
+
+| Pengguna | Akses |
+|----------|-------|
+| **Admin Internal** | CMS Dashboard — mengelola data, konten, dan validasi inbound |
+| **Pengguna Eksternal** | Website Publik — melihat produk, berita, dan mendaftar kemitraan |
+
+---
+
+## ⚙️ Instalasi & Setup
+
+### Prasyarat
+
+- PHP >= 8.1
+- Composer
+- Node.js & NPM
+- MySQL
+
+### Langkah Instalasi
 
 ```bash
-composer require laravel/boost --dev
+# 1. Clone repository
+git clone https://github.com/username/acmi-project.git
+cd acmi-project
 
-php artisan boost:install
+# 2. Install PHP dependencies
+composer install
+
+# 3. Install Node dependencies
+npm install
+
+# 4. Setup environment
+cp .env.example .env
+php artisan key:generate
+
+# 5. Konfigurasi database di file .env
+DB_DATABASE=acmi
+DB_USERNAME=root
+DB_PASSWORD=
+
+# 6. Jalankan migrasi dan seeder
+php artisan migrate
+php artisan db:seed
+
+# 7. Jalankan development server
+npm run dev
+php artisan serve
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Akses aplikasi di `http://localhost:8000`
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🗂️ Struktur Database
 
-## Code of Conduct
+Tabel utama yang digunakan dalam sistem:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Tabel | Keterangan |
+|-------|------------|
+| `users` | Data pengguna dan admin |
+| `products` | Katalog produk mitra |
+| `posts` | Konten berita dan artikel |
+| `inbounds` | Data pendaftaran kemitraan yang masuk |
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🎨 Desain UI/UX
 
-## License
+Proses desain dilakukan melalui dua tahap menggunakan **Figma**:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. **Low-Fidelity** — Menyusun struktur layout dan user flow dasar
+2. **High-Fidelity** — Desain final bertema modern yang menyesuaikan identitas visual ACMI
+
+---
+
+## 🔧 Tools & Kolaborasi
+
+| Kategori | Tools |
+|----------|-------|
+| UI Design | Figma |
+| Version Control | GitHub |
+| Komunikasi Tim | WhatsApp |
+| Project Management | Lark |
+| API Testing | Postman |
+| AI Assistance | ChatGPT, Claude, Gemini |
+
+---
+
+## 🗓️ Timeline Pengembangan
+
+| Periode | Kegiatan |
+|---------|----------|
+| Awal Februari 2026 | Analisis kebutuhan klien |
+| Akhir Februari 2026 | Perancangan UI/UX |
+| Maret — Mei 2026 | Development & Testing sistem |
+| Mei 2026 | Presentasi dan pengujian (Ujikom) |
+
+---
+
+## 🚀 Rencana Pengembangan Selanjutnya
+
+- [ ] **Analytics Dashboard** — Insight dan laporan performa platform
+- [ ] **Membership System** — Sistem keanggotaan terintegrasi
+- [ ] **Cloud Deployment** — Meningkatkan performa dan skalabilitas sistem
+
+
+<p align="center">Dikembangkan dengan ❤️ oleh <strong>Breyole Teamt</strong> — RPL 2026</p>
