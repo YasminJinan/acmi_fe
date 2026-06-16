@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('title', 'On Topik — ACMI')
-@section('meta_description',
-    'Artikel, insight, dan perspektif terkini dari para pemimpin bisnis Indonesia bersama
-    ACMI.')
+@section('meta_description', 'Artikel, insight, dan perspektif terkini dari para pemimpin bisnis Indonesia bersama ACMI.')
 @section('meta_keywords', 'acmi artikel, on topik acmi, insight bisnis indonesia')
 @section('canonical', url('/ontopic'))
 
@@ -11,16 +9,17 @@
     {{-- Container Utama dengan Background Adaptive --}}
     <div
         class="min-h-screen transition-colors duration-500 font-sans selection:bg-orange-500/30 
-         bg-slate-50 dark:bg-[#0a0a0b] text-slate-900 dark:text-slate-200">
+    bg-slate-50 dark:bg-[#0a0a0b] text-slate-900 dark:text-slate-200">
 
-        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 py-6">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 pt-40 pb-12">
 
             <div class="flex flex-col md:flex-row gap-8 lg:gap-12 justify-center relative">
 
-                <!-- 1. KIRI: FLOATING CATEGORY BAR (Adaptive Backdrop) -->
+                <!-- 1. KIRI: FLOATING CATEGORY BAR (Adaptive Backdrop) - DINONAKTIFKAN SEMENTARA -->
+                {{-- 
                 <aside
                     class="hidden md:flex flex-col gap-4 sticky top-32 h-fit z-20 p-2.5 rounded-3xl border transition-all duration-500
-                        bg-white/80 dark:bg-[#121829]/40 backdrop-blur-2xl border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                bg-white/80 dark:bg-[#121829]/40 backdrop-blur-2xl border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
 
                     <!-- Utama (Gradient Tetap Menyala) -->
                     <a href="{{route('ontopic')}}"
@@ -58,20 +57,18 @@
                         </a>
                     @endforeach
                 </aside>
+                --}}
 
-                <!-- 2. TENGAH: MAIN NEWS FEED (Improved Typography) -->
-                <main class="flex-1 max-w-[680px] mt-32 md:mt-20">
+                <!-- 2. TENGAH: MAIN NEWS FEED -->
+                <main class="flex-1 max-w-[680px]">
                     <header class="mb-10 pl-2">
                         <h1
-                            class="text-3xl md:text-5xl font-bold tracking-tight mb-3 bg-gradient-to-r from-slate-900 via-slate-800 to-orange-500 dark:from-white dark:via-slate-200 dark:to-orange-500 bg-clip-text text-transparent">
-                            {{ __('messages.feed_title') }}
-                        </h1>
-                        <p class="text-slate-500 dark:text-slate-400 text-lg font-medium">
-                            {{ __('messages.feed_subtitle') }}
-                        </p>
+                            class="text-4xl font-extrabold tracking-tight mb-2 bg-gradient-to-r from-slate-900 via-slate-800 to-orange-500 dark:from-white dark:via-slate-200 dark:to-orange-500 bg-clip-text text-transparent">
+                            For you</h1>
+                        <p class="text-slate-500 dark:text-slate-400 text-base">Liputan khusus dan berita pilihan untuk Anda hari ini.</p>
                     </header>
 
-                    <div class="space-y-10">
+                    <div class="space-y-8 mt-1.5">
                         @foreach (($articles['data'] ?? []) as $article)
                             <article class="group cursor-pointer">
                                 <a href="{{ route('ontopic.show', $article['slug']) }}">
@@ -105,7 +102,7 @@
                                                 text-slate-900 dark:text-white group-hover:text-orange-500">
                                                 {{ $article['title'] }}
                                             </h2>
-                                            <p class="text-sm text-slate-500 dark:text-slate-400">
+                                            <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">
                                                 {{ $article['excerpt'] }}
                                             </p>
                                         </div>
@@ -117,27 +114,56 @@
                 </main>
 
                 <!-- 3. KANAN: SIDEBAR CONTENT -->
-                <aside class="hidden xl:block w-[340px] space-y-8 mt-16 sticky top-28 h-fit pb-10">
+                <aside class="hidden xl:block w-[340px] space-y-8 sticky top-40 h-fit pb-10">
+
+                    <!-- Section Semua Kategori -->
+                    <div class="bg-white dark:bg-[#0a0f1d] rounded-[2.5rem] p-8 border border-slate-200 dark:border-white/5 shadow-xl dark:shadow-2xl overflow-hidden relative group">
+                        <div class="flex items-center gap-3 mb-5">
+                            <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 border border-orange-500/20">
+                                <i class="fas fa-list-ul text-sm"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">Kategori</h3>
+                        </div>
+
+                        <div class="space-y-1">
+                            @php
+                                $sideCategories = [
+                                    'Sport', 'Business', 'Social', 'Lifestyle', 'Entertainment', 'Technology', 'Travel', 'Health'
+                                ];
+                            @endphp
+                            @foreach ($sideCategories as $cat)
+                                <a href="#" class="flex items-center justify-between group/item py-1.5 px-3 rounded-2xl transition-all duration-300 hover:bg-orange-500/5 dark:hover:bg-white/[0.03]">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-1 h-3.5 rounded-full bg-slate-300 dark:bg-slate-700 group-hover/item:bg-orange-500 transition-all duration-300 transform scale-y-50 group-hover/item:scale-y-100 opacity-30 group-hover/item:opacity-100"></div>
+                                        <span class="text-[14px] font-medium text-slate-500 dark:text-slate-400 group-hover/item:text-slate-900 dark:group-hover/item:text-white transition-colors">{{ $cat }}</span>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-[10px] text-slate-400 dark:text-slate-600 opacity-0 -translate-x-2 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-300"></i>
+                                </a>
+                            @endforeach
+                        </div>
+
+                        {{-- Decorative gradient line --}}
+                        <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-orange-500/20 to-transparent"></div>
+                    </div>
 
                     <!-- Section Berita Utama -->
                     <div
                         class="rounded-[2.5rem] p-8 border transition-all duration-500
                     bg-white dark:bg-[#0a0f1d] border-slate-200 dark:border-white/5 shadow-xl dark:shadow-2xl">
 
-                        <div class="flex justify-between items-center mb-8">
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">Berita Utama
-                            </h3>
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">Berita Utama</h3>
                             <a href="#"
                                 class="text-[10px] font-black text-orange-600 dark:text-slate-500 hover:dark:text-orange-400 uppercase tracking-widest transition-colors">See
                                 all</a>
                         </div>
 
-                        <div class="space-y-8">
+                        <div class="space-y-6">
                             @for ($j = 0; $j < 3; $j++)
                                 <div
-                                    class="group cursor-pointer border-b last:border-0 pb-6 last:pb-0 border-slate-100 dark:border-white/5">
+                                    class="group cursor-pointer border-b last:border-0 pb-5 last:pb-0 border-slate-100 dark:border-white/5">
                                     <div
-                                        class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest mb-3 text-slate-400 dark:text-slate-500">
+                                        class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest mb-2 text-slate-400 dark:text-slate-500">
                                         <i class="fas fa-globe-asia text-orange-500"></i>
                                         <span>Barat</span>
                                         <span class="text-slate-300 dark:text-slate-700">•</span>
@@ -186,27 +212,21 @@
     </div>
 
     <style>
-        /* Utility Sidebar Icon */
         .sidebar-icon {
             @apply flex items-center justify-center w-12 h-12 rounded-2xl transition-all duration-300;
         }
 
-        /* Smooth Scrolling */
         html {
             scroll-behavior: smooth;
         }
 
-        /* Custom Scrollbar (Optional) */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* Hide scrollbars for the category strip if it overflows */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
         }
-
-        ::-webkit-scrollbar-track {
-            @apply bg-slate-100 dark:bg-[#0a0a0b];
-        }
-
-        ::-webkit-scrollbar-thumb {
-            @apply bg-slate-300 dark:bg-slate-800 rounded-full hover:bg-orange-500;
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 @endsection
