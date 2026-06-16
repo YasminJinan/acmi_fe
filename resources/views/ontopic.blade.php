@@ -72,7 +72,7 @@
                     </header>
 
                     <div class="space-y-10">
-                        @foreach ($articles['data'] as $article)
+                        @foreach (($articles['data'] ?? []) as $article)
                             <article class="group cursor-pointer">
                                 <a href="{{ route('ontopic.show', $article['slug']) }}">
                                     <div

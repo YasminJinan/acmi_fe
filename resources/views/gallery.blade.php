@@ -204,82 +204,42 @@
             </p>
         </div>
 
+        {{-- State Loading --}}
         <template x-if="isLoading">
-            <div class="flex justify-center items-center py-32">
-                <div class="text-center">
-                    <i class="fa-solid fa-spinner fa-spin text-4xl text-orange-500 mb-4 block"></i>
-                    <p class="text-gray-400 dark:text-gray-500 font-poppins text-sm">Memuat galeri...</p>
-                </div>
+            <div class="flex justify-center items-center py-20">
+                <i class="fa-solid fa-spinner fa-spin text-3xl text-orange-500"></i>
             </div>
         </template>
 
+        {{-- GRID DINAMIS DARI API --}}
+        <template x-if="!isLoading">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-        <template x-if="!isLoading && galleries.length > 0">
-            <div>
-                <div class="gallery-masonry-grid">
-                    <template x-for="(item, idx) in galleries" :key="item.id ?? idx">
-                        <div
-                            class="gallery-card"
-                            :class="{
-                                'item-wide': idx === 0,
-                                'item-tall': idx === 3,
-                                'item-big':  idx === 6
-                            }"
-                            data-aos="fade-up"
-                            :data-aos-delay="(idx % 3) * 100"
-                        >
-                            {{-- Foto --}}
-                            <img
-                                :src="item.image"
-                                :alt="item.title || 'Momen ACMI'"
-                                class="gallery-img"
-                            >
+                <template x-for="item in galleries" :key="item.id">
+                    <div class="gallery-item group relative overflow-hidden rounded-3xl shadow-sm transition-all duration-500 hover:shadow-2xl">
+                        
+                        {{-- Ubah full_image_url menjadi item.image --}}
+                        <img :src="item.image" 
+                             class="w-full h-[300px] object-cover transition-transform duration-700 group-hover:scale-110">
 
-                            {{-- Overlay hover --}}
-                            <div class="gallery-overlay">
-                                <div>
-                                    <span class="gallery-tag" x-text="item.category || 'Kegiatan'"></span>
-                                    <p class="gallery-label" x-text="item.title || 'Momen ACMI'"></p>
-                                </div>
-                            </div>
-
-                            {{-- Corner action button
-                            <div class="gallery-corner-btn">
-                                <a href="#" class="gallery-action-btn" aria-label="Lihat detail">
-                                    <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
-                                </a>
-                            </div> --}}
-
-                            {{-- Bottom accent line --}}
-                            <div class="gallery-accent-line"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent 
+                                    opacity-0 group-hover:opacity-100 transition-opacity duration-500 
+                                    flex items-end p-6 text-left">
+                            <p class="text-white font-poppins font-semibold" x-text="item.title || 'Momen ACMI'"></p>
                         </div>
-                    </template>
-                </div>
 
-                {{-- Footer CTA --}}
-                <div data-aos="fade-up" class="mt-20 text-center">
-                    <a href="#" class="inline-flex items-center gap-4 px-8 py-4 rounded-full border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-orange-500 hover:border-orange-500/50 transition-all duration-300 group font-poppins">
-                        <span class="font-semibold tracking-wide uppercase text-sm">Lihat Seluruh Galeri</span>
-                        <div class="w-8 h-8 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-all duration-300">
-                            <i class="fa-solid fa-arrow-right-long transition-transform group-hover:translate-x-0.5 text-xs"></i>
-                        </div>
-                    </a>
-                </div>
+                    </div>
+                </template>
 
             </div>
         </template>
-        
+
+        {{-- State Kosong --}}
         <template x-if="!isLoading && galleries.length === 0">
-            <div class="text-center py-32">
-                <div class="w-20 h-20 rounded-[2rem] bg-gray-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-6">
-                    <i class="fa-solid fa-image text-3xl text-gray-300 dark:text-gray-600"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white font-poppins mb-2">Belum ada foto</h3>
-                <p class="text-gray-400 dark:text-gray-500 font-poppins">Dokumentasi galeri belum diunggah.</p>
+            <div class="text-center py-20">
+                <p class="text-gray-500">Belum ada dokumentasi galeri yang diunggah.</p>
             </div>
         </template>
 
     </div>
 </section>
-
-@endsection
