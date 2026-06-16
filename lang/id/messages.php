@@ -337,9 +337,9 @@ return [
     'nav_ontopic' => 'On Topik',
     // HERO
     'hero_badge' => 'Asosiasi CEO & Eksekutif Indonesia',
-    'hero_title_1' => 'Bersinergi, Bertumbuh,',
-    'hero_title_2' => 'Memimpin Indonesia',
-    'hero_desc' => 'Komunitas eksklusif bagi CEO & eksekutif puncak Indonesia untuk berjejaring dan berkembang.',
+    'hero_title_1' => 'Indonesia’s CEOs & Executives',
+    'hero_title_2' => 'Connect, Grow, and Scale Up Together.',
+    'hero_desc' => 'Exclusive ecosystem for high-level business leaders, founders, and executives to build strategic relationships, expand opportunities, and shape the future of Indonesia.',
     'btn_join' => 'Gabung Keanggotaan',
     'btn_explore' => 'Eksplorasi Kegiatan Kami',
 
@@ -384,17 +384,17 @@ return [
     'solution_exp' => 'Tahun Pengalaman',
     'solution_revenue' => 'Total Revenue Anggota',
 
-    'solution_1_title' => 'Networking Berkualitas Tinggi',
-    'solution_1_desc' => 'Terhubung dengan sesama CEO & founders dari berbagai industri dalam forum privat dan eksklusif.',
+    'solution_1_title' => 'Learn - Edukasi & Pengembangan',
+    'solution_1_desc' => 'Program edukasi eksklusif untuk meningkatkan kapasitas kepemimpinan dan wawasan bisnis para eksekutif.',
 
-    'solution_2_title' => 'Knowledge Sharing Eksklusif',
-    'solution_2_desc' => 'Roundtable discussion, masterclass dengan pakar global, dan insight industri terkurasi.',
+    'solution_2_title' => 'Connect - Networking & Komunikasi',
+    'solution_2_desc' => 'Membangun jaringan strategis dan komunikasi intensif antar CEO untuk kolaborasi lintas industri.',
 
-    'solution_3_title' => 'Amplifikasi Pengaruh',
-    'solution_3_desc' => 'Advokasi kebijakan bersama dan platform untuk memperkuat brand leadership pribadi & perusahaan.',
+    'solution_3_title' => 'Ecosystem - Keanggotaan & Tata Kelola',
+    'solution_3_desc' => 'Wadah eksklusif dengan sistem keanggotaan terkurasi dan tata kelola yang profesional.',
 
-    'solution_4_title' => 'Akses ke Peluang Bisnis',
-    'solution_4_desc' => 'Deal flow, joint venture, dan rekomendasi mitra strategis melalui jaringan kepercayaan.',
+    'solution_4_title' => 'Scale up - Bisnis & Investasi',
+    'solution_4_desc' => 'Akses ke peluang bisnis baru, deal flow, serta kemitraan strategis untuk akselerasi investasi.',
 
     // PROGRAM
     'program_badge' => 'Program Unggulan',
@@ -419,8 +419,9 @@ return [
 
     // PRODUCT
     'product_badge' => 'Produk Anggota',
-    'product_title' => 'Produk & Layanan dari Anggota ACMI',
-    'product_desc' => 'Temukan produk dan layanan berkualitas dari perusahaan-perusahaan yang dipimpin oleh anggota ACMI',
+    'product_title' => 'Ekosistem Bisnis Eksekutif',
+    'product_desc' => 'Jaringan perusahaan dan solusi bisnis yang dipilih secara cermat, dipimpin oleh para CEO dan
+eksekutif ACMI dari berbagai sektor industri.',
 
     'search_placeholder' => 'Cari produk...',
     'btn_detail' => 'Lihat Detail',
@@ -438,9 +439,9 @@ return [
 
     // TESTIMONIAL
 'testimonial_badge' => 'Testimoni Anggota',
-'testimonial_title_1' => 'Dipimpin oleh Para',
-'testimonial_title_2' => 'Pemimpin',
-'testimonial_title_3' => 'Terbaik',
+'testimonial_title_1' => 'Dipercaya oleh Para',
+'testimonial_title_2' => 'Pemimpin Bisnis',
+'testimonial_title_3' => '',
 'testimonial_more' => 'Lihat Semua Testimoni',
 'testimonial_less' => 'Tampilkan Lebih Sedikit',
 
@@ -452,17 +453,19 @@ return [
     'testi_6_quote' => '"Networking di ACMI sangat terkurasi dan berkualitas tinggi. Benar-benar powerhouse bagi pemimpin."',
 // MEMBERSHIP
     'membership_badge' => 'Keanggotaan Eksklusif',
-    'membership_title_1' => 'Menjadi Bagian dari',
-    'membership_title_2' => 'Komunitas Eksklusif',
-    'membership_desc' => 'Keanggotaan ACMI bersifat undangan dan melalui proses kurasi untuk memastikan kualitas dan keselarasan nilai antar anggota. Kami mencari pemimpin yang berkomitmen untuk saling berbagi dan bertumbuh bersama.',
+    'membership_title_1' => 'Access The',
+    'membership_title_2' => 'Inner Circle',
+    'membership_desc' => 'ACMI menghadirkan ekosistem privat bagi para CEO, founder, investor, dan executive leaders untuk membangun koneksi strategis, memperluas peluang kolaborasi, dan bertumbuh bersama dalam lingkungan bisnis yang terkurasi dan bernilai tinggi.',
     
     'membership_features' => [
-        'Akses penuh ke seluruh program ACMI',
-        'Undangan ke CEO Roundtable bulanan',
-        'Masterclass eksklusif dengan pakar global',
-        'Networking dengan 500+ CEO Indonesia',
-        'Akses ke resource center dan insight industri',
-        'Prioritas untuk business mission internasional',
+        'Full privileged access ke seluruh program dan ecosystem ACMI',
+        'Exclusive invitation ke premium CEO gathering, executive dinner & private networking session',
+        'Direct access ke mentor ACMI dan strategic business leaders',
+        'Private masterclass bersama global experts dan top industry practitioners',
+        'Strategic networking dengan 500+ curated CEOs, founders, dan decision makers Indonesia',
+        'Access ke peluang kolaborasi lintas industri dan high-value business connections',
+        'Priority invitation untuk global business trip, international business mission & executive delegation',
+        'Exclusive access ke premium insights dan industry reports',
     ],
 
     'membership_cta_title' => 'Ajukan Profil Anda',

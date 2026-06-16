@@ -12,14 +12,35 @@
 @section('content')
 
     {{-- HERO SECTION --}}
-    <section class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b]">
+    <section x-data="{
+            activeSlide: 0,
+            slides: [
+                'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
+                'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
+                'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
+            ],
+            init() {
+                setInterval(() => {
+                    this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+                }, 5000);
+            }
+        }" class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b]">
 
-        {{-- Background Video --}}
+        <!-- {{-- Background Video --}}
         <div class="absolute inset-0 w-full h-full">
             <video autoplay muted loop playsinline
                 class="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-100">
                 <source src="{{ asset('videos/hero-bg.mp4') }}" type="video/mp4">
             </video>
+        </div> -->
+
+        {{-- Background Image Slider --}}
+        <div class="absolute inset-0 w-full h-full bg-gray-900">
+            <template x-for="(slide, index) in slides" :key="index">
+                <img :src="slide" alt="Exclusive Community Background" 
+                     class="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ease-in-out"
+                     :class="activeSlide === index ? 'opacity-80 dark:opacity-100' : 'opacity-0'" />
+            </template>
         </div>
 
         {{-- Overlay --}}
@@ -29,7 +50,7 @@
         dark:from-[#0a0a0b]/40 dark:via-[#0a0a0b]/80 dark:to-[#0a0a0b]">
         </div>
 
-        <div class="relative z-10 text-center px-6 max-w-4xl">
+        <div class="relative z-10 text-center px-6 max-w-7xl">
 
             {{-- Badge --}}
             <div data-aos="zoom-in"
@@ -49,8 +70,8 @@
 
             {{-- Judul --}}
             <h1 data-aos="fade-up" data-aos-delay="200"
-                class="text-4xl md:text-7xl leading-tight text-gray-950 dark:text-white drop-shadow-sm">
-                <span class="font-poppins font-semibold">{{ __('messages.hero_title_1') }}</span><br>
+                class="text-4xl md:text-6xl lg:text-7xl leading-tight drop-shadow-md">
+                <span class="font-poppins font-semibold text-white">{{ __('messages.hero_title_1') }}</span><br>
                 <span
                     class="font-serif font-bold italic text-orange-600 dark:text-orange-500">{{ __('messages.hero_title_2') }}</span>
             </h1>
@@ -78,8 +99,8 @@
                 @php
                     $stats = [
                         ['target' => 500, 'suffix' => '+', 'label' => __('messages.stats_ceo')],
-                        ['target' => 50, 'suffix' => '+', 'label' => __('messages.stats_events')],
-                        ['target' => 15, 'suffix' => '+', 'label' => __('messages.stats_industry')],
+                        ['target' => 300, 'suffix' => '+', 'label' => __('messages.stats_events')],
+                        ['target' => 100, 'suffix' => '+', 'label' => __('messages.stats_industry')],
                     ];
                 @endphp
 
@@ -194,7 +215,7 @@
     </section>
 
 
-    {{-- EVENT BANNER --}}
+    <!-- {{-- EVENT BANNER --}}
     <section class="bg-white dark:bg-[#0a0a0b] px-6 md:px-10 pt-10 pb-6">
         <div class="max-w-7xl mx-auto">
             <div
@@ -258,84 +279,8 @@
 
             </div>
         </div>
-    </section>
+    </section> -->
 
-
-    {{-- CHALLENGE SECTION --}}
-    <section class="bg-gray-100/50 dark:bg-[#050506] px-6 md:px-10 py-24 transition-colors duration-500 overflow-hidden">
-        <div class="max-w-7xl mx-auto flex flex-col gap-16">
-
-            {{-- Header --}}
-            <div class="text-center max-w-4xl mx-auto" data-aos="fade-up">
-                <div
-                    class="inline-block px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-bold mb-6 uppercase tracking-[0.2em] border border-orange-100 dark:border-orange-500/20">
-                    {{ __('messages.challenge_badge') }}
-                </div>
-                <h2 class="text-4xl md:text-5xl leading-tight text-gray-900 dark:text-white font-poppins">
-                    <span class="font-regular tracking-tight">{{ __('messages.challenge_title_1') }}</span><br>
-                    <span class="font-serif font-bold italic text-orange-500">{{ __('messages.challenge_title_2') }}</span>
-                </h2>
-                <p
-                    class="mt-6 text-gray-500 dark:text-gray-400 text-base md:text-lg font-poppins max-w-2xl mx-auto leading-relaxed">
-                    {{ __('messages.challenge_desc') }}
-                </p>
-            </div>
-
-            {{-- Cards --}}
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                @php
-                    $challenges = [
-                        [
-                            'icon' => 'fa-users',
-                            'title' => __('messages.challenge_1_title'),
-                            'desc' => __('messages.challenge_1_desc'),
-                        ],
-                        [
-                            'icon' => 'fa-bolt',
-                            'title' => __('messages.challenge_2_title'),
-                            'desc' => __('messages.challenge_2_desc'),
-                        ],
-                        [
-                            'icon' => 'fa-lock',
-                            'title' => __('messages.challenge_3_title'),
-                            'desc' => __('messages.challenge_3_desc'),
-                        ],
-                        [
-                            'icon' => 'fa-bullseye',
-                            'title' => __('messages.challenge_4_title'),
-                            'desc' => __('messages.challenge_4_desc'),
-                        ],
-                    ];
-                @endphp
-
-                @foreach ($challenges as $index => $item)
-                    <div data-aos="fade-up" data-aos-delay="{{ $index * 150 }}"
-                        class="group relative bg-white dark:bg-[#121214] border border-gray-200 dark:border-white/10 rounded-3xl p-8 transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_30px_60px_-15px_rgba(249,115,22,0.15)] hover:-translate-y-3">
-
-                        <div
-                            class="absolute inset-0 bg-gradient-to-br from-orange-500/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl">
-                        </div>
-
-                        <div class="relative z-10">
-                            <div
-                                class="w-14 h-14 bg-gray-50 dark:bg-white/5 text-orange-500 rounded-2xl flex items-center justify-center text-xl mb-8 border border-gray-100 dark:border-white/5 group-hover:bg-orange-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-orange-500/40 transition-all duration-500">
-                                <i class="fa-solid {{ $item['icon'] }}"></i>
-                            </div>
-                            <h3 class="font-poppins font-bold text-gray-900 dark:text-white mb-4 text-lg tracking-tight">
-                                {{ $item['title'] }}
-                            </h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 font-poppins leading-relaxed">
-                                {{ $item['desc'] }}
-                            </p>
-                        </div>
-
-
-                    </div>
-                @endforeach
-            </div>
-
-        </div>
-    </section>
 
     {{-- SOLUTION SECTION --}}
     <section
@@ -411,25 +356,25 @@
                 @php
                     $solutions = [
                         [
-                            'icon' => 'fa-share-nodes',
+                            'icon' => 'fa-book-open',
                             'title' => __('messages.solution_1_title'),
                             'desc' => __('messages.solution_1_desc'),
                             'aos' => 'fade-down',
                         ],
                         [
-                            'icon' => 'fa-book-open',
+                            'icon' => 'fa-share-nodes',
                             'title' => __('messages.solution_2_title'),
                             'desc' => __('messages.solution_2_desc'),
                             'aos' => 'fade-left',
                         ],
                         [
-                            'icon' => 'fa-bullhorn',
+                            'icon' => 'fa-sitemap',
                             'title' => __('messages.solution_3_title'),
                             'desc' => __('messages.solution_3_desc'),
                             'aos' => 'fade-right',
                         ],
                         [
-                            'icon' => 'fa-briefcase',
+                            'icon' => 'fa-rocket',
                             'title' => __('messages.solution_4_title'),
                             'desc' => __('messages.solution_4_desc'),
                             'aos' => 'fade-up',
@@ -547,7 +492,7 @@
                     </div>
 
                     <div
-                        class="relative group bg-gradient-to-b from-white to-gray-50/50 dark:from-white/[0.04] dark:to-white/[0.01] border border-gray-200/80 dark:border-white/[0.08] p-10 md:p-12 rounded-[2.5rem] w-full max-w-[380px] text-center shadow-xl shadow-gray-200/50 dark:shadow-none backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:rotate-1 hover:border-orange-500/30 dark:hover:border-orange-500/30 hover:shadow-2xl hover:shadow-orange-500/[0.06] dark:hover:shadow-orange-500/[0.04]">
+                        class="relative group flex flex-col justify-center aspect-square bg-gradient-to-b from-white to-gray-50/50 dark:from-white/[0.04] dark:to-white/[0.01] border border-gray-200/80 dark:border-white/[0.08] p-10 md:p-12 rounded-[2.5rem] w-full max-w-[460px] text-center shadow-xl shadow-gray-200/50 dark:shadow-none backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:rotate-1 hover:border-orange-500/30 dark:hover:border-orange-500/30 hover:shadow-2xl hover:shadow-orange-500/[0.06] dark:hover:shadow-orange-500/[0.04]">
 
                         {{-- Icon Container Premium dengan Efek Pulse Lambat --}}
                         <div

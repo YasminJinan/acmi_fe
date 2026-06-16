@@ -24,7 +24,7 @@
                         class="w-10 h-10 border border-gray-200 dark:border-white/10 rounded-xl flex items-center justify-center text-gray-400 dark:text-gray-500 hover:text-white hover:bg-[#0077b5] hover:border-[#0077b5] transition-all duration-300 hover:-translate-y-1 shadow-sm">
                         <i class="fa-brands fa-linkedin-in"></i>
                     </a>
-                    <a href="https://instagram.com/acmi.official" target="_blank"
+                    <a href="https://www.instagram.com/acmi_official/" target="_blank"
                         class="w-10 h-10 border border-gray-200 dark:border-white/10 rounded-xl flex items-center justify-center text-gray-400 dark:text-gray-500 hover:text-white hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:border-transparent transition-all duration-300 hover:-translate-y-1 shadow-sm">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
@@ -100,18 +100,22 @@
                         <div class="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500 transition-all duration-300">
                             <i class="fa-regular fa-envelope text-orange-500 group-hover:text-white transition-colors"></i>
                         </div>
-                        <a href="mailto:admin@acmi.official.id"
+                        <a href="mailto:acmi.ceo@gmail.com"
                             class="text-gray-500 dark:text-gray-400 text-sm font-medium group-hover:text-orange-500 transition-colors">
-                            admin@acmi.official.id
+                            acmi.ceo@gmail.com
                         </a>
                     </li>
                     <li class="flex items-center gap-4 group">
                         <div class="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500 transition-all duration-300">
                             <i class="fa-brands fa-whatsapp text-orange-500 group-hover:text-white transition-colors"></i>
                         </div>
-                        <a href="https://wa.me/628111313000" target="_blank"
+                        <a href="https://wa.me/6287889806080" target="_blank"
                             class="text-gray-500 dark:text-gray-400 text-sm font-medium group-hover:text-orange-500 transition-colors">
-                            +62 811-1313-000
+                            +62 878-8980-6080 (Ratna Suci)
+                        </a>
+                        <a href="https://wa.me/6289506543752" target="_blank"
+                            class="text-gray-500 dark:text-gray-400 text-sm font-medium group-hover:text-orange-500 transition-colors">
+                            +62 895-0654-3752 (Paula)
                         </a>
                     </li>
                 </ul>

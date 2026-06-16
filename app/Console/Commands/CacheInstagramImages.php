@@ -36,12 +36,12 @@ class CacheInstagramImages extends Command
                 // Download & simpan ke storage/app/public/instagram/
                 try {
                     $imgResponse = Http::timeout(20) // naikkan timeout
-    ->retry(3, 2000)              // coba 3x, jeda 2 detik tiap retry
-    ->withHeaders([
-        'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Referer'    => 'https://www.instagram.com/',
-    ])
-    ->get($remoteUrl);
+                ->retry(3, 2000)              // coba 3x, jeda 2 detik tiap retry
+                ->withHeaders([
+                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                    'Referer'    => 'https://www.instagram.com/',
+                ])
+                ->get($remoteUrl);
 
                     if ($imgResponse->successful()) {
                         Storage::disk('public')->put($filename, $imgResponse->body());

@@ -7,7 +7,7 @@
 @section('content')
 
 {{-- SECTION PRODUK ANGGOTA --}}
-<section class="bg-gray-50 dark:bg-[#050505] py-16 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative"
+<section class="bg-gray-50 dark:bg-[#050505] pt-32 pb-16 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative"
     x-data="{
         search: '',
         category: 'Semua',
