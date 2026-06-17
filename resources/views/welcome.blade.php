@@ -12,14 +12,35 @@
 @section('content')
 
     {{-- HERO SECTION --}}
-    <section class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b]">
+    <section x-data="{
+            activeSlide: 0,
+            slides: [
+                'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
+                'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
+                'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
+            ],
+            init() {
+                setInterval(() => {
+                    this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+                }, 5000);
+            }
+        }" class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b]">
 
-        {{-- Background Video --}}
+        <!-- {{-- Background Video --}}
         <div class="absolute inset-0 w-full h-full">
             <video autoplay muted loop playsinline
                 class="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-100">
                 <source src="{{ asset('videos/hero-bg.mp4') }}" type="video/mp4">
             </video>
+        </div> -->
+
+        {{-- Background Image Slider --}}
+        <div class="absolute inset-0 w-full h-full bg-gray-900">
+            <template x-for="(slide, index) in slides" :key="index">
+                <img :src="slide" alt="Exclusive Community Background" 
+                     class="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ease-in-out"
+                     :class="activeSlide === index ? 'opacity-80 dark:opacity-100' : 'opacity-0'" />
+            </template>
         </div>
 
         {{-- Overlay --}}
@@ -29,7 +50,7 @@
         dark:from-[#0a0a0b]/40 dark:via-[#0a0a0b]/80 dark:to-[#0a0a0b]">
         </div>
 
-        <div class="relative z-10 text-center px-6 max-w-4xl">
+        <div class="relative z-10 text-center px-6 max-w-7xl">
 
             {{-- Badge --}}
             <div data-aos="zoom-in"
@@ -49,8 +70,8 @@
 
             {{-- Judul --}}
             <h1 data-aos="fade-up" data-aos-delay="200"
-                class="text-4xl md:text-7xl leading-tight text-gray-950 dark:text-white drop-shadow-sm">
-                <span class="font-poppins font-semibold">{{ __('messages.hero_title_1') }}</span><br>
+                class="text-4xl md:text-6xl lg:text-7xl leading-tight drop-shadow-md">
+                <span class="font-poppins font-semibold text-white">{{ __('messages.hero_title_1') }}</span><br>
                 <span
                     class="font-serif font-bold italic text-orange-600 dark:text-orange-500">{{ __('messages.hero_title_2') }}</span>
             </h1>
@@ -78,8 +99,8 @@
                 @php
                     $stats = [
                         ['target' => 500, 'suffix' => '+', 'label' => __('messages.stats_ceo')],
-                        ['target' => 50, 'suffix' => '+', 'label' => __('messages.stats_events')],
-                        ['target' => 15, 'suffix' => '+', 'label' => __('messages.stats_industry')],
+                        ['target' => 300, 'suffix' => '+', 'label' => __('messages.stats_events')],
+                        ['target' => 100, 'suffix' => '+', 'label' => __('messages.stats_industry')],
                     ];
                 @endphp
 
@@ -194,7 +215,7 @@
     </section>
 
 
-    {{-- EVENT BANNER --}}
+    <!-- {{-- EVENT BANNER --}}
     <section class="bg-white dark:bg-[#0a0a0b] px-6 md:px-10 pt-10 pb-6">
         <div class="max-w-7xl mx-auto">
             <div
@@ -258,84 +279,8 @@
 
             </div>
         </div>
-    </section>
+    </section> -->
 
-
-    {{-- CHALLENGE SECTION --}}
-    <section class="bg-gray-100/50 dark:bg-[#050506] px-6 md:px-10 py-24 transition-colors duration-500 overflow-hidden">
-        <div class="max-w-7xl mx-auto flex flex-col gap-16">
-
-            {{-- Header --}}
-            <div class="text-center max-w-4xl mx-auto" data-aos="fade-up">
-                <div
-                    class="inline-block px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-bold mb-6 uppercase tracking-[0.2em] border border-orange-100 dark:border-orange-500/20">
-                    {{ __('messages.challenge_badge') }}
-                </div>
-                <h2 class="text-4xl md:text-5xl leading-tight text-gray-900 dark:text-white font-poppins">
-                    <span class="font-regular tracking-tight">{{ __('messages.challenge_title_1') }}</span><br>
-                    <span class="font-serif font-bold italic text-orange-500">{{ __('messages.challenge_title_2') }}</span>
-                </h2>
-                <p
-                    class="mt-6 text-gray-500 dark:text-gray-400 text-base md:text-lg font-poppins max-w-2xl mx-auto leading-relaxed">
-                    {{ __('messages.challenge_desc') }}
-                </p>
-            </div>
-
-            {{-- Cards --}}
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                @php
-                    $challenges = [
-                        [
-                            'icon' => 'fa-users',
-                            'title' => __('messages.challenge_1_title'),
-                            'desc' => __('messages.challenge_1_desc'),
-                        ],
-                        [
-                            'icon' => 'fa-bolt',
-                            'title' => __('messages.challenge_2_title'),
-                            'desc' => __('messages.challenge_2_desc'),
-                        ],
-                        [
-                            'icon' => 'fa-lock',
-                            'title' => __('messages.challenge_3_title'),
-                            'desc' => __('messages.challenge_3_desc'),
-                        ],
-                        [
-                            'icon' => 'fa-bullseye',
-                            'title' => __('messages.challenge_4_title'),
-                            'desc' => __('messages.challenge_4_desc'),
-                        ],
-                    ];
-                @endphp
-
-                @foreach ($challenges as $index => $item)
-                    <div data-aos="fade-up" data-aos-delay="{{ $index * 150 }}"
-                        class="group relative bg-white dark:bg-[#121214] border border-gray-200 dark:border-white/10 rounded-3xl p-8 transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_30px_60px_-15px_rgba(249,115,22,0.15)] hover:-translate-y-3">
-
-                        <div
-                            class="absolute inset-0 bg-gradient-to-br from-orange-500/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl">
-                        </div>
-
-                        <div class="relative z-10">
-                            <div
-                                class="w-14 h-14 bg-gray-50 dark:bg-white/5 text-orange-500 rounded-2xl flex items-center justify-center text-xl mb-8 border border-gray-100 dark:border-white/5 group-hover:bg-orange-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-orange-500/40 transition-all duration-500">
-                                <i class="fa-solid {{ $item['icon'] }}"></i>
-                            </div>
-                            <h3 class="font-poppins font-bold text-gray-900 dark:text-white mb-4 text-lg tracking-tight">
-                                {{ $item['title'] }}
-                            </h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 font-poppins leading-relaxed">
-                                {{ $item['desc'] }}
-                            </p>
-                        </div>
-
-
-                    </div>
-                @endforeach
-            </div>
-
-        </div>
-    </section>
 
     {{-- SOLUTION SECTION --}}
     <section
@@ -411,25 +356,25 @@
                 @php
                     $solutions = [
                         [
-                            'icon' => 'fa-share-nodes',
+                            'icon' => 'fa-book-open',
                             'title' => __('messages.solution_1_title'),
                             'desc' => __('messages.solution_1_desc'),
                             'aos' => 'fade-down',
                         ],
                         [
-                            'icon' => 'fa-book-open',
+                            'icon' => 'fa-share-nodes',
                             'title' => __('messages.solution_2_title'),
                             'desc' => __('messages.solution_2_desc'),
                             'aos' => 'fade-left',
                         ],
                         [
-                            'icon' => 'fa-bullhorn',
+                            'icon' => 'fa-sitemap',
                             'title' => __('messages.solution_3_title'),
                             'desc' => __('messages.solution_3_desc'),
                             'aos' => 'fade-right',
                         ],
                         [
-                            'icon' => 'fa-briefcase',
+                            'icon' => 'fa-rocket',
                             'title' => __('messages.solution_4_title'),
                             'desc' => __('messages.solution_4_desc'),
                             'aos' => 'fade-up',
@@ -547,7 +492,7 @@
                     </div>
 
                     <div
-                        class="relative group bg-gradient-to-b from-white to-gray-50/50 dark:from-white/[0.04] dark:to-white/[0.01] border border-gray-200/80 dark:border-white/[0.08] p-10 md:p-12 rounded-[2.5rem] w-full max-w-[380px] text-center shadow-xl shadow-gray-200/50 dark:shadow-none backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:rotate-1 hover:border-orange-500/30 dark:hover:border-orange-500/30 hover:shadow-2xl hover:shadow-orange-500/[0.06] dark:hover:shadow-orange-500/[0.04]">
+                        class="relative group flex flex-col justify-center aspect-square bg-gradient-to-b from-white to-gray-50/50 dark:from-white/[0.04] dark:to-white/[0.01] border border-gray-200/80 dark:border-white/[0.08] p-10 md:p-12 rounded-[2.5rem] w-full max-w-[460px] text-center shadow-xl shadow-gray-200/50 dark:shadow-none backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:rotate-1 hover:border-orange-500/30 dark:hover:border-orange-500/30 hover:shadow-2xl hover:shadow-orange-500/[0.06] dark:hover:shadow-orange-500/[0.04]">
 
                         {{-- Icon Container Premium dengan Efek Pulse Lambat --}}
                         <div
@@ -1025,9 +970,60 @@
         activeCategory: 'Semua',
         galleries: [],
         isLoading: true,
+        
+        // Lightbox state
+        isOpen: false,
+        currentIndex: 0,
+
+        // Computed property to get unique categories from the gallery data
+        get categories() {
+            const cats = this.galleries.map(item => item.category?.name).filter(Boolean);
+            return ['Semua', ...new Set(cats)];
+        },
+
+        // Computed property to get filtered and limited galleries (Max 5)
+        get filteredGalleries() {
+            let filtered = this.galleries;
+            if (this.activeCategory !== 'Semua') {
+                filtered = this.galleries.filter(item => item.category && item.category.name === this.activeCategory);
+            }
+            // Return only the first 5 (assumed to be the newest)
+            return filtered.slice(0, 5);
+        },
+
         filter(category) {
             this.activeCategory = category;
         },
+
+        // Lightbox methods
+        openLightbox(index) {
+            this.currentIndex = index;
+            this.isOpen = true;
+            document.body.style.overflow = 'hidden';
+        },
+
+        closeLightbox() {
+            this.isOpen = false;
+            document.body.style.overflow = 'auto';
+        },
+
+        next() {
+            if (this.currentIndex < this.filteredGalleries.length - 1) {
+                this.currentIndex++;
+            } else {
+                this.currentIndex = 0;
+            }
+        },
+
+        prev() {
+            if (this.currentIndex > 0) {
+                this.currentIndex--;
+            } else {
+                this.currentIndex = this.filteredGalleries.length - 1;
+            }
+        },
+
+        // Fungsi untuk memanggil API secara otomatis
         init() {
             fetch('http://localhost:8000/api/public/gallery')
                 .then(res => res.json())
@@ -1043,7 +1039,11 @@
                 });
         }
     }"
-        class="bg-white dark:bg-[#0a0a0b] py-24 px-6 md:px-10 transition-colors duration-500 overflow-hidden">
+        class="bg-white dark:bg-[#0a0a0b] py-24 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative">
+
+        <style>
+            [x-cloak] { display: none !important; }
+        </style>
 
         {{-- Background Glow Effects --}}
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
@@ -1070,22 +1070,18 @@
                 </h2>
             </div>
 
-            {{-- Filter Categories --}}
+            {{-- Filter Categories (Dinamis dari API) --}}
             <div class="flex flex-wrap justify-center gap-3 mb-10" data-aos="fade-up" data-aos-delay="100">
-                @php
-                    // Filter ini masih statis, bisa didinamiskan ke depannya jika butuh
-                    $categories = ['Semua', 'Summit', 'Masterclass', 'ACMI SPORT', 'ACMI Bersama 2024', 'Reuni 2024'];
-                @endphp
-                @foreach ($categories as $category)
-                    <button @click="filter('{{ $category }}')"
-                        :class="activeCategory === '{{ $category }}'
+                <template x-for="category in categories" :key="category">
+                    <button @click="filter(category)"
+                        :class="activeCategory === category
                             ?
                             'bg-orange-500 text-white shadow-md shadow-orange-500/20 ring-2 ring-orange-500 ring-offset-2 dark:ring-offset-gray-900' :
                             'bg-white dark:bg-white/5 text-slate-500 dark:text-gray-400 border border-slate-200/60 dark:border-white/10 hover:border-orange-500 hover:text-orange-500'"
-                        class="relative px-6 py-2.5 rounded-xl text-sm font-poppins font-semibold transition-all duration-500 ease-out">
-                        {{ $category }}
+                        class="relative px-6 py-2.5 rounded-xl text-sm font-poppins font-semibold transition-all duration-500 ease-out"
+                        x-text="category">
                     </button>
-                @endforeach
+                </template>
             </div>
 
             {{-- State Loading --}}
@@ -1099,26 +1095,21 @@
             <template x-if="!isLoading">
                 <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 text-left" id="gallery-grid">
 
-                    {{-- Looping Data --}}
-                    <template x-for="item in galleries" :key="item.id">
-
-                        {{-- Logika Filter: Tampil jika 'Semua' ATAU nama kategori API cocok dengan activeCategory --}}
-                        <div x-show="activeCategory === 'Semua' || (item.category && activeCategory === item.category.name)"
-                            x-transition:enter="transition ease-out duration-500"
+                    {{-- Looping Data (Terbatas 5 item) --}}
+                    <template x-for="(item, index) in filteredGalleries" :key="item.id">
+                        <div x-transition:enter="transition ease-out duration-500"
                             x-transition:enter-start="opacity-0 scale-90 translate-y-4"
                             x-transition:enter-end="opacity-100 scale-100 translate-y-0" class="break-inside-avoid">
 
-                            <div
-                                class="group relative overflow-hidden rounded-[2.5rem] bg-gray-100 dark:bg-white/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/10">
+                            <div @click="openLightbox(index)"
+                                class="group relative overflow-hidden rounded-[2.5rem] bg-gray-100 dark:bg-white/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/10 cursor-pointer">
 
-                                {{-- Gambar dari API --}}
                                 <img :src="item.image"
                                     class="w-full h-auto min-h-[300px] object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
                                     alt="ACMI Gallery">
 
                                 <div
                                     class="absolute inset-0 bg-gradient-to-t from-orange-600/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-10">
-                                    {{-- Judul dari API --}}
                                     <p class="text-white font-poppins font-bold text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
                                         x-text="item.title || 'ACMI Moment'"></p>
                                 </div>
@@ -1130,14 +1121,68 @@
                 </div>
             </template>
 
-            {{-- Button Selengkapnya
+            {{-- Button Selengkapnya (Disesuaikan dengan kategori aktif) --}}
             <div class="text-center mt-20" data-aos="fade-up">
-                <a href="{{ route('gallery') }}"
+                <a :href="'{{ route('gallery') }}' + (activeCategory !== 'Semua' ? '?category=' + encodeURIComponent(activeCategory) : '')"
                     class="group inline-flex items-center gap-3 px-10 py-4 rounded-2xl bg-slate-900 dark:bg-orange-500 text-white font-bold font-poppins transition-all duration-500 hover:bg-orange-500 hover:shadow-xl hover:shadow-orange-500/20">
                     {{ __('messages.gallery_more') }}
                     <i class="fa-solid fa-arrow-right-long transition-transform group-hover:translate-x-2"></i>
                 </a>
-            </div> --}}
+            </div>
+        </div>
+
+        {{-- LIGHTBOX MODAL --}}
+        <div x-show="isOpen" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 z-[9999] flex flex-col bg-black/95 backdrop-blur-sm"
+             @keydown.window.escape="closeLightbox()"
+             @keydown.window.left="prev()"
+             @keydown.window.right="next()"
+             x-cloak>
+            
+            <!-- Header -->
+            <div class="flex items-center justify-between p-6 text-white relative z-10">
+                <div class="text-sm font-semibold font-poppins bg-white/10 px-4 py-2 rounded-full backdrop-blur-md">
+                    <span x-text="currentIndex + 1" class="text-orange-500"></span> / <span x-text="filteredGalleries.length"></span>
+                </div>
+                <button @click="closeLightbox()" class="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-orange-500 text-white transition-all duration-300">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Main Content slider -->
+            <div class="relative flex-1 flex items-center justify-center p-4 min-h-0">
+                <!-- Navigation Arrows -->
+                <button @click="prev()" class="absolute left-4 md:left-8 w-14 h-14 flex items-center justify-center rounded-full bg-white/5 hover:bg-orange-500 text-white/50 hover:text-white transition-all duration-300 z-10">
+                    <i class="fa-solid fa-chevron-left text-2xl"></i>
+                </button>
+
+                <div class="relative max-w-5xl w-full h-full flex flex-col items-center justify-center">
+                    <!-- Image Wrapper -->
+                    <div class="relative max-h-full flex flex-col items-center">
+                        <img :src="filteredGalleries[currentIndex]?.image" 
+                             class="max-w-full max-h-[70vh] object-contain shadow-[0_20px_50px_rgba(0,0,0,0.5)] rounded-2xl border border-white/10"
+                             :key="currentIndex"
+                             x-transition:enter="transition transform duration-500"
+                             x-transition:enter-start="scale-95 opacity-0"
+                             x-transition:enter-end="scale-100 opacity-100">
+                        
+                        <div class="mt-8 text-center" data-aos="fade-up">
+                            <h3 class="text-white text-2xl font-bold font-poppins tracking-tight mb-2" x-text="filteredGalleries[currentIndex]?.title"></h3>
+                            <span class="inline-block px-3 py-1 rounded-full bg-orange-500/20 text-orange-400 text-[10px] font-bold uppercase tracking-widest border border-orange-500/30" x-text="filteredGalleries[currentIndex]?.category?.name"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <button @click="next()" class="absolute right-4 md:right-8 w-14 h-14 flex items-center justify-center rounded-full bg-white/5 hover:bg-orange-500 text-white/50 hover:text-white transition-all duration-300 z-10">
+                    <i class="fa-solid fa-chevron-right text-2xl"></i>
+                </button>
+            </div>
         </div>
     </section>
 

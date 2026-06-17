@@ -56,13 +56,14 @@ return [
     // ── Footer ──────────────────────────────────────────────
     'bod_see_all' => 'View Full Organizational Structure',
     
-'products_desc' => 'Explore top products and services from ACMI members, ready to support your business growth.',
+'products_desc' => 'A curated network of companies and business solutions led by ACMI’s CEOs and
+executives across diverse industries.',
 
 
     // PRODUCTS SECTION
     'products_badge'               => 'Member Products',
-    'products_title_1'             => 'Products & Services',
-    'products_title_2'             => 'ACMI Members',
+    'products_title_1'             => 'Executive Business',
+    'products_title_2'             => 'Ecosystem',
     'products_search_placeholder'  => 'Search products...',
     'products_categories'          => [
         'Semua'       => 'All Categories',
@@ -332,16 +333,16 @@ return [
 
     // HERO
     'hero_badge' => 'Association of CEOs & Executives Indonesia',
-    'hero_title_1' => 'Collaborate, Grow,',
-    'hero_title_2' => 'Lead Indonesia',
-    'hero_desc' => 'An exclusive community for Indonesia’s top CEOs and executives to connect and grow together.',
+    'hero_title_1' => 'Indonesia’s CEOs & Executives',
+    'hero_title_2' => 'Connect, Grow, and Scale Up Together.',
+    'hero_desc' => 'Exclusive ecosystem for high-level business leaders, founders, and executives to build strategic relationships, expand opportunities, and shape the future of Indonesia.',
     'btn_join' => 'Join Membership',
     'btn_explore' => 'Explore Our Activities',
 
     // STATS
-    'stats_ceo' => 'CEO Members',
-    'stats_events' => 'Annual Events',
-    'stats_industry' => 'Industries',
+    'stats_ceo' => 'Executive Member',
+    'stats_events' => 'Companies Represented',
+    'stats_industry' => 'Strategic Collaborations',
 
     // PARTNER
     'partner_title' => 'Supported by Strategic Partners',
@@ -379,17 +380,17 @@ return [
     'solution_exp' => 'Years of Experience',
     'solution_revenue' => 'Total Member Revenue',
 
-    'solution_1_title' => 'High-Quality Networking',
-    'solution_1_desc' => 'Connect with fellow CEOs and founders across industries in private and exclusive forums.',
+    'solution_1_title' => 'Learn - Education & Development',
+    'solution_1_desc' => 'Exclusive educational programs to enhance the leadership capacity and business insights of executives.',
 
-    'solution_2_title' => 'Exclusive Knowledge Sharing',
-    'solution_2_desc' => 'Roundtable discussions, masterclasses with global experts, and curated industry insights.',
+    'solution_2_title' => 'Connect - Networking & Communication',
+    'solution_2_desc' => 'Building strategic networks and intensive communication among CEOs for cross-industry collaboration.',
 
-    'solution_3_title' => 'Influence Amplification',
-    'solution_3_desc' => 'Collective advocacy and platforms to strengthen personal and corporate leadership branding.',
+    'solution_3_title' => 'Ecosystem - Membership & Governance',
+    'solution_3_desc' => 'An exclusive platform with a curated membership system and professional governance.',
 
-    'solution_4_title' => 'Access to Business Opportunities',
-    'solution_4_desc' => 'Deal flow, joint ventures, and trusted strategic partnerships.',
+    'solution_4_title' => 'Scale up - Business & Investment',
+    'solution_4_desc' => 'Access to new business opportunities, deal flows, and strategic partnerships for investment acceleration.',
 
     // PROGRAM
     'program_badge' => 'Flagship Programs',
@@ -414,9 +415,9 @@ return [
 
     // TESTIMONIAL
     'testimonial_badge' => 'Member Testimonials',
-    'testimonial_title_1' => 'Led by',
-    'testimonial_title_2' => 'Exceptional',
-    'testimonial_title_3' => 'Leaders',
+    'testimonial_title_1' => 'Trusted by',
+    'testimonial_title_2' => 'Business Leaders',
+    'testimonial_title_3' => '',
     'testimonial_more' => 'View All Testimonials',
     'testimonial_less' => 'Show Less',
 
@@ -430,17 +431,19 @@ return [
 
   // MEMBERSHIP
     'membership_badge' => 'Exclusive Membership',
-    'membership_title_1' => 'Be Part of an',
-    'membership_title_2' => 'Exclusive Community',
-    'membership_desc' => 'ACMI membership is invitation-based and curated to ensure quality and alignment among members. We seek leaders committed to sharing and growing together.',
+    'membership_title_1' => 'Access The',
+    'membership_title_2' => 'Inner Circle',
+    'membership_desc' => 'ACMI presents a private ecosystem for CEOs, founders, investors, and executive leaders to build strategic connections, expand collaborative opportunities, and grow together in a curated, high-value business environment.',
     
     'membership_features' => [
-        'Full access to all ACMI programs',
-        'Invitation to monthly CEO Roundtables',
-        'Exclusive masterclasses with global experts',
-        'Networking with 500+ Indonesian CEOs',
-        'Access to resource centers and industry insights',
-        'Priority for international business missions',
+        'Full privileged access to all ACMI programs and ecosystem',
+        'Exclusive invitation to premium CEO gatherings, executive dinners & private networking sessions',
+        'Direct access to ACMI mentors and strategic business leaders',
+        'Private masterclasses with global experts and top industry practitioners',
+        'Strategic networking with 500+ curated CEOs, founders, and decision makers in Indonesia',
+        'Access to cross-industry collaboration opportunities and high-value business connections',
+        'Priority invitation for global business trips, international business missions & executive delegations',
+        'Exclusive access to premium insights and industry reports',
     ],
 
     'membership_cta_title' => 'Submit Your Profile',

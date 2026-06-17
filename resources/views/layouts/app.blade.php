@@ -17,7 +17,7 @@
     <meta name="keywords" content="@yield('meta_keywords', 'ACMI, Asosiasi CEO Mastermind Indonesia, komunitas CEO Indonesia, network pengusaha, mastermind bisnis')">
     <meta name="robots" content="@yield('meta_robots', 'index, follow')">
     <link rel="canonical" href="{{ $canonical }}">
- {{-- Favicon --}}
+    {{-- Favicon --}}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
