@@ -37,8 +37,10 @@ Route::get('/gallery', function () {
 
 Route::get('/products/{slug}', [ProductController::class, 'show'])->name('product.show');
 
-Route::get('/ontopic', [ArticleController::class, 'index'])->name('ontopic');
-Route::get('/ontopic/{slug}', [ArticleController::class, 'show'])->name('ontopic.show');
+Route::get('/{locale}/ontopic', [ArticleController::class, 'index'])->name('ontopic');
+Route::get('/{locale}/ontopic/{slug}', [ArticleController::class, 'show'])
+    ->name('ontopic.show')
+    ->where('locale', 'id|en');
 // Route::get('/ontopic/{slug}', [ArticleController::class, 'show'])->name('ontopic.detail');
 
 Route::get('/form-join', [FormJoinController::class, 'index'])->name('form');
