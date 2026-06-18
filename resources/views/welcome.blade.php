@@ -13,33 +13,34 @@
 
     {{-- HERO SECTION --}}
     <section x-data="{
-            activeSlide: 0,
-            slides: [
-                'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
-                'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
-                'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
-            ],
-            init() {
-                setInterval(() => {
-                    this.activeSlide = (this.activeSlide + 1) % this.slides.length;
-                }, 5000);
-            }
-        }" class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b]">
+        activeSlide: 0,
+        slides: [
+            'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
+            'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
+            'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
+        ],
+        init() {
+            setInterval(() => {
+                this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+            }, 5000);
+        }
+    }"
+        class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b]">
 
         <!-- {{-- Background Video --}}
-        <div class="absolute inset-0 w-full h-full">
-            <video autoplay muted loop playsinline
-                class="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-100">
-                <source src="{{ asset('videos/hero-bg.mp4') }}" type="video/mp4">
-            </video>
-        </div> -->
+                <div class="absolute inset-0 w-full h-full">
+                    <video autoplay muted loop playsinline
+                        class="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-100">
+                        <source src="{{ asset('videos/hero-bg.mp4') }}" type="video/mp4">
+                    </video>
+                </div> -->
 
         {{-- Background Image Slider --}}
         <div class="absolute inset-0 w-full h-full bg-gray-900">
             <template x-for="(slide, index) in slides" :key="index">
-                <img :src="slide" alt="Exclusive Community Background" 
-                     class="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ease-in-out"
-                     :class="activeSlide === index ? 'opacity-80 dark:opacity-100' : 'opacity-0'" />
+                <img :src="slide" alt="Exclusive Community Background"
+                    class="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ease-in-out"
+                    :class="activeSlide === index ? 'opacity-80 dark:opacity-100' : 'opacity-0'" />
             </template>
         </div>
 
@@ -88,8 +89,8 @@
                     class="px-6 py-3 bg-orange-600 dark:bg-orange-500 text-white rounded-lg font-semibold shadow-md shadow-orange-500/20 hover:bg-orange-700 dark:hover:bg-orange-600 hover:scale-105 transition-all duration-300 inline-block">
                     {{ __('messages.btn_join') }}
                 </a>
-                <a href="{{ route('ontopic') }}"
-                    class="inline-block px-6 py-3 border border-orange-400 text-orange-500 rounded-lg font-semibold hover:bg-orange-50/10 hover:scale-105 transition-transform duration-300">
+                <a href="{{ route('ontopic', ['locale' => app()->getLocale()]) }}"
+                    class="inline-block px-6 py-3 border border-orange-400 text-orange-500 rounded-lg font-semibold hover:bg-orange-50 dark:hover:bg-orange-950 transition-all duration-300">
                     {{ __('messages.btn_explore') }}
                 </a>
             </div>
@@ -216,70 +217,70 @@
 
 
     <!-- {{-- EVENT BANNER --}}
-    <section class="bg-white dark:bg-[#0a0a0b] px-6 md:px-10 pt-10 pb-6">
-        <div class="max-w-7xl mx-auto">
-            <div
-                class="relative overflow-hidden bg-gradient-to-br from-orange-50/60 via-[#f8f9fa] to-white dark:from-white/5 dark:via-white/5 dark:to-white/5 border border-orange-100 dark:border-white/10 rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between shadow-md shadow-orange-500/[0.02] dark:shadow-none gap-6 group">
-
-                {{-- Dekorasi Ikon Background (Hanya pemanis visual samar) --}}
-                <div
-                    class="absolute -right-6 -bottom-6 text-orange-500/5 dark:text-white/5 text-9xl pointer-events-none transform -rotate-12 transition-transform duration-500 group-hover:scale-110">
-                    <i class="fa-solid fa-calendar-check"></i>
-                </div>
-
-                {{-- Sisi Kiri: Info Event --}}
-                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 w-full md:w-auto">
+            <section class="bg-white dark:bg-[#0a0a0b] px-6 md:px-10 pt-10 pb-6">
+                <div class="max-w-7xl mx-auto">
                     <div
-                        class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 dark:from-orange-500/20 dark:to-orange-600/20 text-white dark:text-orange-400 rounded-xl flex items-center justify-center text-xl shadow-md shadow-orange-500/20 dark:shadow-none shrink-0">
-                        <i class="fa-solid fa-bolt-lightning animate-pulse"></i>
-                    </div>
-                    <div>
-                        <span
-                            class="inline-flex items-center gap-1.5 text-xs font-bold bg-orange-100/80 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400 px-3 py-1 rounded-full uppercase tracking-wider">
-                            <i class="fa-solid fa-sparkles text-[10px]"></i> {{ __('messages.event_badge') }}
-                        </span>
-                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-2 font-poppins tracking-tight">
-                            {{ __('messages.event_title') }}
-                        </h2>
+                        class="relative overflow-hidden bg-gradient-to-br from-orange-50/60 via-[#f8f9fa] to-white dark:from-white/5 dark:via-white/5 dark:to-white/5 border border-orange-100 dark:border-white/10 rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between shadow-md shadow-orange-500/[0.02] dark:shadow-none gap-6 group">
+
+                        {{-- Dekorasi Ikon Background (Hanya pemanis visual samar) --}}
                         <div
-                            class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1.5 text-sm text-gray-600 dark:text-gray-400">
-                            <p class="flex items-center gap-2">
-                                <i class="fa-regular fa-calendar-days text-orange-500 dark:text-orange-400"></i>
-                                {{ __('messages.event_date') }}
-                            </p>
-                            <span class="hidden sm:inline text-gray-300 dark:text-gray-700">•</span>
-                            <p class="flex items-center gap-1.5">
-                                <i class="fa-solid fa-location-dot text-gray-400 dark:text-gray-500"></i>
-                                <span class="text-xs">Live / Hybrid</span>
-                            </p>
+                            class="absolute -right-6 -bottom-6 text-orange-500/5 dark:text-white/5 text-9xl pointer-events-none transform -rotate-12 transition-transform duration-500 group-hover:scale-110">
+                            <i class="fa-solid fa-calendar-check"></i>
                         </div>
+
+                        {{-- Sisi Kiri: Info Event --}}
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 w-full md:w-auto">
+                            <div
+                                class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 dark:from-orange-500/20 dark:to-orange-600/20 text-white dark:text-orange-400 rounded-xl flex items-center justify-center text-xl shadow-md shadow-orange-500/20 dark:shadow-none shrink-0">
+                                <i class="fa-solid fa-bolt-lightning animate-pulse"></i>
+                            </div>
+                            <div>
+                                <span
+                                    class="inline-flex items-center gap-1.5 text-xs font-bold bg-orange-100/80 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400 px-3 py-1 rounded-full uppercase tracking-wider">
+                                    <i class="fa-solid fa-sparkles text-[10px]"></i> {{ __('messages.event_badge') }}
+                                </span>
+                                <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-2 font-poppins tracking-tight">
+                                    {{ __('messages.event_title') }}
+                                </h2>
+                                <div
+                                    class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1.5 text-sm text-gray-600 dark:text-gray-400">
+                                    <p class="flex items-center gap-2">
+                                        <i class="fa-regular fa-calendar-days text-orange-500 dark:text-orange-400"></i>
+                                        {{ __('messages.event_date') }}
+                                    </p>
+                                    <span class="hidden sm:inline text-gray-300 dark:text-gray-700">•</span>
+                                    <p class="flex items-center gap-1.5">
+                                        <i class="fa-solid fa-location-dot text-gray-400 dark:text-gray-500"></i>
+                                        <span class="text-xs">Live / Hybrid</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Promo & CTA Button --}}
+                        <div
+                            class="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto border-t border-gray-100 dark:border-white/5 pt-4 md:pt-0 md:border-none">
+                            <div class="text-left md:text-right flex items-center md:flex-col gap-2 md:gap-0">
+                                <p
+                                    class="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1 md:justify-end">
+                                    <i class="fa-solid fa-tags text-orange-400 md:hidden"></i> Early Bird Discount
+                                </p>
+                                <p
+                                    class="text-orange-600 dark:text-orange-400 font-black text-xl tracking-tight flex items-center gap-1">
+                                    30% OFF <i class="fa-solid fa-fire text-sm animate-bounce hidden md:inline-block"></i>
+                                </p>
+                            </div>
+
+                            <a href="{{ route('form.store') }}"
+                                class="bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-sm font-semibold px-6 py-3.5 rounded-xl flex items-center gap-2.5 shadow-md shadow-orange-600/10 dark:shadow-none hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ml-auto md:ml-0">
+                                <span>{{ __('messages.event_cta') }}</span>
+                                <i class="fa-solid fa-arrow-right-long text-xs transition-transform group-hover:translate-x-1"></i>
+                            </a>
+                        </div>
+
                     </div>
                 </div>
-
-                {{-- Promo & CTA Button --}}
-                <div
-                    class="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto border-t border-gray-100 dark:border-white/5 pt-4 md:pt-0 md:border-none">
-                    <div class="text-left md:text-right flex items-center md:flex-col gap-2 md:gap-0">
-                        <p
-                            class="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1 md:justify-end">
-                            <i class="fa-solid fa-tags text-orange-400 md:hidden"></i> Early Bird Discount
-                        </p>
-                        <p
-                            class="text-orange-600 dark:text-orange-400 font-black text-xl tracking-tight flex items-center gap-1">
-                            30% OFF <i class="fa-solid fa-fire text-sm animate-bounce hidden md:inline-block"></i>
-                        </p>
-                    </div>
-
-                    <a href="{{ route('form.store') }}"
-                        class="bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-sm font-semibold px-6 py-3.5 rounded-xl flex items-center gap-2.5 shadow-md shadow-orange-600/10 dark:shadow-none hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ml-auto md:ml-0">
-                        <span>{{ __('messages.event_cta') }}</span>
-                        <i class="fa-solid fa-arrow-right-long text-xs transition-transform group-hover:translate-x-1"></i>
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    </section> -->
+            </section> -->
 
 
     {{-- SOLUTION SECTION --}}
@@ -970,17 +971,17 @@
         activeCategory: 'Semua',
         galleries: [],
         isLoading: true,
-        
+    
         // Lightbox state
         isOpen: false,
         currentIndex: 0,
-
+    
         // Computed property to get unique categories from the gallery data
         get categories() {
             const cats = this.galleries.map(item => item.category?.name).filter(Boolean);
             return ['Semua', ...new Set(cats)];
         },
-
+    
         // Computed property to get filtered and limited galleries (Max 5)
         get filteredGalleries() {
             let filtered = this.galleries;
@@ -990,23 +991,23 @@
             // Return only the first 5 (assumed to be the newest)
             return filtered.slice(0, 5);
         },
-
+    
         filter(category) {
             this.activeCategory = category;
         },
-
+    
         // Lightbox methods
         openLightbox(index) {
             this.currentIndex = index;
             this.isOpen = true;
             document.body.style.overflow = 'hidden';
         },
-
+    
         closeLightbox() {
             this.isOpen = false;
             document.body.style.overflow = 'auto';
         },
-
+    
         next() {
             if (this.currentIndex < this.filteredGalleries.length - 1) {
                 this.currentIndex++;
@@ -1014,7 +1015,7 @@
                 this.currentIndex = 0;
             }
         },
-
+    
         prev() {
             if (this.currentIndex > 0) {
                 this.currentIndex--;
@@ -1022,7 +1023,7 @@
                 this.currentIndex = this.filteredGalleries.length - 1;
             }
         },
-
+    
         // Fungsi untuk memanggil API secara otomatis
         init() {
             fetch('http://localhost:8000/api/public/gallery')
@@ -1042,7 +1043,9 @@
         class="bg-white dark:bg-[#0a0a0b] py-24 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative">
 
         <style>
-            [x-cloak] { display: none !important; }
+            [x-cloak] {
+                display: none !important;
+            }
         </style>
 
         {{-- Background Glow Effects --}}
@@ -1074,8 +1077,7 @@
             <div class="flex flex-wrap justify-center gap-3 mb-10" data-aos="fade-up" data-aos-delay="100">
                 <template x-for="category in categories" :key="category">
                     <button @click="filter(category)"
-                        :class="activeCategory === category
-                            ?
+                        :class="activeCategory === category ?
                             'bg-orange-500 text-white shadow-md shadow-orange-500/20 ring-2 ring-orange-500 ring-offset-2 dark:ring-offset-gray-900' :
                             'bg-white dark:bg-white/5 text-slate-500 dark:text-gray-400 border border-slate-200/60 dark:border-white/10 hover:border-orange-500 hover:text-orange-500'"
                         class="relative px-6 py-2.5 rounded-xl text-sm font-poppins font-semibold transition-all duration-500 ease-out"
@@ -1123,7 +1125,8 @@
 
             {{-- Button Selengkapnya (Disesuaikan dengan kategori aktif) --}}
             <div class="text-center mt-20" data-aos="fade-up">
-                <a :href="'{{ route('gallery') }}' + (activeCategory !== 'Semua' ? '?category=' + encodeURIComponent(activeCategory) : '')"
+                <a :href="'{{ route('gallery') }}' + (activeCategory !== 'Semua' ?
+                    '?category=' + encodeURIComponent(activeCategory) : ' ')"
                     class="group inline-flex items-center gap-3 px-10 py-4 rounded-2xl bg-slate-900 dark:bg-orange-500 text-white font-bold font-poppins transition-all duration-500 hover:bg-orange-500 hover:shadow-xl hover:shadow-orange-500/20">
                     {{ __('messages.gallery_more') }}
                     <i class="fa-solid fa-arrow-right-long transition-transform group-hover:translate-x-2"></i>
@@ -1132,25 +1135,21 @@
         </div>
 
         {{-- LIGHTBOX MODAL --}}
-        <div x-show="isOpen" 
-             x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="opacity-0"
-             x-transition:enter-end="opacity-100"
-             x-transition:leave="transition ease-in duration-200"
-             x-transition:leave-start="opacity-100"
-             x-transition:leave-end="opacity-0"
-             class="fixed inset-0 z-[9999] flex flex-col bg-black/95 backdrop-blur-sm"
-             @keydown.window.escape="closeLightbox()"
-             @keydown.window.left="prev()"
-             @keydown.window.right="next()"
-             x-cloak>
-            
+        <div x-show="isOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+            class="fixed inset-0 z-[9999] flex flex-col bg-black/95 backdrop-blur-sm"
+            @keydown.window.escape="closeLightbox()" @keydown.window.left="prev()" @keydown.window.right="next()"
+            x-cloak>
+
             <!-- Header -->
             <div class="flex items-center justify-between p-6 text-white relative z-10">
                 <div class="text-sm font-semibold font-poppins bg-white/10 px-4 py-2 rounded-full backdrop-blur-md">
-                    <span x-text="currentIndex + 1" class="text-orange-500"></span> / <span x-text="filteredGalleries.length"></span>
+                    <span x-text="currentIndex + 1" class="text-orange-500"></span> / <span
+                        x-text="filteredGalleries.length"></span>
                 </div>
-                <button @click="closeLightbox()" class="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-orange-500 text-white transition-all duration-300">
+                <button @click="closeLightbox()"
+                    class="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-orange-500 text-white transition-all duration-300">
                     <i class="fa-solid fa-xmark text-xl"></i>
                 </button>
             </div>
@@ -1158,28 +1157,31 @@
             <!-- Main Content slider -->
             <div class="relative flex-1 flex items-center justify-center p-4 min-h-0">
                 <!-- Navigation Arrows -->
-                <button @click="prev()" class="absolute left-4 md:left-8 w-14 h-14 flex items-center justify-center rounded-full bg-white/5 hover:bg-orange-500 text-white/50 hover:text-white transition-all duration-300 z-10">
+                <button @click="prev()"
+                    class="absolute left-4 md:left-8 w-14 h-14 flex items-center justify-center rounded-full bg-white/5 hover:bg-orange-500 text-white/50 hover:text-white transition-all duration-300 z-10">
                     <i class="fa-solid fa-chevron-left text-2xl"></i>
                 </button>
 
                 <div class="relative max-w-5xl w-full h-full flex flex-col items-center justify-center">
                     <!-- Image Wrapper -->
                     <div class="relative max-h-full flex flex-col items-center">
-                        <img :src="filteredGalleries[currentIndex]?.image" 
-                             class="max-w-full max-h-[70vh] object-contain shadow-[0_20px_50px_rgba(0,0,0,0.5)] rounded-2xl border border-white/10"
-                             :key="currentIndex"
-                             x-transition:enter="transition transform duration-500"
-                             x-transition:enter-start="scale-95 opacity-0"
-                             x-transition:enter-end="scale-100 opacity-100">
-                        
+                        <img :src="filteredGalleries[currentIndex]?.image"
+                            class="max-w-full max-h-[70vh] object-contain shadow-[0_20px_50px_rgba(0,0,0,0.5)] rounded-2xl border border-white/10"
+                            :key="currentIndex" x-transition:enter="transition transform duration-500"
+                            x-transition:enter-start="scale-95 opacity-0" x-transition:enter-end="scale-100 opacity-100">
+
                         <div class="mt-8 text-center" data-aos="fade-up">
-                            <h3 class="text-white text-2xl font-bold font-poppins tracking-tight mb-2" x-text="filteredGalleries[currentIndex]?.title"></h3>
-                            <span class="inline-block px-3 py-1 rounded-full bg-orange-500/20 text-orange-400 text-[10px] font-bold uppercase tracking-widest border border-orange-500/30" x-text="filteredGalleries[currentIndex]?.category?.name"></span>
+                            <h3 class="text-white text-2xl font-bold font-poppins tracking-tight mb-2"
+                                x-text="filteredGalleries[currentIndex]?.title"></h3>
+                            <span
+                                class="inline-block px-3 py-1 rounded-full bg-orange-500/20 text-orange-400 text-[10px] font-bold uppercase tracking-widest border border-orange-500/30"
+                                x-text="filteredGalleries[currentIndex]?.category?.name"></span>
                         </div>
                     </div>
                 </div>
 
-                <button @click="next()" class="absolute right-4 md:right-8 w-14 h-14 flex items-center justify-center rounded-full bg-white/5 hover:bg-orange-500 text-white/50 hover:text-white transition-all duration-300 z-10">
+                <button @click="next()"
+                    class="absolute right-4 md:right-8 w-14 h-14 flex items-center justify-center rounded-full bg-white/5 hover:bg-orange-500 text-white/50 hover:text-white transition-all duration-300 z-10">
                     <i class="fa-solid fa-chevron-right text-2xl"></i>
                 </button>
             </div>

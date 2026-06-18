@@ -10,6 +10,15 @@ class CmsApiService
 {
     private $client;
 
+    public function index()
+    {
+        $cms = new CmsApiService();
+        $articles = $cms->getArticles(request('page', 1), request('category'));
+        $categories = $cms->getCategories();
+
+        return view('ontopic', compact('articles', 'categories'));
+    }
+
     public function __construct()
     {
         $this->client = Http::baseUrl(config('services.cms.api_url'))

@@ -210,7 +210,7 @@
 </section>
 
 {{-- CTA JOIN SECTION --}}
-<section class="relative py-24 md:py-32 bg-[#fafafa] dark:bg-[#0a0a0b] overflow-hidden transition-colors duration-500">
+<section class="relative py-24 md:py-32 bg-[#fafafa] dark:bg-[#0a0a0b] transition-colors duration-500">
 
     {{-- Ambient Background --}}
     <div class="absolute inset-0 overflow-hidden">

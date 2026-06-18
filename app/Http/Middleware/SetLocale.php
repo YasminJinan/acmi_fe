@@ -10,9 +10,29 @@ class SetLocale
 {
     public function handle(Request $request, Closure $next)
     {
-        if (session()->has('locale')) {
+        $locale = $request->route('locale');
+
+        if ($locale && in_array($locale, ['en', 'id'])) {
+            App::setLocale($locale);
+            session(['locale' => $locale]);
+        } elseif (session()->has('locale')) {
             App::setLocale(session('locale'));
         }
+
         return $next($request);
+    }
+
+    public function show(string $slug)
+    {
+        $locale = app()->getLocale();
+    
+        $response = Http::get("http://localhost:8000/api/public/articles/{$locale}/{$slug}");
+    
+        if ($response->successful() && $response->json('success')) {
+            $article = $response->json('data');
+            return view('ontopic-detail', compact('article', 'locale'));
+        }
+    
+        abort(404);
     }
 }

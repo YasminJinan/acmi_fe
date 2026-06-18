@@ -102,6 +102,56 @@
             transition: background-color 0.3s ease;
         }
 
+        /* Custom Scrollbar styling to ensure seamless shadows on the right */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        
+        html:not(.dark) ::-webkit-scrollbar-track,
+        html:not(.dark)::-webkit-scrollbar-track {
+            background: #fafafa;
+        }
+        
+        html.dark ::-webkit-scrollbar-track,
+        html.dark::-webkit-scrollbar-track {
+            background: #0a0a0b;
+        }
+        
+        html:not(.dark) ::-webkit-scrollbar-thumb,
+        html:not(.dark)::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 5px;
+            border: 2px solid #fafafa;
+        }
+        
+        html.dark ::-webkit-scrollbar-thumb,
+        html.dark::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 5px;
+            border: 2px solid #0a0a0b;
+        }
+        
+        html:not(.dark) ::-webkit-scrollbar-thumb:hover,
+        html:not(.dark)::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+        
+        html.dark ::-webkit-scrollbar-thumb:hover,
+        html.dark::-webkit-scrollbar-thumb:hover {
+            background: #4b5563;
+        }
+
+        /* Support for Firefox */
+        html {
+            scrollbar-color: #d1d5db #fafafa;
+            scrollbar-width: thin;
+        }
+
+        html.dark {
+            scrollbar-color: #374151 #0a0a0b;
+        }
+
         @keyframes bounce-slow {
             0%,
             100% {
