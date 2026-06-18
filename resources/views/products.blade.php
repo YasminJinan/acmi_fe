@@ -92,7 +92,7 @@
             {{-- LOOPING DIGANTI MENGGUNAKAN paginatedProducts --}}
             <template x-for="product in paginatedProducts" :key="product.id">
                 <div class="group flex flex-col" data-aos="fade-up">
-                    <div class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
+                    <div class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/20 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
 
                         {{-- Image --}}
                         <div class="relative h-[180px] overflow-hidden">
