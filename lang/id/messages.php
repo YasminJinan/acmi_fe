@@ -76,6 +76,7 @@ return [
     ],
     'products_ceo_label'           => 'CEO',
     'products_detail_btn'          => 'Lihat Detail Bisnis',
+    'products_view_more'           => 'Lihat Produk Lainnya',
     'products_empty_title'         => 'Produk Tidak Ditemukan',
     'products_empty_desc'          => 'Coba gunakan kata kunci lain atau pilih kategori yang berbeda.',
  

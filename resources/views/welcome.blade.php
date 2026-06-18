@@ -621,7 +621,7 @@
 
             {{-- Grid Produk --}}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <template x-for="product in filteredProducts" :key="product.id">
+                <template x-for="product in filteredProducts.slice(0, 6)" :key="product.id">
                     <div class="group flex flex-col" data-aos="fade-up">
                         <div
                             class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
@@ -690,6 +690,14 @@
                     </h3>
                     <p class="text-gray-500 dark:text-gray-400 mt-2">{{ __('messages.products_empty_desc') }}</p>
                 </div>
+            </div>
+
+            <div x-show="filteredProducts.length > 6" data-aos="fade-up" class="mt-12 text-center relative z-30" x-cloak>
+                <a href="{{ route('products') }}"
+                    class="inline-flex items-center gap-3 bg-white dark:bg-gray-800 border-2 border-orange-100 dark:border-orange-500/20 text-orange-500 px-10 py-4 rounded-full text-xs font-black uppercase tracking-widest shadow-[0_15px_30px_rgba(255,107,0,0.15)] hover:bg-orange-500 hover:text-white dark:hover:bg-orange-500 transition-all duration-500 transform active:scale-95 group">
+                    <span>{{ __('messages.products_view_more') }}</span>
+                    <i class="fa-solid fa-chevron-right text-[10px] transition-transform duration-500 group-hover:translate-x-1"></i>
+                </a>
             </div>
 
         </div>

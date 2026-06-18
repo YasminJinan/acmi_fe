@@ -123,6 +123,16 @@ class CmsApiService
 
     public function getServices(): array
     {
+        if (app()->environment('local')) {
+            try {
+                $response = $this->client->get('/services');
+                return $response->successful() ? $response->json('data') : [];
+            } catch (\Exception $e) {
+                Log::error('CMS getServices gagal: ' . $e->getMessage());
+                return [];
+            }
+        }
+
         return Cache::remember('services', 600, function () {
             try {
                 $response = $this->client->get('/services');
