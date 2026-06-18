@@ -24,8 +24,10 @@ class WebhookController extends Controller
                 => Cache::forget('articles:page:1'),
             str_starts_with($event, 'faq')
                 => Cache::forget('faqs'),
-            str_starts_with($event, 'service')
+            str_starts_with($event, 'service') || str_starts_with($event, 'product')
                 => Cache::forget('services'),
+            str_starts_with($event, 'testimonial')
+                => Cache::forget('testimonials'),
             str_starts_with($event, 'gallery')
                 => Cache::forget('gallery'),
             str_starts_with($event, 'partner')

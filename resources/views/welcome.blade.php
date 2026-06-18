@@ -575,8 +575,10 @@
             products: @js($products),
             get filteredProducts() {
                 return this.products.filter(p => {
-                    const matchSearch = p.title.toLowerCase().includes(this.search.toLowerCase()) ||
-                        p.company_name.toLowerCase().includes(this.search.toLowerCase());
+                    const title = p.title || '';
+                    const company = p.company_name || '';
+                    const matchSearch = title.toLowerCase().includes(this.search.toLowerCase()) ||
+                        company.toLowerCase().includes(this.search.toLowerCase());
                     const matchCategory = this.category === 'Semua' ||
                         (Array.isArray(p.category) ? p.category.includes(this.category) : p.category === this.category);
                     return matchSearch && matchCategory;
@@ -621,7 +623,7 @@
 
             {{-- Grid Produk --}}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <template x-for="product in filteredProducts" :key="product.id">
+                <template x-for="product in filteredProducts.slice(0, 6)" :key="product.id">
                     <div class="group flex flex-col" data-aos="fade-up">
                         <div
                             class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
@@ -690,6 +692,14 @@
                     </h3>
                     <p class="text-gray-500 dark:text-gray-400 mt-2">{{ __('messages.products_empty_desc') }}</p>
                 </div>
+            </div>
+
+            <div x-show="filteredProducts.length > 6" data-aos="fade-up" class="mt-12 text-center relative z-30" x-cloak>
+                <a href="{{ route('products') }}"
+                    class="inline-flex items-center gap-3 bg-white dark:bg-gray-800 border-2 border-orange-100 dark:border-orange-500/20 text-orange-500 px-10 py-4 rounded-full text-xs font-black uppercase tracking-widest shadow-[0_15px_30px_rgba(255,107,0,0.15)] hover:bg-orange-500 hover:text-white dark:hover:bg-orange-500 transition-all duration-500 transform active:scale-95 group">
+                    <span>{{ __('messages.products_view_more') }}</span>
+                    <i class="fa-solid fa-chevron-right text-[10px] transition-transform duration-500 group-hover:translate-x-1"></i>
+                </a>
             </div>
 
         </div>
@@ -781,52 +791,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-1000 ease-in-out"
                     :class="open ? 'max-h-[4000px] opacity-100' : 'max-h-[450px] overflow-hidden md:max-h-[480px]'">
 
-                    @php
-                        $testimonials = [
-                            [
-                                'name' => 'Budi Santoso',
-                                'role' => 'CEO, PT Maju Bersama',
-                                'initial' => 'B',
-                                'bg' => 'bg-gradient-to-br from-orange-500 to-orange-600',
-                                'quote' => __('messages.testi_1_quote'),
-                            ],
-                            [
-                                'name' => 'Sarah Wijaya',
-                                'role' => 'Founder, TechVenture ID',
-                                'initial' => 'S',
-                                'bg' => 'bg-gradient-to-br from-orange-400 to-orange-500',
-                                'quote' => __('messages.testi_2_quote'),
-                            ],
-                            [
-                                'name' => 'Herman Tanaka',
-                                'role' => 'Dirut, Global Logistics',
-                                'initial' => 'H',
-                                'bg' => 'bg-gradient-to-br from-orange-500 to-orange-600',
-                                'quote' => __('messages.testi_3_quote'),
-                            ],
-                            [
-                                'name' => 'Anita Rose',
-                                'role' => 'CEO, Creative Agency',
-                                'initial' => 'A',
-                                'bg' => 'bg-gradient-to-br from-orange-400 to-orange-500',
-                                'quote' => __('messages.testi_4_quote'),
-                            ],
-                            [
-                                'name' => 'Dedi Kurnia',
-                                'role' => 'Founder, Retail Group',
-                                'initial' => 'D',
-                                'bg' => 'bg-gradient-to-br from-orange-500 to-orange-600',
-                                'quote' => __('messages.testi_5_quote'),
-                            ],
-                            [
-                                'name' => 'Linda Wang',
-                                'role' => 'Director, Finance Corp',
-                                'initial' => 'L',
-                                'bg' => 'bg-gradient-to-br from-orange-400 to-orange-500',
-                                'quote' => __('messages.testi_6_quote'),
-                            ],
-                        ];
-                    @endphp
+
 
                     @foreach ($testimonials as $testi)
                         <div
@@ -842,22 +807,26 @@
                                         <i class="fa-solid fa-quote-left text-2xl text-orange-500"></i>
                                     </div>
                                     <div class="flex gap-0.5 text-orange-400 text-[10px]">
-                                        @for ($i = 0; $i < 5; $i++)
-                                            <i class="fa-solid fa-star"></i>
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if($i <= ($testi['rating'] ?? 5))
+                                                <i class="fa-solid fa-star"></i>
+                                            @else
+                                                <i class="fa-regular fa-star"></i>
+                                            @endif
                                         @endfor
                                     </div>
                                 </div>
                                 <p
                                     class="text-slate-700 dark:text-gray-300 font-poppins leading-relaxed text-sm md:text-base italic mb-8 relative z-10">
-                                    "{{ $testi['quote'] }}"
+                                    "{{ $testi['content'] }}"
                                 </p>
                             </div>
 
                             <div
                                 class="flex items-center gap-4 pt-6 border-t border-slate-100 dark:border-white/5 relative z-10">
                                 <div
-                                    class="w-12 h-12 {{ $testi['bg'] }} text-white rounded-2xl flex-shrink-0 flex items-center justify-center text-lg font-black shadow-lg transform group-hover:rotate-6 transition-transform">
-                                    {{ $testi['initial'] }}
+                                    class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-2xl flex-shrink-0 flex items-center justify-center text-lg font-black shadow-lg transform group-hover:rotate-6 transition-transform">
+                                    {{ strtoupper(substr($testi['name'], 0, 1)) }}
                                 </div>
                                 <div class="min-w-0">
                                     <h4
