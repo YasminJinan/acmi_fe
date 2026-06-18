@@ -76,6 +76,7 @@ executives across diverse industries.',
     ],
     'products_ceo_label'           => 'CEO',
     'products_detail_btn'          => 'View Business Detail',
+    'products_view_more'           => 'View More Products',
     'products_empty_title'         => 'No Products Found',
     'products_empty_desc'          => 'Try using different keywords or select another category.',
  

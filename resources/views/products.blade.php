@@ -13,7 +13,7 @@
         category: 'Semua',
         products: @js($products),
         page: 1,
-        perPage: 6,
+        perPage: 12,
         
         // Memfilter produk berdasarkan input search & kategori
         get filteredProducts() {
