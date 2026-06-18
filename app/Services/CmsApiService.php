@@ -121,6 +121,24 @@ class CmsApiService
         });
     }
 
+    public function getTestimonials()
+    {
+        return Cache::remember('testimonials', 600, function () {
+            try {
+                $response = $this->client->get('/testimonials');
+
+                if ($response->successful() && isset($response->json()['data'])) {
+                    return collect($response->json()['data'])->take(6)->all();
+                }
+                
+                return [];
+            } catch (\Exception $e) {
+                Log::error('CMS API Error (getTestimonials): ' . $e->getMessage());
+                return [];
+            }
+        });
+    }
+
     public function getServices(): array
     {
         return Cache::remember('services', 600, function () {

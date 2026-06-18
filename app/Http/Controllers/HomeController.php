@@ -69,7 +69,9 @@ class HomeController extends Controller
 
         $posts = collect($posts);
 
-        return view('welcome', compact('posts', 'products', 'faqs', 'gallery', 'partners'));
+        $testimonials = $cms->getTestimonials();
+
+        return view('welcome', compact('posts', 'products', 'faqs', 'gallery', 'partners', 'testimonials'));
     }
 
     /**

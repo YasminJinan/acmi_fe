@@ -575,8 +575,10 @@
             products: @js($products),
             get filteredProducts() {
                 return this.products.filter(p => {
-                    const matchSearch = p.title.toLowerCase().includes(this.search.toLowerCase()) ||
-                        p.company_name.toLowerCase().includes(this.search.toLowerCase());
+                    const title = p.title || '';
+                    const company = p.company_name || '';
+                    const matchSearch = title.toLowerCase().includes(this.search.toLowerCase()) ||
+                        company.toLowerCase().includes(this.search.toLowerCase());
                     const matchCategory = this.category === 'Semua' ||
                         (Array.isArray(p.category) ? p.category.includes(this.category) : p.category === this.category);
                     return matchSearch && matchCategory;
@@ -781,52 +783,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-1000 ease-in-out"
                     :class="open ? 'max-h-[4000px] opacity-100' : 'max-h-[450px] overflow-hidden md:max-h-[480px]'">
 
-                    @php
-                        $testimonials = [
-                            [
-                                'name' => 'Budi Santoso',
-                                'role' => 'CEO, PT Maju Bersama',
-                                'initial' => 'B',
-                                'bg' => 'bg-gradient-to-br from-orange-500 to-orange-600',
-                                'quote' => __('messages.testi_1_quote'),
-                            ],
-                            [
-                                'name' => 'Sarah Wijaya',
-                                'role' => 'Founder, TechVenture ID',
-                                'initial' => 'S',
-                                'bg' => 'bg-gradient-to-br from-orange-400 to-orange-500',
-                                'quote' => __('messages.testi_2_quote'),
-                            ],
-                            [
-                                'name' => 'Herman Tanaka',
-                                'role' => 'Dirut, Global Logistics',
-                                'initial' => 'H',
-                                'bg' => 'bg-gradient-to-br from-orange-500 to-orange-600',
-                                'quote' => __('messages.testi_3_quote'),
-                            ],
-                            [
-                                'name' => 'Anita Rose',
-                                'role' => 'CEO, Creative Agency',
-                                'initial' => 'A',
-                                'bg' => 'bg-gradient-to-br from-orange-400 to-orange-500',
-                                'quote' => __('messages.testi_4_quote'),
-                            ],
-                            [
-                                'name' => 'Dedi Kurnia',
-                                'role' => 'Founder, Retail Group',
-                                'initial' => 'D',
-                                'bg' => 'bg-gradient-to-br from-orange-500 to-orange-600',
-                                'quote' => __('messages.testi_5_quote'),
-                            ],
-                            [
-                                'name' => 'Linda Wang',
-                                'role' => 'Director, Finance Corp',
-                                'initial' => 'L',
-                                'bg' => 'bg-gradient-to-br from-orange-400 to-orange-500',
-                                'quote' => __('messages.testi_6_quote'),
-                            ],
-                        ];
-                    @endphp
+
 
                     @foreach ($testimonials as $testi)
                         <div
@@ -842,22 +799,26 @@
                                         <i class="fa-solid fa-quote-left text-2xl text-orange-500"></i>
                                     </div>
                                     <div class="flex gap-0.5 text-orange-400 text-[10px]">
-                                        @for ($i = 0; $i < 5; $i++)
-                                            <i class="fa-solid fa-star"></i>
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if($i <= ($testi['rating'] ?? 5))
+                                                <i class="fa-solid fa-star"></i>
+                                            @else
+                                                <i class="fa-regular fa-star"></i>
+                                            @endif
                                         @endfor
                                     </div>
                                 </div>
                                 <p
                                     class="text-slate-700 dark:text-gray-300 font-poppins leading-relaxed text-sm md:text-base italic mb-8 relative z-10">
-                                    "{{ $testi['quote'] }}"
+                                    "{{ $testi['content'] }}"
                                 </p>
                             </div>
 
                             <div
                                 class="flex items-center gap-4 pt-6 border-t border-slate-100 dark:border-white/5 relative z-10">
                                 <div
-                                    class="w-12 h-12 {{ $testi['bg'] }} text-white rounded-2xl flex-shrink-0 flex items-center justify-center text-lg font-black shadow-lg transform group-hover:rotate-6 transition-transform">
-                                    {{ $testi['initial'] }}
+                                    class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-2xl flex-shrink-0 flex items-center justify-center text-lg font-black shadow-lg transform group-hover:rotate-6 transition-transform">
+                                    {{ strtoupper(substr($testi['name'], 0, 1)) }}
                                 </div>
                                 <div class="min-w-0">
                                     <h4
