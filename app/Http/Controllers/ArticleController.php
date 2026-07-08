@@ -21,7 +21,8 @@ class ArticleController extends Controller
     {
         App::setLocale($locale); // set locale dari URL
         
-        $response = Http::get("http://localhost:8000/api/public/articles/{$locale}/{$slug}");
+        $baseUrl = config('services.cms.api_url');
+        $response = Http::get("{$baseUrl}/articles/{$locale}/{$slug}");
     
         if ($response->successful() && $response->json('success')) {
             $article = $response->json('data');
