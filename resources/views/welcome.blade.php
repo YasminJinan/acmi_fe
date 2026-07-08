@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-{{-- SEO --}}
 @section('title', 'ACMI - Bersinergi Memimpin Indonesia')
 @section('meta_description',
     'Komunitas eksklusif CEO dan eksekutif terbaik Indonesia. Networking, knowledge sharing,
