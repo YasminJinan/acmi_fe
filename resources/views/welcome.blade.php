@@ -88,7 +88,7 @@
                     class="px-6 py-3 bg-orange-600 dark:bg-orange-500 text-white rounded-lg font-semibold shadow-md shadow-orange-500/20 hover:bg-orange-700 dark:hover:bg-orange-600 hover:scale-105 transition-all duration-300 inline-block">
                     {{ __('messages.btn_join') }}
                 </a>
-                <a href="{{ route('ontopic', ['locale' => app()->getLocale()]) }}"
+                <a href="{{ app()->getLocale() == 'id' ? route('id.artikel') : route('en.ontopic') }}"
                     class="inline-block px-6 py-3 border border-orange-400 text-orange-500 rounded-lg font-semibold hover:bg-orange-50 dark:hover:bg-orange-950 transition-all duration-300">
                     {{ __('messages.btn_explore') }}
                 </a>
@@ -270,7 +270,7 @@
                                 </p>
                             </div>
 
-                            <a href="{{ route('form.store') }}"
+                            <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}"
                                 class="bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-sm font-semibold px-6 py-3.5 rounded-xl flex items-center gap-2.5 shadow-md shadow-orange-600/10 dark:shadow-none hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ml-auto md:ml-0">
                                 <span>{{ __('messages.event_cta') }}</span>
                                 <i class="fa-solid fa-arrow-right-long text-xs transition-transform group-hover:translate-x-1"></i>
@@ -668,7 +668,7 @@
                                     </div>
 
                                     {{-- Button --}}
-                                    <a :href="'/products/' + product.slug"
+                                    <a :href="'{{ app()->getLocale() == 'id' ? '/id/produk/' : '/en/products/' }}' + product.slug"
                                         class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
                                         {{ __('messages.products_detail_btn') }}
                                         <i
@@ -694,7 +694,7 @@
             </div>
 
             <div x-show="filteredProducts.length > 6" data-aos="fade-up" class="mt-12 text-center relative z-30" x-cloak>
-                <a href="{{ route('products') }}"
+                <a href="{{ app()->getLocale() == 'id' ? route('id.produk') : route('en.products') }}"
                     class="inline-flex items-center gap-3 bg-white dark:bg-gray-800 border-2 border-orange-100 dark:border-orange-500/20 text-orange-500 px-10 py-4 rounded-full text-xs font-black uppercase tracking-widest shadow-[0_15px_30px_rgba(255,107,0,0.15)] hover:bg-orange-500 hover:text-white dark:hover:bg-orange-500 transition-all duration-500 transform active:scale-95 group">
                     <span>{{ __('messages.products_view_more') }}</span>
                     <i class="fa-solid fa-chevron-right text-[10px] transition-transform duration-500 group-hover:translate-x-1"></i>
@@ -787,7 +787,7 @@
 
             {{-- Grid Kartu --}}
             <div class="relative">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-1000 ease-in-out"
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-4 -m-4 transition-all duration-1000 ease-in-out"
                     :class="open ? 'max-h-[4000px] opacity-100' : 'max-h-[450px] overflow-hidden md:max-h-[480px]'">
 
 
@@ -1093,7 +1093,7 @@
 
             {{-- Button Selengkapnya (Disesuaikan dengan kategori aktif) --}}
             <div class="text-center mt-20" data-aos="fade-up">
-                <a :href="'{{ route('gallery') }}' + (activeCategory !== 'Semua' ?
+                <a :href="'{{ app()->getLocale() == 'id' ? route('id.galeri') : route('en.gallery') }}' + (activeCategory !== 'Semua' ?
                     '?category=' + encodeURIComponent(activeCategory) : ' ')"
                     class="group inline-flex items-center gap-3 px-10 py-4 rounded-2xl bg-slate-900 dark:bg-orange-500 text-white font-bold font-poppins transition-all duration-500 hover:bg-orange-500 hover:shadow-xl hover:shadow-orange-500/20">
                     {{ __('messages.gallery_more') }}

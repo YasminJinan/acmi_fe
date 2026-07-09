@@ -330,7 +330,7 @@ executives across diverse industries.',
     'nav_products' => 'Products',
     'nav_gallery' => 'Gallery',
     'nav_manager' => 'Manager',
-    'nav_ontopic' => 'On Topik',
+    'nav_ontopic' => 'On Topic',
 
     // HERO
     'hero_badge' => 'Association of CEOs & Executives Indonesia',

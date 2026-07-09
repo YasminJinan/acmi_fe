@@ -17,9 +17,9 @@ class ArticleController extends Controller
         return view('ontopic', compact('articles', 'categories'));
     }
 
-    public function show(string $locale, string $slug)
+    public function show(string $slug)
     {
-        App::setLocale($locale); // set locale dari URL
+        $locale = app()->getLocale(); // set locale dari URL middleware
         
         $baseUrl = config('services.cms.api_url');
         $response = Http::get("{$baseUrl}/articles/{$locale}/{$slug}");

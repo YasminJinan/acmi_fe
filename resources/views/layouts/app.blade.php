@@ -16,6 +16,59 @@
     <meta name="description" content="@yield('meta_description', 'ACMI (Asosiasi CEO Mastermind Indonesia) adalah wadah eksklusif bagi para pemimpin industri untuk berjejaring, belajar, dan tumbuh bersama melalui kolaborasi strategis.')">
     <meta name="keywords" content="@yield('meta_keywords', 'ACMI, Asosiasi CEO Mastermind Indonesia, komunitas CEO Indonesia, network pengusaha, mastermind bisnis')">
     <meta name="robots" content="@yield('meta_robots', 'index, follow')">
+    
+    {{-- Hreflang Tags & Toggle Mapping --}}
+    @php
+        $currentRoute = Route::currentRouteName();
+        $routeParams = Route::current() ? Route::current()->parameters() : [];
+        
+        $routeMap = [
+            'en.board' => 'id.direksi',
+            'id.direksi' => 'en.board',
+            'en.products' => 'id.produk',
+            'id.produk' => 'en.products',
+            'en.product.show' => 'id.product.show',
+            'id.product.show' => 'en.product.show',
+            'en.faq' => 'id.faq',
+            'id.faq' => 'en.faq',
+            'en.gallery' => 'id.galeri',
+            'id.galeri' => 'en.gallery',
+            'en.ontopic' => 'id.artikel',
+            'id.artikel' => 'en.ontopic',
+            'en.ontopic.show' => 'id.artikel.show',
+            'id.artikel.show' => 'en.ontopic.show',
+            'en.join' => 'id.gabung',
+            'id.gabung' => 'en.join',
+            'en.manager' => 'id.manajer',
+            'id.manajer' => 'en.manager',
+            'en.home' => 'id.home',
+            'id.home' => 'en.home',
+        ];
+
+        $enUrl = url('/en');
+        $idUrl = url('/id');
+
+        if ($currentRoute) {
+            if (str_starts_with($currentRoute, 'en.')) {
+                $enUrl = route($currentRoute, $routeParams);
+                $idRoute = $routeMap[$currentRoute] ?? null;
+                $idUrl = $idRoute ? route($idRoute, $routeParams) : url('/id');
+            } elseif (str_starts_with($currentRoute, 'id.')) {
+                $idUrl = route($currentRoute, $routeParams);
+                $enRoute = $routeMap[$currentRoute] ?? null;
+                $enUrl = $enRoute ? route($enRoute, $routeParams) : url('/en');
+            }
+        }
+        
+        $locale = app()->getLocale();
+        $switchTo = $locale === 'id' ? 'en' : 'id';
+        $targetSwitchUrl = $locale === 'id' ? $enUrl : $idUrl;
+        View::share('targetSwitchUrl', $targetSwitchUrl);
+    @endphp
+    
+    <link rel="alternate" hreflang="en" href="{{ $enUrl }}" />
+    <link rel="alternate" hreflang="id" href="{{ $idUrl }}" />
+    <link rel="alternate" hreflang="x-default" href="{{ $enUrl }}" />
     <link rel="canonical" href="{{ $canonical }}">
     {{-- Favicon --}}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">

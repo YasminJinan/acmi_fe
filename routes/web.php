@@ -8,16 +8,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WebhookController; 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Http;
 
-Route::get('lang/{locale}', function ($locale) {
-    if (in_array($locale, ['en', 'id'])) {
-        session(['locale' => $locale]);
-
-    }
-    return redirect()->back();
-})->name('lang.switch');
-
+Route::get('/', function () {
+    return redirect('/' . app()->getLocale());
+});
 
 Route::get('/sitemap.xml', function () {
     $path = public_path('sitemap.xml');
@@ -27,45 +21,39 @@ Route::get('/sitemap.xml', function () {
     return response()->file($path, ['Content-Type' => 'application/xml']);
 });
 
-Route::get('/ig-proxy', [App\Http\Controllers\HomeController::class, 'igProxy'])->name('ig.proxy');
-
-Route::get('/', [HomeController::class, 'index']);
-
-Route::get('/gallery', function () {
-    return view('gallery');
-})->name('gallery');
-
-Route::get('/products/{slug}', [ProductController::class, 'show'])->name('product.show');
-
-Route::get('/{locale}/ontopic', [ArticleController::class, 'index'])->name('ontopic');
-Route::get('/{locale}/ontopic/{slug}', [ArticleController::class, 'show'])
-    ->name('ontopic.show')
-    ->where('locale', 'id|en');
-// Route::get('/ontopic/{slug}', [ArticleController::class, 'show'])->name('ontopic.detail');
-
-Route::get('/form-join', [FormJoinController::class, 'index'])->name('form');
-Route::post('/form-join', [FormJoinController::class, 'store'])->name('form.store');
-
-Route::get('/acmi-manager', function () {
-    return view('acmi-manager');
-})->name('acmi-manager');
-
-Route::get('/gallerysec', function () {
-    return view('gallerysec');
-})->name('gallerysec');
-
-Route::get('/board', function () {
-    return view('board');
-})->name('board');
-
-Route::get('/products', [ProductController::class, 'index'])->name('products');
-
-Route::get('/lang/{locale}', function ($locale) {
-    if (!in_array($locale, ['en', 'id'])) {
-        abort(400);
-    }
-    session(['locale' => $locale]);
-    return redirect()->back();
-})->name('lang.switch');
-
+Route::get('/ig-proxy', [HomeController::class, 'igProxy'])->name('ig.proxy');
 Route::post('/webhook/cms', [WebhookController::class, 'handle']);
+
+Route::middleware([\App\Http\Middleware\SetLocale::class])->group(function () {
+    
+    // English Routes
+    Route::prefix('en')->name('en.')->group(function () {
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+        Route::get('/board', function () { return view('board'); })->name('board');
+        Route::get('/products', [ProductController::class, 'index'])->name('products');
+        Route::get('/products/{slug}', [ProductController::class, 'show'])->name('product.show');
+        Route::get('/faq', function () { return view('faq'); })->name('faq'); 
+        Route::get('/gallery', function () { return view('gallerysec'); })->name('gallery'); 
+        Route::get('/ontopic', [ArticleController::class, 'index'])->name('ontopic');
+        Route::get('/ontopic/{slug}', [ArticleController::class, 'show'])->name('ontopic.show');
+        Route::get('/join', [FormJoinController::class, 'index'])->name('join');
+        Route::post('/join', [FormJoinController::class, 'store'])->name('join.store');
+        Route::get('/manager', function () { return view('acmi-manager'); })->name('manager');
+    });
+
+    // Indonesian Routes
+    Route::prefix('id')->name('id.')->group(function () {
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+        Route::get('/dewan', function () { return view('board'); })->name('dewan');
+        Route::get('/produk', [ProductController::class, 'index'])->name('produk');
+        Route::get('/produk/{slug}', [ProductController::class, 'show'])->name('product.show');
+        Route::get('/tanya-jawab', function () { return view('faq'); })->name('faq');
+        Route::get('/galeri', function () { return view('gallerysec'); })->name('galeri');
+        Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel');
+        Route::get('/artikel/{slug}', [ArticleController::class, 'show'])->name('artikel.show');
+        Route::get('/gabung', [FormJoinController::class, 'index'])->name('gabung');
+        Route::post('/gabung', [FormJoinController::class, 'store'])->name('gabung.store');
+        Route::get('/manajer', function () { return view('acmi-manager'); })->name('manajer');
+    });
+
+});

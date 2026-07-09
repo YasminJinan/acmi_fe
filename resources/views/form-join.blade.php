@@ -84,7 +84,7 @@
                         </p>
 
                         {{-- GANTI action="#" MENJADI route YANG BENAR (misal: route('join.store')) --}}
-                        <form action="{{ route('form.store') }}" method="POST" class="space-y-12">
+                        <form action="{{ app()->getLocale() == 'id' ? route('id.gabung.store') : route('en.join.store') }}" method="POST" class="space-y-12">
                             @csrf
 
                             {{-- PENTING: Tambahkan kembali Alert Notifikasi --}}

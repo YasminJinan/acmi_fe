@@ -159,7 +159,7 @@
 
             {{-- Button Selengkapnya (Disesuaikan dengan kategori aktif) --}}
             <div class="text-center mt-20" data-aos="fade-up">
-                <a :href="'{{ route('gallery') }}' + (activeCategory !== 'Semua' ? '?category=' + encodeURIComponent(activeCategory) : '')"
+                <a :href="'{{ app()->getLocale() == 'id' ? route('id.galeri') : route('en.gallery') }}' + (activeCategory !== 'Semua' ? '?category=' + encodeURIComponent(activeCategory) : '')"
                     class="group inline-flex items-center gap-3 px-10 py-4 rounded-2xl bg-slate-900 dark:bg-orange-500 text-white font-bold font-poppins transition-all duration-500 hover:bg-orange-500 hover:shadow-xl hover:shadow-orange-500/20">
                     {{ __('messages.gallery_more') }}
                     <i class="fa-solid fa-arrow-right-long transition-transform group-hover:translate-x-2"></i>

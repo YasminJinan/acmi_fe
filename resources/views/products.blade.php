@@ -132,7 +132,7 @@
                                 </div>
 
                                 {{-- Button --}}
-                                <a :href="'/products/' + product.slug"
+                                <a :href="'{{ app()->getLocale() == 'id' ? '/id/produk/' : '/en/products/' }}' + product.slug"
                                     class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
                                     {{ __('messages.products_detail_btn') }}
                                     <i class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
