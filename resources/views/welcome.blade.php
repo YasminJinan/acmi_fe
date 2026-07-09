@@ -13,26 +13,46 @@
     {{-- HERO SECTION --}}
     <section x-data="{
         activeSlide: 0,
-        slides: [
-            'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
-            'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
-            'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
-        ],
+        headerData: null,
+        slides: [],
+        isLoading: true,
         init() {
-            setInterval(() => {
-                this.activeSlide = (this.activeSlide + 1) % this.slides.length;
-            }, 5000);
+            fetch('http://localhost:8000/api/public/header')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success && data.data) {
+                        this.headerData = data.data;
+                        if(data.data.images && data.data.images.length > 0) {
+                            this.slides = data.data.images;
+                        } else {
+                            this.slides = [
+                                'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
+                                'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
+                                'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
+                            ];
+                        }
+                    } else {
+                        this.slides = [
+                            'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
+                            'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
+                            'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
+                        ];
+                    }
+                    this.isLoading = false;
+                    
+                    if (this.slides.length > 1) {
+                        setInterval(() => {
+                            this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+                        }, 5000);
+                    }
+                })
+                .catch(err => {
+                    console.error('Error memuat data header:', err);
+                    this.isLoading = false;
+                });
         }
     }"
         class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b]">
-
-        <!-- {{-- Background Video --}}
-                <div class="absolute inset-0 w-full h-full">
-                    <video autoplay muted loop playsinline
-                        class="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-100">
-                        <source src="{{ asset('videos/hero-bg.mp4') }}" type="video/mp4">
-                    </video>
-                </div> -->
 
         {{-- Background Image Slider --}}
         <div class="absolute inset-0 w-full h-full bg-gray-900">
@@ -71,15 +91,15 @@
             {{-- Judul --}}
             <h1 data-aos="fade-up" data-aos-delay="200"
                 class="text-4xl md:text-6xl lg:text-7xl leading-tight drop-shadow-md">
-                <span class="font-poppins font-semibold text-white">{{ __('messages.hero_title_1') }}</span><br>
+                <span class="font-poppins font-semibold text-white" x-text="headerData?.title_1 || '{{ __('messages.hero_title_1') }}'"></span><br>
                 <span
-                    class="font-serif font-bold italic text-orange-600 dark:text-orange-500">{{ __('messages.hero_title_2') }}</span>
+                    class="font-serif font-bold italic text-orange-600 dark:text-orange-500" x-text="headerData?.title_2 || '{{ __('messages.hero_title_2') }}'"></span>
             </h1>
 
             {{-- Deskripsi --}}
             <p data-aos="fade-up" data-aos-delay="400"
-                class="mt-6 text-gray-700 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed">
-                {{ __('messages.hero_desc') }}
+                class="mt-6 text-gray-700 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed"
+                x-text="headerData?.description || '{{ __('messages.hero_desc') }}'">
             </p>
 
             {{-- Buttons --}}
