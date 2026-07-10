@@ -568,11 +568,13 @@
 
 
     {{-- PRODUK ANGGOTA SECTION --}}
-    <section class="bg-gray-50 dark:bg-[#050505] py-16 px-6 md:px-10 transition-colors duration-500 overflow-hidden"
+    <section class="bg-gray-50 dark:bg-[#050505] py-16 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative" id="produk-anggota"
         x-data="{
             search: '',
             category: 'Semua',
             products: @js($products),
+            page: 1,
+            perPage: 6,
             get filteredProducts() {
                 return this.products.filter(p => {
                     const matchSearch = p.title.toLowerCase().includes(this.search.toLowerCase()) ||
@@ -581,8 +583,17 @@
                         (Array.isArray(p.category) ? p.category.includes(this.category) : p.category === this.category);
                     return matchSearch && matchCategory;
                 });
+            },
+            get paginatedProducts() {
+                let start = (this.page - 1) * this.perPage;
+                let end = start + this.perPage;
+                return this.filteredProducts.slice(start, end);
+            },
+            get totalPages() {
+                return Math.ceil(this.filteredProducts.length / this.perPage);
             }
-        }">
+        }"
+        x-init="$watch('search', value => page = 1); $watch('category', value => page = 1)">
 
         <div class="max-w-7xl mx-auto">
 
@@ -621,7 +632,7 @@
 
             {{-- Grid Produk --}}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <template x-for="product in filteredProducts.slice(0, 6)" :key="product.id">
+                <template x-for="product in paginatedProducts" :key="product.id">
                     <div class="group flex flex-col" data-aos="fade-up">
                         <div
                             class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
@@ -692,7 +703,35 @@
                 </div>
             </div>
 
-            <div x-show="filteredProducts.length > 6" data-aos="fade-up" class="mt-12 text-center relative z-30" x-cloak>
+            {{-- NAVIGASI PAGINATION --}}
+            <div x-show="totalPages > 1" x-cloak class="mt-16 flex justify-center items-center gap-2" data-aos="fade-up">
+                {{-- Tombol Prev --}}
+                <button @click="if(page > 1) { page--; document.getElementById('produk-anggota').scrollIntoView({behavior: 'smooth'}); }" 
+                    :disabled="page === 1"
+                    class="w-12 h-12 rounded-xl flex items-center justify-center transition-all border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none bg-white dark:bg-white/5">
+                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                </button>
+
+                {{-- Angka Halaman --}}
+                <template x-for="p in totalPages" :key="p">
+                    <button @click="page = p; document.getElementById('produk-anggota').scrollIntoView({behavior: 'smooth'});"
+                        x-text="p"
+                        :class="page === p 
+                            ? 'bg-orange-500 text-white border-orange-500 shadow-lg shadow-orange-500/25' 
+                            : 'bg-white dark:bg-white/5 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-white/10 hover:border-orange-500 hover:text-orange-500'"
+                        class="w-12 h-12 rounded-xl font-bold text-sm border transition-all">
+                    </button>
+                </template>
+
+                {{-- Tombol Next --}}
+                <button @click="if(page < totalPages) { page++; document.getElementById('produk-anggota').scrollIntoView({behavior: 'smooth'}); }" 
+                    :disabled="page === totalPages"
+                    class="w-12 h-12 rounded-xl flex items-center justify-center transition-all border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none bg-white dark:bg-white/5">
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+            </div>
+
+            <div x-show="filteredProducts.length > 6" data-aos="fade-up" class="mt-8 text-center relative z-30" x-cloak>
                 <a href="{{ route('products') }}"
                     class="inline-flex items-center gap-3 bg-white dark:bg-gray-800 border-2 border-orange-100 dark:border-orange-500/20 text-orange-500 px-10 py-4 rounded-full text-xs font-black uppercase tracking-widest shadow-[0_15px_30px_rgba(255,107,0,0.15)] hover:bg-orange-500 hover:text-white dark:hover:bg-orange-500 transition-all duration-500 transform active:scale-95 group">
                     <span>{{ __('messages.products_view_more') }}</span>
