@@ -49,7 +49,7 @@
                 </h4>
                 <ul class="space-y-4">
                     <li>
-                        <a href="{{ route('board') }}"
+                        <a href="{{ app()->getLocale() == 'id' ? route('id.dewan') : route('en.board') }}"
                             class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group">
                             <i
                                 class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i>
@@ -57,7 +57,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('products') }}"
+                        <a href="{{ app()->getLocale() == 'id' ? route('id.produk') : route('en.products') }}"
                             class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group">
                             <i
                                 class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i>
@@ -65,7 +65,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('gallery') }}"
+                        <a href="{{ app()->getLocale() == 'id' ? route('id.galeri') : route('en.gallery') }}"
                             class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group">
                             <i
                                 class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i>
@@ -73,7 +73,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('acmi-manager') }}"
+                        <a href="{{ app()->getLocale() == 'id' ? route('id.manajer') : route('en.manager') }}"
                             class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group">
                             <i
                                 class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i>
@@ -81,7 +81,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('ontopic', ['locale' => app()->getLocale()]) }}"
+                        <a href="{{ app()->getLocale() == 'id' ? route('id.artikel') : route('en.ontopic') }}"
                             class="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500 text-sm transition-colors flex items-center gap-2 group">
                             <i
                                 class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i>

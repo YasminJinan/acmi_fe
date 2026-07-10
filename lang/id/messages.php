@@ -331,16 +331,16 @@ return [
 
     // NAV
     
-    'nav_board' => 'Board',
+    'nav_board' => 'Direksi',
     'nav_products' => 'Produk',
-    'nav_gallery' => 'Gallery',
-    'nav_manager' => 'Manager',
-    'nav_ontopic' => 'On Topik',
+    'nav_gallery' => 'Galeri',
+    'nav_manager' => 'Manajer',
+    'nav_ontopic' => 'On Topic',
     // HERO
     'hero_badge' => 'Asosiasi CEO & Eksekutif Indonesia',
-    'hero_title_1' => 'Indonesia’s CEOs & Executives',
-    'hero_title_2' => 'Connect, Grow, and Scale Up Together.',
-    'hero_desc' => 'Exclusive ecosystem for high-level business leaders, founders, and executives to build strategic relationships, expand opportunities, and shape the future of Indonesia.',
+    'hero_title_1' => 'Para CEO & Eksekutif Indonesia',
+    'hero_title_2' => 'Terhubung, Berkembang, dan Memperluas Bisnis Bersama.',
+    'hero_desc' => 'Ekosistem eksklusif bagi para pemimpin bisnis, pendiri, dan eksekutif tingkat atas untuk membangun hubungan strategis, memperluas peluang, dan membentuk masa depan Indonesia.',
     'btn_join' => 'Gabung Keanggotaan',
     'btn_explore' => 'Eksplorasi Kegiatan Kami',
 

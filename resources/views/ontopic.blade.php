@@ -24,7 +24,7 @@
                 bg-white/80 dark:bg-[#121829]/40 backdrop-blur-2xl border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
 
                     <!-- Utama (Gradient Tetap Menyala) -->
-                    <a href="{{ route('ontopic', ['locale' => app()->getLocale()]) }}"
+                    <a href="{{ app()->getLocale() == 'id' ? route('id.artikel') : route('en.ontopic') }}"
                         class="group relative sidebar-icon shadow-lg shadow-orange-500/20 text-white transform hover:scale-110 active:scale-95 transition-all ">
                         <i class="fas fa-home text-[1.1rem]"></i>
                         <span
@@ -46,7 +46,7 @@
                     @endphp
 
                     @foreach ($categories as $cat)
-                        <a href="{{ route('ontopic', ['locale' => app()->getLocale(), 'category' => $cat['slug']]) }}"
+                        <a href="{{ app()->getLocale() == 'id' ? route('id.artikel', ['category' => $cat['slug']]) : route('en.ontopic', ['category' => $cat['slug']]) }}"
                             class="group relative sidebar-icon transition-all transform hover:scale-110
                             {{ request('category') === $cat['slug']
                                 ? 'text-orange-500'
@@ -75,7 +75,7 @@
                         @foreach ($articles['data'] ?? [] as $article)
                             <article class="group cursor-pointer">
                                 <a
-                                    href="{{ route('ontopic.show', ['locale' => app()->getLocale(), 'slug' => $article['slug']]) }}">
+                                    href="{{ app()->getLocale() == 'id' ? route('id.artikel.show', ['slug' => $article['slug']]) : route('en.ontopic.show', ['slug' => $article['slug']]) }}">
                                     <div
                                         class="relative overflow-hidden rounded-[2.5rem] border transition-all duration-500 bg-white
                 dark:bg-[#0d1117] border-slate-200 dark:border-white/5 hover:border-orange-500/50
@@ -132,30 +132,27 @@
                         </div>
 
                         <div class="space-y-1">
-                            @php
-                                $sideCategories = [
-                                    'Sport',
-                                    'Business',
-                                    'Social',
-                                    'Lifestyle',
-                                    'Entertainment',
-                                    'Technology',
-                                    'Travel',
-                                    'Health',
-                                ];
-                            @endphp
-                            @foreach ($sideCategories as $cat)
-                                <a href="#"
+                            <a href="{{ app()->getLocale() == 'id' ? route('id.artikel') : route('en.ontopic') }}"
+                                class="flex items-center justify-between group/item py-1.5 px-3 rounded-2xl transition-all duration-300 hover:bg-orange-500/5 dark:hover:bg-white/[0.03]">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-1 h-3.5 rounded-full {{ !request('category') ? 'bg-orange-500 scale-y-100 opacity-100' : 'bg-slate-300 dark:bg-slate-700 group-hover/item:bg-orange-500 scale-y-50 group-hover/item:scale-y-100 opacity-30 group-hover/item:opacity-100' }} transition-all duration-300 transform">
+                                    </div>
+                                    <span class="text-[14px] font-medium {{ !request('category') ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-400 group-hover/item:text-slate-900 dark:group-hover/item:text-white' }} transition-colors">{{ __('messages.cat_utama') ?? 'Semua Kategori' }}</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-[10px] text-slate-400 dark:text-slate-600 {{ !request('category') ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2 group-hover/item:opacity-100 group-hover/item:translate-x-0' }} transition-all duration-300"></i>
+                            </a>
+                            @foreach ($categories as $cat)
+                                <a href="{{ app()->getLocale() == 'id' ? route('id.artikel', ['category' => $cat['slug']]) : route('en.ontopic', ['category' => $cat['slug']]) }}"
                                     class="flex items-center justify-between group/item py-1.5 px-3 rounded-2xl transition-all duration-300 hover:bg-orange-500/5 dark:hover:bg-white/[0.03]">
                                     <div class="flex items-center gap-4">
                                         <div
-                                            class="w-1 h-3.5 rounded-full bg-slate-300 dark:bg-slate-700 group-hover/item:bg-orange-500 transition-all duration-300 transform scale-y-50 group-hover/item:scale-y-100 opacity-30 group-hover/item:opacity-100">
+                                            class="w-1 h-3.5 rounded-full {{ request('category') === $cat['slug'] ? 'bg-orange-500 scale-y-100 opacity-100' : 'bg-slate-300 dark:bg-slate-700 group-hover/item:bg-orange-500 scale-y-50 group-hover/item:scale-y-100 opacity-30 group-hover/item:opacity-100' }} transition-all duration-300 transform">
                                         </div>
                                         <span
-                                            class="text-[14px] font-medium text-slate-500 dark:text-slate-400 group-hover/item:text-slate-900 dark:group-hover/item:text-white transition-colors">{{ $cat }}</span>
+                                            class="text-[14px] font-medium {{ request('category') === $cat['slug'] ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-400 group-hover/item:text-slate-900 dark:group-hover/item:text-white' }} transition-colors">{{ $cat['name'] }}</span>
                                     </div>
                                     <i
-                                        class="fas fa-chevron-right text-[10px] text-slate-400 dark:text-slate-600 opacity-0 -translate-x-2 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-300"></i>
+                                        class="fas fa-chevron-right text-[10px] text-slate-400 dark:text-slate-600 {{ request('category') === $cat['slug'] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2 group-hover/item:opacity-100 group-hover/item:translate-x-0' }} transition-all duration-300"></i>
                                 </a>
                             @endforeach
                         </div>
@@ -174,58 +171,34 @@
                         <div class="flex justify-between items-center mb-6">
                             <h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">Berita Utama
                             </h3>
-                            <a href="#"
+                            <a href="{{ app()->getLocale() == 'id' ? route('id.artikel') : route('en.ontopic') }}"
                                 class="text-[10px] font-black text-orange-600 dark:text-slate-500 hover:dark:text-orange-400 uppercase tracking-widest transition-colors">See
                                 all</a>
                         </div>
-
+ 
                         <div class="space-y-6">
-                            @for ($j = 0; $j < 3; $j++)
+                            @foreach (collect($articles['data'] ?? [])->take(3) as $article)
                                 <div
                                     class="group cursor-pointer border-b last:border-0 pb-5 last:pb-0 border-slate-100 dark:border-white/5">
-                                    <div
-                                        class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest mb-2 text-slate-400 dark:text-slate-500">
-                                        <i class="fas fa-globe-asia text-orange-500"></i>
-                                        <span>Barat</span>
-                                        <span class="text-slate-300 dark:text-slate-700">•</span>
-                                        <span>Feb 18</span>
-                                    </div>
-                                    <h4
-                                        class="text-[15px] font-bold leading-relaxed transition-colors duration-300
-                                text-slate-800 dark:text-slate-200 group-hover:text-orange-500">
-                                        ACMI Grebek Kantor : Kunjungan ke Jofiter Group oleh Budi Wahyono
-                                    </h4>
+                                    <a href="{{ app()->getLocale() == 'id' ? route('id.artikel.show', ['slug' => $article['slug']]) : route('en.ontopic.show', ['slug' => $article['slug']]) }}">
+                                        <div
+                                            class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest mb-2 text-slate-400 dark:text-slate-500">
+                                            <i class="fas fa-globe-asia text-orange-500"></i>
+                                            <span class="truncate max-w-[80px]">{{ $article['category']['name'] ?? 'Umum' }}</span>
+                                            <span class="text-slate-300 dark:text-slate-700">•</span>
+                                            <span>{{ \Carbon\Carbon::parse($article['published_at'] ?? now())->format('M d') }}</span>
+                                        </div>
+                                        <h4
+                                            class="text-[15px] font-bold leading-relaxed transition-colors duration-300
+                                text-slate-800 dark:text-slate-200 group-hover:text-orange-500 line-clamp-2">
+                                            {{ $article['title'] }}
+                                        </h4>
+                                    </a>
                                 </div>
-                            @endfor
+                            @endforeach
                         </div>
                     </div>
 
-                    <!-- Section Sport -->
-                    <div
-                        class="rounded-[2.5rem] p-8 border transition-all duration-500
-                    bg-white dark:bg-[#0a0f1d] border-slate-200 dark:border-white/5 shadow-xl dark:shadow-2xl">
-
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="text-xl font-black text-orange-500 italic tracking-tighter uppercase">Sport</h3>
-                            <a href="#"
-                                class="text-[10px] font-bold text-slate-400 hover:text-slate-900 dark:hover:text-white uppercase tracking-widest transition-colors">See
-                                all</a>
-                        </div>
-
-                        <div class="space-y-6">
-                            <div
-                                class="group cursor-pointer p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-transparent hover:border-orange-500/30 transition-all">
-                                <div class="flex items-center gap-2 text-[10px] font-bold uppercase mb-2 text-slate-400">
-                                    <i class="fas fa-trophy text-orange-500"></i>
-                                    <span>Tournament</span>
-                                </div>
-                                <h4
-                                    class="text-[15px] font-bold leading-relaxed text-slate-800 dark:text-slate-200 group-hover:text-orange-500 transition-colors">
-                                    CEO Golf Championship 2026: Mempererat Silaturahmi Pengusaha
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
 
                 </aside>
             </div>

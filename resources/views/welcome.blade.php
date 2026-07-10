@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-{{-- SEO --}}
 @section('title', 'ACMI - Bersinergi Memimpin Indonesia')
 @section('meta_description',
     'Komunitas eksklusif CEO dan eksekutif terbaik Indonesia. Networking, knowledge sharing,
@@ -14,26 +13,46 @@
     {{-- HERO SECTION --}}
     <section x-data="{
         activeSlide: 0,
-        slides: [
-            'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
-            'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
-            'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
-        ],
+        headerData: null,
+        slides: [],
+        isLoading: true,
         init() {
-            setInterval(() => {
-                this.activeSlide = (this.activeSlide + 1) % this.slides.length;
-            }, 5000);
+            fetch('http://localhost:8000/api/public/header')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success && data.data) {
+                        this.headerData = data.data;
+                        if(data.data.images && data.data.images.length > 0) {
+                            this.slides = data.data.images;
+                        } else {
+                            this.slides = [
+                                'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
+                                'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
+                                'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
+                            ];
+                        }
+                    } else {
+                        this.slides = [
+                            'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
+                            'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
+                            'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
+                        ];
+                    }
+                    this.isLoading = false;
+                    
+                    if (this.slides.length > 1) {
+                        setInterval(() => {
+                            this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+                        }, 5000);
+                    }
+                })
+                .catch(err => {
+                    console.error('Error memuat data header:', err);
+                    this.isLoading = false;
+                });
         }
     }"
         class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b]">
-
-        <!-- {{-- Background Video --}}
-                <div class="absolute inset-0 w-full h-full">
-                    <video autoplay muted loop playsinline
-                        class="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-100">
-                        <source src="{{ asset('videos/hero-bg.mp4') }}" type="video/mp4">
-                    </video>
-                </div> -->
 
         {{-- Background Image Slider --}}
         <div class="absolute inset-0 w-full h-full bg-gray-900">
@@ -72,15 +91,15 @@
             {{-- Judul --}}
             <h1 data-aos="fade-up" data-aos-delay="200"
                 class="text-4xl md:text-6xl lg:text-7xl leading-tight drop-shadow-md">
-                <span class="font-poppins font-semibold text-white">{{ __('messages.hero_title_1') }}</span><br>
+                <span class="font-poppins font-semibold text-white" x-text="headerData?.title_1 || '{{ __('messages.hero_title_1') }}'"></span><br>
                 <span
-                    class="font-serif font-bold italic text-orange-600 dark:text-orange-500">{{ __('messages.hero_title_2') }}</span>
+                    class="font-serif font-bold italic text-orange-600 dark:text-orange-500" x-text="headerData?.title_2 || '{{ __('messages.hero_title_2') }}'"></span>
             </h1>
 
             {{-- Deskripsi --}}
             <p data-aos="fade-up" data-aos-delay="400"
-                class="mt-6 text-gray-700 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed">
-                {{ __('messages.hero_desc') }}
+                class="mt-6 text-gray-700 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed"
+                x-text="headerData?.description || '{{ __('messages.hero_desc') }}'">
             </p>
 
             {{-- Buttons --}}
@@ -89,7 +108,7 @@
                     class="px-6 py-3 bg-orange-600 dark:bg-orange-500 text-white rounded-lg font-semibold shadow-md shadow-orange-500/20 hover:bg-orange-700 dark:hover:bg-orange-600 hover:scale-105 transition-all duration-300 inline-block">
                     {{ __('messages.btn_join') }}
                 </a>
-                <a href="{{ route('ontopic', ['locale' => app()->getLocale()]) }}"
+                <a href="{{ app()->getLocale() == 'id' ? route('id.artikel') : route('en.ontopic') }}"
                     class="inline-block px-6 py-3 border border-orange-400 text-orange-500 rounded-lg font-semibold hover:bg-orange-50 dark:hover:bg-orange-950 transition-all duration-300">
                     {{ __('messages.btn_explore') }}
                 </a>
@@ -271,7 +290,7 @@
                                 </p>
                             </div>
 
-                            <a href="{{ route('form.store') }}"
+                            <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}"
                                 class="bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-sm font-semibold px-6 py-3.5 rounded-xl flex items-center gap-2.5 shadow-md shadow-orange-600/10 dark:shadow-none hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ml-auto md:ml-0">
                                 <span>{{ __('messages.event_cta') }}</span>
                                 <i class="fa-solid fa-arrow-right-long text-xs transition-transform group-hover:translate-x-1"></i>
@@ -577,8 +596,10 @@
             perPage: 6,
             get filteredProducts() {
                 return this.products.filter(p => {
-                    const matchSearch = p.title.toLowerCase().includes(this.search.toLowerCase()) ||
-                        p.company_name.toLowerCase().includes(this.search.toLowerCase());
+                    const title = p.title || '';
+                    const company = p.company_name || '';
+                    const matchSearch = title.toLowerCase().includes(this.search.toLowerCase()) ||
+                        company.toLowerCase().includes(this.search.toLowerCase());
                     const matchCategory = this.category === 'Semua' ||
                         (Array.isArray(p.category) ? p.category.includes(this.category) : p.category === this.category);
                     return matchSearch && matchCategory;
@@ -678,7 +699,7 @@
                                     </div>
 
                                     {{-- Button --}}
-                                    <a :href="'/products/' + product.slug"
+                                    <a :href="'{{ app()->getLocale() == 'id' ? '/id/produk/' : '/en/products/' }}' + product.slug"
                                         class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
                                         {{ __('messages.products_detail_btn') }}
                                         <i
@@ -732,7 +753,7 @@
             </div>
 
             <div x-show="filteredProducts.length > 6" data-aos="fade-up" class="mt-8 text-center relative z-30" x-cloak>
-                <a href="{{ route('products') }}"
+                <a href="{{ app()->getLocale() == 'id' ? route('id.produk') : route('en.products') }}"
                     class="inline-flex items-center gap-3 bg-white dark:bg-gray-800 border-2 border-orange-100 dark:border-orange-500/20 text-orange-500 px-10 py-4 rounded-full text-xs font-black uppercase tracking-widest shadow-[0_15px_30px_rgba(255,107,0,0.15)] hover:bg-orange-500 hover:text-white dark:hover:bg-orange-500 transition-all duration-500 transform active:scale-95 group">
                     <span>{{ __('messages.products_view_more') }}</span>
                     <i class="fa-solid fa-chevron-right text-[10px] transition-transform duration-500 group-hover:translate-x-1"></i>
@@ -825,55 +846,10 @@
 
             {{-- Grid Kartu --}}
             <div class="relative">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-1000 ease-in-out"
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-4 -m-4 transition-all duration-1000 ease-in-out"
                     :class="open ? 'max-h-[4000px] opacity-100' : 'max-h-[450px] overflow-hidden md:max-h-[480px]'">
 
-                    @php
-                        $testimonials = [
-                            [
-                                'name' => 'Budi Santoso',
-                                'role' => 'CEO, PT Maju Bersama',
-                                'initial' => 'B',
-                                'bg' => 'bg-gradient-to-br from-orange-500 to-orange-600',
-                                'quote' => __('messages.testi_1_quote'),
-                            ],
-                            [
-                                'name' => 'Sarah Wijaya',
-                                'role' => 'Founder, TechVenture ID',
-                                'initial' => 'S',
-                                'bg' => 'bg-gradient-to-br from-orange-400 to-orange-500',
-                                'quote' => __('messages.testi_2_quote'),
-                            ],
-                            [
-                                'name' => 'Herman Tanaka',
-                                'role' => 'Dirut, Global Logistics',
-                                'initial' => 'H',
-                                'bg' => 'bg-gradient-to-br from-orange-500 to-orange-600',
-                                'quote' => __('messages.testi_3_quote'),
-                            ],
-                            [
-                                'name' => 'Anita Rose',
-                                'role' => 'CEO, Creative Agency',
-                                'initial' => 'A',
-                                'bg' => 'bg-gradient-to-br from-orange-400 to-orange-500',
-                                'quote' => __('messages.testi_4_quote'),
-                            ],
-                            [
-                                'name' => 'Dedi Kurnia',
-                                'role' => 'Founder, Retail Group',
-                                'initial' => 'D',
-                                'bg' => 'bg-gradient-to-br from-orange-500 to-orange-600',
-                                'quote' => __('messages.testi_5_quote'),
-                            ],
-                            [
-                                'name' => 'Linda Wang',
-                                'role' => 'Director, Finance Corp',
-                                'initial' => 'L',
-                                'bg' => 'bg-gradient-to-br from-orange-400 to-orange-500',
-                                'quote' => __('messages.testi_6_quote'),
-                            ],
-                        ];
-                    @endphp
+
 
                     @foreach ($testimonials as $testi)
                         <div
@@ -889,22 +865,26 @@
                                         <i class="fa-solid fa-quote-left text-2xl text-orange-500"></i>
                                     </div>
                                     <div class="flex gap-0.5 text-orange-400 text-[10px]">
-                                        @for ($i = 0; $i < 5; $i++)
-                                            <i class="fa-solid fa-star"></i>
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if($i <= ($testi['rating'] ?? 5))
+                                                <i class="fa-solid fa-star"></i>
+                                            @else
+                                                <i class="fa-regular fa-star"></i>
+                                            @endif
                                         @endfor
                                     </div>
                                 </div>
                                 <p
                                     class="text-slate-700 dark:text-gray-300 font-poppins leading-relaxed text-sm md:text-base italic mb-8 relative z-10">
-                                    "{{ $testi['quote'] }}"
+                                    "{{ $testi['content'] }}"
                                 </p>
                             </div>
 
                             <div
                                 class="flex items-center gap-4 pt-6 border-t border-slate-100 dark:border-white/5 relative z-10">
                                 <div
-                                    class="w-12 h-12 {{ $testi['bg'] }} text-white rounded-2xl flex-shrink-0 flex items-center justify-center text-lg font-black shadow-lg transform group-hover:rotate-6 transition-transform">
-                                    {{ $testi['initial'] }}
+                                    class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-2xl flex-shrink-0 flex items-center justify-center text-lg font-black shadow-lg transform group-hover:rotate-6 transition-transform">
+                                    {{ strtoupper(substr($testi['name'], 0, 1)) }}
                                 </div>
                                 <div class="min-w-0">
                                     <h4
@@ -1172,7 +1152,7 @@
 
             {{-- Button Selengkapnya (Disesuaikan dengan kategori aktif) --}}
             <div class="text-center mt-20" data-aos="fade-up">
-                <a :href="'{{ route('gallery') }}' + (activeCategory !== 'Semua' ?
+                <a :href="'{{ app()->getLocale() == 'id' ? route('id.galeri') : route('en.gallery') }}' + (activeCategory !== 'Semua' ?
                     '?category=' + encodeURIComponent(activeCategory) : ' ')"
                     class="group inline-flex items-center gap-3 px-10 py-4 rounded-2xl bg-slate-900 dark:bg-orange-500 text-white font-bold font-poppins transition-all duration-500 hover:bg-orange-500 hover:shadow-xl hover:shadow-orange-500/20">
                     {{ __('messages.gallery_more') }}

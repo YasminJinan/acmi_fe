@@ -22,15 +22,16 @@
 
         {{-- Navigasi Desktop --}}
         <div class="hidden lg:flex items-center gap-8 text-sm font-poppins text-gray-700 dark:text-gray-200">
-            <a href="{{ route('board') }}"
+            @php $l = app()->getLocale(); @endphp
+            <a href="{{ $l == 'id' ? route('id.dewan') : route('en.board') }}"
                 class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_board') }}</a>
-            <a href="{{ route('products') }}"
+            <a href="{{ $l == 'id' ? route('id.produk') : route('en.products') }}"
                 class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_products') }}</a>
-            <a href="{{ route('gallerysec') }}"
+            <a href="{{ $l == 'id' ? route('id.galeri') : route('en.gallery') }}"
                 class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_gallery') }}</a>
-            <a href="{{ route('acmi-manager') }}"
+            <a href="{{ $l == 'id' ? route('id.manajer') : route('en.manager') }}"
                 class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_manager') }}</a>
-            <a href="{{ route('ontopic', ['locale' => app()->getLocale()]) }}"
+            <a href="{{ $l == 'id' ? route('id.artikel') : route('en.ontopic') }}"
                 class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_ontopic') }}</a>
         </div>
 
@@ -47,17 +48,17 @@
                 $switchTo = $locale === 'id' ? 'en' : 'id';
                 $label = $locale === 'id' ? 'EN' : 'ID';
             @endphp
-            <a href="{{ url('lang/' . $switchTo) }}"
+            <a href="{{ $targetSwitchUrl ?? url('/' . $switchTo) }}"
                 class="hidden sm:flex px-3 md:px-4 h-9 items-center gap-2 rounded-full text-[10px] font-bold tracking-widest bg-white/50 dark:bg-white/10 text-gray-700 dark:text-gray-200 hover:bg-orange-500 hover:text-white border border-gray-100 dark:border-white/20 uppercase transition-all">
                 <i class="fa-solid fa-globe text-xs"></i> {{ $label }}
             </a>
 
-            <a href="/form-join"
+            <a href="{{ $l == 'id' ? route('id.gabung') : route('en.join') }}"
                 class=" hidden md:block bg-orange-500 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md hover:scale-105 transition-all">
                 {{ __('messages.btn_join') }}
             </a>
 
-            <button href="/form-join" @click="mobileMenuOpen = !mobileMenuOpen"
+            <button href="{{ $l == 'id' ? route('id.gabung') : route('en.join') }}" @click="mobileMenuOpen = !mobileMenuOpen"
                 class="lg:hidden w-9 h-9 flex items-center justify-center rounded-full bg-white/50 dark:bg-white/10 border border-gray-200 dark:border-white/20 text-gray-700 dark:text-white">
                 <i :class="mobileMenuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'"></i>
             </button>
@@ -74,20 +75,20 @@
         <div class="flex flex-col gap-4 text-center font-poppins text-gray-700 dark:text-gray-200">
             <a href="#"
                 class="py-2 hover:text-orange-500 transition border-b border-gray-100 dark:border-white/5">{{ __('messages.nav_profile') }}</a>
-            <a href="#"
+            <a href="{{ $l == 'id' ? route('id.dewan') : route('en.board') }}"
                 class="py-2 hover:text-orange-500 transition border-b border-gray-100 dark:border-white/5">{{ __('messages.nav_board') }}</a>
             <a href="#"
                 class="py-2 hover:text-orange-500 transition border-b border-gray-100 dark:border-white/5">{{ __('messages.nav_members') }}</a>
-            <a href="#"
+            <a href="{{ $l == 'id' ? route('id.galeri') : route('en.gallery') }}"
                 class="py-2 hover:text-orange-500 transition border-b border-gray-100 dark:border-white/5">{{ __('messages.nav_gallery') }}</a>
-            <a href="#" class="py-2 hover:text-orange-500 transition">{{ __('messages.nav_ontopic') }}</a>
+            <a href="{{ $l == 'id' ? route('id.artikel') : route('en.ontopic') }}" class="py-2 hover:text-orange-500 transition">{{ __('messages.nav_ontopic') }}</a>
 
             <div class="flex flex-col gap-2 mt-2 pt-4 border-t border-gray-100 dark:border-white/10">
-                <button class="w-full bg-orange-500 text-white py-3 rounded-2xl font-bold">
+                <a href="{{ $l == 'id' ? route('id.gabung') : route('en.join') }}" class="w-full block bg-orange-500 text-white py-3 rounded-2xl font-bold">
                     {{ __('messages.btn_join') }}
-                </button>
-                <a href="{{ url('lang/' . $switchTo) }}"
-                    class="sm:hidden w-full py-2 text-[10px] font-bold tracking-widest uppercase">
+                </a>
+                <a href="{{ $targetSwitchUrl ?? url('/' . $switchTo) }}"
+                    class="sm:hidden w-full block py-2 text-[10px] font-bold tracking-widest uppercase">
                     Switch to {{ $switchTo }}
                 </a>
             </div>

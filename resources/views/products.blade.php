@@ -92,7 +92,7 @@
             {{-- LOOPING DIGANTI MENGGUNAKAN paginatedProducts --}}
             <template x-for="product in paginatedProducts" :key="product.id">
                 <div class="group flex flex-col" data-aos="fade-up">
-                    <div class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
+                    <div class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/20 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
 
                         {{-- Image --}}
                         <div class="relative h-[180px] overflow-hidden">
@@ -132,7 +132,7 @@
                                 </div>
 
                                 {{-- Button --}}
-                                <a :href="'/products/' + product.slug"
+                                <a :href="'{{ app()->getLocale() == 'id' ? '/id/produk/' : '/en/products/' }}' + product.slug"
                                     class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
                                     {{ __('messages.products_detail_btn') }}
                                     <i class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
