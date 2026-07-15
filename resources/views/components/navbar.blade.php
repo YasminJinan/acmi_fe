@@ -1,22 +1,57 @@
-<div x-data="{ mobileMenuOpen: false, scrolled: false }" x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 20 })"
-    class="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-6xl z-50 transition-all duration-300"
+@php
+    $locale   = app()->getLocale();
+    $switchTo = $locale === 'id' ? 'en' : 'id';
+    $label    = $locale === 'id' ? 'EN' : 'ID';
+
+    // Satu sumber kebenaran untuk desktop & mobile.
+    // Tambah/hapus menu cukup di sini — dua-duanya ikut otomatis.
+    $navLinks = [
+        ['route' => 'board',        'params' => [],                    'label' => __('messages.nav_board')],
+        ['route' => 'products',     'params' => [],                    'label' => __('messages.nav_products')],
+        ['route' => 'gallerysec',   'params' => [],                    'label' => __('messages.nav_gallery')],
+        ['route' => 'acmi-manager', 'params' => [],                    'label' => __('messages.nav_manager')],
+        ['route' => 'ontopic',      'params' => ['locale' => $locale], 'label' => __('messages.nav_ontopic')],
+    ];
+@endphp
+
+<div x-data="{
+        mobileMenuOpen: false,
+        scrolled: false,
+        init() {
+            this.scrolled = window.scrollY > 20;
+            window.addEventListener('scroll', () => {
+                this.scrolled = window.scrollY > 20;
+            }, { passive: true });
+
+            // Tutup menu kalau viewport balik ke desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 1024) this.mobileMenuOpen = false;
+            }, { passive: true });
+        }
+    }"
+    @keydown.escape.window="mobileMenuOpen = false"
+    class="fixed left-1/2 -translate-x-1/2 w-[92%] max-w-6xl z-50 transition-all duration-300"
     :class="scrolled ? 'top-2' : 'top-6'">
 
-    <div class="flex items-center justify-between px-4 md:px-6 py-3 rounded-full 
-                bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-gray-200 dark:border-white/10
-                shadow-lg transition-all duration-500"
-        :class="scrolled ? 'bg-white/80 dark:bg-black/80 py-2 shadow-xl' : 'bg-white/40 dark:bg-black/40 py-3'">
+    <nav aria-label="Navigasi utama"
+        class="flex items-center justify-between px-4 md:px-6 rounded-full
+               backdrop-blur-xl border border-gray-200 dark:border-white/10
+               transition-all duration-500"
+        :class="scrolled
+            ? 'bg-white/80 dark:bg-black/80 py-2 shadow-xl'
+            : 'bg-white/40 dark:bg-black/40 py-3 shadow-lg'">
 
         {{-- LOGO --}}
         <div class="flex-shrink-0">
-            <a href="{{ url('/') }}" class="block hover:opacity-80 transition-opacity">
+            <a href="{{ url('/') }}" class="block hover:opacity-80 transition-opacity"
+                aria-label="ACMI — kembali ke beranda">
                 <img x-show="isDark" x-cloak src="{{ asset('assets/logo_light.png') }}"
-                    class="h-9 md:h-11 object-contain transition-all" :class="scrolled ? 'h-8 md:h-9' : 'h-9 md:h-11'"
-                    alt="Logo ACMI" />
+                    class="object-contain transition-all duration-300"
+                    :class="scrolled ? 'h-8 md:h-9' : 'h-9 md:h-11'" alt="Logo ACMI" />
 
                 <img x-show="!isDark" src="{{ asset('assets/logo-acmi-new.svg') }}"
-                    class="h-9 md:h-11 object-contain transition-all" :class="scrolled ? 'h-8 md:h-9' : 'h-9 md:h-11'"
-                    alt="Logo ACMI" />
+                    class="object-contain transition-all duration-300"
+                    :class="scrolled ? 'h-8 md:h-9' : 'h-9 md:h-11'" alt="Logo ACMI" />
             </a>
         </div>
 
@@ -39,7 +74,10 @@
 
         {{-- Action Buttons --}}
         <div class="flex items-center gap-2 md:gap-3">
+
+            {{-- Toggle tema --}}
             <button @click="toggle()" type="button"
+                :aria-label="isDark ? 'Aktifkan mode terang' : 'Aktifkan mode gelap'"
                 class="w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white/50 dark:bg-white/10 border border-gray-200 dark:border-white/20 text-gray-700 dark:text-yellow-300 backdrop-blur-md transition-all hover:scale-110">
                 <i x-show="!isDark" class="fa-solid fa-moon text-xs md:text-sm"></i>
                 <i x-show="isDark" x-cloak class="fa-solid fa-sun text-xs md:text-sm"></i>
@@ -65,14 +103,14 @@
                 <i :class="mobileMenuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'"></i>
             </button>
         </div>
-    </div>
+    </nav>
 
     {{-- Mobile Menu Dropdown --}}
-    <div x-show="mobileMenuOpen" x-cloak @click.away="mobileMenuOpen = false"
+    <div id="mobile-menu" x-show="mobileMenuOpen" x-cloak @click.outside="mobileMenuOpen = false"
         x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95"
         x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-100"
         x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
-        class="absolute top-full mt-3 left-0 right-0 p-4 rounded-3xl bg-white/95 dark:bg-black/95 backdrop-blur-2xl border border-gray-200 dark:border-white/10 shadow-2xl lg:hidden">
+        class="absolute top-full mt-3 left-0 right-0 p-4 rounded-3xl bg-white/95 dark:bg-black/95 backdrop-blur-2xl border border-gray-200 dark:border-white/10 shadow-2xl lg:hidden origin-top">
 
         <div class="flex flex-col gap-4 text-center font-poppins text-gray-700 dark:text-gray-200">
             <a href="#"

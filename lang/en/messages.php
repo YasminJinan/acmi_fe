@@ -3,6 +3,91 @@
 return [
 
 
+// ── Product / Member Products ────────────────────────
+    'product_badge' => 'Member Products',
+    'product_title' => 'Executive Business Ecosystem',
+    'product_desc'  => 'A carefully curated network of companies and business solutions, led by CEOs and executives.',
+
+    'btn_detail'     => 'View Details',
+    'modal_features' => 'Key Features',
+    'modal_contact'  => 'Contact Company',
+
+    'form_name'    => 'Full Name',
+    'form_email'   => 'Email Address',
+    'form_phone'   => 'Phone / WhatsApp Number',
+    'form_message' => 'Your Message',
+    'form_submit'  => 'Send Message',
+    
+
+'org_badge'          => 'Organizational Structure',
+'org_title_1'        => 'ACMI Board',
+'org_title_2'        => 'Term 2025–2028',
+'org_description'    => 'The national board, four organizational pillars, and regional teams running ACMI programs across Indonesia.',
+'org_vacant'         => 'Position Open',
+'org_deputy_label'   => 'Deputies',
+'org_footnote'       => 'ACMI Central & Regional Structure 2025–2028 — final version.',
+'org_pusat_title'    => 'Central Board',
+'org_pusat_subtitle' => 'National Executive Board',
+'org_role_president' => 'President',
+'org_pilar_title'    => 'Four Pillars',
+'org_wilayah_title'  => 'Regional Structure',
+'org_wil_barat_title'  => 'West Region',
+'org_wil_tengah_title' => 'Central Region',
+'org_wil_timur_title'  => 'East Region',
+
+
+// ── Pusat / Central ──────────────────────────────────
+    'org_role_deputy_president'   => 'Deputy President',
+    'org_role_secgen'             => 'Secretary General',
+    'org_role_deputy_secgen_1'    => 'Deputy Secretary General 1',
+    'org_role_deputy_secgen_2'    => 'Deputy Secretary General 2',
+    'org_role_treasurer'          => 'National Treasurer',
+    'org_role_deputy_treasurer_1' => 'Deputy National Treasurer 1',
+    'org_role_deputy_treasurer_2' => 'Deputy National Treasurer 2',
+
+    // ── Pilar / Pillars ──────────────────────────────────
+    'org_pilar_subtitle'           => 'Learn · Connect · Ecosystem · Scale Up',
+    'org_pilar_learn_title'        => 'Learn',
+    'org_pilar_learn_subtitle'     => 'Education & Development',
+    'org_pilar_connect_title'      => 'Connect',
+    'org_pilar_connect_subtitle'   => 'Networking & Communication',
+    'org_pilar_ecosystem_title'    => 'Ecosystem',
+    'org_pilar_ecosystem_subtitle' => 'Membership & Governance',
+    'org_pilar_scaleup_title'      => 'Scale Up',
+    'org_pilar_scaleup_subtitle'   => 'Business & Investment',
+
+    'org_role_dir_learning'   => 'Director of Learning',
+    'org_role_dep_curriculum' => 'Deputy Curriculum & Digital Learning',
+    'org_role_dep_mentorship' => 'Deputy Mentorship & New Member',
+    'org_role_dep_pubedu'     => 'Deputy Public Education & Content',
+    'org_role_dir_networking' => 'Director of Networking',
+    'org_role_dep_event'      => 'Deputy Event & Host',
+    'org_role_dep_pr'         => 'Deputy Public Relations',
+    'org_role_dep_digicom'    => 'Deputy Digital Communication',
+    'org_role_dep_creative'   => 'Deputy Creative & Media Production',
+    'org_role_dir_membership' => 'Director of Membership',
+    'org_role_dep_member_mgmt'=> 'Deputy Member Management',
+    'org_role_dep_compliance' => 'Deputy Compliance & Accountability',
+    'org_role_dep_legal'      => 'Deputy Legal & Advocacy',
+    'org_role_dep_bond'       => 'Deputy Bond & Beyond',
+    'org_role_dir_bisdev'     => 'Director of Business Development',
+    'org_role_dep_consulting' => 'Deputy Business Consulting',
+
+    // ── Wilayah / Regional ───────────────────────────────
+    'org_wilayah_subtitle'      => 'West · Central · East',
+    'org_role_reg_director'     => 'Regional Director',
+    'org_role_reg_secretary'    => 'Regional Secretary',
+    'org_role_reg_treasurer'    => 'Regional Treasurer',
+    'org_role_reg_dir_learning' => 'Director of Learning',
+    'org_role_reg_dep_learning' => 'Deputy of Learning',
+    'org_role_reg_dir_network'  => 'Director of Networking',
+    'org_role_reg_dep_network'  => 'Deputy of Networking',
+    'org_role_reg_dir_member'   => 'Director of Membership',
+    'org_role_reg_dep_member'   => 'Deputy of Membership',
+    'org_role_reg_dir_bisdev'   => 'Director of Business Dev.',
+    'org_role_reg_dep_bisdev'   => 'Deputy of Business Dev.',
+
+
    // =========================================================
     //  BOARD OF DIRECTORS  —  ACMI 2024-2025
     //  Blade: resources/views/acmi-board-section.blade.php
@@ -251,11 +336,6 @@ executives across diverse industries.',
     'view_detail' => 'View Business Detail',
     'ceo_label' => 'CEO',
 
-// BOARD OF DIRECTORS SECTION
-    'bod_badge' => 'ACMI Organizational Structure',
-    'bod_title_1' => 'The Helmsmen Behind',
-    'bod_title_2' => 'Our Grand Vision',
-    'bod_description' => 'A synergy of industry leaders and visionary executives dedicated to accelerating the growth of the business ecosystem in Indonesia.',
   // ABOUT SECTION
     'about_badge' => 'About ACMI',
     'about_title_1' => 'Leading',
