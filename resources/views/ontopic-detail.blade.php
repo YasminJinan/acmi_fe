@@ -5,7 +5,7 @@
 @section('meta_description', Str::limit(strip_tags($article['content'] ?? ''), 155))
 @section('meta_keywords', implode(', ', $article['tags'] ?? ['ACMI', 'Bisnis', 'CEO']))
 @section('og_type', 'article')
-@section('canonical', url('/ontopic/' . ($article['slug'] ?? '')))
+@section('canonical', url()->current())
 
 {{-- Ini og_image yang benar --}}
 @section('og_image', $article['og_image_url'] ?? $article['thumbnail_url'] ?? asset('assets/logo-acmi-new.svg'))

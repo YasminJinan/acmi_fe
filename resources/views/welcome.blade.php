@@ -287,7 +287,7 @@
             {{-- Grid Events --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <template x-for="event in filteredEvents" :key="event.id">
-                    <div class="group bg-gray-50 dark:bg-[#111116] rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/5 transition-all duration-500 hover:border-orange-500/50 dark:hover:border-orange-500/30 hover:shadow-xl hover:shadow-orange-500/10 flex flex-col h-full" data-aos="fade-up">
+                    <div @click="window.location.href = '{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}'" class="cursor-pointer group bg-gray-50 dark:bg-[#111116] rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/5 transition-all duration-500 hover:border-orange-500/50 dark:hover:border-orange-500/30 hover:shadow-xl hover:shadow-orange-500/10 flex flex-col h-full" data-aos="fade-up">
                         
                         {{-- Image Placeholder / Pattern --}}
                         <div class="relative h-48 w-full bg-gray-200 dark:bg-[#1a1a24] overflow-hidden">
@@ -333,7 +333,7 @@
                                     </div>
                                 </div>
                                 
-                                <a href="#" class="text-orange-600 dark:text-orange-500 hover:text-orange-700 dark:hover:text-orange-400 text-xs font-bold font-poppins flex items-center gap-2 group/link">
+                                <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}" class="text-orange-600 dark:text-orange-500 hover:text-orange-700 dark:hover:text-orange-400 text-xs font-bold font-poppins flex items-center gap-2 group/link">
                                     {{ app()->getLocale() == 'id' ? 'Daftar Sekarang' : 'Register Now' }}
                                     <i class="fa-solid fa-arrow-right transition-transform group-hover/link:translate-x-1"></i>
                                 </a>
@@ -548,7 +548,7 @@
                     {{-- CTA --}}
                     <div class="pt-2 group/btn">
                         <div class="flex flex-col sm:flex-row items-center gap-4">
-                            <a href="{{ url('/form-join') }}"
+                            <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}"
                                 class="px-8 py-4 bg-orange-600 dark:bg-orange-500 hover:bg-orange-700 dark:hover:bg-orange-600 text-white font-bold font-poppins rounded-xl shadow-lg shadow-orange-600/20 dark:shadow-none transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 w-full sm:w-auto">
                                 {{ __('messages.membership_cta_btn') }}
                                 <i

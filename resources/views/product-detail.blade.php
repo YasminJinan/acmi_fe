@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+{{-- SEO & META TAGS --}}
+@section('title', $product->title . ' - ' . $product->company_name)
+@section('meta_description', Str::limit(strip_tags($product->description ?? ''), 155))
+@section('meta_keywords', $product->title . ', ' . $product->company_name . ', Produk ACMI, CEO Indonesia')
+@section('og_type', 'product')
+@section('canonical', url()->current())
+@section('og_image', $product->image ?? asset('images/OG-ACMI.png'))
 @section('content')
     <div class="min-h-screen bg-gray-50 dark:bg-[#0a0c14] text-gray-900 dark:text-white pt-28 pb-20 px-4 md:px-10 font-sans transition-colors duration-500">
         <div class="max-w-7xl mx-auto">

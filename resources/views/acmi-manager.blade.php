@@ -1,4 +1,9 @@
 @extends('layouts.app')
+@section('title', 'Manager — ACMI')
+@section('meta_keywords', 'acmi manager, pengurus pusat acmi, dewan pengurus acmi')
+@section('meta_description', 'Kenali jajaran pengurus pusat dan manajer ACMI yang berdedikasi membangun komunitas CEO terbaik di Indonesia.')
+@section('canonical', url()->current())
+
 @section('content')
 
 {{-- ============================================================

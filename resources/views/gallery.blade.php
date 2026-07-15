@@ -1,10 +1,15 @@
 @extends('layouts.app')
-@section('title', 'Gallery — ACMI')
+@php
+    $category = request('category');
+    $pageTitle = $category && $category !== 'Semua' ? $category . ' Gallery - ACMI' : 'Gallery - ACMI';
+    $canonicalUrl = $category && $category !== 'Semua' ? url()->current() . '?category=' . urlencode($category) : url()->current();
+@endphp
+@section('title', $pageTitle)
 @section('meta_description',
     'Dokumentasi kegiatan, event, dan momen eksklusif komunitas CEO dan eksekutif ACMI
     Indonesia.')
 @section('meta_keywords', 'acmi gallery, foto event acmi, dokumentasi acmi')
-@section('canonical', url('/gallery'))
+@section('canonical', $canonicalUrl)
 
 @section('content')
     <style>
@@ -35,12 +40,26 @@
         filter(category) {
             this.activeCategory = category;
             const url = new URL(window.location);
+            let newTitle = 'Gallery - ACMI';
             if (category === 'Semua') {
                 url.searchParams.delete('category');
             } else {
                 url.searchParams.set('category', category);
+                newTitle = category + ' Gallery - ACMI';
             }
             window.history.pushState({}, '', url);
+            document.title = newTitle;
+
+            // Update Canonical URL
+            let canonicalTag = document.querySelector('link[rel=canonical]');
+            if (canonicalTag) {
+                canonicalTag.href = url.toString();
+            }
+        },
+
+        updateTitle() {
+            const photoTitle = this.filteredGalleries[this.currentIndex]?.title;
+            document.title = (photoTitle ? photoTitle : 'Foto Kegiatan') + ' - ACMI';
         },
 
         // Lightbox methods
@@ -48,11 +67,15 @@
             this.currentIndex = index;
             this.isOpen = true;
             document.body.style.overflow = 'hidden';
+            this.updateTitle();
         },
 
         closeLightbox() {
             this.isOpen = false;
             document.body.style.overflow = 'auto';
+            document.title = (this.activeCategory && this.activeCategory !== 'Semua') 
+                ? this.activeCategory + ' Gallery - ACMI' 
+                : 'Gallery - ACMI';
         },
 
         next() {
@@ -61,6 +84,7 @@
             } else {
                 this.currentIndex = 0;
             }
+            this.updateTitle();
         },
 
         prev() {
@@ -69,6 +93,7 @@
             } else {
                 this.currentIndex = this.filteredGalleries.length - 1;
             }
+            this.updateTitle();
         },
 
         loadMore() {
