@@ -16,6 +16,7 @@
         activeCategory: 'Semua',
         galleries: [],
         isLoading: true,
+        limit: 5,
         
         // Lightbox state
         isOpen: false,
@@ -68,6 +69,10 @@
             } else {
                 this.currentIndex = this.filteredGalleries.length - 1;
             }
+        },
+
+        loadMore() {
+            this.limit += 5;
         },
 
         // Fungsi untuk memanggil API secara otomatis
@@ -142,7 +147,7 @@
             <template x-if="!isLoading">
                 <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8" id="gallery-grid">
                     {{-- Looping Data dari API --}}
-                    <template x-for="(item, index) in filteredGalleries" :key="item.id">
+                    <template x-for="(item, index) in filteredGalleries.slice(0, limit)" :key="item.id">
                         <div x-transition:enter="transition ease-out duration-500"
                             x-transition:enter-start="opacity-0 scale-90 translate-y-4"
                             x-transition:enter-end="opacity-100 scale-100 translate-y-0" class="break-inside-avoid">
@@ -163,6 +168,15 @@
                     </template>
                 </div>
             </template>
+
+            {{-- Button Selengkapnya (Load More) --}}
+            <div class="text-center mt-20" data-aos="fade-up" x-show="limit < filteredGalleries.length" x-cloak>
+                <button @click="loadMore()"
+                    class="group inline-flex items-center gap-3 px-10 py-4 rounded-2xl bg-slate-900 dark:bg-orange-500 text-white font-bold font-poppins transition-all duration-500 hover:bg-orange-500 hover:shadow-xl hover:shadow-orange-500/20">
+                    {{ __('messages.gallery_more') }}
+                    <i class="fa-solid fa-arrow-down transition-transform group-hover:translate-y-2"></i>
+                </button>
+            </div>
         </div>
 
         {{-- LIGHTBOX MODAL --}}

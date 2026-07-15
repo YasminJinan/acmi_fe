@@ -12,10 +12,12 @@
         $canonical = trim($__env->yieldContent('canonical')) ?: url()->current();
     @endphp
 
-    <title>@yield('title', 'ACMI')</title>
-    <meta name="description" content="@yield('meta_description', 'ACMI (Asosiasi CEO Mastermind Indonesia) adalah wadah eksklusif bagi para pemimpin industri untuk berjejaring, belajar, dan tumbuh bersama melalui kolaborasi strategis.')">
+    <title>@yield('title', 'ACMI - Asosiasi CEO Mastermind Indonesia')</title>
+    <meta name="description" content="@yield('meta_description', 'Komunitas eksklusif CEO dan pemimpin bisnis di Indonesia. Wadah terbaik untuk networking, berbagi ilmu, dan mengeksplorasi kolaborasi strategis.')">
     <meta name="keywords" content="@yield('meta_keywords', 'ACMI, Asosiasi CEO Mastermind Indonesia, komunitas CEO Indonesia, network pengusaha, mastermind bisnis')">
     <meta name="robots" content="@yield('meta_robots', 'index, follow')">
+    <meta name="author" content="@yield('meta_author', 'ACMI')">
+    <meta name="publisher" content="@yield('meta_publisher', 'ACMI')">
     
     {{-- Hreflang Tags & Toggle Mapping --}}
     @php
@@ -79,8 +81,8 @@
     <link rel="apple-touch-icon" href="{{ asset('images/favicon.png') }}">
     
     <meta property="og:type" content="{{ $ogType }}">
-    <meta property="og:title" content="@yield('title', 'ACMI')">
-    <meta property="og:description" content="@yield('meta_description', 'ACMI (Asosiasi CEO Mastermind Indonesia) adalah wadah eksklusif bagi para pemimpin industri untuk berjejaring, belajar, dan tumbuh bersama melalui kolaborasi strategis.')">
+    <meta property="og:title" content="@yield('title', 'ACMI - Asosiasi CEO Mastermind Indonesia')">
+    <meta property="og:description" content="@yield('meta_description', 'Komunitas eksklusif CEO dan pemimpin bisnis di Indonesia. Wadah terbaik untuk networking, berbagi ilmu, dan mengeksplorasi kolaborasi strategis.')">
     <meta property="og:url" content="{{ $canonical }}">
     {{-- KALAU WEB NYA SDH FIX --}}
     <meta property="og:image" content="@yield('og_image', asset('images/OG-ACMI.png'))">
@@ -91,8 +93,8 @@
 
     {{-- Twitter Card --}}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('title', 'ACMI')">
-    <meta name="twitter:description" content="@yield('meta_description', 'ACMI (Asosiasi CEO Mastermind Indonesia) adalah wadah eksklusif bagi para pemimpin industri untuk berjejaring, belajar, dan tumbuh bersama melalui kolaborasi strategis.')">
+    <meta name="twitter:title" content="@yield('title', 'ACMI - Asosiasi CEO Mastermind Indonesia')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Komunitas eksklusif CEO dan pemimpin bisnis di Indonesia. Wadah terbaik untuk networking, berbagi ilmu, dan mengeksplorasi kolaborasi strategis.')">
     <meta name="twitter:image" content="@yield('og_image', asset('images/OG-ACMI.png'))">
     <meta name="twitter:site" content="@{{ 'ACMI_Indonesia' }}">
 
@@ -106,7 +108,7 @@
       "alternateName": "ACMI",
       "url": "{{ config('app.url') }}",
       "logo": "{{ asset('logo-acmi-new') }}",
-      "description": "ACMI (Asosiasi CEO Mastermind Indonesia) adalah wadah eksklusif bagi para pemimpin industri untuk berjejaring, belajar, dan tumbuh bersama melalui kolaborasi strategis."
+      "description": "Komunitas eksklusif CEO dan pemimpin bisnis di Indonesia. Wadah terbaik untuk networking, berbagi ilmu, dan mengeksplorasi kolaborasi strategis."
     }
     </script>
     @endverbatim
