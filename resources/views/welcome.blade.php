@@ -8,26 +8,46 @@
     {{-- HERO SECTION --}}
     <section x-data="{
         activeSlide: 0,
-        slides: [
-            'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
-            'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
-            'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
-        ],
+        headerData: null,
+        slides: [],
+        isLoading: true,
         init() {
-            setInterval(() => {
-                this.activeSlide = (this.activeSlide + 1) % this.slides.length;
-            }, 5000);
+            fetch('http://localhost:8000/api/public/header')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success && data.data) {
+                        this.headerData = data.data;
+                        if(data.data.images && data.data.images.length > 0) {
+                            this.slides = data.data.images;
+                        } else {
+                            this.slides = [
+                                'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
+                                'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
+                                'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
+                            ];
+                        }
+                    } else {
+                        this.slides = [
+                            'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
+                            'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
+                            'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
+                        ];
+                    }
+                    this.isLoading = false;
+                    
+                    if (this.slides.length > 1) {
+                        setInterval(() => {
+                            this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+                        }, 5000);
+                    }
+                })
+                .catch(err => {
+                    console.error('Error memuat data header:', err);
+                    this.isLoading = false;
+                });
         }
     }"
         class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b]">
-
-        <!-- {{-- Background Video --}}
-                <div class="absolute inset-0 w-full h-full">
-                    <video autoplay muted loop playsinline
-                        class="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-100">
-                        <source src="{{ asset('videos/hero-bg.mp4') }}" type="video/mp4">
-                    </video>
-                </div> -->
 
         {{-- Background Image Slider --}}
         <div class="absolute inset-0 w-full h-full bg-gray-900">
@@ -66,15 +86,15 @@
             {{-- Judul --}}
             <h1 data-aos="fade-up" data-aos-delay="200"
                 class="text-4xl md:text-6xl lg:text-7xl leading-tight drop-shadow-md">
-                <span class="font-poppins font-semibold text-white">{{ __('messages.hero_title_1') }}</span><br>
+                <span class="font-poppins font-semibold text-white" x-text="headerData?.title_1 || '{{ __('messages.hero_title_1') }}'"></span><br>
                 <span
-                    class="font-serif font-bold italic text-orange-600 dark:text-orange-500">{{ __('messages.hero_title_2') }}</span>
+                    class="font-serif font-bold italic text-orange-600 dark:text-orange-500" x-text="headerData?.title_2 || '{{ __('messages.hero_title_2') }}'"></span>
             </h1>
 
             {{-- Deskripsi --}}
             <p data-aos="fade-up" data-aos-delay="400"
-                class="mt-6 text-gray-700 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed">
-                {{ __('messages.hero_desc') }}
+                class="mt-6 text-gray-700 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed"
+                x-text="headerData?.description || '{{ __('messages.hero_desc') }}'">
             </p>
 
             {{-- Buttons --}}
@@ -562,11 +582,13 @@
 
 
     {{-- PRODUK ANGGOTA SECTION --}}
-    <section class="bg-gray-50 dark:bg-[#050505] py-16 px-6 md:px-10 transition-colors duration-500 overflow-hidden"
+    <section class="bg-gray-50 dark:bg-[#050505] py-16 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative" id="produk-anggota"
         x-data="{
             search: '',
             category: 'Semua',
             products: @js($products),
+            page: 1,
+            perPage: 6,
             get filteredProducts() {
                 return this.products.filter(p => {
                     const title = p.title || '';
@@ -577,8 +599,17 @@
                         (Array.isArray(p.category) ? p.category.includes(this.category) : p.category === this.category);
                     return matchSearch && matchCategory;
                 });
+            },
+            get paginatedProducts() {
+                let start = (this.page - 1) * this.perPage;
+                let end = start + this.perPage;
+                return this.filteredProducts.slice(start, end);
+            },
+            get totalPages() {
+                return Math.ceil(this.filteredProducts.length / this.perPage);
             }
-        }">
+        }"
+        x-init="$watch('search', value => page = 1); $watch('category', value => page = 1)">
 
         <div class="max-w-7xl mx-auto">
 
@@ -617,7 +648,7 @@
 
             {{-- Grid Produk --}}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <template x-for="product in filteredProducts.slice(0, 6)" :key="product.id">
+                <template x-for="product in paginatedProducts" :key="product.id">
                     <div class="group flex flex-col" data-aos="fade-up">
                         <div
                             class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
@@ -688,7 +719,35 @@
                 </div>
             </div>
 
-            <div x-show="filteredProducts.length > 6" data-aos="fade-up" class="mt-12 text-center relative z-30" x-cloak>
+            {{-- NAVIGASI PAGINATION --}}
+            <div x-show="totalPages > 1" x-cloak class="mt-16 flex justify-center items-center gap-2" data-aos="fade-up">
+                {{-- Tombol Prev --}}
+                <button @click="if(page > 1) { page--; document.getElementById('produk-anggota').scrollIntoView({behavior: 'smooth'}); }" 
+                    :disabled="page === 1"
+                    class="w-12 h-12 rounded-xl flex items-center justify-center transition-all border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none bg-white dark:bg-white/5">
+                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                </button>
+
+                {{-- Angka Halaman --}}
+                <template x-for="p in totalPages" :key="p">
+                    <button @click="page = p; document.getElementById('produk-anggota').scrollIntoView({behavior: 'smooth'});"
+                        x-text="p"
+                        :class="page === p 
+                            ? 'bg-orange-500 text-white border-orange-500 shadow-lg shadow-orange-500/25' 
+                            : 'bg-white dark:bg-white/5 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-white/10 hover:border-orange-500 hover:text-orange-500'"
+                        class="w-12 h-12 rounded-xl font-bold text-sm border transition-all">
+                    </button>
+                </template>
+
+                {{-- Tombol Next --}}
+                <button @click="if(page < totalPages) { page++; document.getElementById('produk-anggota').scrollIntoView({behavior: 'smooth'}); }" 
+                    :disabled="page === totalPages"
+                    class="w-12 h-12 rounded-xl flex items-center justify-center transition-all border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none bg-white dark:bg-white/5">
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+            </div>
+
+            <div x-show="filteredProducts.length > 6" data-aos="fade-up" class="mt-8 text-center relative z-30" x-cloak>
                 <a href="{{ app()->getLocale() == 'id' ? route('id.produk') : route('en.products') }}"
                     class="inline-flex items-center gap-3 bg-white dark:bg-gray-800 border-2 border-orange-100 dark:border-orange-500/20 text-orange-500 px-10 py-4 rounded-full text-xs font-black uppercase tracking-widest shadow-[0_15px_30px_rgba(255,107,0,0.15)] hover:bg-orange-500 hover:text-white dark:hover:bg-orange-500 transition-all duration-500 transform active:scale-95 group">
                     <span>{{ __('messages.products_view_more') }}</span>
