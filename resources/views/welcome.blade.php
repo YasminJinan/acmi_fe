@@ -229,8 +229,6 @@
         </div>
     </section>
 
-
-<<<<<<< HEAD
     {{-- EVENT SECTION --}}
     <section class="bg-white dark:bg-[#0a0a0b] py-20 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative" id="events-section"
         x-data="{
@@ -340,47 +338,6 @@
                                 </a>
                             </div>
                         </div>
-=======
-    {{-- EVENT BANNER --}}
-    <section class="bg-white dark:bg-[#0a0a0b] px-6 md:px-10 pt-10 pb-6">
-        <div class="max-w-7xl mx-auto">
-            <div
-                class="relative overflow-hidden bg-gradient-to-br from-orange-50/60 via-[#f8f9fa] to-white dark:from-white/5 dark:via-white/5 dark:to-white/5 border border-orange-100 dark:border-white/10 rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between shadow-md shadow-orange-500/[0.02] dark:shadow-none gap-6 group">
-
-                {{-- Dekorasi Ikon Background (Hanya pemanis visual samar) --}}
-                <div
-                    class="absolute -right-6 -bottom-6 text-orange-500/5 dark:text-white/5 text-9xl pointer-events-none transform -rotate-12 transition-transform duration-500 group-hover:scale-110">
-                    <i class="fa-solid fa-calendar-check"></i>
-                </div>
-
-                {{-- Sisi Kiri: Info Event --}}
-                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 w-full md:w-auto">
-                    <div
-                        class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 dark:from-orange-500/20 dark:to-orange-600/20 text-white dark:text-orange-400 rounded-xl flex items-center justify-center text-xl shadow-md shadow-orange-500/20 dark:shadow-none shrink-0">
-                        <i class="fa-solid fa-bolt-lightning animate-pulse"></i>
-                    </div>
-                    <div>
-                        <span
-                            class="inline-flex items-center gap-1.5 text-xs font-bold bg-orange-100/80 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400 px-3 py-1 rounded-full uppercase tracking-wider">
-                            <i class="fa-solid fa-sparkles text-[10px]"></i> {{ __('messages.event_badge') }}
-                        </span>
-                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-2 font-poppins tracking-tight">
-                            {{ __('messages.event_title') }}
-                        </h2>
-                        <div
-                            class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1.5 text-sm text-gray-600 dark:text-gray-400">
-                            <p class="flex items-center gap-2">
-                                <i class="fa-regular fa-calendar-days text-orange-500 dark:text-orange-400"></i>
-                                {{ __('messages.event_date') }}
-                            </p>
-                            <span class="hidden sm:inline text-gray-300 dark:text-gray-700">•</span>
-                            <p class="flex items-center gap-1.5">
-                                <i class="fa-solid fa-location-dot text-gray-400 dark:text-gray-500"></i>
-                                <span class="text-xs">Live / Hybrid</span>
-                            </p>
-                        </div>
->>>>>>> 34699fe (Add sponsor banner and update acmi-manager)
-                    </div>
                 </template>
                 
                 {{-- Empty State --}}
@@ -391,34 +348,28 @@
                     <h3 class="text-lg font-bold text-gray-900 dark:text-white font-poppins">{{ app()->getLocale() == 'id' ? 'Belum ada event' : 'No events available' }}</h3>
                     <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">{{ app()->getLocale() == 'id' ? 'Nantikan event menarik dari kami selanjutnya.' : 'Stay tuned for our upcoming exciting events.' }}</p>
                 </div>
-<<<<<<< HEAD
             </div>
-            
-=======
 
-                {{-- Promo & CTA Button --}}
-                <div
-                    class="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto border-t border-gray-100 dark:border-white/5 pt-4 md:pt-0 md:border-none">
-                    <div class="text-left md:text-right flex items-center md:flex-col gap-2 md:gap-0">
-                        <p
-                            class="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1 md:justify-end">
-                            <i class="fa-solid fa-tags text-orange-400 md:hidden"></i> Early Bird Discount
-                        </p>
-                        <p
-                            class="text-orange-600 dark:text-orange-400 font-black text-xl tracking-tight flex items-center gap-1">
-                            30% OFF <i class="fa-solid fa-fire text-sm animate-bounce hidden md:inline-block"></i>
-                        </p>
-                    </div>
-
-                    <a href="{{ route('form.store') }}"
-                        class="bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-sm font-semibold px-6 py-3.5 rounded-xl flex items-center gap-2.5 shadow-md shadow-orange-600/10 dark:shadow-none hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ml-auto md:ml-0">
-                        <span>{{ __('messages.event_cta') }}</span>
-                        <i class="fa-solid fa-arrow-right-long text-xs transition-transform group-hover:translate-x-1"></i>
-                    </a>
+            {{-- Promo & CTA Button --}}
+            <div
+                class="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto border-t border-gray-100 dark:border-white/5 pt-4 md:pt-0 md:border-none mt-8">
+                <div class="text-left md:text-right flex items-center md:flex-col gap-2 md:gap-0">
+                    <p
+                        class="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1 md:justify-end">
+                        <i class="fa-solid fa-tags text-orange-400 md:hidden"></i> Early Bird Discount
+                    </p>
+                    <p
+                        class="text-orange-600 dark:text-orange-400 font-black text-xl tracking-tight flex items-center gap-1">
+                        30% OFF <i class="fa-solid fa-fire text-sm animate-bounce hidden md:inline-block"></i>
+                    </p>
                 </div>
 
+                <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}"
+                    class="bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-sm font-semibold px-6 py-3.5 rounded-xl flex items-center gap-2.5 shadow-md shadow-orange-600/10 dark:shadow-none hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ml-auto md:ml-0">
+                    <span>{{ __('messages.event_cta') }}</span>
+                    <i class="fa-solid fa-arrow-right-long text-xs transition-transform group-hover:translate-x-1"></i>
+                </a>
             </div>
->>>>>>> 34699fe (Add sponsor banner and update acmi-manager)
         </div>
     </section>
 
@@ -884,33 +835,7 @@
                 </div>
             </div>
 
-            {{-- NAVIGASI PAGINATION --}}
-            <div x-show="totalPages > 1" x-cloak class="mt-16 flex justify-center items-center gap-2" data-aos="fade-up">
-                {{-- Tombol Prev --}}
-                <button @click="if(page > 1) { page--; document.getElementById('produk-anggota').scrollIntoView({behavior: 'smooth'}); }" 
-                    :disabled="page === 1"
-                    class="w-12 h-12 rounded-xl flex items-center justify-center transition-all border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none bg-white dark:bg-white/5">
-                    <i class="fa-solid fa-chevron-left text-xs"></i>
-                </button>
 
-                {{-- Angka Halaman --}}
-                <template x-for="p in totalPages" :key="p">
-                    <button @click="page = p; document.getElementById('produk-anggota').scrollIntoView({behavior: 'smooth'});"
-                        x-text="p"
-                        :class="page === p 
-                            ? 'bg-orange-500 text-white border-orange-500 shadow-lg shadow-orange-500/25' 
-                            : 'bg-white dark:bg-white/5 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-white/10 hover:border-orange-500 hover:text-orange-500'"
-                        class="w-12 h-12 rounded-xl font-bold text-sm border transition-all">
-                    </button>
-                </template>
-
-                {{-- Tombol Next --}}
-                <button @click="if(page < totalPages) { page++; document.getElementById('produk-anggota').scrollIntoView({behavior: 'smooth'}); }" 
-                    :disabled="page === totalPages"
-                    class="w-12 h-12 rounded-xl flex items-center justify-center transition-all border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none bg-white dark:bg-white/5">
-                    <i class="fa-solid fa-chevron-right text-xs"></i>
-                </button>
-            </div>
 
             <div x-show="filteredProducts.length > 6" data-aos="fade-up" class="mt-8 text-center relative z-30" x-cloak>
                 <a href="{{ app()->getLocale() == 'id' ? route('id.produk') : route('en.products') }}"
