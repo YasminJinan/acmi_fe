@@ -185,6 +185,8 @@ class EventSeeder extends Seeder
             ]
         ];
 
-        \Illuminate\Support\Facades\DB::table('events')->insert($events);
+        foreach ($events as $event) {
+            \App\Models\Event::create($event);
+        }
     }
 }
