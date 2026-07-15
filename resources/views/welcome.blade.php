@@ -1,12 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'ACMI - Bersinergi Memimpin Indonesia')
-@section('meta_description',
-    'Komunitas eksklusif CEO dan eksekutif terbaik Indonesia. Networking, knowledge sharing,
-    dan business opportunities.')
 @section('meta_keywords', 'acmi, ceo indonesia, komunitas eksekutif, leadership indonesia')
 @section('og_image', asset('images/OG-ACMI.png'))
-@section('canonical', url('/'))
 
 @section('content')
 
