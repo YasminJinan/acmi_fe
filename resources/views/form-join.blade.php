@@ -109,23 +109,46 @@
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="space-y-2">
-                                        {{-- TAMBAHKAN name="name" --}}
                                         <input type="text" name="name" value="{{ old('name') }}" placeholder="Nama Lengkap" required
                                             class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
                                     </div>
                                     <div class="space-y-2">
-                                        {{-- TAMBAHKAN name="email" --}}
                                         <input type="email" name="email" value="{{ old('email') }}" placeholder="Email Profesional" required
                                             class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
                                     </div>
                                     <div class="space-y-2">
-                                        {{-- TAMBAHKAN name="phone" --}}
                                         <input type="tel" name="phone" value="{{ old('phone') }}" placeholder="WhatsApp (Aktif)" required
                                             class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
                                     </div>
                                     <div class="space-y-2">
-                                        {{-- TAMBAHKAN name="linkedin" --}}
-                                        <input type="url" name="linkedin" value="{{ old('linkedin') }}" placeholder="LinkedIn Profile URL"
+                                        <input type="date" name="birth_date" value="{{ old('birth_date') }}" required
+                                            class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <select name="gender" required
+                                            class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f97316%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1.5rem_center] bg-no-repeat">
+                                            <option disabled {{ !old('gender') ? 'selected' : '' }} class="dark:bg-[#111113] dark:text-gray-400">Jenis Kelamin</option>
+                                            <option class="dark:bg-[#111113]" value="Laki-laki" {{ old('gender') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                                            <option class="dark:bg-[#111113]" value="Perempuan" {{ old('gender') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <input type="text" name="domicile" value="{{ old('domicile') }}" placeholder="Domisili (Kota/Kabupaten)" required
+                                            class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <select name="shirt_size" required
+                                            class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f97316%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1.5rem_center] bg-no-repeat">
+                                            <option disabled {{ !old('shirt_size') ? 'selected' : '' }} class="dark:bg-[#111113] dark:text-gray-400">Ukuran Baju</option>
+                                            <option class="dark:bg-[#111113]" value="S" {{ old('shirt_size') == 'S' ? 'selected' : '' }}>S</option>
+                                            <option class="dark:bg-[#111113]" value="M" {{ old('shirt_size') == 'M' ? 'selected' : '' }}>M</option>
+                                            <option class="dark:bg-[#111113]" value="L" {{ old('shirt_size') == 'L' ? 'selected' : '' }}>L</option>
+                                            <option class="dark:bg-[#111113]" value="XL" {{ old('shirt_size') == 'XL' ? 'selected' : '' }}>XL</option>
+                                            <option class="dark:bg-[#111113]" value="XXL" {{ old('shirt_size') == 'XXL' ? 'selected' : '' }}>XXL</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-2 md:col-span-2">
+                                        <input type="text" name="address" value="{{ old('address') }}" placeholder="Alamat Lengkap Rumah" required
                                             class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
                                     </div>
                                 </div>
@@ -140,15 +163,12 @@
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {{-- TAMBAHKAN name="company" --}}
                                     <input type="text" name="company" value="{{ old('company') }}" placeholder="Nama Perusahaan" required
                                         class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
 
-                                    {{-- TAMBAHKAN name="position" --}}
                                     <input type="text" name="position" value="{{ old('position') }}" placeholder="Jabatan Saat Ini" required
                                         class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
 
-                                    {{-- TAMBAHKAN name="industry" --}}
                                     <select name="industry"
                                         class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f97316%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1.5rem_center] bg-no-repeat">
                                         <option disabled {{ !old('industry') ? 'selected' : '' }} class="dark:bg-[#111113] dark:text-gray-400">Sektor Industri</option>
@@ -171,7 +191,7 @@
                                     <select name="employee_size"
                                         class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23f97316%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em_1em] bg-[right_1.5rem_center] bg-no-repeat">
                                         <option disabled {{ !old('employee_size') ? 'selected' : '' }} class="dark:bg-[#111113] dark:text-gray-400">Jumlah Karyawan</option>
-                                        <option class="dark:bg-[#111113]" {{ old('employee_szie') == '1-50 Karyawan' ? 'selected' : '' }}>1-50 Karyawan</option>
+                                        <option class="dark:bg-[#111113]" {{ old('employee_size') == '1-50 Karyawan' ? 'selected' : '' }}>1-50 Karyawan</option>
                                         <option class="dark:bg-[#111113]" {{ old('employee_size') == '51-200 Karyawan' ? 'selected' : '' }}>51-200 Karyawan</option>
                                         <option class="dark:bg-[#111113]" {{ old('employee_size') == '201-500 Karyawan' ? 'selected' : '' }}>201-500 Karyawan</option>
                                         <option class="dark:bg-[#111113]" {{ old('employee_size') == '501-1000 Karyawan' ? 'selected' : '' }}>501-1000 Karyawan</option>
@@ -187,19 +207,65 @@
                                         <option class="dark:bg-[#111113]" {{ old('revenue') == 'IDR 200 Miliar - 1 Triliun' ? 'selected' : '' }}>IDR 200 Miliar - 1 Triliun</option>
                                         <option class="dark:bg-[#111113]" {{ old('revenue') == '> IDR 1 Triliun' ? 'selected' : '' }}>> IDR 1 Triliun</option>
                                     </select>
+
+                                    <div class="space-y-2 md:col-span-2">
+                                        <input type="text" name="company_address" value="{{ old('company_address') }}" placeholder="Alamat Lengkap Perusahaan" required
+                                            class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+                                    </div>
+
+                                    <div class="space-y-2 md:col-span-2">
+                                        <textarea name="business_detail" rows="3" placeholder="Detail Produk / Jasa Usaha (Rekomendasi: Text area pendek agar mereka bisa menjelaskan bisnisnya)" required
+                                            class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600 resize-none">{{ old('business_detail') }}</textarea>
+                                    </div>
                                 </div>
                             </div>
 
-                            {{-- Section 03: Visi & Aspirasi --}}
+                            {{-- Section 03: Akun Media Sosial --}}
                             <div class="space-y-6">
                                 <div class="flex items-center gap-4">
                                     <span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-bold transition-colors duration-300">03</span>
+                                    <h3 class="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-widest transition-colors duration-300">Akun Media Sosial</h3>
+                                    <div class="h-[1px] flex-grow bg-gray-100 dark:bg-white/10 transition-colors duration-300"></div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-2">
+                                        <input type="url" name="linkedin" value="{{ old('linkedin') }}" placeholder="LinkedIn Profile URL"
+                                            class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <input type="text" name="instagram" value="{{ old('instagram') }}" placeholder="Akun Instagram"
+                                            class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <input type="text" name="tiktok" value="{{ old('tiktok') }}" placeholder="Akun TikTok"
+                                            class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <input type="text" name="facebook" value="{{ old('facebook') }}" placeholder="Akun Facebook"
+                                            class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- Section 04: Motivasi & Referral --}}
+                            <div class="space-y-6">
+                                <div class="flex items-center gap-4">
+                                    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-bold transition-colors duration-300">04</span>
                                     <h3 class="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-widest transition-colors duration-300">Motivasi & Referral</h3>
                                     <div class="h-[1px] flex-grow bg-gray-100 dark:bg-white/10 transition-colors duration-300"></div>
                                 </div>
-                                {{-- TAMBAHKAN name="message" --}}
-                                <textarea name="message" rows="4" placeholder="Mengapa anda tertarik bergabung dengan ACMI?*" required
-                                    class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600 resize-none">{{ old('message') }}</textarea>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-2 md:col-span-2">
+                                        <textarea name="message" rows="4" placeholder="Mengapa anda tertarik bergabung dengan ACMI?*" required
+                                            class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600 resize-none">{{ old('message') }}</textarea>
+                                    </div>
+                                    <div class="space-y-2 md:col-span-2">
+                                        <input type="text" name="ceo_mm_batch" value="{{ old('ceo_mm_batch') }}" placeholder="CEO MM Batch" required
+                                            class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
+                                    </div>
+                                </div>
                             </div>
 
                             {{-- Submit Button --}}
