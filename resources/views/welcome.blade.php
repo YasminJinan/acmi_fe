@@ -154,7 +154,7 @@
         partners: [],
         isLoading: true,
         init() {
-            fetch('http://localhost:8000/api/public/partners')
+            fetch('{{ config('services.acmi_api.url', 'http://localhost:8000') }}/api/public/partners')
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
@@ -230,6 +230,7 @@
     </section>
 
 
+<<<<<<< HEAD
     {{-- EVENT SECTION --}}
     <section class="bg-white dark:bg-[#0a0a0b] py-20 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative" id="events-section"
         x-data="{
@@ -339,6 +340,46 @@
                                 </a>
                             </div>
                         </div>
+=======
+    {{-- EVENT BANNER --}}
+    <section class="bg-white dark:bg-[#0a0a0b] px-6 md:px-10 pt-10 pb-6">
+        <div class="max-w-7xl mx-auto">
+            <div
+                class="relative overflow-hidden bg-gradient-to-br from-orange-50/60 via-[#f8f9fa] to-white dark:from-white/5 dark:via-white/5 dark:to-white/5 border border-orange-100 dark:border-white/10 rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between shadow-md shadow-orange-500/[0.02] dark:shadow-none gap-6 group">
+
+                {{-- Dekorasi Ikon Background (Hanya pemanis visual samar) --}}
+                <div
+                    class="absolute -right-6 -bottom-6 text-orange-500/5 dark:text-white/5 text-9xl pointer-events-none transform -rotate-12 transition-transform duration-500 group-hover:scale-110">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </div>
+
+                {{-- Sisi Kiri: Info Event --}}
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 w-full md:w-auto">
+                    <div
+                        class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 dark:from-orange-500/20 dark:to-orange-600/20 text-white dark:text-orange-400 rounded-xl flex items-center justify-center text-xl shadow-md shadow-orange-500/20 dark:shadow-none shrink-0">
+                        <i class="fa-solid fa-bolt-lightning animate-pulse"></i>
+                    </div>
+                    <div>
+                        <span
+                            class="inline-flex items-center gap-1.5 text-xs font-bold bg-orange-100/80 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400 px-3 py-1 rounded-full uppercase tracking-wider">
+                            <i class="fa-solid fa-sparkles text-[10px]"></i> {{ __('messages.event_badge') }}
+                        </span>
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-2 font-poppins tracking-tight">
+                            {{ __('messages.event_title') }}
+                        </h2>
+                        <div
+                            class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1.5 text-sm text-gray-600 dark:text-gray-400">
+                            <p class="flex items-center gap-2">
+                                <i class="fa-regular fa-calendar-days text-orange-500 dark:text-orange-400"></i>
+                                {{ __('messages.event_date') }}
+                            </p>
+                            <span class="hidden sm:inline text-gray-300 dark:text-gray-700">•</span>
+                            <p class="flex items-center gap-1.5">
+                                <i class="fa-solid fa-location-dot text-gray-400 dark:text-gray-500"></i>
+                                <span class="text-xs">Live / Hybrid</span>
+                            </p>
+                        </div>
+>>>>>>> 34699fe (Add sponsor banner and update acmi-manager)
                     </div>
                 </template>
                 
@@ -350,8 +391,34 @@
                     <h3 class="text-lg font-bold text-gray-900 dark:text-white font-poppins">{{ app()->getLocale() == 'id' ? 'Belum ada event' : 'No events available' }}</h3>
                     <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">{{ app()->getLocale() == 'id' ? 'Nantikan event menarik dari kami selanjutnya.' : 'Stay tuned for our upcoming exciting events.' }}</p>
                 </div>
+<<<<<<< HEAD
             </div>
             
+=======
+
+                {{-- Promo & CTA Button --}}
+                <div
+                    class="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto border-t border-gray-100 dark:border-white/5 pt-4 md:pt-0 md:border-none">
+                    <div class="text-left md:text-right flex items-center md:flex-col gap-2 md:gap-0">
+                        <p
+                            class="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1 md:justify-end">
+                            <i class="fa-solid fa-tags text-orange-400 md:hidden"></i> Early Bird Discount
+                        </p>
+                        <p
+                            class="text-orange-600 dark:text-orange-400 font-black text-xl tracking-tight flex items-center gap-1">
+                            30% OFF <i class="fa-solid fa-fire text-sm animate-bounce hidden md:inline-block"></i>
+                        </p>
+                    </div>
+
+                    <a href="{{ route('form.store') }}"
+                        class="bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-sm font-semibold px-6 py-3.5 rounded-xl flex items-center gap-2.5 shadow-md shadow-orange-600/10 dark:shadow-none hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ml-auto md:ml-0">
+                        <span>{{ __('messages.event_cta') }}</span>
+                        <i class="fa-solid fa-arrow-right-long text-xs transition-transform group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+
+            </div>
+>>>>>>> 34699fe (Add sponsor banner and update acmi-manager)
         </div>
     </section>
 
@@ -478,6 +545,16 @@
     </section>
 
 
+    {{-- ═══ SPONSOR 1 · BANK MANDIRI · 728×90 · di bawah SOLUTION SECTION ═══ --}}
+    <section class="bg-white dark:bg-[#0a0a0b] py-14 transition-colors duration-500">
+        <x-sponsor-banner
+            href="https://www.bankmandiri.co.id/"
+            image="{{ asset('assets/images/sponsors/mandiri-728x90.jpg') }}"
+            brand="Bank Mandiri"
+            size="728x90" />
+    </section>
+
+
     {{-- EXCLUSIVE MEMBERSHIP SECTION --}}
     <section
         class="relative py-20 md:py-28 bg-gradient-to-b from-white to-gray-50 dark:from-[#0a0a0b] dark:to-[#0c0c0e] transition-colors duration-500 overflow-hidden">
@@ -593,6 +670,18 @@
             </div>
         </div>
     </section>
+
+
+    {{-- ═══ SPONSOR 2 · GARUDA INDONESIA · 970×250 · di bawah EXCLUSIVE MEMBERSHIP ═══ --}}
+    <section class="bg-gray-50 dark:bg-[#0c0c0e] py-16 transition-colors duration-500">
+        <x-sponsor-banner
+            href="https://www.garuda-indonesia.com/id/id/"
+            image="{{ asset('assets/images/sponsors/garuda-970x250.jpg') }}"
+            brand="Garuda Indonesia"
+            size="970x250" />
+    </section>
+
+
     {{-- Swiper Script --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
@@ -636,6 +725,23 @@
         .dark .card-glass {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
         }
     </style>
 
@@ -815,26 +921,18 @@
             </div>
 
         </div>
-        </div>
-        <style>
-            [x-cloak] {
-                display: none !important;
-            }
-
-            .custom-scrollbar::-webkit-scrollbar {
-                width: 6px;
-            }
-
-            .custom-scrollbar::-webkit-scrollbar-track {
-                background: transparent;
-            }
-
-            .custom-scrollbar::-webkit-scrollbar-thumb {
-                background: #f97316;
-                border-radius: 10px;
-            }
-        </style>
     </section>
+
+
+    {{-- ═══ SPONSOR 3 · McKINSEY & COMPANY · 336×280 · di bawah PRODUK ANGGOTA ═══ --}}
+    <section class="bg-gray-50 dark:bg-[#050505] py-16 transition-colors duration-500">
+        <x-sponsor-banner
+            href="https://www.mckinsey.com/id/overview"
+            image="{{ asset('assets/images/sponsors/mckinsey-336x280.jpg') }}"
+            brand="McKinsey &amp; Company"
+            size="336x280" />
+    </section>
+
 
     {{-- TESTIMONIAL SECTION --}}
     <section x-data="{
@@ -903,8 +1001,6 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-4 -m-4 transition-all duration-1000 ease-in-out"
                     :class="open ? 'max-h-[4000px] opacity-100' : 'max-h-[450px] overflow-hidden md:max-h-[480px]'">
 
-
-
                     @foreach ($testimonials as $testi)
                         <div
                             class="group relative bg-white dark:bg-white/5 backdrop-blur-2xl border border-slate-200 dark:border-white/10 p-8 rounded-[2rem] shadow-[0_10px_30px_rgba(0,0,0,0.02)] dark:shadow-none hover:shadow-[0_20px_40px_rgba(255,107,0,0.1)] dark:hover:bg-white/[0.08] transition-all duration-500 flex flex-col justify-between min-h-[380px] hover:-translate-y-2 overflow-hidden">
@@ -920,7 +1016,7 @@
                                     </div>
                                     <div class="flex gap-0.5 text-orange-400 text-[10px]">
                                         @for ($i = 1; $i <= 5; $i++)
-                                            @if($i <= ($testi['rating'] ?? 5))
+                                            @if ($i <= ($testi['rating'] ?? 5))
                                                 <i class="fa-solid fa-star"></i>
                                             @else
                                                 <i class="fa-regular fa-star"></i>
@@ -971,7 +1067,6 @@
         </div>
     </section>
 
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     {{-- FAQ SECTION --}}
     <section class="relative py-24 px-6 overflow-hidden bg-white dark:bg-[#0a0a0b] transition-colors duration-500">
@@ -1047,22 +1142,39 @@
         </div>
     </section>
 
+
+    {{--
+        ═══ SPONSOR 4 · BCA PRIORITAS · 728×90 ═══
+        CATATAN: brief menyebut "di bawah keanggotaan exclusive", tapi slot itu
+        sudah dipakai Garuda. Sementara ditaruh setelah FAQ (slot besar terakhir
+        yang kosong). Kalau ternyata maksudnya lain, cukup pindahkan blok
+        <section> ini — komponennya tidak perlu diubah.
+    --}}
+    <section class="bg-white dark:bg-[#0a0a0b] py-14 transition-colors duration-500">
+        <x-sponsor-banner
+            href="https://www.bca.co.id/id/individu/produk/prioritas"
+            image="{{ asset('assets/images/sponsors/bca-prioritas-728x90.jpg') }}"
+            brand="BCA Prioritas"
+            size="728x90" />
+    </section>
+
+
     {{-- GALLERY SECTION --}}
     <section x-data="{
         activeCategory: 'Semua',
         galleries: [],
         isLoading: true,
-    
+
         // Lightbox state
         isOpen: false,
         currentIndex: 0,
-    
+
         // Computed property to get unique categories from the gallery data
         get categories() {
             const cats = this.galleries.map(item => item.category?.name).filter(Boolean);
             return ['Semua', ...new Set(cats)];
         },
-    
+
         // Computed property to get filtered and limited galleries (Max 5)
         get filteredGalleries() {
             let filtered = this.galleries;
@@ -1072,23 +1184,23 @@
             // Return only the first 5 (assumed to be the newest)
             return filtered.slice(0, 5);
         },
-    
+
         filter(category) {
             this.activeCategory = category;
         },
-    
+
         // Lightbox methods
         openLightbox(index) {
             this.currentIndex = index;
             this.isOpen = true;
             document.body.style.overflow = 'hidden';
         },
-    
+
         closeLightbox() {
             this.isOpen = false;
             document.body.style.overflow = 'auto';
         },
-    
+
         next() {
             if (this.currentIndex < this.filteredGalleries.length - 1) {
                 this.currentIndex++;
@@ -1096,7 +1208,7 @@
                 this.currentIndex = 0;
             }
         },
-    
+
         prev() {
             if (this.currentIndex > 0) {
                 this.currentIndex--;
@@ -1104,10 +1216,10 @@
                 this.currentIndex = this.filteredGalleries.length - 1;
             }
         },
-    
+
         // Fungsi untuk memanggil API secara otomatis
         init() {
-            fetch('http://localhost:8000/api/public/gallery')
+            fetch('{{ config('services.acmi_api.url', 'http://localhost:8000') }}/api/public/gallery')
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
@@ -1122,12 +1234,6 @@
         }
     }"
         class="bg-white dark:bg-[#0a0a0b] py-24 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative">
-
-        <style>
-            [x-cloak] {
-                display: none !important;
-            }
-        </style>
 
         {{-- Background Glow Effects --}}
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
@@ -1269,12 +1375,39 @@
         </div>
     </section>
 
+
+    {{--
+        ═══ SPONSOR 5 & 6 · TELKOMSEL 300×250 + ASTRA 970×250 · di bawah GALLERY ═══
+        Dua-duanya tinggi native 250px, jadi disandingkan dalam satu baris dengan
+        flex-basis proporsional (970 : 300). Hasilnya tinggi keduanya identik dan
+        nggak kelihatan seperti tumpukan iklan. Di bawah lg → stack ke tengah.
+    --}}
+    <section class="bg-white dark:bg-[#0a0a0b] py-16 transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8">
+
+                <div class="w-full lg:flex-[970_1_0%] lg:min-w-0 flex justify-center">
+                    <x-sponsor-banner
+                        href="https://www.astra.co.id/"
+                        image="{{ asset('assets/images/sponsors/astra-970x250.jpg') }}"
+                        brand="Astra International"
+                        size="970x250"
+                        :flush="true" />
+                </div>
+
+              
+
+            </div>
+        </div>
+    </section>
+
+
     {{-- INSTAGRAM FEED SECTION --}}
     <section class="relative py-24 bg-white dark:bg-[#0a0a0b] transition-colors duration-500 overflow-hidden">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16" data-aos="fade-up">
                 <div
-                    class="inline-block px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-bold mb-4 uppercase tracking-[0.2em] border border border-orange-100 dark:border-orange-500/20">
+                    class="inline-block px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-bold mb-4 uppercase tracking-[0.2em] border border-orange-100 dark:border-orange-500/20">
                     Social Connect
                 </div>
                 <h2 class="text-4xl md:text-5xl leading-tight text-gray-900 dark:text-white font-poppins">
@@ -1291,14 +1424,14 @@
                     <div data-aos="fade-up" data-aos-delay="{{ $index * 100 }}"
                         class="group relative overflow-hidden rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 transition-all duration-500 hover:bg-white dark:hover:bg-white/10 hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:-translate-y-2">
 
-                        {{-- LINK DIRECT KE AKUN/POST INSTAGRAM (target="_blank" untuk security & user experience) --}}
+                        {{-- LINK DIRECT KE AKUN/POST INSTAGRAM --}}
                         <a href="{{ $post['permalink'] ?? '#' }}" target="_blank" rel="noopener noreferrer"
                             class="block">
 
                             {{-- Image Container --}}
                             <div class="aspect-square overflow-hidden relative">
                                 <img src="{{ $post['mediaUrl'] ?? 'https://placehold.co/600x600?text=No+Image' }}"
-                                    alt="Instagram Post"
+                                    alt="Instagram Post" loading="lazy"
                                     class="h-full w-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-75">
                             </div>
 
@@ -1333,6 +1466,16 @@
             </div>
         </div>
     </section>
+
+      <div class="w-full lg:flex-[300_1_0%] lg:min-w-0 flex justify-center">
+                    <x-sponsor-banner
+                        href="https://www.telkomsel.com/business"
+                        image="{{ asset('assets/images/sponsors/telkomsel-300x250.jpg') }}"
+                        brand="Telkomsel Business"
+                        size="300x250"
+                        :flush="true" />
+                </div>
+
 
     {{-- FINAL CTA SECTION --}}
     <section class="relative py-24 px-6 overflow-hidden bg-[#fafafa] dark:bg-[#0a0a0b] transition-colors duration-500">
@@ -1395,4 +1538,23 @@
             </div>
         </div>
     </section>
+
+
+    {{-- Alpine (dipindah ke bawah, cukup sekali untuk seluruh halaman) --}}
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    {{-- GA4: tracking klik sponsor via event delegation --}}
+    <script>
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a[data-sponsor]');
+            if (!link || typeof window.gtag !== 'function') return;
+
+            window.gtag('event', 'sponsor_click', {
+                sponsor_brand: link.dataset.sponsor,
+                sponsor_size: link.dataset.sponsorSize,
+                link_url: link.href,
+                page_location: window.location.pathname,
+            });
+        }, { passive: true });
+    </script>
 @endsection

@@ -2,21 +2,22 @@
 @section('content')
 
 {{-- ============================================================
-     BOARD OF DIRECTORS — ACMI 2024-2025
-     Lang keys: messages.bod_*
-     Photos   : public/assets/manager/{slug}.png
+     STRUKTUR ORGANISASI — ACMI 2025-2028
+     Sumber   : Struktur_Organisasi_ACMI_Periode_2025-2028_rev.pdf
+     Lang keys: messages.org_*
+     Catatan  : tanpa foto — monogram inisial + nama + jabatan
      ============================================================ --}}
 <section class="relative py-24 lg:py-32 overflow-hidden bg-white dark:bg-[#0a0a0b] transition-colors duration-500">
 
     {{-- Ambient Background Lights --}}
     <div class="absolute top-0 right-0 w-[700px] h-[700px] bg-orange-500/8 rounded-full blur-[160px] -z-0 pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-orange-600/8 rounded-full blur-[140px] -z-0 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-800/8 rounded-full blur-[140px] -z-0 pointer-events-none"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-500/3 rounded-full blur-[180px] -z-0 pointer-events-none"></div>
 
     <div class="container mx-auto px-6 relative z-10">
 
         {{-- ====================== HEADER ====================== --}}
-        <div class="max-w-4xl mx-auto text-center mb-24">
+        <div class="max-w-4xl mx-auto text-center mb-20 lg:mb-24">
 
             <div data-aos="fade-up"
                  class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-500/20 bg-orange-500/5 text-orange-600 dark:text-orange-400 text-[11px] font-black mb-8 uppercase tracking-[0.3em]">
@@ -24,199 +25,394 @@
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
                 </span>
-                {{ __('messages.bod_badge') }}
+                {{ __('messages.org_badge') }}
             </div>
 
             <h2 data-aos="fade-up" data-aos-delay="100"
                 class="font-poppins text-gray-900 dark:text-white leading-[1.1] mb-6 tracking-tight text-3xl md:text-5xl font-bold">
-                <span class="font-poppins font-bold">{{ __('messages.bod_title_1') }}</span> <br>
-                <span class="font-serif italic font-semibold text-orange-500">{{ __('messages.bod_title_2') }}</span>
+                <span class="font-poppins font-bold">{{ __('messages.org_title_1') }}</span> <br>
+                <span class="font-serif italic font-semibold text-orange-500">{{ __('messages.org_title_2') }}</span>
             </h2>
 
             <p data-aos="fade-up" data-aos-delay="200"
                class="max-w-2xl mx-auto text-gray-500 dark:text-gray-400 text-lg md:text-xl font-semibold leading-relaxed">
-                {{ __('messages.bod_description') }}
+                {{ __('messages.org_description') }}
             </p>
 
         </div>
 
         {{-- ====================== DATA ====================== --}}
         @php
-        $groups = [
-
-            // ── Dewan Pengurus Pusat ──────────────────────────────────────
-            [
-                'title'    => __('messages.bod_group_dpp_title'),
-                'subtitle' => __('messages.bod_group_dpp_subtitle'),
-                'icon'     => 'fa-solid fa-crown',
-                'cols'     => 5,
-                'members'  => [
-                    ['role' => __('messages.bod_role_ketua_umum'),       'name' => 'Donny Wahyudi',                          'img' => 'donny_wahyudi.png'],
-                    ['role' => __('messages.bod_role_wakil_ketua_umum'), 'name' => 'Dara Zam',                               'img' => 'dara_zam.png'],
-                    ['role' => __('messages.bod_role_sekjen'),           'name' => 'Sonny Arca Adryanto',                   'img' => 'sonny_arca_adryanto.png'],
-                    ['role' => __('messages.bod_role_wasekjen'),         'name' => 'Candra Arief S.',                       'img' => 'candra_arief_s.png'],
-                    ['role' => __('messages.bod_role_bendahara_umum'),   'name' => 'Lim Erwin Hartono',                     'img' => 'lim_erwin_hartono.png'],
-                ],
-            ],
-
-            // ── Pengurus Pusat ────────────────────────────────────────────
-            [
-                'title'    => __('messages.bod_group_pusat_title'),
-                'subtitle' => __('messages.bod_group_pusat_subtitle'),
-                'icon'     => 'fa-solid fa-building',
-                'cols'     => 3,
-                'members'  => [
-                    ['role' => __('messages.bod_role_bisdev'),      'name' => 'Fajar Budiman',                           'img' => 'fajar_budiman.png'],
-                    ['role' => __('messages.bod_role_keanggotaan'), 'name' => 'Rilla Kusuma Dewi',                      'img' => 'rilla_kusuma_dewi.png'],
-                    ['role' => __('messages.bod_role_legal'),       'name' => 'Husni Farid Abdat, S.H., M.H., C.L.A.', 'img' => 'husni_farid_abdat_sh_mh_cla.png'],
-                ],
-            ],
-
-            // ── Wilayah Barat ─────────────────────────────────────────────
-            [
-                'title'    => __('messages.bod_group_barat_title'),
-                'subtitle' => __('messages.bod_group_barat_subtitle'),
-                'icon'     => 'fa-solid fa-map-location-dot',
-                'cols'     => 4,
-                'members'  => [
-                    ['role' => __('messages.bod_role_ketua'),         'name' => 'Wie Wie',                 'img' => 'wie_wie.png'],
-                    ['role' => __('messages.bod_role_wakil_ketua'),   'name' => 'Deasi Widya',             'img' => 'deasi_widya.png'],
-                    ['role' => __('messages.bod_role_wabid_edukasi'), 'name' => 'Gunawan Saputro',         'img' => 'gunawan_saputro.png'],
-                    ['role' => __('messages.bod_role_digicom'),       'name' => 'Martin Suharto, SE. MM',  'img' => 'martin_suharto_se_mm.png'],
-                ],
-            ],
-
-            // ── Wilayah Tengah ────────────────────────────────────────────
-            [
-                'title'    => __('messages.bod_group_tengah_title'),
-                'subtitle' => __('messages.bod_group_tengah_subtitle'),
-                'icon'     => 'fa-solid fa-map-location-dot',
-                'cols'     => 4,
-                'members'  => [
-                    ['role' => __('messages.bod_role_ketua'),     'name' => 'Iwan Anton Prabowo',    'img' => 'iwan_anton_prabowo.png'],
-                    ['role' => __('messages.bod_role_wakil'),     'name' => 'Muhammad Kudhori Bix',  'img' => 'muhammad_kudhori_bix.png'],
-                    ['role' => __('messages.bod_role_bendahara'), 'name' => 'Adi Darmawan',          'img' => 'adi_darmawan.png'],
-                    ['role' => __('messages.bod_role_humas'),     'name' => 'Muhammad Dardiri',      'img' => 'muhammad_dardiri.png'],
-                ],
-            ],
-
-            // ── Wilayah Timur ─────────────────────────────────────────────
-            [
-                'title'    => __('messages.bod_group_timur_title'),
-                'subtitle' => __('messages.bod_group_timur_subtitle'),
-                'icon'     => 'fa-solid fa-map-location-dot',
-                'cols'     => 5,
-                'members'  => [
-                    ['role' => __('messages.bod_role_ketua'),       'name' => 'Raga Alfath',                'img' => 'raga_alfath.png'],
-                    ['role' => __('messages.bod_role_bisdev_wil'),  'name' => 'Yainudin Yahya',             'img' => 'yainudin_yahya.png'],
-                    ['role' => __('messages.bod_role_keanggotaan'), 'name' => 'Achmad Arief',              'img' => 'achmad_arief.png'],
-                    ['role' => __('messages.bod_role_bendahara'),   'name' => 'Sukis Wijayanti',           'img' => 'sukis_wijayanti.png'],
-                    ['role' => __('messages.bod_role_edukasi'),     'name' => 'Dedy Pratama (Dedy Focus)', 'img' => 'dedy_pratama_dedy_focus.png'],
-                ],
-            ],
-
+        /*
+        |--------------------------------------------------------------------------
+        | Struktur Pusat
+        |--------------------------------------------------------------------------
+        | 'lead' => true  : jabatan level pimpinan (kartu solid, badge oranye)
+        | name = null     : posisi masih kosong → tampil "Segera Diisi"
+        */
+        $pusat = [
+            ['role' => __('messages.org_role_president'),          'name' => 'Donny Wahyudi',          'lead' => true],
+            ['role' => __('messages.org_role_deputy_president'),   'name' => 'Dara Zam Chairyah',      'lead' => true],
+            ['role' => __('messages.org_role_secgen'),             'name' => 'Sonny Arca Adryanto',    'lead' => true],
+            ['role' => __('messages.org_role_treasurer'),          'name' => 'Lim Erwin Hartono',      'lead' => true],
+            ['role' => __('messages.org_role_deputy_secgen_1'),    'name' => 'Deasi T. Widyastuti'],
+            ['role' => __('messages.org_role_deputy_secgen_2'),    'name' => null],
+            ['role' => __('messages.org_role_deputy_treasurer_1'), 'name' => 'Raga Birhatihin Al Fath'],
+            ['role' => __('messages.org_role_deputy_treasurer_2'), 'name' => 'Suryani'],
         ];
 
-        $colsMap = [
-            3 => 'grid-cols-2 sm:grid-cols-3',
-            4 => 'grid-cols-2 sm:grid-cols-4',
-            5 => 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5',
+        /*
+        |--------------------------------------------------------------------------
+        | Empat Pilar
+        |--------------------------------------------------------------------------
+        | Tiap pilar: satu Director + jajaran Deputy.
+        */
+        $pilar = [
+            [
+                'key'      => 'learn',
+                'title'    => __('messages.org_pilar_learn_title'),
+                'subtitle' => __('messages.org_pilar_learn_subtitle'),
+                'icon'     => 'fa-solid fa-graduation-cap',
+                'director' => ['role' => __('messages.org_role_dir_learning'), 'name' => 'Muhammad Khemal'],
+                'deputies' => [
+                    ['role' => __('messages.org_role_dep_curriculum'),  'name' => 'Erlina'],
+                    ['role' => __('messages.org_role_dep_mentorship'),  'name' => 'Krisna Purbaya Putra'],
+                    ['role' => __('messages.org_role_dep_pubedu'),      'name' => 'Achmad Wildan'],
+                ],
+            ],
+            [
+                'key'      => 'connect',
+                'title'    => __('messages.org_pilar_connect_title'),
+                'subtitle' => __('messages.org_pilar_connect_subtitle'),
+                'icon'     => 'fa-solid fa-handshake',
+                'director' => ['role' => __('messages.org_role_dir_networking'), 'name' => 'Lindar Fitriany'],
+                'deputies' => [
+                    ['role' => __('messages.org_role_dep_event'),    'name' => 'Zulaidah Rahmawati Wadjo'],
+                    ['role' => __('messages.org_role_dep_pr'),       'name' => 'Aris Imran'],
+                    ['role' => __('messages.org_role_dep_digicom'),  'name' => 'Asad Abdulkadir'],
+                    ['role' => __('messages.org_role_dep_creative'), 'name' => 'Lely Kusworo'],
+                ],
+            ],
+            [
+                'key'      => 'ecosystem',
+                'title'    => __('messages.org_pilar_ecosystem_title'),
+                'subtitle' => __('messages.org_pilar_ecosystem_subtitle'),
+                'icon'     => 'fa-solid fa-users-gear',
+                'director' => ['role' => __('messages.org_role_dir_membership'), 'name' => 'Paula Meliana'],
+                'deputies' => [
+                    ['role' => __('messages.org_role_dep_member_mgmt'), 'name' => 'Yandi Hermawan'],
+                    ['role' => __('messages.org_role_dep_compliance'),  'name' => null],
+                    ['role' => __('messages.org_role_dep_legal'),       'name' => 'Husni Farid Abdat'],
+                    ['role' => __('messages.org_role_dep_bond'),        'name' => 'M. Zulkifli'],
+                ],
+            ],
+            [
+                'key'      => 'scaleup',
+                'title'    => __('messages.org_pilar_scaleup_title'),
+                'subtitle' => __('messages.org_pilar_scaleup_subtitle'),
+                'icon'     => 'fa-solid fa-arrow-trend-up',
+                'director' => ['role' => __('messages.org_role_dir_bisdev'), 'name' => 'Andi Pangeran'],
+                'deputies' => [
+                    ['role' => __('messages.org_role_dep_consulting'), 'name' => 'Heriyanto Anugroho'],
+                ],
+            ],
         ];
+
+        /*
+        |--------------------------------------------------------------------------
+        | Struktur Wilayah
+        |--------------------------------------------------------------------------
+        */
+        $wilayah = [
+            [
+                'key'     => 'barat',
+                'title'   => __('messages.org_wil_barat_title'),
+                'lead'    => ['role' => __('messages.org_role_reg_director'), 'name' => 'Wie Wie'],
+                'members' => [
+                    ['role' => __('messages.org_role_reg_secretary'),     'name' => 'Ayad Als Adha'],
+                    ['role' => __('messages.org_role_reg_treasurer'),     'name' => 'Alif Akbar S.'],
+                    ['role' => __('messages.org_role_reg_dir_learning'),  'name' => 'Hilman Pratama'],
+                    ['role' => __('messages.org_role_reg_dep_learning'),  'name' => 'Irfi Ismail'],
+                    ['role' => __('messages.org_role_reg_dir_network'),   'name' => 'Abinew Razak'],
+                    ['role' => __('messages.org_role_reg_dep_network'),   'name' => 'Unggul Gumilang Wicaksono'],
+                    ['role' => __('messages.org_role_reg_dir_member'),    'name' => 'Martin Suharto'],
+                    ['role' => __('messages.org_role_reg_dep_member'),    'name' => 'Indra Nanda'],
+                    ['role' => __('messages.org_role_reg_dir_bisdev'),    'name' => 'Jatmeko'],
+                    ['role' => __('messages.org_role_reg_dep_bisdev'),    'name' => 'Citra Kusuma'],
+                ],
+            ],
+            [
+                'key'     => 'tengah',
+                'title'   => __('messages.org_wil_tengah_title'),
+                'lead'    => ['role' => __('messages.org_role_reg_director'), 'name' => 'Iwan A. Prabowo'],
+                'members' => [
+                    ['role' => __('messages.org_role_reg_secretary'),    'name' => 'M. Khudori Bix'],
+                    ['role' => __('messages.org_role_reg_treasurer'),    'name' => 'Marylia Rahmawati'],
+                    ['role' => __('messages.org_role_reg_dir_learning'), 'name' => 'Bimo Yunianto'],
+                    ['role' => __('messages.org_role_reg_dir_network'),  'name' => 'Taufiq Ichsani'],
+                    ['role' => __('messages.org_role_reg_dir_member'),   'name' => 'Fajarini'],
+                    ['role' => __('messages.org_role_reg_dir_bisdev'),   'name' => 'Suyono'],
+                ],
+            ],
+            [
+                'key'     => 'timur',
+                'title'   => __('messages.org_wil_timur_title'),
+                'lead'    => ['role' => __('messages.org_role_reg_director'), 'name' => 'Sukis Widjajanti'],
+                'members' => [
+                    ['role' => __('messages.org_role_reg_secretary'),    'name' => 'Dedy Pratama'],
+                    ['role' => __('messages.org_role_reg_treasurer'),    'name' => 'Dedy Pratama'],
+                    ['role' => __('messages.org_role_reg_dir_learning'), 'name' => 'Indra Rinaldy'],
+                    ['role' => __('messages.org_role_reg_dir_network'),  'name' => 'Achmad Arief'],
+                    ['role' => __('messages.org_role_reg_dir_member'),   'name' => 'Soesanto Hartono'],
+                    ['role' => __('messages.org_role_reg_dir_bisdev'),   'name' => 'Abdul Muidz Aad'],
+                    ['role' => __('messages.org_role_reg_dep_bisdev'),   'name' => 'Yainudin Yahya'],
+                ],
+            ],
+        ];
+
+        /* Helper: bikin monogram dari nama (maks 2 huruf) */
+        $initials = function ($name) {
+            if (! $name) return '—';
+            $clean = preg_replace('/\(.*?\)|[^\p{L}\s]/u', ' ', $name);
+            $parts = preg_split('/\s+/u', trim($clean), -1, PREG_SPLIT_NO_EMPTY);
+            if (empty($parts)) return '—';
+            $first = mb_substr($parts[0], 0, 1);
+            $last  = count($parts) > 1 ? mb_substr(end($parts), 0, 1) : '';
+            return mb_strtoupper($first . $last);
+        };
         @endphp
 
-        {{-- ====================== GROUPS LOOP ====================== --}}
-        @foreach($groups as $gIndex => $group)
-        <div class="mb-20" data-aos="fade-up" data-aos-delay="{{ $gIndex * 60 }}">
+        {{-- ====================== 01 · STRUKTUR PUSAT ====================== --}}
+        <div class="mb-24" data-aos="fade-up">
 
-            {{-- Group Header --}}
             <div class="flex items-center gap-4 mb-10">
                 <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg shadow-orange-500/30">
-                    <i class="{{ $group['icon'] }} text-white text-sm"></i>
+                    <i class="fa-solid fa-crown text-white text-sm"></i>
                 </div>
                 <div class="leading-tight">
                     <span class="font-poppins font-bold text-lg text-gray-900 dark:text-white">
-                        {{ $group['title'] }}
+                        {{ __('messages.org_pusat_title') }}
                     </span>
                     <span class="mx-2 text-gray-300 dark:text-white/20">·</span>
                     <span class="text-orange-500 dark:text-orange-400 text-sm font-semibold">
-                        {{ $group['subtitle'] }}
+                        {{ __('messages.org_pusat_subtitle') }}
                     </span>
                 </div>
                 <div class="flex-1 h-px bg-gradient-to-r from-orange-500/25 via-orange-500/10 to-transparent"></div>
             </div>
 
-            {{-- Members Grid --}}
-            <div class="grid {{ $colsMap[$group['cols']] }} gap-4 md:gap-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+                @foreach($pusat as $i => $m)
+                <div data-aos="fade-up" data-aos-delay="{{ $i * 60 }}"
+                     class="group relative overflow-hidden rounded-2xl border transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-12px_rgba(249,115,22,0.18)]
+                            {{ ($m['lead'] ?? false)
+                                ? 'bg-white dark:bg-[#111113] border-orange-500/25 hover:border-orange-500/60'
+                                : 'bg-gray-50 dark:bg-[#0f0f11] border-gray-100 dark:border-white/5 hover:border-orange-500/40' }}">
 
-                @foreach($group['members'] as $mIndex => $member)
-                <div
-                    data-aos="fade-up"
-                    data-aos-delay="{{ ($gIndex * 40) + ($mIndex * 70) }}"
-                    class="group relative bg-gray-50 dark:bg-[#111113] rounded-2xl overflow-hidden border border-gray-100 dark:border-white/5 transition-all duration-500 hover:border-orange-500/40 hover:shadow-[0_20px_40px_-12px_rgba(249,115,22,0.18)] hover:-translate-y-1.5"
-                >
-                    {{-- Top accent line --}}
                     <div class="absolute top-0 left-0 w-0 h-[2.5px] bg-gradient-to-r from-orange-400 via-orange-500 to-red-500 group-hover:w-full transition-all duration-700 ease-out z-10"></div>
 
-                    {{-- Photo --}}
-                    <div class="relative overflow-hidden aspect-[3/3.2]">
-                        <img
-                            src="{{ asset('assets/manager/' . $member['img']) }}"
-                            alt="{{ $member['name'] }}"
-                            class="w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-105"
-                            onerror="this.onerror=null;this.src='';this.parentElement.classList.add('img-fallback');"
-                        >
-                        {{-- Fallback avatar --}}
-                        <div class="fallback-avatar absolute inset-0 hidden items-center justify-center bg-gradient-to-br from-orange-500/10 to-orange-600/5">
-                            <svg class="w-16 h-16 text-orange-400/40" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
-                            </svg>
+                    <div class="p-6">
+                        {{-- Monogram --}}
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 font-poppins font-black text-base tracking-wider transition-all duration-500
+                                    {{ ($m['lead'] ?? false)
+                                        ? 'bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/25'
+                                        : 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border border-orange-500/15 group-hover:bg-orange-500/20' }}">
+                            {{ $initials($m['name']) }}
                         </div>
-                        {{-- Bottom gradient --}}
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-50 via-gray-50/10 to-transparent dark:from-[#111113] dark:via-[#111113]/10 pointer-events-none"></div>
-                        {{-- Orange tint on hover --}}
-                        <div class="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/8 transition-all duration-500 pointer-events-none"></div>
+
+                        {{-- Role --}}
+                        <div class="inline-flex items-center px-2.5 py-1 rounded-full bg-orange-500/10 border border-orange-500/15 text-orange-600 dark:text-orange-400 text-[9px] font-black uppercase tracking-widest mb-2.5 leading-none group-hover:bg-orange-500/20 transition-colors duration-300">
+                            {{ $m['role'] }}
+                        </div>
+
+                        {{-- Nama (proper noun — tidak diterjemahkan) --}}
+                        @if($m['name'])
+                            <h4 class="text-[15px] font-bold text-gray-800 dark:text-white font-poppins leading-snug group-hover:text-orange-500 transition-colors duration-300">
+                                {{ $m['name'] }}
+                            </h4>
+                        @else
+                            <h4 class="text-[15px] font-semibold text-gray-400 dark:text-gray-600 font-poppins leading-snug italic">
+                                {{ __('messages.org_vacant') }}
+                            </h4>
+                        @endif
                     </div>
 
-                    {{-- Content --}}
-                    <div class="px-4 pb-5 pt-2">
-                        {{-- Role Badge --}}
-                        <div class="inline-flex items-center px-2.5 py-1 rounded-full bg-orange-500/10 border border-orange-500/15 text-orange-600 dark:text-orange-400 text-[9px] font-black uppercase tracking-widest mb-2 leading-none group-hover:bg-orange-500/20 transition-colors duration-300">
-                            {{ $member['role'] }}
-                        </div>
-                        {{-- Name — NOT translated (proper noun) --}}
-                        <h4 class="text-[13px] font-bold text-gray-800 dark:text-white font-poppins leading-snug group-hover:text-orange-500 transition-colors duration-300">
-                            {{ $member['name'] }}
-                        </h4>
-                    </div>
-
-                    {{-- Bottom accent line --}}
                     <div class="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-orange-400 to-orange-600 group-hover:w-full transition-all duration-1000 ease-out"></div>
                 </div>
                 @endforeach
-
             </div>
         </div>
-        @endforeach
 
-        {{-- ====================== FOOTER LINK ====================== --}}
-        <div data-aos="fade-up" class="mt-8 text-center">
-            <a href="#"
-               class="inline-flex items-center gap-4 px-8 py-4 rounded-full border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-orange-500 hover:border-orange-500/50 transition-all group">
-                <span class="font-poppins font-semibold tracking-wide uppercase text-sm">
-                    {{ __('messages.bod_see_all') }}
-                </span>
-                <div class="w-8 h-8 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-all">
-                    <i class="fa-solid fa-arrow-right-long transition-transform group-hover:translate-x-1"></i>
+        {{-- ====================== 02 · EMPAT PILAR ====================== --}}
+        <div class="mb-24">
+
+            <div class="flex items-center gap-4 mb-10" data-aos="fade-up">
+                <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg shadow-orange-500/30">
+                    <i class="fa-solid fa-layer-group text-white text-sm"></i>
                 </div>
-            </a>
+                <div class="leading-tight">
+                    <span class="font-poppins font-bold text-lg text-gray-900 dark:text-white">
+                        {{ __('messages.org_pilar_title') }}
+                    </span>
+                    <span class="mx-2 text-gray-300 dark:text-white/20">·</span>
+                    <span class="text-orange-500 dark:text-orange-400 text-sm font-semibold">
+                        {{ __('messages.org_pilar_subtitle') }}
+                    </span>
+                </div>
+                <div class="flex-1 h-px bg-gradient-to-r from-orange-500/25 via-orange-500/10 to-transparent"></div>
+            </div>
+
+            <div class="space-y-5">
+                @foreach($pilar as $pIndex => $p)
+                <div data-aos="fade-up" data-aos-delay="{{ $pIndex * 60 }}"
+                     class="group/pillar relative rounded-3xl border border-gray-100 dark:border-white/5 bg-gray-50/60 dark:bg-[#0f0f11] p-6 md:p-8 transition-all duration-500 hover:border-orange-500/30">
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+
+                        {{-- Kiri: identitas pilar + Director --}}
+                        <div class="lg:col-span-4">
+                            <div class="flex items-center gap-3 mb-5">
+                                <div class="flex-shrink-0 w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center">
+                                    <i class="{{ $p['icon'] }} text-orange-500 text-xs"></i>
+                                </div>
+                                <div class="leading-tight">
+                                    <div class="font-poppins font-bold text-base text-gray-900 dark:text-white uppercase tracking-wide">
+                                        {{ $p['title'] }}
+                                    </div>
+                                    <div class="text-[11px] font-semibold text-gray-400 dark:text-gray-500">
+                                        {{ $p['subtitle'] }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- Kartu Director --}}
+                            <div class="group relative overflow-hidden rounded-2xl bg-white dark:bg-[#141416] border border-orange-500/25 p-5 transition-all duration-500 hover:border-orange-500/60 hover:shadow-[0_20px_40px_-12px_rgba(249,115,22,0.18)]">
+                                <div class="absolute top-0 left-0 w-0 h-[2.5px] bg-gradient-to-r from-orange-400 to-red-500 group-hover:w-full transition-all duration-700 ease-out"></div>
+                                <div class="flex items-center gap-4">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/25 flex items-center justify-center font-poppins font-black text-sm tracking-wider">
+                                        {{ $initials($p['director']['name']) }}
+                                    </div>
+                                    <div class="min-w-0">
+                                        <div class="text-[9px] font-black uppercase tracking-widest text-orange-600 dark:text-orange-400 mb-1 leading-none">
+                                            {{ $p['director']['role'] }}
+                                        </div>
+                                        <h4 class="text-[15px] font-bold text-gray-800 dark:text-white font-poppins leading-snug truncate group-hover:text-orange-500 transition-colors duration-300">
+                                            {{ $p['director']['name'] }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Kanan: jajaran Deputy --}}
+                        <div class="lg:col-span-8 lg:border-l lg:border-gray-200/70 dark:lg:border-white/5 lg:pl-8">
+                            <div class="text-[10px] font-black uppercase tracking-[0.25em] text-gray-400 dark:text-gray-600 mb-4">
+                                {{ __('messages.org_deputy_label') }}
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                @foreach($p['deputies'] as $d)
+                                <div class="group relative overflow-hidden rounded-xl bg-white dark:bg-[#141416] border border-gray-100 dark:border-white/5 px-4 py-3.5 transition-all duration-400 hover:border-orange-500/40 hover:-translate-y-0.5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="flex-shrink-0 w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/15 text-orange-600 dark:text-orange-400 flex items-center justify-center font-poppins font-black text-[11px] tracking-wider group-hover:bg-orange-500/20 transition-colors duration-300">
+                                            {{ $initials($d['name']) }}
+                                        </div>
+                                        <div class="min-w-0">
+                                            <div class="text-[9px] font-black uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-0.5 leading-none">
+                                                {{ $d['role'] }}
+                                            </div>
+                                            @if($d['name'])
+                                                <h4 class="text-[13px] font-bold text-gray-800 dark:text-white font-poppins leading-snug truncate group-hover:text-orange-500 transition-colors duration-300">
+                                                    {{ $d['name'] }}
+                                                </h4>
+                                            @else
+                                                <h4 class="text-[13px] font-semibold text-gray-400 dark:text-gray-600 font-poppins leading-snug italic">
+                                                    {{ __('messages.org_vacant') }}
+                                                </h4>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- ====================== 03 · STRUKTUR WILAYAH ====================== --}}
+        <div class="mb-16">
+
+            <div class="flex items-center gap-4 mb-10" data-aos="fade-up">
+                <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg shadow-orange-500/30">
+                    <i class="fa-solid fa-map-location-dot text-white text-sm"></i>
+                </div>
+                <div class="leading-tight">
+                    <span class="font-poppins font-bold text-lg text-gray-900 dark:text-white">
+                        {{ __('messages.org_wilayah_title') }}
+                    </span>
+                    <span class="mx-2 text-gray-300 dark:text-white/20">·</span>
+                    <span class="text-orange-500 dark:text-orange-400 text-sm font-semibold">
+                        {{ __('messages.org_wilayah_subtitle') }}
+                    </span>
+                </div>
+                <div class="flex-1 h-px bg-gradient-to-r from-orange-500/25 via-orange-500/10 to-transparent"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                @foreach($wilayah as $wIndex => $w)
+                <div data-aos="fade-up" data-aos-delay="{{ $wIndex * 80 }}"
+                     class="relative rounded-3xl border border-gray-100 dark:border-white/5 bg-gray-50/60 dark:bg-[#0f0f11] overflow-hidden transition-all duration-500 hover:border-orange-500/30">
+
+                    {{-- Header wilayah --}}
+                    <div class="relative px-6 pt-6 pb-5 border-b border-gray-100 dark:border-white/5">
+                        <div class="absolute top-0 left-0 w-full h-[2.5px] bg-gradient-to-r from-orange-400 via-orange-500 to-transparent"></div>
+                        <div class="text-[10px] font-black uppercase tracking-[0.3em] text-orange-500 dark:text-orange-400 mb-3">
+                            {{ $w['title'] }}
+                        </div>
+                        <div class="group flex items-center gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/25 flex items-center justify-center font-poppins font-black text-sm tracking-wider">
+                                {{ $initials($w['lead']['name']) }}
+                            </div>
+                            <div class="min-w-0">
+                                <div class="text-[9px] font-black uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-1 leading-none">
+                                    {{ $w['lead']['role'] }}
+                                </div>
+                                <h4 class="text-[15px] font-bold text-gray-800 dark:text-white font-poppins leading-snug truncate">
+                                    {{ $w['lead']['name'] }}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Daftar pengurus --}}
+                    <ul class="divide-y divide-gray-100 dark:divide-white/5">
+                        @foreach($w['members'] as $m)
+                        <li class="group flex items-center justify-between gap-4 px-6 py-3.5 transition-colors duration-300 hover:bg-orange-500/5">
+                            <span class="text-[10px] font-black uppercase tracking-wider text-gray-400 dark:text-gray-500 leading-tight">
+                                {{ $m['role'] }}
+                            </span>
+                            <span class="text-[13px] font-bold text-gray-800 dark:text-white font-poppins text-right leading-snug group-hover:text-orange-500 transition-colors duration-300">
+                                {{ $m['name'] }}
+                            </span>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- ====================== FOOTER NOTE ====================== --}}
+        <div data-aos="fade-up" class="text-center">
+            <p class="text-xs font-semibold text-gray-400 dark:text-gray-600 tracking-wide">
+                {{ __('messages.org_footnote') }}
+            </p>
         </div>
 
     </div>
 </section>
-
-<style>
-    .img-fallback img              { display: none !important; }
-    .img-fallback .fallback-avatar { display: flex !important; }
-</style>
 
 @endsection

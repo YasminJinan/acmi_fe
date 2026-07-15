@@ -3,6 +3,24 @@
 return [
 
 
+
+'org_badge'          => 'Organizational Structure',
+'org_title_1'        => 'ACMI Board',
+'org_title_2'        => 'Term 2025–2028',
+'org_description'    => 'The national board, four organizational pillars, and regional teams running ACMI programs across Indonesia.',
+'org_vacant'         => 'Position Open',
+'org_deputy_label'   => 'Deputies',
+'org_footnote'       => 'ACMI Central & Regional Structure 2025–2028 — final version.',
+'org_pusat_title'    => 'Central Board',
+'org_pusat_subtitle' => 'National Executive Board',
+'org_role_president' => 'President',
+'org_pilar_title'    => 'Four Pillars',
+'org_wilayah_title'  => 'Regional Structure',
+'org_wil_barat_title'  => 'West Region',
+'org_wil_tengah_title' => 'Central Region',
+'org_wil_timur_title'  => 'East Region',
+
+
    // =========================================================
     //  BOARD OF DIRECTORS  —  ACMI 2024-2025
     //  Blade: resources/views/acmi-board-section.blade.php
