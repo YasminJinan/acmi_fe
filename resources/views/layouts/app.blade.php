@@ -43,6 +43,8 @@
             'id.manajer' => 'en.manager',
             'en.home' => 'id.home',
             'id.home' => 'en.home',
+            'en.events' => 'id.events',
+            'id.events' => 'en.events',
         ];
 
         $enUrl = url('/en');

@@ -68,10 +68,10 @@ class HomeController extends Controller
         });
 
         $posts = collect($posts);
-
         $testimonials = $cms->getTestimonials();
+        $events = \App\Models\Event::orderBy('starts_at', 'asc')->get();
 
-        return view('welcome', compact('posts', 'products', 'faqs', 'gallery', 'partners', 'testimonials'));
+        return view('welcome', compact('posts', 'products', 'faqs', 'gallery', 'partners', 'testimonials', 'events'));
     }
 
     /**

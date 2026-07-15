@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController; 
 use App\Http\Controllers\WebhookController; 
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
@@ -39,6 +40,7 @@ Route::middleware([\App\Http\Middleware\SetLocale::class])->group(function () {
         Route::get('/join', [FormJoinController::class, 'index'])->name('join');
         Route::post('/join', [FormJoinController::class, 'store'])->name('join.store');
         Route::get('/manager', function () { return view('acmi-manager'); })->name('manager');
+        Route::get('/events', [EventController::class, 'index'])->name('events');
     });
 
     // Indonesian Routes
@@ -54,6 +56,7 @@ Route::middleware([\App\Http\Middleware\SetLocale::class])->group(function () {
         Route::get('/gabung', [FormJoinController::class, 'index'])->name('gabung');
         Route::post('/gabung', [FormJoinController::class, 'store'])->name('gabung.store');
         Route::get('/manajer', function () { return view('acmi-manager'); })->name('manajer');
+        Route::get('/events', [EventController::class, 'index'])->name('events');
     });
 
 });

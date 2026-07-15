@@ -27,6 +27,8 @@
                 class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_board') }}</a>
             <a href="{{ $l == 'id' ? route('id.produk') : route('en.products') }}"
                 class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_products') }}</a>
+            <a href="{{ $l == 'id' ? route('id.events') : route('en.events') }}"
+                class="hover:text-orange-500 dark:hover:text-orange-400 transition">Event</a>
             <a href="{{ $l == 'id' ? route('id.galeri') : route('en.gallery') }}"
                 class="hover:text-orange-500 dark:hover:text-orange-400 transition">{{ __('messages.nav_gallery') }}</a>
             <a href="{{ $l == 'id' ? route('id.manajer') : route('en.manager') }}"
@@ -79,6 +81,8 @@
                 class="py-2 hover:text-orange-500 transition border-b border-gray-100 dark:border-white/5">{{ __('messages.nav_board') }}</a>
             <a href="#"
                 class="py-2 hover:text-orange-500 transition border-b border-gray-100 dark:border-white/5">{{ __('messages.nav_members') }}</a>
+            <a href="{{ $l == 'id' ? route('id.events') : route('en.events') }}"
+                class="py-2 hover:text-orange-500 transition border-b border-gray-100 dark:border-white/5">Event</a>
             <a href="{{ $l == 'id' ? route('id.galeri') : route('en.gallery') }}"
                 class="py-2 hover:text-orange-500 transition border-b border-gray-100 dark:border-white/5">{{ __('messages.nav_gallery') }}</a>
             <a href="{{ $l == 'id' ? route('id.artikel') : route('en.ontopic') }}" class="py-2 hover:text-orange-500 transition">{{ __('messages.nav_ontopic') }}</a>
