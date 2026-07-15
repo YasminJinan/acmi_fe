@@ -3,6 +3,14 @@
 return [
 
 
+// ── Membership Features ──────────────────────────────
+    'membership_feature_1' => 'Akses penuh ke seluruh program ACMI',
+    'membership_feature_2' => 'Undangan ke CEO roundtable bulanan',
+    'membership_feature_3' => 'Masterclass eksklusif bersama para pakar global',
+    'membership_feature_4' => 'Networking dengan 500+ CEO Indonesia',
+    'membership_feature_5' => 'Akses ke resource center dan industry insights',
+    'membership_feature_6' => 'Prioritas untuk misi bisnis internasional',
+
     // =========================================================
     //  BOARD OF DIRECTORS  —  ACMI 2024-2025
     //  Blade: resources/views/acmi-board-section.blade.php
