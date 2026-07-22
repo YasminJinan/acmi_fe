@@ -338,6 +338,7 @@
                                 </a>
                             </div>
                         </div>
+                    </div>
                 </template>
                 
                 {{-- Empty State --}}
@@ -350,26 +351,6 @@
                 </div>
             </div>
 
-            {{-- Promo & CTA Button --}}
-            <div
-                class="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto border-t border-gray-100 dark:border-white/5 pt-4 md:pt-0 md:border-none mt-8">
-                <div class="text-left md:text-right flex items-center md:flex-col gap-2 md:gap-0">
-                    <p
-                        class="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1 md:justify-end">
-                        <i class="fa-solid fa-tags text-orange-400 md:hidden"></i> Early Bird Discount
-                    </p>
-                    <p
-                        class="text-orange-600 dark:text-orange-400 font-black text-xl tracking-tight flex items-center gap-1">
-                        30% OFF <i class="fa-solid fa-fire text-sm animate-bounce hidden md:inline-block"></i>
-                    </p>
-                </div>
-
-                <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}"
-                    class="bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-sm font-semibold px-6 py-3.5 rounded-xl flex items-center gap-2.5 shadow-md shadow-orange-600/10 dark:shadow-none hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ml-auto md:ml-0">
-                    <span>{{ __('messages.event_cta') }}</span>
-                    <i class="fa-solid fa-arrow-right-long text-xs transition-transform group-hover:translate-x-1"></i>
-                </a>
-            </div>
         </div>
     </section>
 
@@ -496,14 +477,19 @@
     </section>
 
 
-    {{-- ═══ SPONSOR 1 · BANK MANDIRI · 728×90 · di bawah SOLUTION SECTION ═══ --}}
+    {{-- ═══ SPONSOR 1 · 728×90 · di bawah SOLUTION SECTION ═══ --}}
+    @php
+    $s = ($sponsorsBySize['728x90'] ?? collect())->values()->get(0);
+@endphp
+    @if($s)
     <section class="bg-white dark:bg-[#0a0a0b] py-14 transition-colors duration-500">
         <x-sponsor-banner
-            href="https://www.bankmandiri.co.id/"
-            image="{{ asset('assets/images/sponsors/mandiri-728x90.jpg') }}"
-            brand="Bank Mandiri"
+            :href="$s['link']"
+            :image="$s['image']"
+            :brand="$s['title']"
             size="728x90" />
     </section>
+    @endif
 
 
     {{-- EXCLUSIVE MEMBERSHIP SECTION --}}
@@ -623,14 +609,17 @@
     </section>
 
 
-    {{-- ═══ SPONSOR 2 · GARUDA INDONESIA · 970×250 · di bawah EXCLUSIVE MEMBERSHIP ═══ --}}
+    {{-- ═══ SPONSOR 2 · 970×250 · di bawah EXCLUSIVE MEMBERSHIP ═══ --}}
+    @php($s = ($sponsorsBySize['970x250'] ?? collect())->values()->get(0))
+    @if($s)
     <section class="bg-gray-50 dark:bg-[#0c0c0e] py-16 transition-colors duration-500">
         <x-sponsor-banner
-            href="https://www.garuda-indonesia.com/id/id/"
-            image="{{ asset('assets/images/sponsors/garuda-970x250.jpg') }}"
-            brand="Garuda Indonesia"
+            :href="$s['link']"
+            :image="$s['image']"
+            :brand="$s['title']"
             size="970x250" />
     </section>
+    @endif
 
 
     {{-- Swiper Script --}}
@@ -849,14 +838,17 @@
     </section>
 
 
-    {{-- ═══ SPONSOR 3 · McKINSEY & COMPANY · 336×280 · di bawah PRODUK ANGGOTA ═══ --}}
+    {{-- ═══ SPONSOR 3 · 336×280 · di bawah PRODUK ANGGOTA ═══ --}}
+    @php($s = ($sponsorsBySize['336x280'] ?? collect())->values()->get(0))
+    @if($s)
     <section class="bg-gray-50 dark:bg-[#050505] py-16 transition-colors duration-500">
         <x-sponsor-banner
-            href="https://www.mckinsey.com/id/overview"
-            image="{{ asset('assets/images/sponsors/mckinsey-336x280.jpg') }}"
-            brand="McKinsey &amp; Company"
+            :href="$s['link']"
+            :image="$s['image']"
+            :brand="$s['title']"
             size="336x280" />
     </section>
+    @endif
 
 
     {{-- TESTIMONIAL SECTION --}}
@@ -1075,13 +1067,16 @@
         yang kosong). Kalau ternyata maksudnya lain, cukup pindahkan blok
         <section> ini — komponennya tidak perlu diubah.
     --}}
+    @php($s = ($sponsorsBySize['728x90'] ?? collect())->values()->get(1) ?? ($sponsorsBySize['728x90'] ?? collect())->values()->get(0))
+    @if($s)
     <section class="bg-white dark:bg-[#0a0a0b] py-14 transition-colors duration-500">
         <x-sponsor-banner
-            href="https://www.bca.co.id/id/individu/produk/prioritas"
-            image="{{ asset('assets/images/sponsors/bca-prioritas-728x90.jpg') }}"
-            brand="BCA Prioritas"
+            :href="$s['link']"
+            :image="$s['image']"
+            :brand="$s['title']"
             size="728x90" />
     </section>
+    @endif
 
 
     {{-- GALLERY SECTION --}}
@@ -1307,24 +1302,27 @@
         flex-basis proporsional (970 : 300). Hasilnya tinggi keduanya identik dan
         nggak kelihatan seperti tumpukan iklan. Di bawah lg → stack ke tengah.
     --}}
+    @php($s = ($sponsorsBySize['970x250'] ?? collect())->values()->get(1) ?? ($sponsorsBySize['970x250'] ?? collect())->values()->get(0))
+    @if($s)
     <section class="bg-white dark:bg-[#0a0a0b] py-16 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8">
 
                 <div class="w-full lg:flex-[970_1_0%] lg:min-w-0 flex justify-center">
                     <x-sponsor-banner
-                        href="https://www.astra.co.id/"
-                        image="{{ asset('assets/images/sponsors/astra-970x250.jpg') }}"
-                        brand="Astra International"
+                        :href="$s['link']"
+                        :image="$s['image']"
+                        :brand="$s['title']"
                         size="970x250"
                         :flush="true" />
                 </div>
 
-              
+
 
             </div>
         </div>
     </section>
+    @endif
 
 
     {{-- INSTAGRAM FEED SECTION --}}
@@ -1392,14 +1390,17 @@
         </div>
     </section>
 
+      @php($s = ($sponsorsBySize['300x250'] ?? collect())->values()->get(0))
+      @if($s)
       <div class="w-full lg:flex-[300_1_0%] lg:min-w-0 flex justify-center">
                     <x-sponsor-banner
-                        href="https://www.telkomsel.com/business"
-                        image="{{ asset('assets/images/sponsors/telkomsel-300x250.jpg') }}"
-                        brand="Telkomsel Business"
+                        :href="$s['link']"
+                        :image="$s['image']"
+                        :brand="$s['title']"
                         size="300x250"
                         :flush="true" />
                 </div>
+      @endif
 
 
     {{-- FINAL CTA SECTION --}}
