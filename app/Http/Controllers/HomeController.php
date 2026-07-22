@@ -19,6 +19,7 @@ class HomeController extends Controller
         $faqs     = $cms->getFaqs();
         $gallery  = $cms->getGallery();
         $partners = $cms->getPartners();
+        $sponsorsBySize = collect($cms->getSponsors())->groupBy('size');
 
         $posts = Cache::remember('instagram_posts_v4', 60 * 60, function () {
             
@@ -71,7 +72,7 @@ class HomeController extends Controller
         $testimonials = $cms->getTestimonials();
         $events = \App\Models\Event::orderBy('starts_at', 'asc')->get();
 
-        return view('welcome', compact('posts', 'products', 'faqs', 'gallery', 'partners', 'testimonials', 'events'));
+        return view('welcome', compact('posts', 'products', 'faqs', 'gallery', 'partners', 'testimonials', 'events', 'sponsorsBySize'));
     }
 
     /**

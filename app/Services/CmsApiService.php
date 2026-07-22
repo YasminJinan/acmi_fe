@@ -188,6 +188,19 @@ class CmsApiService
         });
     }
 
+    public function getSponsors(): array
+    {
+        return Cache::remember('sponsors', 300, function () {
+            try {
+                $response = $this->client->get('/sponsors');
+                return $response->successful() ? $response->json('data') : [];
+            } catch (\Exception $e) {
+                Log::error('CMS getSponsors gagal: ' . $e->getMessage());
+                return [];
+            }
+        });
+    }
+
     public function submitInbound(array $data): array
     {
         try {
