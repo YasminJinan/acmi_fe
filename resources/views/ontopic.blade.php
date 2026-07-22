@@ -1,10 +1,26 @@
 @extends('layouts.app')
-@section('title', 'On Topik — ACMI')
+@php
+    $isId = app()->getLocale() == 'id';
+    $categorySlug = request('category');
+    $categoryName = null;
+
+    if ($categorySlug && isset($categories)) {
+        $cat = collect($categories)->firstWhere('slug', $categorySlug);
+        $categoryName = $cat ? $cat['name'] : ucfirst($categorySlug);
+    }
+
+    if ($categoryName) {
+        $title = $isId ? "Artikel {$categoryName} - ACMI" : "{$categoryName} Articles - ACMI";
+    } else {
+        $title = $isId ? 'Artikel — ACMI' : 'On Topic — ACMI';
+    }
+@endphp
+@section('title', $title)
 @section('meta_description',
     'Artikel, insight, dan perspektif terkini dari para pemimpin bisnis Indonesia bersama
     ACMI.')
 @section('meta_keywords', 'acmi artikel, on topik acmi, insight bisnis indonesia')
-@section('canonical', url('/ontopic'))
+@section('canonical', request()->fullUrl())
 
 @section('content')
 

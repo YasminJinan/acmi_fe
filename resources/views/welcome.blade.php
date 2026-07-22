@@ -229,7 +229,6 @@
         </div>
     </section>
 
-
     {{-- EVENT SECTION --}}
     <section class="bg-white dark:bg-[#0a0a0b] py-20 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative" id="events-section"
         x-data="{
@@ -287,7 +286,7 @@
             {{-- Grid Events --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <template x-for="event in filteredEvents" :key="event.id">
-                    <div class="group bg-gray-50 dark:bg-[#111116] rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/5 transition-all duration-500 hover:border-orange-500/50 dark:hover:border-orange-500/30 hover:shadow-xl hover:shadow-orange-500/10 flex flex-col h-full" data-aos="fade-up">
+                    <div @click="window.location.href = '{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}'" class="cursor-pointer group bg-gray-50 dark:bg-[#111116] rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/5 transition-all duration-500 hover:border-orange-500/50 dark:hover:border-orange-500/30 hover:shadow-xl hover:shadow-orange-500/10 flex flex-col h-full" data-aos="fade-up">
                         
                         {{-- Image Placeholder / Pattern --}}
                         <div class="relative h-48 w-full bg-gray-200 dark:bg-[#1a1a24] overflow-hidden">
@@ -333,7 +332,7 @@
                                     </div>
                                 </div>
                                 
-                                <a href="#" class="text-orange-600 dark:text-orange-500 hover:text-orange-700 dark:hover:text-orange-400 text-xs font-bold font-poppins flex items-center gap-2 group/link">
+                                <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}" class="text-orange-600 dark:text-orange-500 hover:text-orange-700 dark:hover:text-orange-400 text-xs font-bold font-poppins flex items-center gap-2 group/link">
                                     {{ app()->getLocale() == 'id' ? 'Daftar Sekarang' : 'Register Now' }}
                                     <i class="fa-solid fa-arrow-right transition-transform group-hover/link:translate-x-1"></i>
                                 </a>
@@ -563,7 +562,7 @@
                     {{-- CTA --}}
                     <div class="pt-2 group/btn">
                         <div class="flex flex-col sm:flex-row items-center gap-4">
-                            <a href="{{ url('/form-join') }}"
+                            <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}"
                                 class="px-8 py-4 bg-orange-600 dark:bg-orange-500 hover:bg-orange-700 dark:hover:bg-orange-600 text-white font-bold font-poppins rounded-xl shadow-lg shadow-orange-600/20 dark:shadow-none transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 w-full sm:w-auto">
                                 {{ __('messages.membership_cta_btn') }}
                                 <i
@@ -825,33 +824,7 @@
                 </div>
             </div>
 
-            {{-- NAVIGASI PAGINATION --}}
-            <div x-show="totalPages > 1" x-cloak class="mt-16 flex justify-center items-center gap-2" data-aos="fade-up">
-                {{-- Tombol Prev --}}
-                <button @click="if(page > 1) { page--; document.getElementById('produk-anggota').scrollIntoView({behavior: 'smooth'}); }" 
-                    :disabled="page === 1"
-                    class="w-12 h-12 rounded-xl flex items-center justify-center transition-all border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none bg-white dark:bg-white/5">
-                    <i class="fa-solid fa-chevron-left text-xs"></i>
-                </button>
 
-                {{-- Angka Halaman --}}
-                <template x-for="p in totalPages" :key="p">
-                    <button @click="page = p; document.getElementById('produk-anggota').scrollIntoView({behavior: 'smooth'});"
-                        x-text="p"
-                        :class="page === p 
-                            ? 'bg-orange-500 text-white border-orange-500 shadow-lg shadow-orange-500/25' 
-                            : 'bg-white dark:bg-white/5 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-white/10 hover:border-orange-500 hover:text-orange-500'"
-                        class="w-12 h-12 rounded-xl font-bold text-sm border transition-all">
-                    </button>
-                </template>
-
-                {{-- Tombol Next --}}
-                <button @click="if(page < totalPages) { page++; document.getElementById('produk-anggota').scrollIntoView({behavior: 'smooth'}); }" 
-                    :disabled="page === totalPages"
-                    class="w-12 h-12 rounded-xl flex items-center justify-center transition-all border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none bg-white dark:bg-white/5">
-                    <i class="fa-solid fa-chevron-right text-xs"></i>
-                </button>
-            </div>
 
             <div x-show="filteredProducts.length > 6" data-aos="fade-up" class="mt-8 text-center relative z-30" x-cloak>
                 <a href="{{ app()->getLocale() == 'id' ? route('id.produk') : route('en.products') }}"
