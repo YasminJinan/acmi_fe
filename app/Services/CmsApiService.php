@@ -74,7 +74,7 @@ class CmsApiService
                 if ($category) $params['category'] = $category;
 
                 $response = $this->client->get('/articles', $params);
-                return $response->successful() ? $response->json() : [];
+                return $response->successful() ? ($response->json() ?? []) : [];
             } catch (\Exception $e) {
                 Log::error('CMS getArticles gagal: ' . $e->getMessage());
                 return [];
@@ -100,7 +100,7 @@ class CmsApiService
         return Cache::remember('categories', 600, function () {
             try {
                 $response = $this->client->get('/categories');
-                return $response->successful() ? $response->json('data') : [];
+                return $response->successful() ? ($response->json('data') ?? []) : [];
             } catch (\Exception $e) {
                 Log::error('CMS getCategories gagal: ' . $e->getMessage());
                 return [];
@@ -113,7 +113,7 @@ class CmsApiService
         return Cache::remember('faqs', 600, function () {
             try {
                 $response = $this->client->get('/faqs');
-                return $response->successful() ? $response->json('data') : [];
+                return $response->successful() ? ($response->json('data') ?? []) : [];
             } catch (\Exception $e) {
                 Log::error('CMS getFaqs gagal: ' . $e->getMessage());
                 return [];
@@ -144,7 +144,7 @@ class CmsApiService
         if (app()->environment('local')) {
             try {
                 $response = $this->client->get('/services');
-                return $response->successful() ? $response->json('data') : [];
+                return $response->successful() ? ($response->json('data') ?? []) : [];
             } catch (\Exception $e) {
                 Log::error('CMS getServices gagal: ' . $e->getMessage());
                 return [];
@@ -154,7 +154,7 @@ class CmsApiService
         return Cache::remember('services', 600, function () {
             try {
                 $response = $this->client->get('/services');
-                return $response->successful() ? $response->json('data') : [];
+                return $response->successful() ? ($response->json('data') ?? []) : [];
             } catch (\Exception $e) {
                 Log::error('CMS getServices gagal: ' . $e->getMessage());
                 return [];
@@ -167,7 +167,7 @@ class CmsApiService
         return Cache::remember('gallery', 600, function () {
             try {
                 $response = $this->client->get('/gallery');
-                return $response->successful() ? $response->json('data') : [];
+                return $response->successful() ? ($response->json('data') ?? []) : [];
             } catch (\Exception $e) {
                 Log::error('CMS getGallery gagal: ' . $e->getMessage());
                 return [];
@@ -180,7 +180,7 @@ class CmsApiService
         return Cache::remember('partners', 600, function () {
             try {
                 $response = $this->client->get('/partners');
-                return $response->successful() ? $response->json('data') : [];
+                return $response->successful() ? ($response->json('data') ?? []) : [];
             } catch (\Exception $e) {
                 Log::error('CMS getPartners gagal: ' . $e->getMessage());
                 return [];
