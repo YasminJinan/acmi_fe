@@ -12,7 +12,7 @@
         slides: [],
         isLoading: true,
         init() {
-            fetch('http://localhost:8000/api/public/header')
+            fetch('{{ config('services.cms.api_url') }}/header')
                 .then(res => res.json())
                 .then(data => {
                     if (data.success && data.data) {
@@ -154,7 +154,7 @@
         partners: [],
         isLoading: true,
         init() {
-            fetch('{{ config('services.acmi_api.url', 'http://localhost:8000') }}/api/public/partners')
+            fetch('{{ config('services.cms.api_url') }}/partners')
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
@@ -1139,7 +1139,7 @@
 
         // Fungsi untuk memanggil API secara otomatis
         init() {
-            fetch('{{ config('services.acmi_api.url', 'http://localhost:8000') }}/api/public/gallery')
+            fetch('{{ config('services.cms.api_url') }}/gallery')
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {

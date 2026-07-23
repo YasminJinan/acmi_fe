@@ -108,7 +108,7 @@
                 this.activeCategory = catParam;
             }
 
-            fetch('http://localhost:8000/api/public/gallery')
+            fetch('{{ config('services.cms.api_url') }}/gallery')
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
