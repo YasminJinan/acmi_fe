@@ -16,13 +16,15 @@ class HomeController extends Controller
         $cms = new CmsApiService();
 
         $products = $cms->getServices();
-        $faqs     = $cms->getFaqs();
-        $gallery  = $cms->getGallery();
+        $faqs = $cms->getFaqs();
+        $gallery = $cms->getGallery();
         $partners = $cms->getPartners();
-        $sponsorsBySize = collect($cms->getSponsors())->groupBy('size');
+        $sponsors = collect($cms->getSponsors());
+        $sponsorsByPosition = $sponsors->filter(fn($s) => !empty($s['position']))->keyBy('position');
+        $sponsorsBySize = $sponsors->filter(fn($s) => empty($s['position']))->groupBy('size');
 
         $posts = Cache::remember('instagram_posts_v4', 60 * 60, function () {
-            
+
             try {
                 // $apiUrl = env('APIFY_INSTAGRAM_URL');
                 $apiUrl = config('services.apify.instagram_url');
@@ -54,11 +56,11 @@ class HomeController extends Controller
                         : 'https://placehold.co/600x600?text=No+Image';
 
                     return [
-                        'mediaUrl'      => $mediaUrl,
-                        'permalink'     => $item['url'] ?? '#',
+                        'mediaUrl' => $mediaUrl,
+                        'permalink' => $item['url'] ?? '#',
                         'prunedCaption' => Str::limit($item['caption'] ?? 'ACMI Post', 100),
-                        'likeCount'     => $item['likesCount'] ?? 0,
-                        'commentCount'  => $item['commentsCount'] ?? 0,
+                        'likeCount' => $item['likesCount'] ?? 0,
+                        'commentCount' => $item['commentsCount'] ?? 0,
                     ];
                 })->all();
 
@@ -72,7 +74,7 @@ class HomeController extends Controller
         $testimonials = $cms->getTestimonials();
         $events = \App\Models\Event::orderBy('starts_at', 'asc')->get();
 
-        return view('welcome', compact('posts', 'products', 'faqs', 'gallery', 'partners', 'testimonials', 'events', 'sponsorsBySize'));
+        return view('welcome', compact('posts', 'products', 'faqs', 'gallery', 'partners', 'testimonials', 'events', 'sponsorsBySize', 'sponsorsByPosition'));
     }
 
     /**
@@ -97,7 +99,7 @@ class HomeController extends Controller
             $response = Http::timeout(10)
                 ->withHeaders([
                     'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-                    'Referer'    => 'https://www.instagram.com/',
+                    'Referer' => 'https://www.instagram.com/',
                 ])
                 ->get($imageUrl);
 
