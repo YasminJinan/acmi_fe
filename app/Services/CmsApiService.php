@@ -201,6 +201,19 @@ class CmsApiService
         });
     }
 
+    public function getSponsoredBanners(): array
+    {
+        return Cache::remember('sponsored_banners', 300, function () {
+            try {
+                $response = $this->client->get('/sponsored-banners');
+                return $response->successful() ? $response->json('data') : [];
+            } catch (\Exception $e) {
+                Log::error('CMS getSponsoredBanners gagal: ' . $e->getMessage());
+                return [];
+            }
+        });
+    }
+
     public function submitInbound(array $data): array
     {
         try {

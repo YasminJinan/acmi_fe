@@ -22,6 +22,7 @@ class HomeController extends Controller
         $sponsors = collect($cms->getSponsors());
         $sponsorsByPosition = $sponsors->filter(fn($s) => !empty($s['position']))->keyBy('position');
         $sponsorsBySize = $sponsors->filter(fn($s) => empty($s['position']))->groupBy('size');
+        $sponsoredBannersBySize = collect($cms->getSponsoredBanners())->groupBy('size');
 
         $posts = Cache::remember('instagram_posts_v4', 60 * 60, function () {
 
@@ -74,7 +75,7 @@ class HomeController extends Controller
         $testimonials = $cms->getTestimonials();
         $events = \App\Models\Event::orderBy('starts_at', 'asc')->get();
 
-        return view('welcome', compact('posts', 'products', 'faqs', 'gallery', 'partners', 'testimonials', 'events', 'sponsorsBySize', 'sponsorsByPosition'));
+        return view('welcome', compact('posts', 'products', 'faqs', 'gallery', 'partners', 'testimonials', 'events', 'sponsorsBySize', 'sponsorsByPosition', 'sponsoredBannersBySize'));
     }
 
     /**

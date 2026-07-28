@@ -479,16 +479,13 @@
 
     {{-- ═══ SPONSOR 1 · 728×90 · di bawah SOLUTION SECTION ═══ --}}
     @php
-        $s = $sponsorsByPosition->get(1) ?? ($sponsorsBySize['728x90'] ?? collect())->values()->get(0) ?? [
-            'link' => 'https://www.bankmandiri.co.id/',
-            'image' => asset('assets/images/sponsors/mandiri-728x90.jpg'),
-            'title' => 'Bank Mandiri'
-        ];
+        $s = ($sponsoredBannersBySize['728x90'] ?? collect())->values()->get(0);
     @endphp
     @if($s)
     <section class="bg-white dark:bg-[#0a0a0b] py-14 transition-colors duration-500">
         <x-sponsor-banner
-            :href="$s['link']"
+            :id="$s['id']"
+            :href="$s['link_sponsored']"
             :image="$s['image']"
             :brand="$s['title']"
             :size="$s['size'] ?? '728x90'" />
@@ -1503,4 +1500,9 @@
             });
         }, { passive: true });
     </script>
+
+    {{-- CMS: tracking impression & click sponsored banners --}}
+    @push('scripts')
+        <script src="{{ asset('js/sponsor-tracking.js') }}"></script>
+    @endpush
 @endsection
