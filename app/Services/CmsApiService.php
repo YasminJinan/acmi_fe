@@ -22,6 +22,7 @@ class CmsApiService
     public function __construct()
     {
         $this->client = Http::baseUrl(config('services.cms.api_url'))
+            ->withHeaders(['Connection' => 'close'])
             ->timeout(5)
             ->retry(3, 100);
     }

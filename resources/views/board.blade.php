@@ -276,7 +276,7 @@
                 <div class="flex flex-col sm:flex-row items-center gap-5">
 
                     {{-- Primary Button --}}
-                    <a href="{{ url('/form-join') }}"
+                    <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}"
                        class="group relative px-10 py-5
                               bg-orange-500 hover:bg-orange-400
                               text-white font-bold font-poppins

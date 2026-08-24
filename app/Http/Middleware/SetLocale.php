@@ -14,8 +14,10 @@ class SetLocale
 
         if ($locale && in_array($locale, ['en', 'id'])) {
             App::setLocale($locale);
-            session(['locale' => $locale]);
-        } elseif (session()->has('locale')) {
+            if ($request->hasSession()) {
+                session(['locale' => $locale]);
+            }
+        } elseif ($request->hasSession() && session()->has('locale')) {
             App::setLocale(session('locale'));
         } else {
             App::setLocale('id'); // Default locale

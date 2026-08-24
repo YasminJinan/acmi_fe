@@ -22,7 +22,7 @@ class ArticleController extends Controller
         $locale = app()->getLocale(); // set locale dari URL middleware
         
         $baseUrl = config('services.cms.api_url');
-        $response = Http::get("{$baseUrl}/articles/{$locale}/{$slug}");
+        $response = Http::withHeaders(['Connection' => 'close'])->timeout(5)->get("{$baseUrl}/articles/{$locale}/{$slug}");
     
         if ($response->successful() && $response->json('success')) {
             $article = $response->json('data');

@@ -33,7 +33,7 @@ Route::middleware([\App\Http\Middleware\SetLocale::class])->group(function () {
         Route::get('/board', function () { return view('board'); })->name('board');
         Route::get('/products', [ProductController::class, 'index'])->name('products');
         Route::get('/products/{slug}', [ProductController::class, 'show'])->name('product.show');
-        Route::get('/faq', function () { return view('faq'); })->name('faq'); 
+        Route::get('/faq', function () { return redirect('/en#faq'); })->name('faq'); 
         Route::get('/gallery', function () { return view('gallery'); })->name('gallery'); 
         Route::get('/ontopic', [ArticleController::class, 'index'])->name('ontopic');
         Route::get('/ontopic/{slug}', [ArticleController::class, 'show'])->name('ontopic.show');
@@ -49,7 +49,7 @@ Route::middleware([\App\Http\Middleware\SetLocale::class])->group(function () {
         Route::get('/dewan', function () { return view('board'); })->name('dewan');
         Route::get('/produk', [ProductController::class, 'index'])->name('produk');
         Route::get('/produk/{slug}', [ProductController::class, 'show'])->name('product.show');
-        Route::get('/tanya-jawab', function () { return view('faq'); })->name('faq');
+        Route::get('/tanya-jawab', function () { return redirect('/id#faq'); })->name('faq');
         Route::get('/galeri', function () { return view('gallery'); })->name('galeri');
         Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel');
         Route::get('/artikel/{slug}', [ArticleController::class, 'show'])->name('artikel.show');

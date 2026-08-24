@@ -99,7 +99,7 @@
 
             {{-- Buttons --}}
             <div data-aos="fade-up" data-aos-delay="600" class="mt-8 flex justify-center gap-4 flex-wrap">
-                <a href="/form-join"
+                <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}"
                     class="px-6 py-3 bg-orange-600 dark:bg-orange-500 text-white rounded-lg font-semibold shadow-md shadow-orange-500/20 hover:bg-orange-700 dark:hover:bg-orange-600 hover:scale-105 transition-all duration-300 inline-block">
                     {{ __('messages.btn_join') }}
                 </a>
@@ -1443,7 +1443,7 @@
                         class="absolute -inset-1 bg-orange-500 rounded-xl blur-xl opacity-20 group-hover:opacity-40 transition duration-500">
                     </div>
 
-                    <a href="{{ url('/form-join') }}"
+                    <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}"
                         class="relative flex items-center justify-center gap-4 bg-orange-600 dark:bg-orange-500 hover:bg-orange-700 dark:hover:bg-orange-600 text-white font-bold font-poppins px-10 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 active:scale-95 shadow-lg shadow-orange-600/20 dark:shadow-none w-full sm:w-auto">
                         <span>{{ __('messages.cta_final_btn') }}</span>
 
