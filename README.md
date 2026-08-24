@@ -20,16 +20,52 @@ Solusinya berupa sistem terintegrasi yang mencakup **CMS Dashboard** untuk admin
 
 ---
 
-## ✨ Fitur Utama
+## ✨ Fitur Lengkap Sistem (Web Portal & CMS)
 
-- 📦 **Katalog Produk Mitra** — Menampilkan produk dan profil mitra secara publik
-- 📰 **Portal Berita** — Sistem publikasi berita dan artikel organisasi
-- 📝 **Inbound Form Pendaftaran** — Form pendaftaran kemitraan online yang terintegrasi
-- 📊 **Dashboard & Visualisasi Data** — Insight dan manajemen data internal
-- 🤝 **Sistem CRM** — Pengelolaan pendaftaran dan data mitra
-- ⚙️ **Content Management System** — Kelola konten tanpa perlu menyentuh kode program
+Platform ACMI terbagi menjadi dua ekosistem utama: **Web Portal Publik (`acmi_fe`)** untuk pengguna/pengunjung dan **CMS Dashboard (`acmi_db`)** untuk admin internal.
 
 ---
+
+### 🌐 1. Fitur Web Portal Publik (`acmi_fe`)
+
+Website portal utama yang dapat diakses oleh publik, calon anggota, dan mitra bisnis:
+
+| Fitur | Deskripsi |
+| :--- | :--- |
+| 🌍 **Multi-Language (Bilingual ID/EN)** | Dukungan penuh 2 bahasa (Indonesia & Inggris) dengan sistem routing terstruktur (`/id/*` dan `/en/*`), dynamic slug, dan auto language switch di header navigasi. |
+| 👑 **Executive Hero & Branding** | Tampilan visual modern bertema dark/light mode, animasi interaktif, tipografi elegan (Poppins & Serif), dan direct CTA ke pendaftaran keanggotaan. |
+| 🏛️ **Profil Dewan Pengurus (Board)** | Halaman profil jajaran Board of Directors ACMI, visi-misi organisasi, nilai inti kepemimpinan, dan tombol pendaftaran kemitraan. |
+| 🛍️ **Katalog Produk & Layanan Mitra** | Menampilkan etalase layanan dan produk eksklusif ekosistem ACMI (`/id/produk` & `/en/products`) lengkap dengan halaman detail per produk. |
+| 📰 **Portal Artikel & Berita (OnTopic)** | Pusat wawasan bisnis, artikel kepemimpinan, dan berita kegiatan ACMI dengan fitur filter kategori, pagination, serta halaman detail yang responsif. |
+| 📅 **Agenda & Exclusive Events** | Halaman daftar kegiatan, workshop, roundtable, dan summit tahunan khusus CEO dengan detail jadwal dan status pendaftaran. |
+| 📸 **Galeri Dokumentasi Interaktif** | Dokumentasi foto kegiatan ACMI dengan tampilan grid responsif, filter kategori album, dan tampilan lightbox interaktif. |
+| 📝 **Formulir Pendaftaran VIP (Inbound Join)** | Formulir aplikasi keanggotaan online (`/id/gabung` & `/en/join`) yang otomatis terhubung dan tersinkronisasi ke database CMS internal. |
+| 👥 **Profil Manajemen & Sekretariat** | Informasi jajaran manajerial pengelola harian komunitas dan profil sekretariat ACMI (`/id/manajer` & `/en/manager`). |
+| ❓ **FAQ Interaktif** | Bagian tanya jawab interaktif bertema akordion seputar syarat gabung, proses seleksi kurasi, dan keuntungan anggota. |
+| 📸 **Integrasi Instagram Feed** | Menampilkan postingan media sosial Instagram resmi ACMI secara real-time via API proxy. |
+| 🤝 **Sponsor Banner & Tracking Interaktif** | Carousel logo mitra/sponsor terintegrasi dengan pelacakan analitik tayangan (*impression*) dan klik banner (`sponsor-tracking.js`). |
+| 🚀 **SEO & Schema JSON-LD Teroptimasi** | Dilengkapi Schema.org JSON-LD, OpenGraph tags, dynamic hreflang alternate, canonical links, dan sitemap XML otomatis (`/sitemap.xml`). |
+| 🌓 **Dark & Light Mode Switcher** | Pengatur tema gelap dan terang dengan transisi halus berbasis Alpine.js dan Tailwind CSS yang menyimpan preferensi pengguna. |
+
+---
+
+### 🗄️ 2. Fitur CMS Dashboard Admin (`acmi_db`)
+
+Dashboard internal untuk admin mengelola seluruh data, konten, dan pendaftaran:
+
+| Fitur | Deskripsi |
+| :--- | :--- |
+| 🔐 **Autentikasi & Keamanan Admin** | Sistem login terproteksi (`/signin`) dengan enkripsi password dan manajemen session admin internal. |
+| 📊 **Dashboard & Visualisasi Data** | Ringkasan statistik performa website, jumlah pendaftaran masuk (inbound), total artikel, layanan aktif, dan data interaksi sponsor. |
+| ✍️ **Manajemen Artikel & Berita** | CRUD (Create, Read, Update, Delete) artikel berita lengkap dengan Rich Text Editor, upload featured image, auto slug generator, dan status publikasi. |
+| 🏷️ **Manajemen Kategori Artikel** | Pengelompokan kategori topik artikel untuk mempermudah pencarian dan filter di website publik. |
+| 📦 **Manajemen Produk & Layanan** | Pengelolaan katalog produk/jasa mitra, upload foto produk, deskripsi layanan, dan pengaturan slug. |
+| 🗓️ **Manajemen Agenda & Event** | Pengaturan jadwal kegiatan, tanggal acara, lokasi/link virtual, daftar pembicara, dan status registrasi. |
+| 🖼️ **Manajemen Galeri Media** | Pengunggahan dan pengelompokan dokumentasi foto/kegiatan ACMI ke dalam album galeri. |
+| 📥 **Manajemen Inbound Leads & Pendaftar** | Sistem CRM untuk meninjau data pendaftaran keanggotaan baru, validasi profil bisnis, data kontak, dan proses kurasi status. |
+| 🎖️ **Manajemen Mitra & Sponsor** | Pengaturan logo partner, banner sponsor, penentuan tiering level, URL rujukan, serta pemantauan statistik klik & impresi. |
+| 💬 **Manajemen FAQ & Testimonial** | Pengelolaan daftar pertanyaan umum (Q&A) dan ulasan testimoni para CEO secara dinamis tanpa perlu mengubah kode program. |
+| 🔌 **Engine Public RESTful API** | Layanan endpoint API terpusat (`/api/public/*`) berkecepatan tinggi dengan format JSON standar untuk menyuplai data ke frontend secara real-time. |
 
 ## 🛠️ Tech Stack
 
