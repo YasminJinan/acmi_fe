@@ -12,6 +12,7 @@
 |       size="728x90" />
 |
 | Props:
+|   id     (opsi)   ID banner dari CMS — dipakai untuk tracking impression/click
 |   href   (wajib)  URL tujuan sponsor
 |   image  (wajib)  Path gambar banner (idealnya 2x retina, WebP/JPG)
 |   brand  (wajib)  Nama brand — dipakai untuk alt, aria-label, & event GA4
@@ -21,6 +22,7 @@
 --}}
 
 @props([
+    'id'    => null,
     'href',
     'image',
     'brand',
@@ -58,6 +60,7 @@
        aria-label="Iklan {{ $brand }} — membuka situs {{ $brand }} di tab baru"
        data-sponsor="{{ $brand }}"
        data-sponsor-size="{{ $preset['text'] }}"
+       @if($id !== null) data-sponsor-id="{{ $id }}" @endif
        @class([
            'group relative block w-full overflow-hidden rounded-xl',
            'border border-gray-200/70 dark:border-white/[0.07]',
