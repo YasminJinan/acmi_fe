@@ -21,8 +21,9 @@ class CmsApiService
 
         $this->client = Http::baseUrl($baseUrl)
             ->withHeaders(['Connection' => 'close'])
-            ->connectTimeout(2) // batas waktu koneksi TCP
-            ->timeout(3);       // batas waktu total transfer
+            ->connectTimeout(10) // batas waktu koneksi TCP (diperbesar agar SSL handshake tidak timeout)
+            ->timeout(15)        // batas waktu total transfer
+            ->retry(2, 100);     // otomatis coba ulang 1x jika terjadi gangguan koneksi sesaat
     }
 
     public function getInstagramPosts(): array
@@ -272,7 +273,10 @@ class CmsApiService
     public function submitInbound(array $data): array
     {
         try {
-            $response = $this->client->post('/inbound', [
+            $response = $this->client
+                ->connectTimeout(10)
+                ->timeout(20)
+                ->post('/inbound', [
                 'name'            => $data['name'] ?? null,
                 'email'           => $data['email'] ?? null,
                 'phone'           => $data['phone'] ?? null,
