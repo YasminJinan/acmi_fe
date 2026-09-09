@@ -21,7 +21,14 @@ class CmsApiService
 
     public function __construct()
     {
-        $this->client = Http::baseUrl(config('services.cms.api_url'))
+        $baseUrl = rtrim(config('services.cms.api_url') ?? '', '/');
+
+        // otomatis pastikan path /api/public selalu ada jika belum disertakan di .env
+        if (!empty($baseUrl) && !str_contains($baseUrl, '/api/public')) {
+            $baseUrl .= '/api/public';
+        }
+
+        $this->client = Http::baseUrl($baseUrl)
             ->withHeaders(['Connection' => 'close'])
             ->connectTimeout(2) // batas waktu koneksi TCP
             ->timeout(3);       // batas waktu total transfer
