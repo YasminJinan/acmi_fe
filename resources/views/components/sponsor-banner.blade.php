@@ -74,7 +74,6 @@
            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#0a0a0b]',
            'motion-reduce:transform-none motion-reduce:transition-none',
            $preset['max'],
-           $preset['ratio'],
        ])>
 
         {{-- Inner gold stroke — crisp di atas gambar, nggak ketiban border luar --}}
@@ -91,11 +90,9 @@
 
         <img src="{{ $image }}"
              alt="Iklan {{ $brand }}"
-             width="{{ $preset['w'] }}"
-             height="{{ $preset['h'] }}"
              loading="lazy"
              decoding="async"
-             class="h-full w-full object-cover transition-transform duration-[1200ms] ease-out
+             class="w-full h-auto block transition-transform duration-[1200ms] ease-out
                     group-hover:scale-[1.02] motion-reduce:transform-none" />
 
         {{-- Badge "Ad" --}}

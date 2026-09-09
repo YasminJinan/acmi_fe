@@ -9,7 +9,7 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::orderBy('starts_at', 'asc')->get();
+        $events = Event::whereNull('deleted_at')->orderBy('starts_at', 'asc')->get();
         return view('events', compact('events'));
     }
 }

@@ -99,6 +99,21 @@ return [
             'sslmode' => env('DB_SSLMODE', 'prefer'),
         ],
 
+        // Koneksi PostgreSQL ACMI (remote server)
+        'pgsql_acmi' => [
+            'driver'         => 'pgsql',
+            'host'           => env('PGSQL_ACMI_HOST', '69.5.7.115'),
+            'port'           => env('PGSQL_ACMI_PORT', '5432'),
+            'database'       => env('PGSQL_ACMI_DATABASE', 'acmi'),
+            'username'       => env('PGSQL_ACMI_USERNAME', 'postgres'),
+            'password'       => env('PGSQL_ACMI_PASSWORD', ''),
+            'charset'        => 'utf8',
+            'prefix'         => '',
+            'prefix_indexes' => true,
+            'search_path'    => 'public',
+            'sslmode'        => env('PGSQL_ACMI_SSLMODE', 'prefer'),
+        ],
+
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DB_URL'),

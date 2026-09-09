@@ -15,7 +15,8 @@ class HomeController extends Controller
     {
         $cms = new CmsApiService();
 
-        $products = $cms->getServices();
+        $productService = new \App\Services\ProductService($cms);
+        $products = $productService->getAllProducts();
         $faqs = $cms->getFaqs();
         $gallery = $cms->getGallery();
         $partners = $cms->getPartners();
@@ -35,7 +36,7 @@ class HomeController extends Controller
                     return [];
                 }
 
-                $response = Http::timeout(15)->get($apiUrl);
+                $response = Http::timeout(4)->get($apiUrl);
 
                 if (!$response->successful()) {
                     Log::error('Apify gagal: ' . $response->status());
@@ -73,7 +74,7 @@ class HomeController extends Controller
 
         $posts = collect($posts);
         $testimonials = $cms->getTestimonials();
-        $events = \App\Models\Event::orderBy('starts_at', 'asc')->get();
+        $events = \App\Models\Event::whereNull('deleted_at')->orderBy('starts_at', 'asc')->get();
 
         return view('welcome', compact('posts', 'products', 'faqs', 'gallery', 'partners', 'testimonials', 'events', 'sponsorsBySize', 'sponsorsByPosition', 'sponsoredBannersBySize'));
     }

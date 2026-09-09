@@ -36,6 +36,7 @@
                         @endforeach
                     </div>
 
+                    @if (!empty($product->features) && count((array) $product->features) > 0)
                     <div class="bg-white dark:bg-[#111420] border border-gray-200 dark:border-gray-800 rounded-3xl p-8 shadow-sm">
                         <h3 class="text-xl font-bold mb-6 text-gray-900 dark:text-white">Fitur Unggulan</h3>
                         <ul class="space-y-4">
@@ -51,28 +52,9 @@
                                     {{ $feature }}
                                 </li>
                             @endforeach
-                            <li class="flex items-center text-gray-700 dark:text-gray-300">
-                                <span class="bg-orange-500/10 p-1 rounded-full mr-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-500" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </span>
-                                ROI Calculator
-                            </li>
-                            <li class="flex items-center text-gray-700 dark:text-gray-300">
-                                <span class="bg-orange-500/10 p-1 rounded-full mr-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-500" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </span>
-                                Carbon Credit Trading
-                            </li>
                         </ul>
                     </div>
+                    @endif
                 </div>
 
                 <div class="lg:col-span-5 space-y-6">
@@ -94,48 +76,34 @@
                     <div class="bg-white dark:bg-[#111420] border border-gray-200 dark:border-gray-800 rounded-3xl p-8 space-y-5 shadow-sm">
                         <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Informasi Kontak</h3>
                         <div class="space-y-4">
-                            <a href="{{ $product->website }}"
-                                class="flex items-center text-gray-600 dark:text-gray-400 hover:text-orange-500 transition">
-                                <i class="fas fa-globe w-8 text-orange-500 text-xl"></i>
-                                {{ str_replace(['https://', 'http://'], '', $product->website) }}
-                            </a>
-                            <div class="flex items-center text-gray-600 dark:text-gray-400">
-                                <i class="fas fa-envelope w-8 text-orange-500 text-xl"></i>
-                                contact@energihijau.co.id
-                            </div>
-                            <div class="flex items-center text-gray-600 dark:text-gray-400">
-                                <i class="fas fa-phone w-8 text-orange-500 text-xl"></i>
-                                +62 21 555 0202
-                            </div>
-                            <div class="flex items-start text-gray-600 dark:text-gray-400">
-                                <i class="fas fa-map-marker-alt w-8 text-orange-500 text-xl mt-1"></i>
-                                <span>{{ $product->address }}</span>
-                            </div>
+                            @if (!empty($product->website))
+                                <a href="{{ $product->website }}" target="_blank" rel="noopener noreferrer"
+                                    class="flex items-center text-gray-600 dark:text-gray-400 hover:text-orange-500 transition">
+                                    <i class="fas fa-globe w-8 text-orange-500 text-xl"></i>
+                                    {{ str_replace(['https://', 'http://'], '', $product->website) }}
+                                </a>
+                            @endif
+                            @if (!empty($product->email))
+                                <a href="mailto:{{ $product->email }}"
+                                    class="flex items-center text-gray-600 dark:text-gray-400 hover:text-orange-500 transition">
+                                    <i class="fas fa-envelope w-8 text-orange-500 text-xl"></i>
+                                    {{ $product->email }}
+                                </a>
+                            @endif
+                            @if (!empty($product->phone))
+                                <a href="tel:{{ preg_replace('/[^0-9+]/', '', $product->phone) }}"
+                                    class="flex items-center text-gray-600 dark:text-gray-400 hover:text-orange-500 transition">
+                                    <i class="fas fa-phone w-8 text-orange-500 text-xl"></i>
+                                    {{ $product->phone }}
+                                </a>
+                            @endif
+                            @if (!empty($product->address))
+                                <div class="flex items-start text-gray-600 dark:text-gray-400">
+                                    <i class="fas fa-map-marker-alt w-8 text-orange-500 text-xl mt-1"></i>
+                                    <span>{{ $product->address }}</span>
+                                </div>
+                            @endif
                         </div>
-                    </div>
-
-                    <div class="bg-white dark:bg-[#111420] border border-gray-200 dark:border-gray-800 rounded-3xl p-8 shadow-sm">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-6">Hubungi Perusahaan</h3>
-                        <form class="space-y-4">
-                            <input type="text" placeholder="Nama Lengkap"
-                                class="w-full bg-gray-50 dark:bg-[#0a0c14] border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-orange-500 text-gray-900 dark:text-white transition">
-                            <input type="email" placeholder="Email"
-                                class="w-full bg-gray-50 dark:bg-[#0a0c14] border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-orange-500 text-gray-900 dark:text-white transition">
-                            <input type="tel" placeholder="Nomor Telepon"
-                                class="w-full bg-gray-50 dark:bg-[#0a0c14] border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-orange-500 text-gray-900 dark:text-white transition">
-                            <textarea rows="4" placeholder="Pesan Anda..."
-                                class="w-full bg-gray-50 dark:bg-[#0a0c14] border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-orange-500 text-gray-900 dark:text-white transition"></textarea>
-
-                            <button
-                                class="w-full bg-gradient-to-r from-orange-400 to-orange-600 hover:from-orange-500 hover:to-orange-700 text-white font-bold py-4 rounded-xl flex items-center justify-center space-x-2 transition transform active:scale-95 shadow-lg shadow-orange-500/20">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-45" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                                </svg>
-                                <span>Kirim Pesan</span>
-                            </button>
-                        </form>
                     </div>
                 </div>
 

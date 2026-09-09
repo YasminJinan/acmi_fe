@@ -23,8 +23,8 @@ class CmsApiService
     {
         $this->client = Http::baseUrl(config('services.cms.api_url'))
             ->withHeaders(['Connection' => 'close'])
-            ->timeout(5)
-            ->retry(3, 100);
+            ->connectTimeout(2) // batas waktu koneksi TCP
+            ->timeout(3);       // batas waktu total transfer
     }
 
     public function getInstagramPosts(): array

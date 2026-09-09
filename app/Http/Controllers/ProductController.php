@@ -2,24 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\CmsApiService;
+use App\Services\ProductService;
 
 class ProductController extends Controller
 {
+    protected ProductService $productService;
+
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
+
     public function index()
     {
-        $cms = new CmsApiService();
-        $products = $cms->getServices();
+        $products = $this->productService->getAllProducts();
 
         return view('products', compact('products'));
     }
 
     public function show(string $slug)
     {
-        $cms = new CmsApiService();
-        $products = $cms->getServices();
-
-        $product = collect($products)->firstWhere('slug', $slug);
+        $product = $this->productService->findBySlug($slug);
 
         if (!$product) {
             abort(404);
@@ -28,10 +31,8 @@ class ProductController extends Controller
         return view('product-detail', ['product' => (object) $product]);
     }
 
-    // Tetap ada untuk HomeController yang masih pakai ini
     public function getRawData(): array
     {
-        $cms = new CmsApiService();
-        return $cms->getServices();
+        return $this->productService->getAllProducts();
     }
 }
