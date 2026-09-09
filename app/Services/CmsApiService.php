@@ -215,6 +215,19 @@ class CmsApiService
         });
     }
 
+    public function getHeader(): ?array
+    {
+        return Cache::remember('header_data', 300, function () {
+            try {
+                $response = $this->client->get('/header');
+                return $response->successful() ? ($response->json('data') ?? null) : null;
+            } catch (\Exception $e) {
+                Log::error('CMS getHeader gagal: ' . $e->getMessage());
+                return null;
+            }
+        });
+    }
+
     public function submitInbound(array $data): array
     {
         try {

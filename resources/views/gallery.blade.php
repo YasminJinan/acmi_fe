@@ -19,8 +19,8 @@
     </style>
     <section x-data="{
         activeCategory: 'Semua',
-        galleries: [],
-        isLoading: true,
+        galleries: @js($gallery ?? []),
+        isLoading: {{ empty($gallery) ? 'true' : 'false' }},
         limit: 5,
         
         // Lightbox state
@@ -108,18 +108,22 @@
                 this.activeCategory = catParam;
             }
 
-            fetch('{{ config('services.cms.api_url') }}/gallery')
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        this.galleries = data.data;
-                    }
-                    this.isLoading = false;
-                })
-                .catch(err => {
-                    console.error('Error memuat galeri:', err);
-                    this.isLoading = false;
-                });
+            if (!this.galleries || this.galleries.length === 0) {
+                fetch('{{ config('services.cms.api_url') }}/gallery')
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            this.galleries = data.data;
+                        }
+                        this.isLoading = false;
+                    })
+                    .catch(err => {
+                        console.error('Error memuat galeri:', err);
+                        this.isLoading = false;
+                    });
+            } else {
+                this.isLoading = false;
+            }
         }
     }"
     class="bg-white dark:bg-[#0a0a0b] py-24 px-6 md:px-10 transition-colors duration-500 overflow-hidden min-h-screen">

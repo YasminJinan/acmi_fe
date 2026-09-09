@@ -34,7 +34,10 @@ Route::middleware([\App\Http\Middleware\SetLocale::class])->group(function () {
         Route::get('/products', [ProductController::class, 'index'])->name('products');
         Route::get('/products/{slug}', [ProductController::class, 'show'])->name('product.show');
         Route::get('/faq', function () { return redirect('/en#faq'); })->name('faq'); 
-        Route::get('/gallery', function () { return view('gallery'); })->name('gallery'); 
+        Route::get('/gallery', function () {
+            $gallery = (new \App\Services\CmsApiService())->getGallery();
+            return view('gallery', compact('gallery'));
+        })->name('gallery'); 
         Route::get('/ontopic', [ArticleController::class, 'index'])->name('ontopic');
         Route::get('/ontopic/{slug}', [ArticleController::class, 'show'])->name('ontopic.show');
         Route::get('/join', [FormJoinController::class, 'index'])->name('join');
@@ -50,7 +53,10 @@ Route::middleware([\App\Http\Middleware\SetLocale::class])->group(function () {
         Route::get('/produk', [ProductController::class, 'index'])->name('produk');
         Route::get('/produk/{slug}', [ProductController::class, 'show'])->name('product.show');
         Route::get('/tanya-jawab', function () { return redirect('/id#faq'); })->name('faq');
-        Route::get('/galeri', function () { return view('gallery'); })->name('galeri');
+        Route::get('/galeri', function () {
+            $gallery = (new \App\Services\CmsApiService())->getGallery();
+            return view('gallery', compact('gallery'));
+        })->name('galeri');
         Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel');
         Route::get('/artikel/{slug}', [ArticleController::class, 'show'])->name('artikel.show');
         Route::get('/gabung', [FormJoinController::class, 'index'])->name('gabung');

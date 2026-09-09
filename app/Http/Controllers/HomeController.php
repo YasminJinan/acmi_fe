@@ -17,6 +17,7 @@ class HomeController extends Controller
 
         $productService = new \App\Services\ProductService($cms);
         $products = $productService->getAllProducts();
+        $headerData = $cms->getHeader();
         $faqs = $cms->getFaqs();
         $gallery = $cms->getGallery();
         $partners = $cms->getPartners();
@@ -76,7 +77,7 @@ class HomeController extends Controller
         $testimonials = $cms->getTestimonials();
         $events = \App\Models\Event::whereNull('deleted_at')->orderBy('starts_at', 'asc')->get();
 
-        return view('welcome', compact('posts', 'products', 'faqs', 'gallery', 'partners', 'testimonials', 'events', 'sponsorsBySize', 'sponsorsByPosition', 'sponsoredBannersBySize'));
+        return view('welcome', compact('headerData', 'posts', 'products', 'faqs', 'gallery', 'partners', 'testimonials', 'events', 'sponsorsBySize', 'sponsorsByPosition', 'sponsoredBannersBySize'));
     }
 
     /**

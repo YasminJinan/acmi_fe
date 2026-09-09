@@ -6,45 +6,27 @@
 @section('content')
 
     {{-- HERO SECTION --}}
+    @php
+        $heroSlides = (!empty($headerData['images']) && count($headerData['images']) > 0)
+            ? $headerData['images']
+            : [
+                'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
+                'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
+                'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
+            ];
+        $heroTitle1 = !empty($headerData['title_1']) ? $headerData['title_1'] : __('messages.hero_title_1');
+        $heroTitle2 = !empty($headerData['title_2']) ? $headerData['title_2'] : __('messages.hero_title_2');
+        $heroDesc   = !empty($headerData['description']) ? $headerData['description'] : __('messages.hero_desc');
+    @endphp
     <section x-data="{
         activeSlide: 0,
-        headerData: null,
-        slides: [],
-        isLoading: true,
+        slides: @js($heroSlides),
         init() {
-            fetch('{{ config('services.cms.api_url') }}/header')
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success && data.data) {
-                        this.headerData = data.data;
-                        if(data.data.images && data.data.images.length > 0) {
-                            this.slides = data.data.images;
-                        } else {
-                            this.slides = [
-                                'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
-                                'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
-                                'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
-                            ];
-                        }
-                    } else {
-                        this.slides = [
-                            'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
-                            'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
-                            'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
-                        ];
-                    }
-                    this.isLoading = false;
-                    
-                    if (this.slides.length > 1) {
-                        setInterval(() => {
-                            this.activeSlide = (this.activeSlide + 1) % this.slides.length;
-                        }, 5000);
-                    }
-                })
-                .catch(err => {
-                    console.error('Error memuat data header:', err);
-                    this.isLoading = false;
-                });
+            if (this.slides.length > 1) {
+                setInterval(() => {
+                    this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+                }, 5000);
+            }
         }
     }"
         class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b]">
@@ -86,15 +68,15 @@
             {{-- Judul --}}
             <h1 data-aos="fade-up" data-aos-delay="200"
                 class="text-4xl md:text-6xl lg:text-7xl leading-tight drop-shadow-md">
-                <span class="font-poppins font-semibold text-white" x-text="headerData?.title_1 || '{{ __('messages.hero_title_1') }}'"></span><br>
+                <span class="font-poppins font-semibold text-white">{{ $heroTitle1 }}</span><br>
                 <span
-                    class="font-serif font-bold italic text-orange-600 dark:text-orange-500" x-text="headerData?.title_2 || '{{ __('messages.hero_title_2') }}'"></span>
+                    class="font-serif font-bold italic text-orange-600 dark:text-orange-500">{{ $heroTitle2 }}</span>
             </h1>
 
             {{-- Deskripsi --}}
             <p data-aos="fade-up" data-aos-delay="400"
-                class="mt-6 text-gray-700 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed"
-                x-text="headerData?.description || '{{ __('messages.hero_desc') }}'">
+                class="mt-6 text-gray-700 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed">
+                {{ $heroDesc }}
             </p>
 
             {{-- Buttons --}}
@@ -151,22 +133,8 @@
 
     {{-- PARTNER SECTION DINAMIS DARI CMS --}}
     <section x-data="{
-        partners: [],
-        isLoading: true,
-        init() {
-            fetch('{{ config('services.cms.api_url') }}/partners')
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        this.partners = data.data;
-                    }
-                    this.isLoading = false;
-                })
-                .catch(err => {
-                    console.error('Error memuat data partner:', err);
-                    this.isLoading = false;
-                });
-        }
+        partners: @js($partners ?? []),
+        isLoading: false,
     }"
         class="relative py-24 bg-white dark:bg-[#0a0a0b] overflow-hidden transition-colors duration-500">
         <div class="container mx-auto px-6">
@@ -1102,8 +1070,8 @@
     {{-- GALLERY SECTION --}}
     <section x-data="{
         activeCategory: 'Semua',
-        galleries: [],
-        isLoading: true,
+        galleries: @js($gallery ?? []),
+        isLoading: false,
 
         // Lightbox state
         isOpen: false,
@@ -1157,20 +1125,8 @@
             }
         },
 
-        // Fungsi untuk memanggil API secara otomatis
         init() {
-            fetch('{{ config('services.cms.api_url') }}/gallery')
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        this.galleries = data.data;
-                    }
-                    this.isLoading = false;
-                })
-                .catch(err => {
-                    console.error('Error memuat galeri:', err);
-                    this.isLoading = false;
-                });
+            // Data provided server-side
         }
     }"
         class="bg-white dark:bg-[#0a0a0b] py-24 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative">
