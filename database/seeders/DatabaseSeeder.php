@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        
-        $this->call(EventSeeder::class);
+
+        // CATATAN: EventSeeder DINONAKTIFKAN dan dipindah ke database/seeders/archive/.
+        // Model Event memakai koneksi 'pgsql_acmi' (PostgreSQL pihak ketiga, produksi).
+        // Menjalankannya akan menulis ke database orang lain. Jangan diaktifkan kembali.
     }
 }

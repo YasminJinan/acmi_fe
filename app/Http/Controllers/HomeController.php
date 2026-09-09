@@ -75,7 +75,12 @@ class HomeController extends Controller
 
         $posts = collect($posts);
         $testimonials = $cms->getTestimonials();
-        $events = \App\Models\Event::whereNull('deleted_at')->orderBy('starts_at', 'asc')->get();
+        try {
+            $events = \App\Models\Event::whereNull('deleted_at')->orderBy('starts_at', 'asc')->get();
+        } catch (\Throwable $e) {
+            Log::error('Gagal mengambil events dari pgsql_acmi: ' . $e->getMessage());
+            $events = collect();
+        }
 
         return view('welcome', compact('headerData', 'posts', 'products', 'faqs', 'gallery', 'partners', 'testimonials', 'events', 'sponsorsBySize', 'sponsorsByPosition', 'sponsoredBannersBySize'));
     }
