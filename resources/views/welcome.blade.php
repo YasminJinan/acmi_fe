@@ -447,16 +447,16 @@
 
     {{-- ═══ SPONSOR 1 · 728×90 · di bawah SOLUTION SECTION ═══ --}}
     @php
-        $s = ($sponsoredBannersBySize['728x90'] ?? collect())->values()->get(0);
+        $s1 = $sponsorsByPosition->get(1) ?? ($sponsorsBySize['728x90'] ?? collect())->values()->get(0) ?? ($sponsoredBannersBySize['728x90'] ?? collect())->values()->get(0);
     @endphp
-    @if($s)
+    @if(!empty($s1['image']))
     <section class="bg-white dark:bg-[#0a0a0b] py-14 transition-colors duration-500">
         <x-sponsor-banner
-            :id="$s['id']"
-            :href="$s['link_sponsored']"
-            :image="$s['image']"
-            :brand="$s['title']"
-            :size="$s['size'] ?? '728x90'" />
+            :id="$s1['id'] ?? null"
+            :href="$s1['link'] ?? $s1['link_sponsored'] ?? '#'"
+            :image="$s1['image']"
+            :brand="$s1['title'] ?? 'Sponsored'"
+            :size="$s1['size'] ?? '728x90'" />
     </section>
     @endif
 
@@ -580,19 +580,16 @@
 
     {{-- ═══ SPONSOR 2 · 970×250 · di bawah EXCLUSIVE MEMBERSHIP ═══ --}}
     @php
-        $s = $sponsorsByPosition->get(2) ?? ($sponsorsBySize['970x250'] ?? collect())->values()->get(0) ?? [
-            'link' => 'https://www.garuda-indonesia.com/',
-            'image' => asset('assets/images/sponsors/garuda-970x250.jpg'),
-            'title' => 'Garuda Indonesia'
-        ];
+        $s2 = $sponsorsByPosition->get(2) ?? ($sponsorsBySize['970x250'] ?? collect())->values()->get(0) ?? ($sponsoredBannersBySize['970x250'] ?? collect())->values()->get(0);
     @endphp
-    @if($s)
+    @if(!empty($s2['image']))
     <section class="bg-gray-50 dark:bg-[#0c0c0e] py-16 transition-colors duration-500">
         <x-sponsor-banner
-            :href="$s['link']"
-            :image="$s['image']"
-            :brand="$s['title']"
-            :size="$s['size'] ?? '970x250'" />
+            :id="$s2['id'] ?? null"
+            :href="$s2['link'] ?? $s2['link_sponsored'] ?? '#'"
+            :image="$s2['image']"
+            :brand="$s2['title'] ?? 'Sponsored'"
+            :size="$s2['size'] ?? '970x250'" />
     </section>
     @endif
 
@@ -815,19 +812,16 @@
 
     {{-- ═══ SPONSOR 3 · 336×280 · di bawah PRODUK ANGGOTA ═══ --}}
     @php
-        $s = $sponsorsByPosition->get(3) ?? ($sponsorsBySize['336x280'] ?? collect())->values()->get(0) ?? [
-            'link' => 'https://www.mckinsey.com/',
-            'image' => asset('assets/images/sponsors/mckinsey-336x280.jpg'),
-            'title' => 'McKinsey & Company'
-        ];
+        $s3 = $sponsorsByPosition->get(3) ?? ($sponsorsBySize['336x280'] ?? collect())->values()->get(0) ?? ($sponsoredBannersBySize['336x280'] ?? collect())->values()->get(0);
     @endphp
-    @if($s)
+    @if(!empty($s3['image']))
     <section class="bg-gray-50 dark:bg-[#050505] py-16 transition-colors duration-500">
         <x-sponsor-banner
-            :href="$s['link']"
-            :image="$s['image']"
-            :brand="$s['title']"
-            :size="$s['size'] ?? '336x280'" />
+            :id="$s3['id'] ?? null"
+            :href="$s3['link'] ?? $s3['link_sponsored'] ?? '#'"
+            :image="$s3['image']"
+            :brand="$s3['title'] ?? 'Sponsored'"
+            :size="$s3['size'] ?? '336x280'" />
     </section>
     @endif
 
@@ -1041,28 +1035,18 @@
     </section>
 
 
-    {{--
-        ═══ SPONSOR 4 · BCA PRIORITAS · 728×90 ═══
-        CATATAN: brief menyebut "di bawah keanggotaan exclusive", tapi slot itu
-        sudah dipakai Garuda. Sementara ditaruh setelah FAQ (slot besar terakhir
-        yang kosong). Kalau ternyata maksudnya lain, cukup pindahkan blok
-        <section> ini — komponennya tidak perlu diubah.
-    --}}
-    {{-- ═══ SPONSOR 4 · BCA PRIORITAS · 728×90 ═══ --}}
+    {{-- ═══ SPONSOR 4 · 728×90 ═══ --}}
     @php
-        $s = $sponsorsByPosition->get(4) ?? ($sponsorsBySize['728x90'] ?? collect())->values()->get(1) ?? ($sponsorsBySize['728x90'] ?? collect())->values()->get(0) ?? [
-            'link' => 'https://prioritas.bca.co.id/',
-            'image' => asset('assets/images/sponsors/bca-prioritas-728x90.jpg'),
-            'title' => 'BCA Prioritas'
-        ];
+        $s4 = $sponsorsByPosition->get(4) ?? ($sponsorsBySize['728x90'] ?? collect())->values()->get(1) ?? ($sponsoredBannersBySize['728x90'] ?? collect())->values()->get(1);
     @endphp
-    @if($s)
+    @if(!empty($s4['image']))
     <section class="bg-white dark:bg-[#0a0a0b] py-14 transition-colors duration-500">
         <x-sponsor-banner
-            :href="$s['link']"
-            :image="$s['image']"
-            :brand="$s['title']"
-            :size="$s['size'] ?? '728x90'" />
+            :id="$s4['id'] ?? null"
+            :href="$s4['link'] ?? $s4['link_sponsored'] ?? '#'"
+            :image="$s4['image']"
+            :brand="$s4['title'] ?? 'Sponsored'"
+            :size="$s4['size'] ?? '728x90'" />
     </section>
     @endif
 
@@ -1272,20 +1256,17 @@
     </section>
 
 
-    {{-- ═══ SPONSOR 5 · ASTRA · 970×250 · di bawah GALLERY ═══ --}}
+    {{-- ═══ SPONSOR 5 · 970×250 · di bawah GALLERY ═══ --}}
     @php
-        $s5 = $sponsorsByPosition->get(5) ?? ($sponsorsBySize['970x250'] ?? collect())->values()->get(1) ?? ($sponsorsBySize['970x250'] ?? collect())->values()->get(0) ?? [
-            'link' => 'https://www.astra.co.id/',
-            'image' => asset('assets/images/sponsors/astra-970x250.jpg'),
-            'title' => 'Astra International'
-        ];
+        $s5 = $sponsorsByPosition->get(5) ?? ($sponsorsBySize['970x250'] ?? collect())->values()->get(1) ?? ($sponsoredBannersBySize['970x250'] ?? collect())->values()->get(1);
     @endphp
-    @if($s5)
+    @if(!empty($s5['image']))
     <section class="bg-white dark:bg-[#0a0a0b] py-16 transition-colors duration-500">
         <x-sponsor-banner
-            :href="$s5['link']"
+            :id="$s5['id'] ?? null"
+            :href="$s5['link'] ?? $s5['link_sponsored'] ?? '#'"
             :image="$s5['image']"
-            :brand="$s5['title']"
+            :brand="$s5['title'] ?? 'Sponsored'"
             :size="$s5['size'] ?? '970x250'" />
     </section>
     @endif
@@ -1357,20 +1338,17 @@
     </section>
 
 
-    {{-- ═══ SPONSOR 6 · TELKOMSEL · 300×250 · di bawah INSTAGRAM FEED ═══ --}}
+    {{-- ═══ SPONSOR 6 · 300×250 · di bawah INSTAGRAM FEED ═══ --}}
     @php
-        $s6 = $sponsorsByPosition->get(6) ?? ($sponsorsBySize['300x250'] ?? collect())->values()->get(0) ?? [
-            'link' => 'https://www.telkomsel.com/',
-            'image' => asset('assets/images/sponsors/telkomsel-300x250.jpg'),
-            'title' => 'Telkomsel'
-        ];
+        $s6 = $sponsorsByPosition->get(6) ?? ($sponsorsBySize['300x250'] ?? collect())->values()->get(0) ?? ($sponsoredBannersBySize['300x250'] ?? collect())->values()->get(0);
     @endphp
-    @if($s6)
+    @if(!empty($s6['image']))
     <section class="bg-white dark:bg-[#0a0a0b] py-16 transition-colors duration-500">
         <x-sponsor-banner
-            :href="$s6['link']"
+            :id="$s6['id'] ?? null"
+            :href="$s6['link'] ?? $s6['link_sponsored'] ?? '#'"
             :image="$s6['image']"
-            :brand="$s6['title']"
+            :brand="$s6['title'] ?? 'Sponsored'"
             :size="$s6['size'] ?? '300x250'" />
     </section>
     @endif

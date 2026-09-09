@@ -198,6 +198,16 @@ class CmsApiService
 
     public function getSponsors(): array
     {
+        if (app()->environment('local')) {
+            try {
+                $response = $this->client->get('/sponsors');
+                return $response->successful() ? ($response->json('data') ?? []) : [];
+            } catch (\Exception $e) {
+                Log::error('CMS getSponsors gagal: ' . $e->getMessage());
+                return [];
+            }
+        }
+
         return Cache::remember('sponsors', 300, function () {
             try {
                 $response = $this->client->get('/sponsors');
@@ -211,6 +221,16 @@ class CmsApiService
 
     public function getSponsoredBanners(): array
     {
+        if (app()->environment('local')) {
+            try {
+                $response = $this->client->get('/sponsored-banners');
+                return $response->successful() ? ($response->json('data') ?? []) : [];
+            } catch (\Exception $e) {
+                Log::error('CMS getSponsoredBanners gagal: ' . $e->getMessage());
+                return [];
+            }
+        }
+
         return Cache::remember('sponsored_banners', 300, function () {
             try {
                 $response = $this->client->get('/sponsored-banners');
