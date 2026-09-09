@@ -19,13 +19,11 @@ class ArticleController extends Controller
 
     public function show(string $slug)
     {
-        $locale = app()->getLocale(); // set locale dari URL middleware
-        
-        $baseUrl = config('services.cms.api_url');
-        $response = Http::withHeaders(['Connection' => 'close'])->timeout(5)->get("{$baseUrl}/articles/{$locale}/{$slug}");
+        $locale = app()->getLocale();
+        $cms = new CmsApiService();
+        $article = $cms->getArticle($slug, $locale);
     
-        if ($response->successful() && $response->json('success')) {
-            $article = $response->json('data');
+        if ($article) {
             return view('ontopic-detail', compact('article', 'locale'));
         }
     

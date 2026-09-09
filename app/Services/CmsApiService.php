@@ -10,18 +10,9 @@ class CmsApiService
 {
     private $client;
 
-    public function index()
-    {
-        $cms = new CmsApiService();
-        $articles = $cms->getArticles(request('page', 1), request('category'));
-        $categories = $cms->getCategories();
-
-        return view('ontopic', compact('articles', 'categories'));
-    }
-
     public function __construct()
     {
-        $baseUrl = rtrim(config('services.cms.api_url') ?? '', '/');
+        $baseUrl = rtrim(config('services.cms.api_url') ?: (config('services.cms.url') ?: env('CMS_API_URL', 'http://localhost:8000/api/public')), '/');
 
         // otomatis pastikan path /api/public selalu ada jika belum disertakan di .env
         if (!empty($baseUrl) && !str_contains($baseUrl, '/api/public')) {
@@ -90,14 +81,27 @@ class CmsApiService
         });
     }
 
-    public function getArticle(string $slug): ?array
+    public function getArticle(string $slug, ?string $locale = null): ?array
     {
-        return Cache::remember("article:{$slug}", 600, function () use ($slug) {
+        $locale = $locale ?? app()->getLocale() ?? 'id';
+        $key = "article:{$locale}:{$slug}";
+
+        if (app()->environment('local')) {
             try {
-                $response = $this->client->get("/articles/{$slug}");
-                return $response->successful() ? $response->json('data') : null;
+                $response = $this->client->get("/articles/{$locale}/{$slug}");
+                return $response->successful() ? ($response->json('data') ?? null) : null;
             } catch (\Exception $e) {
-                Log::error("CMS getArticle [{$slug}] gagal: " . $e->getMessage());
+                Log::error("CMS getArticle [{$locale}/{$slug}] gagal: " . $e->getMessage());
+                return null;
+            }
+        }
+
+        return Cache::remember($key, 600, function () use ($locale, $slug) {
+            try {
+                $response = $this->client->get("/articles/{$locale}/{$slug}");
+                return $response->successful() ? ($response->json('data') ?? null) : null;
+            } catch (\Exception $e) {
+                Log::error("CMS getArticle [{$locale}/{$slug}] gagal: " . $e->getMessage());
                 return null;
             }
         });
