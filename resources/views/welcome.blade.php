@@ -20,11 +20,11 @@
     @endphp
     <section x-data="{
         activeSlide: 0,
-        slides: @js($heroSlides),
+        totalSlides: {{ count($heroSlides) }},
         init() {
-            if (this.slides.length > 1) {
+            if (this.totalSlides > 1) {
                 setInterval(() => {
-                    this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+                    this.activeSlide = (this.activeSlide + 1) % this.totalSlides;
                 }, 5000);
             }
         }
@@ -33,11 +33,11 @@
 
         {{-- Background Image Slider --}}
         <div class="absolute inset-0 w-full h-full bg-gray-900">
-            <template x-for="(slide, index) in slides" :key="index">
-                <img :src="slide" alt="Exclusive Community Background"
+            @foreach ($heroSlides as $index => $slide)
+                <img src="{{ $slide }}" alt="Exclusive Community Background"
                     class="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ease-in-out"
-                    :class="activeSlide === index ? 'opacity-80 dark:opacity-100' : 'opacity-0'" />
-            </template>
+                    :class="activeSlide === {{ $index }} ? 'opacity-80 dark:opacity-100' : 'opacity-0'" />
+            @endforeach
         </div>
 
         {{-- Overlay --}}
