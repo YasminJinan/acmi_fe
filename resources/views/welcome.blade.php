@@ -475,18 +475,14 @@
 
 
     {{-- ═══ SPONSOR 1 · 728×90 · di bawah SOLUTION SECTION ═══ --}}
-    {{--
-    @php
-        $s1 =
-            $sponsorsByPosition->get(1) ??
-            (($sponsorsBySize['728x90'] ?? collect())->values()->get(0) ??
-                ($sponsoredBannersBySize['728x90'] ?? collect())->values()->get(0));
-    @endphp
     <section class="bg-white dark:bg-[#0a0a0b] py-14 transition-colors duration-500">
-        <x-sponsor-banner :id="$s1['id'] ?? null" :href="$s1['link'] ?? ($s1['link_sponsored'] ?? '#')" image="https://acmiofficial.com/custom/Blog-2.jpg"
-            :brand="$s1['title'] ?? 'Sponsored'" size="728x90" />
+        <x-sponsor-banner
+            :id="$s1['id'] ?? null"
+            :href="$s1['link'] ?? $s1['link_sponsored'] ?? '#'"
+            :image="$s1['image'] ?? null"
+            :brand="$s1['title'] ?? 'Sponsored'"
+            :size="$s1['size'] ?? '728x90'" />
     </section>
-    --}}
 
 
     {{-- EXCLUSIVE MEMBERSHIP SECTION --}}
@@ -607,19 +603,14 @@
 
 
     {{-- ═══ SPONSOR 2 · 970×250 · di bawah EXCLUSIVE MEMBERSHIP ═══ --}}
-    {{--
-    @php
-        $s2 =
-            $sponsorsByPosition->get(2) ??
-            (($sponsorsBySize['970x250'] ?? collect())->values()->get(0) ??
-                ($sponsoredBannersBySize['970x250'] ?? collect())->values()->get(0));
-    @endphp
-    @if (!empty($s2['image']))
-        <section class="bg-gray-50 dark:bg-[#0c0c0e] py-16 transition-colors duration-500">
-            <x-sponsor-banner :id="$s2['id'] ?? null" :href="$s2['link'] ?? ($s2['link_sponsored'] ?? '#')" :image="$s2['image']" :brand="$s2['title'] ?? 'Sponsored'" :size="$s2['size'] ?? '970x250'" />
-        </section>
-    @endif
-    --}}
+    <section class="bg-gray-50 dark:bg-[#0c0c0e] py-16 transition-colors duration-500">
+        <x-sponsor-banner
+            :id="$s2['id'] ?? null"
+            :href="$s2['link'] ?? $s2['link_sponsored'] ?? '#'"
+            :image="$s2['image'] ?? null"
+            :brand="$s2['title'] ?? 'Sponsored'"
+            :size="$s2['size'] ?? '970x250'" />
+    </section>
 
 
     {{-- Swiper Script --}}
@@ -841,20 +832,14 @@
 
 
     {{-- ═══ SPONSOR 3 · 336×280 · di bawah PRODUK ANGGOTA ═══ --}}
-    {{--
-    @php
-        $s3 =
-            $sponsorsByPosition->get(3) ??
-            (($sponsorsBySize['336x280'] ?? collect())->values()->get(0) ??
-                ($sponsoredBannersBySize['336x280'] ?? collect())->values()->get(0));
-    @endphp
-    @if (!empty($s3['image']))
-        <section class="bg-gray-50 dark:bg-[#050505] py-16 transition-colors duration-500">
-            <x-sponsor-banner :id="$s3['id'] ?? null" :href="$s3['link'] ?? ($s3['link_sponsored'] ?? '#')" :image="$s3['image']" :brand="$s3['title'] ?? 'Sponsored'"
-                :size="$s3['size'] ?? '336x280'" />
-        </section>
-    @endif
-    --}}
+    <section class="bg-gray-50 dark:bg-[#050505] py-16 transition-colors duration-500">
+        <x-sponsor-banner
+            :id="$s3['id'] ?? null"
+            :href="$s3['link'] ?? $s3['link_sponsored'] ?? '#'"
+            :image="$s3['image'] ?? null"
+            :brand="$s3['title'] ?? 'Sponsored'"
+            :size="$s3['size'] ?? '336x280'" />
+    </section>
 
 
     {{-- TESTIMONIAL SECTION --}}
@@ -1067,20 +1052,14 @@
 
 
     {{-- ═══ SPONSOR 4 · 728×90 ═══ --}}
-    {{--
-    @php
-        $s4 =
-            $sponsorsByPosition->get(4) ??
-            (($sponsorsBySize['728x90'] ?? collect())->values()->get(1) ??
-                ($sponsoredBannersBySize['728x90'] ?? collect())->values()->get(1));
-    @endphp
-    @if (!empty($s4['image']))
-        <section class="bg-white dark:bg-[#0a0a0b] py-14 transition-colors duration-500">
-            <x-sponsor-banner :id="$s4['id'] ?? null" :href="$s4['link'] ?? ($s4['link_sponsored'] ?? '#')" :image="$s4['image']" :brand="$s4['title'] ?? 'Sponsored'"
-                :size="$s4['size'] ?? '728x90'" />
-        </section>
-    @endif
-    --}}
+    <section class="bg-white dark:bg-[#0a0a0b] py-14 transition-colors duration-500">
+        <x-sponsor-banner
+            :id="$s4['id'] ?? null"
+            :href="$s4['link'] ?? $s4['link_sponsored'] ?? '#'"
+            :image="$s4['image'] ?? null"
+            :brand="$s4['title'] ?? 'Sponsored'"
+            :size="$s4['size'] ?? '728x90'" />
+    </section>
 
 
     {{-- GALLERY SECTION --}}
@@ -1290,20 +1269,14 @@
 
 
     {{-- ═══ SPONSOR 5 · 970×250 · di bawah GALLERY ═══ --}}
-    {{--
-    @php
-        $s5 =
-            $sponsorsByPosition->get(5) ??
-            (($sponsorsBySize['970x250'] ?? collect())->values()->get(1) ??
-                ($sponsoredBannersBySize['970x250'] ?? collect())->values()->get(1));
-    @endphp
-    @if (!empty($s5['image']))
-        <section class="bg-white dark:bg-[#0a0a0b] py-16 transition-colors duration-500">
-            <x-sponsor-banner :id="$s5['id'] ?? null" :href="$s5['link'] ?? ($s5['link_sponsored'] ?? '#')" :image="$s5['image']" :brand="$s5['title'] ?? 'Sponsored'"
-                :size="$s5['size'] ?? '970x250'" />
-        </section>
-    @endif
-    --}}
+    <section class="bg-white dark:bg-[#0a0a0b] py-16 transition-colors duration-500">
+        <x-sponsor-banner
+            :id="$s5['id'] ?? null"
+            :href="$s5['link'] ?? $s5['link_sponsored'] ?? '#'"
+            :image="$s5['image'] ?? null"
+            :brand="$s5['title'] ?? 'Sponsored'"
+            :size="$s5['size'] ?? '970x250'" />
+    </section>
 
 
     {{-- INSTAGRAM FEED SECTION (TEMPORARILY COMMENTED OUT) --}}
@@ -1369,20 +1342,14 @@
 
 
     {{-- ═══ SPONSOR 6 · 300×250 · di bawah INSTAGRAM FEED ═══ --}}
-    {{--
-    @php
-        $s6 =
-            $sponsorsByPosition->get(6) ??
-            (($sponsorsBySize['300x250'] ?? collect())->values()->get(0) ??
-                ($sponsoredBannersBySize['300x250'] ?? collect())->values()->get(0));
-    @endphp
-    @if (!empty($s6['image']))
-        <section class="bg-white dark:bg-[#0a0a0b] py-16 transition-colors duration-500">
-            <x-sponsor-banner :id="$s6['id'] ?? null" :href="$s6['link'] ?? ($s6['link_sponsored'] ?? '#')" :image="$s6['image']" :brand="$s6['title'] ?? 'Sponsored'"
-                :size="$s6['size'] ?? '300x250'" />
-        </section>
-    @endif
-    --}}
+    <section class="bg-white dark:bg-[#0a0a0b] py-16 transition-colors duration-500">
+        <x-sponsor-banner
+            :id="$s6['id'] ?? null"
+            :href="$s6['link'] ?? $s6['link_sponsored'] ?? '#'"
+            :image="$s6['image'] ?? null"
+            :brand="$s6['title'] ?? 'Sponsored'"
+            :size="$s6['size'] ?? '300x250'" />
+    </section>
 
 
     {{-- FINAL CTA SECTION --}}
