@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'nav_event' => 'Event',
 'nav_profile' => 'Profile',
 'nav_members' => 'Members',
 

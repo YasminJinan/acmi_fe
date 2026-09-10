@@ -2,6 +2,7 @@
 
 return [
 
+'nav_event' => 'Event',
 'nav_profile' => 'Profil',
 'nav_members' => 'Anggota',
 // ── Membership Features ──────────────────────────────
