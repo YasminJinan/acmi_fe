@@ -2,6 +2,8 @@
 
 return [
 
+'nav_profile' => 'Profile',
+'nav_members' => 'Members',
 
 // ── Product / Member Products ────────────────────────
     'product_badge' => 'Member Products',
