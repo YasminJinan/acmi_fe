@@ -29,7 +29,7 @@
             }
         }
     }"
-        class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b]">
+        class="relative min-h-[100dvh] md:h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b] pt-28 pb-16 md:py-0">
 
         {{-- Background Image Slider --}}
         <div class="absolute inset-0 w-full h-full bg-gray-900">
@@ -47,11 +47,11 @@
         dark:from-[#0a0a0b]/40 dark:via-[#0a0a0b]/80 dark:to-[#0a0a0b]">
         </div>
 
-        <div class="relative z-10 text-center px-6 max-w-7xl">
+        <div class="relative z-10 text-center px-4 sm:px-6 max-w-7xl">
 
             {{-- Badge --}}
             <div data-aos="zoom-in"
-                class="inline-block px-6 py-1.5 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-[0_8px_32px_0_rgba(255,145,0,0.08)] mb-6 transition-all duration-500 hover:border-orange-400/50 group">
+                class="inline-block px-4 py-1 sm:px-6 sm:py-1.5 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-[0_8px_32px_0_rgba(255,145,0,0.08)] mb-4 sm:mb-6 transition-all duration-500 hover:border-orange-400/50 group">
                 <div class="flex items-center gap-2">
                     <span class="relative flex h-2 w-2">
                         <span
@@ -59,7 +59,7 @@
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
                     </span>
                     <span
-                        class="text-orange-600 dark:text-orange-500 text-xs font-poppins font-semibold uppercase tracking-widest group-hover:text-orange-500 transition-colors">
+                        class="text-orange-600 dark:text-orange-500 text-[10px] sm:text-xs font-poppins font-semibold uppercase tracking-widest group-hover:text-orange-500 transition-colors">
                         {{ __('messages.hero_badge') }}
                     </span>
                 </div>
@@ -67,32 +67,32 @@
 
             {{-- Judul --}}
             <h1 data-aos="fade-up" data-aos-delay="200"
-                class="text-4xl md:text-6xl lg:text-7xl leading-tight drop-shadow-md">
-                <span class="font-poppins font-semibold text-white">{{ $heroTitle1 }}</span><br>
+                class="text-2xl sm:text-4xl md:text-6xl lg:text-7xl leading-snug sm:leading-tight md:leading-tight drop-shadow-md">
+                <span class="font-poppins font-semibold text-white block sm:inline text-xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl">{{ $heroTitle1 }}</span>
                 <span
-                    class="font-serif font-bold italic text-orange-600 dark:text-orange-500">{{ $heroTitle2 }}</span>
+                    class="font-serif font-bold italic text-orange-600 dark:text-orange-500 block text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mt-1 sm:mt-0">{{ $heroTitle2 }}</span>
             </h1>
 
             {{-- Deskripsi --}}
             <p data-aos="fade-up" data-aos-delay="400"
-                class="mt-6 text-gray-700 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed">
+                class="mt-4 sm:mt-6 text-gray-700 dark:text-gray-300 text-xs sm:text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed">
                 {{ $heroDesc }}
             </p>
 
             {{-- Buttons --}}
-            <div data-aos="fade-up" data-aos-delay="600" class="mt-8 flex justify-center gap-4 flex-wrap">
+            <div data-aos="fade-up" data-aos-delay="600" class="mt-6 sm:mt-8 flex justify-center gap-3 sm:gap-4 flex-wrap">
                 <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}"
-                    class="px-6 py-3 bg-orange-600 dark:bg-orange-500 text-white rounded-lg font-semibold shadow-md shadow-orange-500/20 hover:bg-orange-700 dark:hover:bg-orange-600 hover:scale-105 transition-all duration-300 inline-block">
+                    class="px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-base bg-orange-600 dark:bg-orange-500 text-white rounded-lg font-semibold shadow-md shadow-orange-500/20 hover:bg-orange-700 dark:hover:bg-orange-600 hover:scale-105 transition-all duration-300 inline-block">
                     {{ __('messages.btn_join') }}
                 </a>
                 <a href="{{ app()->getLocale() == 'id' ? route('id.artikel') : route('en.ontopic') }}"
-                    class="inline-block px-6 py-3 border border-orange-400 text-orange-500 rounded-lg font-semibold hover:bg-orange-50 dark:hover:bg-orange-950 transition-all duration-300">
+                    class="inline-block px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-base border border-orange-400 text-orange-500 rounded-lg font-semibold hover:bg-orange-50 dark:hover:bg-orange-950 transition-all duration-300">
                     {{ __('messages.btn_explore') }}
                 </a>
             </div>
 
             {{-- Stats --}}
-            <div class="mt-14 grid grid-cols-3 gap-4 max-w-3xl mx-auto">
+            <div class="mt-8 sm:mt-14 grid grid-cols-3 gap-2 sm:gap-4 max-w-3xl mx-auto">
                 @php
                     $stats = [
                         ['target' => 500, 'suffix' => '+', 'label' => __('messages.stats_ceo')],
@@ -103,7 +103,7 @@
 
                 @foreach ($stats as $index => $stat)
                     <div data-aos="flip-up" data-aos-delay="{{ 800 + $index * 100 }}"
-                        class="bg-white/80 dark:bg-white/5 backdrop-blur-lg rounded-xl py-4 border border-gray-200/60 dark:border-white/10 shadow-lg shadow-gray-200/50 dark:shadow-none"
+                        class="bg-white/80 dark:bg-white/5 backdrop-blur-lg rounded-xl py-3 sm:py-4 px-2 sm:px-4 border border-gray-200/60 dark:border-white/10 shadow-lg shadow-gray-200/50 dark:shadow-none"
                         x-data="{
                             current: 0,
                             target: {{ $stat['target'] }},
@@ -119,10 +119,10 @@
                                 window.requestAnimationFrame(step);
                             }
                         }" x-init="start()">
-                        <p class="text-2xl font-bold font-poppins text-gray-950 dark:text-white">
+                        <p class="text-lg sm:text-2xl font-bold font-poppins text-gray-950 dark:text-white">
                             <span x-text="current">0</span>{{ $stat['suffix'] }}
                         </p>
-                        <p class="text-xs text-gray-600 dark:text-gray-400 font-poppins mt-0.5">{{ $stat['label'] }}</p>
+                        <p class="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400 font-poppins mt-0.5">{{ $stat['label'] }}</p>
                     </div>
                 @endforeach
             </div>
@@ -449,16 +449,14 @@
     @php
         $s1 = $sponsorsByPosition->get(1) ?? ($sponsorsBySize['728x90'] ?? collect())->values()->get(0) ?? ($sponsoredBannersBySize['728x90'] ?? collect())->values()->get(0);
     @endphp
-    @if(!empty($s1['image']))
     <section class="bg-white dark:bg-[#0a0a0b] py-14 transition-colors duration-500">
         <x-sponsor-banner
             :id="$s1['id'] ?? null"
             :href="$s1['link'] ?? $s1['link_sponsored'] ?? '#'"
-            :image="$s1['image']"
+            image="https://acmiofficial.com/custom/Blog-2.jpg"
             :brand="$s1['title'] ?? 'Sponsored'"
-            :size="$s1['size'] ?? '728x90'" />
+            size="728x90" />
     </section>
-    @endif
 
 
     {{-- EXCLUSIVE MEMBERSHIP SECTION --}}
@@ -1272,7 +1270,8 @@
     @endif
 
 
-    {{-- INSTAGRAM FEED SECTION --}}
+    {{-- INSTAGRAM FEED SECTION (TEMPORARILY COMMENTED OUT) --}}
+    {{--
     <section class="relative py-24 bg-white dark:bg-[#0a0a0b] transition-colors duration-500 overflow-hidden">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16" data-aos="fade-up">
@@ -1287,25 +1286,20 @@
                 <div class="h-1 w-12 bg-orange-500 mx-auto rounded-full mt-4"></div>
             </div>
 
-            {{-- Grid Feed --}}
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                {{-- Menggunakan @forelse bawaan Blade dengan aman --}}
                 @forelse ($posts as $index => $post)
                     <div data-aos="fade-up" data-aos-delay="{{ $index * 100 }}"
                         class="group relative overflow-hidden rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 transition-all duration-500 hover:bg-white dark:hover:bg-white/10 hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:-translate-y-2">
 
-                        {{-- LINK DIRECT KE AKUN/POST INSTAGRAM --}}
                         <a href="{{ $post['permalink'] ?? '#' }}" target="_blank" rel="noopener noreferrer"
                             class="block">
 
-                            {{-- Image Container --}}
                             <div class="aspect-square overflow-hidden relative">
                                 <img src="{{ $post['mediaUrl'] ?? 'https://placehold.co/600x600?text=No+Image' }}"
                                     alt="Instagram Post" loading="lazy"
                                     class="h-full w-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-75">
                             </div>
 
-                            {{-- Content --}}
                             <div class="p-6 relative">
                                 <div class="flex items-center justify-between mb-3">
                                     <p
@@ -1323,7 +1317,6 @@
                         </a>
                     </div>
                 @empty
-                    {{-- Fallback jika array $posts ternyata kosong atau cache belum terisi --}}
                     <div class="text-center col-span-1 md:col-span-3 py-12" data-aos="fade-up">
                         <div
                             class="w-16 h-16 bg-gray-100 dark:bg-white/5 text-gray-400 rounded-full flex items-center justify-center text-xl mx-auto mb-4">
@@ -1336,6 +1329,7 @@
             </div>
         </div>
     </section>
+    --}}
 
 
     {{-- ═══ SPONSOR 6 · 300×250 · di bawah INSTAGRAM FEED ═══ --}}

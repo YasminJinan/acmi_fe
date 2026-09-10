@@ -26,6 +26,8 @@ class HomeController extends Controller
         $sponsorsBySize = $sponsors->filter(fn($s) => empty($s['position']))->groupBy('size');
         $sponsoredBannersBySize = collect($cms->getSponsoredBanners())->groupBy('size');
 
+        // Instagram Scraper (Temporary Commented Out)
+        /*
         $posts = Cache::remember('instagram_posts_v4', 60 * 60, function () {
 
             try {
@@ -72,8 +74,8 @@ class HomeController extends Controller
                 return [];
             }
         });
-
-        $posts = collect($posts);
+        */
+        $posts = collect([]);
         $testimonials = $cms->getTestimonials();
         $events = \App\Models\Event::whereNull('deleted_at')->orderBy('starts_at', 'asc')->get();
 

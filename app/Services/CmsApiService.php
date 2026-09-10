@@ -28,6 +28,8 @@ class CmsApiService
 
     public function getInstagramPosts(): array
     {
+        // Instagram scraper temporarily commented out
+        /*
         return Cache::remember('instagram_posts', 3600, function () {
             try {
                 $response = Http::timeout(5)
@@ -63,6 +65,8 @@ class CmsApiService
                 return [];
             }
         });
+        */
+        return [];
     }
 
     public function getArticles(int $page = 1, ?string $category = null): array
