@@ -169,7 +169,80 @@ class ProductService
         }
 
     /**
-     * Gabungkan semua produk (CMS ACMI DB + ACMI Connect PostgreSQL)
+     * Generator data dummy produk untuk testing grid 8x3 & 10 Halaman Pagination (240 Produk)
+     */
+    public function getDummyProducts(int $count = 240): array
+    {
+        $categories = ['Software', 'Teknologi', 'Energi', 'F&B', 'Manufaktur', 'Properti', 'Fintech', 'Konsultan', 'Logistik', 'Edukasi'];
+
+        $companyBases = [
+            'Inni Punya Indonesia', 'Surya Putra Swastika', 'Tri-Wall Indonesia', 'SSCX International',
+            'Nusantara Digital Teknindo', 'Indo Cloud Solusindo', 'Prima Agro Mandiri', 'Megah Sukses Jaya',
+            'Bina Talenta Indonesia', 'Sentra Logistik Medika', 'Sinar Abadi Energi', 'Cipta Harapan Niaga',
+            'Mitra Berkah Lestari', 'Graha Bangun Nusantara', 'Wahana Kreatif Asia', 'Indo Pay Sistem',
+            'Pangan Nusantara Gemilang', 'Solusi Otomasi Industri', 'Daya Gemilang Utama', 'Ventura Optima Indonesia',
+            'Integra Edukasi Bangsa', 'Garda Keamanan Cyber', 'Eco Green Tech', 'Media Utama Komunika',
+            'Logistik Ekspres Nusantara', 'Archipelagindo Kapital', 'Sehat Bersama Bangsa', 'Cemerlang Retailindo',
+            'Fast Food Indonesia Mandiri', 'BioTech Herbal Nusantara', 'Smart Analytics Asia', 'Halal Food Global',
+            'Robotik Nusantara', 'Investasi Karya Bersama', 'Trans Cargo Indonesia', 'EduTech Cerdas Indonesia',
+            'Artha Mandiri Sejahtera', 'Design Studio Nusantara', 'Global Export Import', 'Nusantara AI Solusindo',
+            'Bintang Asia Medika', 'Prakarsa Digital Utama', 'Cakra Daya Solusindo', 'Bakti Nusantara Energi',
+            'Cipta Karya Logistik', 'Samudra Jaya Perdana', 'Harapan Bangsa Edukasi', 'Wira Karya Tekno',
+            'Mitra Sejahtera Bersama', 'Kreatif Digital Media'
+        ];
+
+        $ceoFirst = ['RILLA', 'YUSUF', 'RIFKI', 'ANDI', 'SITI', 'BUDI', 'HENDRA', 'DEWI', 'AGUS', 'MAYA', 'DONI', 'FADHIL', 'RINA', 'CHANDRA', 'REZA', 'NITA', 'EKO', 'DINI', 'FAJAR', 'TANIA', 'DENI', 'FITRI', 'GITA', 'IRWAN', 'JOHAN', 'KARTIKA', 'LUKMAN', 'MIRA', 'NICHOLAS', 'OCTAVIA'];
+        $ceoLast  = ['KUSUMA DEWI', 'ROMADHON', 'RIZAL', 'WIDJAJA', 'NURHALIZA', 'SANTOSO', 'WIJAYA', 'LESTARI', 'SETIAWAN', 'SAPUTRI', 'PRATAMA', 'MUHAMMAD', 'ANGGRAENI', 'KUSUMA', 'RAHARDIAN', 'SARI', 'PURWANTO', 'AMALIA', 'RIZKY', 'HARTO', 'GUNAWAN', 'HANDAYANI', 'GUSTAMA', 'KURNIAWAN', 'SETIABUDI', 'DEWI', 'HAKIM', 'LESMANA', 'SAPUTRA', 'PUTRI'];
+
+        $descriptions = [
+            'Penyedia solusi produk berkualitas tinggi dan layanan profesional terintegrasi untuk bisnis modern.',
+            'Layanan konsultasi dan pendampingan perusahaan untuk meningkatkan efektivitas, efisiensi, dan produktivitas operasional.',
+            'Platform teknologi inovatif berbasis AI untuk mempercepat transformasi digital industri di Indonesia.',
+            'Produsen kemasan korugasi dan solusi pembungkusan ramah lingkungan untuk rantai pasok manufaktur.',
+            'Layanan pengelolaan keuangan pintar dan pembiayaan usaha terpercaya untuk UMKM dan Korporasi.',
+            'Penyedia produk F&B olahan bernutrisi tinggi dengan sertifikasi mutu internasional.',
+            'Solusi logistik dan pergudangan terpadu dengan jangkauan pengiriman ke seluruh wilayah Nusantara.',
+            'Layanan pengembang properti dan konstruksi bangunan komersial yang berkelanjutan.',
+            'Infrastruktur cloud computing berkecapatan tinggi dan solusi keamanan siber terverifikasi aman.',
+            'Pengembangan aplikasi bisnis berbasis analitik data terintegrasi dan otomasi industri.'
+        ];
+
+        $products = [];
+        for ($i = 0; $i < $count; $i++) {
+            $baseIndex = $i % count($companyBases);
+            $cycle = floor($i / count($companyBases));
+            $companyName = 'PT ' . $companyBases[$baseIndex] . ($cycle > 0 ? ' Division ' . chr(65 + (int)($cycle - 1)) : '');
+            
+            $cat = $categories[$i % count($categories)];
+            $ceo = $ceoFirst[$i % count($ceoFirst)] . ' ' . $ceoLast[$i % count($ceoLast)];
+            $desc = $descriptions[$i % count($descriptions)];
+            $slug = \Illuminate\Support\Str::slug($companyName . '-' . ($i + 1));
+
+            $products[] = [
+                'id'           => 'dummy_prod_' . ($i + 1),
+                'slug'         => $slug,
+                'title'        => $companyName,
+                'category'     => [$cat],
+                'company_name' => $companyName,
+                'ceo_name'     => $ceo,
+                'description'  => $desc,
+                'features'     => [$cat, 'Inovasi Bisnis', 'Ekosistem ACMI'],
+                'website'      => 'https://example.com',
+                'address'      => 'Jakarta, Indonesia',
+                'email'        => 'info@' . \Illuminate\Support\Str::slug($companyName) . '.co.id',
+                'phone'        => '+62 812-3456-' . sprintf('%04d', $i + 1),
+                'image'        => 'https://placehold.co/600x400/1e293b/f97316?text=' . urlencode(\Illuminate\Support\Str::limit($companyName, 20, '')),
+                'images'       => [],
+                'gallery'      => [],
+                'source'       => 'dummy',
+            ];
+        }
+
+        return $products;
+    }
+
+    /**
+     * Gabungkan semua produk (CMS ACMI DB + ACMI Connect PostgreSQL + Dummy jika testing)
      */
     public function getAllProducts(): array
     {
@@ -182,7 +255,15 @@ class ProductService
             return $item;
         })->all();
 
-        return array_merge($cmsProducts, $connectProducts);
+        $merged = array_merge($cmsProducts, $connectProducts);
+
+        // Jika total produk aktual kurang dari 240 (10 halaman x 24 produk), gabungkan dummy products agar mencapai total 240 produk
+        if (count($merged) < 240) {
+            $dummies = $this->getDummyProducts(240 - count($merged));
+            $merged = array_merge($merged, $dummies);
+        }
+
+        return $merged;
     }
 
     /**

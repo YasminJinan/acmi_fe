@@ -142,7 +142,7 @@ return [
     'products_badge'               => 'Produk Anggota',
     'products_title_1'             => 'Produk & Layanan',
     'products_title_2'             => 'Anggota ACMI',
-    'products_search_placeholder'  => 'Cari produk...',
+    'products_search_placeholder'  => 'Cari nama PT, CEO, atau produk...',
     'products_categories'          => [
         'Semua'       => 'Semua Kategori',
         'Software'    => 'Software',

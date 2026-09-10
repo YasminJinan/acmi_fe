@@ -13,13 +13,17 @@
         category: 'Semua',
         products: @js($products),
         page: 1,
-        perPage: 12,
+        perPage: 24,
         
-        // Memfilter produk berdasarkan input search & kategori
+        // Memfilter produk berdasarkan input search (Nama PT, CEO, Deskripsi) & kategori
         get filteredProducts() {
+            const query = this.search.toLowerCase().trim();
             return this.products.filter(p => {
-                const matchSearch = p.title.toLowerCase().includes(this.search.toLowerCase()) ||
-                    p.company_name.toLowerCase().includes(this.search.toLowerCase());
+                const matchSearch = !query ||
+                    (p.title && p.title.toLowerCase().includes(query)) ||
+                    (p.company_name && p.company_name.toLowerCase().includes(query)) ||
+                    (p.ceo_name && p.ceo_name.toLowerCase().includes(query)) ||
+                    (p.description && p.description.toLowerCase().includes(query));
                 const matchCategory = this.category === 'Semua' ||
                     (Array.isArray(p.category) ? p.category.includes(this.category) : p.category === this.category);
                 return matchSearch && matchCategory;
@@ -86,8 +90,8 @@
             </div>
         </div>
 
-        {{-- Grid Produk --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {{-- Grid Produk (3 Kolom x 8 Baris = 24 Produk per Halaman) --}}
+        <div id="products-grid-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             {{-- LOOPING DIGANTI MENGGUNAKAN paginatedProducts --}}
             <template x-for="product in paginatedProducts" :key="product.id">
@@ -155,31 +159,25 @@
 
         </div>
 
-        {{-- NAVIGASI PAGINATION (DITAMBAHKAN DI SINI) --}}
-        <div x-show="totalPages > 1" x-cloak class="mt-16 flex justify-center items-center gap-2" data-aos="fade-up">
-            {{-- Tombol Prev --}}
-            <button @click="if(page > 1) { page--; window.scrollTo({top: 0, behavior: 'smooth'}); }" 
+        {{-- NAVIGASI PAGINATION (COMPACT PREVIOUS / NEXT STYLE) --}}
+        <div x-show="totalPages > 1" x-cloak class="mt-16 flex justify-center items-center gap-4 md:gap-6" data-aos="fade-up">
+            {{-- Tombol Previous --}}
+            <button @click="if(page > 1) page--" 
                 :disabled="page === 1"
-                class="w-12 h-12 rounded-xl flex items-center justify-center transition-all border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none bg-white dark:bg-white/5">
-                <i class="fa-solid fa-chevron-left text-xs"></i>
+                class="px-6 md:px-8 py-3.5 rounded-2xl border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 font-poppins font-bold text-sm md:text-base text-slate-800 dark:text-white transition-all duration-300 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none shadow-sm flex items-center justify-center cursor-pointer">
+                Previous
             </button>
 
-            {{-- Angka Halaman --}}
-            <template x-for="p in totalPages" :key="p">
-                <button @click="page = p; window.scrollTo({top: 0, behavior: 'smooth'});"
-                    x-text="p"
-                    :class="page === p 
-                        ? 'bg-orange-500 text-white border-orange-500 shadow-lg shadow-orange-500/25' 
-                        : 'bg-white dark:bg-white/5 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-white/10 hover:border-orange-500 hover:text-orange-500'"
-                    class="w-12 h-12 rounded-xl font-bold text-sm border transition-all">
-                </button>
-            </template>
+            {{-- Indikator Halaman (Page X of Y) --}}
+            <div class="font-poppins font-semibold text-sm md:text-base text-slate-500 dark:text-gray-400 px-2 md:px-4 select-none">
+                Page <span x-text="page" class="font-bold text-slate-900 dark:text-white"></span> of <span x-text="totalPages" class="font-bold text-slate-900 dark:text-white"></span>
+            </div>
 
             {{-- Tombol Next --}}
-            <button @click="if(page < totalPages) { page++; window.scrollTo({top: 0, behavior: 'smooth'}); }" 
+            <button @click="if(page < totalPages) page++" 
                 :disabled="page === totalPages"
-                class="w-12 h-12 rounded-xl flex items-center justify-center transition-all border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none bg-white dark:bg-white/5">
-                <i class="fa-solid fa-chevron-right text-xs"></i>
+                class="px-6 md:px-8 py-3.5 rounded-2xl border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 font-poppins font-bold text-sm md:text-base text-slate-800 dark:text-white transition-all duration-300 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none shadow-sm flex items-center justify-center cursor-pointer">
+                Next
             </button>
         </div>
 

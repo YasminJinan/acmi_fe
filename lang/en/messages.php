@@ -151,7 +151,7 @@ executives across diverse industries.',
     'products_badge'               => 'Member Products',
     'products_title_1'             => 'Executive Business',
     'products_title_2'             => 'Ecosystem',
-    'products_search_placeholder'  => 'Search products...',
+    'products_search_placeholder'  => 'Search company, CEO, or product...',
     'products_categories'          => [
         'Semua'       => 'All Categories',
         'Software'    => 'Software',

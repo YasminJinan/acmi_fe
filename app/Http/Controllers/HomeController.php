@@ -16,7 +16,7 @@ class HomeController extends Controller
         $cms = new CmsApiService();
 
         $productService = new \App\Services\ProductService($cms);
-        $products = $productService->getAllProducts();
+        $products = collect($productService->getAllProducts())->shuffle()->values()->all();
         $headerData = $cms->getHeader();
         $faqs = $cms->getFaqs();
         $gallery = $cms->getGallery();
@@ -77,10 +77,11 @@ class HomeController extends Controller
         */
         $posts = collect([]);
         $testimonials = $cms->getTestimonials();
+
         try {
             $events = \App\Models\Event::whereNull('deleted_at')->orderBy('starts_at', 'asc')->get();
         } catch (\Throwable $e) {
-            Log::error('Gagal mengambil events dari pgsql_acmi: ' . $e->getMessage());
+            Log::error('Gagal mengambil events dari database pgsql_acmi: ' . $e->getMessage());
             $events = collect();
         }
 

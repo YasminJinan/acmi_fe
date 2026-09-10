@@ -24,7 +24,7 @@
 @props([
     'id'    => null,
     'href'  => '#',
-    'image',
+    'image' => null,
     'brand' => 'Sponsored',
     'size'  => '728x90',
     'label' => 'SPONSORED',
@@ -54,7 +54,8 @@
             SPONSORED <span class="mx-1 text-gray-300 dark:text-gray-700">·</span> {{ $preset['text'] }}
         </p>
 
-        {{-- Banner Card dengan border oranye/kuning & badge AD --}}
+        {{-- Banner Card (Hanya dirender jika ada gambar banner yang valid) --}}
+        @if(!empty($image) && $image !== '#')
         <a href="{{ $href }}"
            target="_blank"
            rel="sponsored noopener noreferrer"
@@ -83,5 +84,6 @@
                  decoding="async"
                  class="w-full h-auto block transition-transform duration-500 ease-out group-hover:scale-[1.01]" />
         </a>
+        @endif
     </div>
 </div>
