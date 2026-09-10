@@ -77,18 +77,11 @@ class HomeController extends Controller
         */
         $posts = collect([]);
         $testimonials = $cms->getTestimonials();
-<<<<<<< HEAD
-        try {
-            $events = \App\Models\Event::whereNull('deleted_at')->orderBy('starts_at', 'asc')->get();
-        } catch (\Throwable $e) {
-            Log::error('Gagal mengambil events dari pgsql_acmi: ' . $e->getMessage());
-=======
 
         try {
             $events = \App\Models\Event::whereNull('deleted_at')->orderBy('starts_at', 'asc')->get();
         } catch (\Throwable $e) {
             Log::error('Gagal mengambil events dari database pgsql_acmi: ' . $e->getMessage());
->>>>>>> b76ac91 (revision from pak nanu)
             $events = collect();
         }
 
