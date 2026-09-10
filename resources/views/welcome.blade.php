@@ -30,7 +30,7 @@
             }
         }
     }"
-        class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b]">
+        class="relative min-h-[100dvh] md:h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b] pt-32 pb-16 md:py-0">
 
         {{-- Background Image Slider --}}
         <div class="absolute inset-0 w-full h-full bg-gray-900">
@@ -48,11 +48,11 @@
         dark:from-[#0a0a0b]/40 dark:via-[#0a0a0b]/80 dark:to-[#0a0a0b]">
         </div>
 
-        <div class="relative z-10 text-center px-6 max-w-7xl">
+        <div class="relative z-10 text-center px-4 sm:px-6 max-w-7xl w-full">
 
             {{-- Badge --}}
             <div data-aos="zoom-in"
-                class="inline-block px-6 py-1.5 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-[0_8px_32px_0_rgba(255,145,0,0.08)] mb-6 transition-all duration-500 hover:border-orange-400/50 group">
+                class="inline-block px-4 py-1 sm:px-6 sm:py-1.5 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-[0_8px_32px_0_rgba(255,145,0,0.08)] mb-3 sm:mb-6 transition-all duration-500 hover:border-orange-400/50 group">
                 <div class="flex items-center gap-2">
                     <span class="relative flex h-2 w-2">
                         <span
@@ -60,7 +60,7 @@
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
                     </span>
                     <span
-                        class="text-orange-600 dark:text-orange-500 text-xs font-poppins font-semibold uppercase tracking-widest group-hover:text-orange-500 transition-colors">
+                        class="text-orange-600 dark:text-orange-500 text-[10px] sm:text-xs font-poppins font-semibold uppercase tracking-widest group-hover:text-orange-500 transition-colors">
                         {{ __('messages.hero_badge') }}
                     </span>
                 </div>
@@ -68,25 +68,25 @@
 
             {{-- Judul --}}
             <h1 data-aos="fade-up" data-aos-delay="200"
-                class="text-4xl md:text-6xl lg:text-7xl leading-tight drop-shadow-md">
-                <span class="font-poppins font-semibold text-white">{{ $heroTitle1 }}</span><br>
-                <span class="font-serif font-bold italic text-orange-600 dark:text-orange-500">{{ $heroTitle2 }}</span>
+                class="text-2xl sm:text-4xl md:text-6xl lg:text-7xl leading-snug sm:leading-tight md:leading-tight drop-shadow-md">
+                <span class="font-poppins font-semibold text-white block sm:inline text-lg sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl mb-1 sm:mb-0">{{ $heroTitle1 }}</span>
+                <span class="font-serif font-bold italic text-orange-600 dark:text-orange-500 block text-2xl sm:text-4xl md:text-6xl lg:text-7xl leading-snug sm:leading-tight">{{ $heroTitle2 }}</span>
             </h1>
 
             {{-- Deskripsi --}}
             <p data-aos="fade-up" data-aos-delay="400"
-                class="mt-6 text-gray-700 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed">
+                class="mt-4 sm:mt-6 text-gray-700 dark:text-gray-300 text-xs sm:text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed">
                 {{ $heroDesc }}
             </p>
 
             {{-- Buttons --}}
-            <div data-aos="fade-up" data-aos-delay="600" class="mt-8 flex justify-center gap-4 flex-wrap">
+            <div data-aos="fade-up" data-aos-delay="600" class="mt-6 sm:mt-8 flex justify-center gap-3 sm:gap-4 flex-wrap">
                 <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}"
-                    class="px-6 py-3 bg-orange-600 dark:bg-orange-500 text-white rounded-lg font-semibold shadow-md shadow-orange-500/20 hover:bg-orange-700 dark:hover:bg-orange-600 hover:scale-105 transition-all duration-300 inline-block">
+                    class="px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-base bg-orange-600 dark:bg-orange-500 text-white rounded-lg font-semibold shadow-md shadow-orange-500/20 hover:bg-orange-700 dark:hover:bg-orange-600 hover:scale-105 transition-all duration-300 inline-block">
                     {{ __('messages.btn_join') }}
                 </a>
                 <a href="{{ app()->getLocale() == 'id' ? route('id.artikel') : route('en.ontopic') }}"
-                    class="inline-block px-6 py-3 border border-orange-400 text-orange-500 rounded-lg font-semibold hover:bg-orange-50 dark:hover:bg-orange-950 transition-all duration-300">
+                    class="inline-block px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-base border border-orange-400 text-orange-500 rounded-lg font-semibold hover:bg-orange-50 dark:hover:bg-orange-950 transition-all duration-300">
                     {{ __('messages.btn_explore') }}
                 </a>
             </div>

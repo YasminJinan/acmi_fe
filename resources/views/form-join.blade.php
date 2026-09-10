@@ -75,29 +75,58 @@
                         class="absolute bottom-0 left-0 w-64 h-64 bg-blue-50/30 dark:bg-blue-900/5 rounded-full -ml-32 -mb-32 blur-3xl pointer-events-none">
                     </div>
 
-                    <div class="relative">
+                    <div class="relative" id="form-container">
+                        <div id="form-alert" class="scroll-mt-36"></div>
                         <h2 class="text-3xl font-poppins font-bold text-slate-900 dark:text-white mb-2 transition-colors duration-300">
                             Formulir Aplikasi
                         </h2>
-                        <p class="text-gray-400 dark:text-gray-500 text-sm mb-12 font-poppins transition-colors duration-300">
+                        <p class="text-gray-400 dark:text-gray-500 text-sm mb-8 font-poppins transition-colors duration-300">
                             Estimasi waktu pengisian: 3 menit
                         </p>
 
-                        {{-- GANTI action="#" MENJADI route YANG BENAR (misal: route('join.store')) --}}
+                        {{-- Alert Notifikasi --}}
+                        @if(session('success'))
+                            <div class="mb-8 p-6 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-start gap-4 text-emerald-700 dark:text-emerald-300 font-poppins shadow-lg shadow-emerald-500/5 transition-all duration-300">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-500/20">
+                                    <i class="fa-solid fa-circle-check text-xl"></i>
+                                </div>
+                                <div class="space-y-1">
+                                    <h4 class="font-bold text-base text-emerald-800 dark:text-emerald-300">Pendaftaran Berhasil Dikirim!</h4>
+                                    <p class="text-sm opacity-90 leading-relaxed">{{ session('success') }}</p>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if(session('error'))
+                            <div class="mb-8 p-6 bg-rose-500/10 border border-rose-500/30 rounded-2xl flex items-start gap-4 text-rose-700 dark:text-rose-300 font-poppins shadow-lg shadow-rose-500/5 transition-all duration-300">
+                                <div class="w-10 h-10 rounded-xl bg-rose-500 text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-rose-500/20">
+                                    <i class="fa-solid fa-circle-exclamation text-xl"></i>
+                                </div>
+                                <div class="space-y-1">
+                                    <h4 class="font-bold text-base text-rose-800 dark:text-rose-300">Gagal Mengirim Form</h4>
+                                    <p class="text-sm opacity-90 leading-relaxed">{!! session('error') !!}</p>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($errors->any())
+                            <div class="mb-8 p-6 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex items-start gap-4 text-amber-700 dark:text-amber-300 font-poppins shadow-lg shadow-amber-500/5 transition-all duration-300">
+                                <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-amber-500/20">
+                                    <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+                                </div>
+                                <div class="space-y-2">
+                                    <h4 class="font-bold text-base text-amber-800 dark:text-amber-300">Mohon Lengkapi/Perbaiki Form</h4>
+                                    <ul class="text-sm space-y-1 list-disc list-inside opacity-90">
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        @endif
+
                         <form action="{{ app()->getLocale() == 'id' ? route('id.gabung.store') : route('en.join.store') }}" method="POST" class="space-y-12">
                             @csrf
-
-                            {{-- PENTING: Tambahkan kembali Alert Notifikasi --}}
-                            @if(session('success'))
-                                <div class="p-4 bg-green-50 border border-green-200 rounded-2xl text-green-700 text-sm font-poppins">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                            @if(session('error'))
-                                <div class="p-4 bg-red-50 border border-red-200 rounded-2xl text-red-700 text-sm font-poppins">
-                                    {!! session('error') !!}
-                                </div>
-                            @endif
 
                             {{-- Section 01: Informasi Pribadi --}}
                             <div class="space-y-6">
@@ -289,4 +318,15 @@
 
         </div>
     </section>
+
+    @if(session('success') || session('error') || $errors->any())
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const alertEl = document.getElementById('form-alert');
+                if (alertEl) {
+                    alertEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        </script>
+    @endif
 @endsection

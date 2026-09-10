@@ -26,8 +26,8 @@ class FormJoinController extends Controller
             'company'         => 'nullable|string|max:255',
             'position'        => 'nullable|string|max:255',
             'industry'        => 'nullable|string|max:255',
-            'linkedin'        => 'nullable|url|max:255',
-            'company_url'     => 'nullable|url|max:255',
+            'linkedin'        => 'nullable|string|max:255',
+            'company_url'     => 'nullable|string|max:255',
             'company_address' => 'nullable|string',
             'business_detail' => 'nullable|string',
             'instagram'       => 'nullable|string|max:255',
@@ -49,11 +49,19 @@ class FormJoinController extends Controller
         ]));
 
         if (isset($result['success']) && $result['success']) {
-            return redirect()->back()->with('success', 'Pendaftaran berhasil! Tim kami akan menghubungi Anda segera.');
+            return redirect()->to(url()->current() . '#form-alert')
+                ->with('success', 'Pendaftaran berhasil dikirim! Tim ACMI akan meninjau dan menghubungi Anda segera.');
         }
 
-        return redirect()->back()
-            ->with('error', 'Gagal kirim! Pesan Error: ' . json_encode($result))
+        $errorMsg = $result['message'] ?? 'Gagal mengirim form. Silakan coba beberapa saat lagi.';
+        if (!empty($result['errors'])) {
+            if (is_array($result['errors'])) {
+                $errorMsg .= ' (' . implode(', ', array_map(fn($e) => is_array($e) ? implode(' ', $e) : $e, $result['errors'])) . ')';
+            }
+        }
+
+        return redirect()->to(url()->current() . '#form-alert')
+            ->with('error', $errorMsg)
             ->withInput();
     }
 }
