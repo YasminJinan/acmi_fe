@@ -7,16 +7,17 @@
 
     {{-- HERO SECTION --}}
     @php
-        $heroSlides = (!empty($headerData['images']) && count($headerData['images']) > 0)
-            ? $headerData['images']
-            : [
-                'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
-                'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
-                'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80'
-            ];
+        $heroSlides =
+            !empty($headerData['images']) && count($headerData['images']) > 0
+                ? $headerData['images']
+                : [
+                    'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1920&q=80',
+                    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80',
+                    'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80',
+                ];
         $heroTitle1 = !empty($headerData['title_1']) ? $headerData['title_1'] : __('messages.hero_title_1');
         $heroTitle2 = !empty($headerData['title_2']) ? $headerData['title_2'] : __('messages.hero_title_2');
-        $heroDesc   = !empty($headerData['description']) ? $headerData['description'] : __('messages.hero_desc');
+        $heroDesc = !empty($headerData['description']) ? $headerData['description'] : __('messages.hero_desc');
     @endphp
     <section x-data="{
         activeSlide: 0,
@@ -29,7 +30,7 @@
             }
         }
     }"
-        class="relative min-h-[100dvh] md:h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b] pt-28 pb-16 md:py-0">
+        class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-[#0a0a0b]">
 
         {{-- Background Image Slider --}}
         <div class="absolute inset-0 w-full h-full bg-gray-900">
@@ -47,11 +48,11 @@
         dark:from-[#0a0a0b]/40 dark:via-[#0a0a0b]/80 dark:to-[#0a0a0b]">
         </div>
 
-        <div class="relative z-10 text-center px-4 sm:px-6 max-w-7xl">
+        <div class="relative z-10 text-center px-6 max-w-7xl">
 
             {{-- Badge --}}
             <div data-aos="zoom-in"
-                class="inline-block px-4 py-1 sm:px-6 sm:py-1.5 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-[0_8px_32px_0_rgba(255,145,0,0.08)] mb-4 sm:mb-6 transition-all duration-500 hover:border-orange-400/50 group">
+                class="inline-block px-6 py-1.5 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-[0_8px_32px_0_rgba(255,145,0,0.08)] mb-6 transition-all duration-500 hover:border-orange-400/50 group">
                 <div class="flex items-center gap-2">
                     <span class="relative flex h-2 w-2">
                         <span
@@ -59,7 +60,7 @@
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
                     </span>
                     <span
-                        class="text-orange-600 dark:text-orange-500 text-[10px] sm:text-xs font-poppins font-semibold uppercase tracking-widest group-hover:text-orange-500 transition-colors">
+                        class="text-orange-600 dark:text-orange-500 text-xs font-poppins font-semibold uppercase tracking-widest group-hover:text-orange-500 transition-colors">
                         {{ __('messages.hero_badge') }}
                     </span>
                 </div>
@@ -67,32 +68,31 @@
 
             {{-- Judul --}}
             <h1 data-aos="fade-up" data-aos-delay="200"
-                class="text-2xl sm:text-4xl md:text-6xl lg:text-7xl leading-snug sm:leading-tight md:leading-tight drop-shadow-md">
-                <span class="font-poppins font-semibold text-white block sm:inline text-xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl">{{ $heroTitle1 }}</span>
-                <span
-                    class="font-serif font-bold italic text-orange-600 dark:text-orange-500 block text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mt-1 sm:mt-0">{{ $heroTitle2 }}</span>
+                class="text-4xl md:text-6xl lg:text-7xl leading-tight drop-shadow-md">
+                <span class="font-poppins font-semibold text-white">{{ $heroTitle1 }}</span><br>
+                <span class="font-serif font-bold italic text-orange-600 dark:text-orange-500">{{ $heroTitle2 }}</span>
             </h1>
 
             {{-- Deskripsi --}}
             <p data-aos="fade-up" data-aos-delay="400"
-                class="mt-4 sm:mt-6 text-gray-700 dark:text-gray-300 text-xs sm:text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed">
+                class="mt-6 text-gray-700 dark:text-gray-300 text-sm md:text-base font-poppins max-w-xl mx-auto leading-relaxed">
                 {{ $heroDesc }}
             </p>
 
             {{-- Buttons --}}
-            <div data-aos="fade-up" data-aos-delay="600" class="mt-6 sm:mt-8 flex justify-center gap-3 sm:gap-4 flex-wrap">
+            <div data-aos="fade-up" data-aos-delay="600" class="mt-8 flex justify-center gap-4 flex-wrap">
                 <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}"
-                    class="px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-base bg-orange-600 dark:bg-orange-500 text-white rounded-lg font-semibold shadow-md shadow-orange-500/20 hover:bg-orange-700 dark:hover:bg-orange-600 hover:scale-105 transition-all duration-300 inline-block">
+                    class="px-6 py-3 bg-orange-600 dark:bg-orange-500 text-white rounded-lg font-semibold shadow-md shadow-orange-500/20 hover:bg-orange-700 dark:hover:bg-orange-600 hover:scale-105 transition-all duration-300 inline-block">
                     {{ __('messages.btn_join') }}
                 </a>
                 <a href="{{ app()->getLocale() == 'id' ? route('id.artikel') : route('en.ontopic') }}"
-                    class="inline-block px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-base border border-orange-400 text-orange-500 rounded-lg font-semibold hover:bg-orange-50 dark:hover:bg-orange-950 transition-all duration-300">
+                    class="inline-block px-6 py-3 border border-orange-400 text-orange-500 rounded-lg font-semibold hover:bg-orange-50 dark:hover:bg-orange-950 transition-all duration-300">
                     {{ __('messages.btn_explore') }}
                 </a>
             </div>
 
             {{-- Stats --}}
-            <div class="mt-8 sm:mt-14 grid grid-cols-3 gap-2 sm:gap-4 max-w-3xl mx-auto">
+            <div class="mt-14 grid grid-cols-3 gap-4 max-w-3xl mx-auto">
                 @php
                     $stats = [
                         ['target' => 500, 'suffix' => '+', 'label' => __('messages.stats_ceo')],
@@ -103,7 +103,7 @@
 
                 @foreach ($stats as $index => $stat)
                     <div data-aos="flip-up" data-aos-delay="{{ 800 + $index * 100 }}"
-                        class="bg-white/80 dark:bg-white/5 backdrop-blur-lg rounded-xl py-3 sm:py-4 px-2 sm:px-4 border border-gray-200/60 dark:border-white/10 shadow-lg shadow-gray-200/50 dark:shadow-none"
+                        class="bg-white/80 dark:bg-white/5 backdrop-blur-lg rounded-xl py-4 border border-gray-200/60 dark:border-white/10 shadow-lg shadow-gray-200/50 dark:shadow-none"
                         x-data="{
                             current: 0,
                             target: {{ $stat['target'] }},
@@ -119,10 +119,10 @@
                                 window.requestAnimationFrame(step);
                             }
                         }" x-init="start()">
-                        <p class="text-lg sm:text-2xl font-bold font-poppins text-gray-950 dark:text-white">
+                        <p class="text-2xl font-bold font-poppins text-gray-950 dark:text-white">
                             <span x-text="current">0</span>{{ $stat['suffix'] }}
                         </p>
-                        <p class="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400 font-poppins mt-0.5">{{ $stat['label'] }}</p>
+                        <p class="text-xs text-gray-600 dark:text-gray-400 font-poppins mt-0.5">{{ $stat['label'] }}</p>
                     </div>
                 @endforeach
             </div>
@@ -198,8 +198,8 @@
     </section>
 
     {{-- EVENT SECTION --}}
-    <section class="bg-white dark:bg-[#0a0a0b] py-20 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative" id="events-section"
-        x-data="{
+    <section class="bg-white dark:bg-[#0a0a0b] py-20 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative"
+        id="events-section" x-data="{
             filter: 'upcoming',
             events: @js($events),
             get filteredEvents() {
@@ -214,39 +214,49 @@
                 });
             }
         }">
-        
+
         <div class="max-w-7xl mx-auto">
-            
+
             {{-- Header --}}
             <div class="text-center max-w-3xl mx-auto mb-12" data-aos="fade-up">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-500 dark:text-orange-400 text-[11px] font-bold mb-6 shadow-sm uppercase tracking-widest font-poppins">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-500 dark:text-orange-400 text-[11px] font-bold mb-6 shadow-sm uppercase tracking-widest font-poppins">
                     <i class="fa-regular fa-calendar-check text-[12px]"></i>
                     <span>{{ app()->getLocale() == 'id' ? 'Event Eksklusif' : 'Exclusive Events' }}</span>
                 </div>
-                
-                <h2 class="text-4xl md:text-5xl font-poppins font-bold text-gray-900 dark:text-white leading-tight tracking-tight mb-4">
-                    {{ app()->getLocale() == 'id' ? 'Event & ' : 'ACMI ' }}<span class="text-orange-500">{{ app()->getLocale() == 'id' ? 'Kegiatan ACMI' : 'Events' }}</span>
+
+                <h2
+                    class="text-4xl md:text-5xl font-poppins font-bold text-gray-900 dark:text-white leading-tight tracking-tight mb-4">
+                    {{ app()->getLocale() == 'id' ? 'Event & ' : 'ACMI ' }}<span
+                        class="text-orange-500">{{ app()->getLocale() == 'id' ? 'Kegiatan ACMI' : 'Events' }}</span>
                 </h2>
-                <p class="text-gray-600 dark:text-gray-400 text-sm md:text-base font-poppins leading-relaxed max-w-2xl mx-auto">
+                <p
+                    class="text-gray-600 dark:text-gray-400 text-sm md:text-base font-poppins leading-relaxed max-w-2xl mx-auto">
                     {{ app()->getLocale() == 'id' ? 'Jadilah bagian dari event eksklusif ACMI yang dirancang untuk mengembangkan wawasan, jaringan, dan kapasitas kepemimpinan Anda.' : 'Be part of exclusive ACMI events designed to develop your insights, network, and leadership capacity.' }}
                 </p>
             </div>
 
             {{-- Filter Tabs --}}
             <div class="flex justify-center gap-3 mb-10" data-aos="fade-up">
-                <button @click="filter = 'upcoming'" 
-                        :class="filter === 'upcoming' ? 'bg-orange-500 text-white border-orange-500 shadow-md shadow-orange-500/20' : 'bg-transparent text-gray-500 dark:text-gray-400 border-gray-300 dark:border-gray-700 hover:text-gray-900 dark:hover:text-white hover:border-gray-400 dark:hover:border-gray-500'"
-                        class="px-6 py-2 rounded-full border text-sm font-semibold font-poppins transition-all duration-300">
+                <button @click="filter = 'upcoming'"
+                    :class="filter === 'upcoming' ?
+                        'bg-orange-500 text-white border-orange-500 shadow-md shadow-orange-500/20' :
+                        'bg-transparent text-gray-500 dark:text-gray-400 border-gray-300 dark:border-gray-700 hover:text-gray-900 dark:hover:text-white hover:border-gray-400 dark:hover:border-gray-500'"
+                    class="px-6 py-2 rounded-full border text-sm font-semibold font-poppins transition-all duration-300">
                     {{ app()->getLocale() == 'id' ? 'Akan Datang' : 'Upcoming' }}
                 </button>
-                <button @click="filter = 'past'" 
-                        :class="filter === 'past' ? 'bg-orange-500 text-white border-orange-500 shadow-md shadow-orange-500/20' : 'bg-transparent text-gray-500 dark:text-gray-400 border-gray-300 dark:border-gray-700 hover:text-gray-900 dark:hover:text-white hover:border-gray-400 dark:hover:border-gray-500'"
-                        class="px-6 py-2 rounded-full border text-sm font-semibold font-poppins transition-all duration-300">
+                <button @click="filter = 'past'"
+                    :class="filter === 'past' ?
+                        'bg-orange-500 text-white border-orange-500 shadow-md shadow-orange-500/20' :
+                        'bg-transparent text-gray-500 dark:text-gray-400 border-gray-300 dark:border-gray-700 hover:text-gray-900 dark:hover:text-white hover:border-gray-400 dark:hover:border-gray-500'"
+                    class="px-6 py-2 rounded-full border text-sm font-semibold font-poppins transition-all duration-300">
                     {{ app()->getLocale() == 'id' ? 'Selesai' : 'Past' }}
                 </button>
-                <button @click="filter = 'all'" 
-                        :class="filter === 'all' ? 'bg-orange-500 text-white border-orange-500 shadow-md shadow-orange-500/20' : 'bg-transparent text-gray-500 dark:text-gray-400 border-gray-300 dark:border-gray-700 hover:text-gray-900 dark:hover:text-white hover:border-gray-400 dark:hover:border-gray-500'"
-                        class="px-6 py-2 rounded-full border text-sm font-semibold font-poppins transition-all duration-300">
+                <button @click="filter = 'all'"
+                    :class="filter === 'all' ?
+                        'bg-orange-500 text-white border-orange-500 shadow-md shadow-orange-500/20' :
+                        'bg-transparent text-gray-500 dark:text-gray-400 border-gray-300 dark:border-gray-700 hover:text-gray-900 dark:hover:text-white hover:border-gray-400 dark:hover:border-gray-500'"
+                    class="px-6 py-2 rounded-full border text-sm font-semibold font-poppins transition-all duration-300">
                     {{ app()->getLocale() == 'id' ? 'Semua' : 'All' }}
                 </button>
             </div>
@@ -254,42 +264,55 @@
             {{-- Grid Events --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <template x-for="event in filteredEvents" :key="event.id">
-                    <div @click="window.location.href = '{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}'" class="cursor-pointer group bg-gray-50 dark:bg-[#111116] rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/5 transition-all duration-500 hover:border-orange-500/50 dark:hover:border-orange-500/30 hover:shadow-xl hover:shadow-orange-500/10 flex flex-col h-full" data-aos="fade-up">
-                        
-                        {{-- Image Placeholder / Pattern --}}
-                        <div class="relative h-48 w-full bg-gray-200 dark:bg-[#1a1a24] overflow-hidden">
-                            <div class="absolute inset-0 bg-gradient-to-t from-gray-50 dark:from-[#111116] to-transparent z-10"></div>
-                            
+                    <div @click="window.location.href = '{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}'"
+                        class="cursor-pointer group bg-gray-50 dark:bg-[#111116] rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/5 transition-all duration-500 hover:border-orange-500/50 dark:hover:border-orange-500/30 hover:shadow-xl hover:shadow-orange-500/10 flex flex-col h-full"
+                        data-aos="fade-up">
+
+                        {{-- Image / Poster --}}
+                        <div class="relative h-80 sm:h-[420px] md:h-[480px] w-full bg-[#0d0d12] overflow-hidden flex items-center justify-center">
+                            <img :src="(event.title && event.title.toLowerCase().includes('talk')) ? 'https://acmiofficial.com/acmi-admin/uploads/galeri_image/1738116649_5aa07e2ad47b6b53757a.jpg' : '/assets/acmi-connect-event.jpeg'"
+                                 :alt="event.title"
+                                 loading="lazy"
+                                 class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-gray-50/80 via-transparent dark:from-[#111116]/80 to-transparent z-10 pointer-events-none">
+                            </div>
+
                             {{-- Event Type Badge --}}
-                            <div class="absolute top-5 left-5 z-20">
-                                <span class="bg-orange-500 text-white text-[10px] font-black px-3 py-1.5 rounded-lg uppercase tracking-widest shadow-lg"
-                                      x-text="event.type">
+                            <div class="absolute top-4 left-4 z-20">
+                                <span
+                                    class="bg-orange-500 text-white text-[10px] font-black px-3 py-1.5 rounded-lg uppercase tracking-widest shadow-lg"
+                                    x-text="event.type">
                                 </span>
                             </div>
                         </div>
 
                         {{-- Content --}}
-                        <div class="p-6 md:p-8 flex flex-col flex-grow relative z-20 -mt-8">
-                            <h3 class="text-xl md:text-2xl font-poppins font-bold text-gray-900 dark:text-white mb-3 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors"
+                        <div class="p-5 sm:p-6 flex flex-col flex-grow relative z-20">
+                            <h3 class="text-lg sm:text-xl font-poppins font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors leading-snug"
                                 x-text="event.title">
                             </h3>
-                            
+
                             {{-- Meta Info --}}
-                            <div class="flex flex-wrap gap-x-4 gap-y-2 mb-4 text-xs font-poppins text-gray-600 dark:text-gray-400">
+                            <div
+                                class="flex flex-wrap gap-x-3 gap-y-1 mb-3 text-[11px] sm:text-xs font-poppins text-gray-600 dark:text-gray-400">
                                 <div class="flex items-center gap-1.5">
                                     <i class="fa-regular fa-clock text-orange-500"></i>
-                                    <span x-text="new Date(event.starts_at.replace(' ', 'T')).toLocaleTimeString('{{ app()->getLocale() }}-{{ strtoupper(app()->getLocale()) }}', {hour: '2-digit', minute:'2-digit'}) + ' {{ app()->getLocale() == 'id' ? 'WIB' : '' }}'"></span>
+                                    <span
+                                        x-text="new Date(event.starts_at.replace(' ', 'T')).toLocaleTimeString('{{ app()->getLocale() }}-{{ strtoupper(app()->getLocale()) }}', {hour: '2-digit', minute:'2-digit'}) + ' {{ app()->getLocale() == 'id' ? 'WIB' : '' }}'"></span>
                                 </div>
                                 <div class="flex items-center gap-1.5">
                                     <i class="fa-solid fa-location-dot text-orange-500"></i>
                                     <span x-text="event.location"></span>
                                 </div>
                             </div>
-                            
-                            <p class="text-sm text-gray-600 dark:text-gray-400 font-poppins leading-relaxed mb-6 line-clamp-2" x-text="event.description"></p>
 
-                            <div class="mt-auto pt-5 border-t border-gray-200 dark:border-white/5 flex items-center justify-between">
-                                <div class="flex items-center gap-3 text-xs font-poppins text-gray-600 dark:text-gray-400">
+                            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-poppins leading-relaxed mb-4 line-clamp-2"
+                                x-text="event.description"></p>
+
+                            <div
+                                class="mt-auto pt-4 border-t border-gray-200 dark:border-white/5 flex items-center justify-between">
+                                <div class="flex items-center gap-3 text-[11px] sm:text-xs font-poppins text-gray-600 dark:text-gray-400">
                                     <div class="flex items-center gap-1.5">
                                         <i class="fa-solid fa-users text-gray-400 dark:text-gray-500"></i>
                                         <span x-text="event.attendees_count"></span>
@@ -299,23 +322,29 @@
                                         <span>{{ app()->getLocale() == 'id' ? 'Eksklusif Anggota' : 'Member Exclusive' }}</span>
                                     </div>
                                 </div>
-                                
-                                <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}" class="text-orange-600 dark:text-orange-500 hover:text-orange-700 dark:hover:text-orange-400 text-xs font-bold font-poppins flex items-center gap-2 group/link">
+
+                                <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}"
+                                    class="text-orange-600 dark:text-orange-500 hover:text-orange-700 dark:hover:text-orange-400 text-xs font-bold font-poppins flex items-center gap-1.5 group/link">
                                     {{ app()->getLocale() == 'id' ? 'Daftar Sekarang' : 'Register Now' }}
-                                    <i class="fa-solid fa-arrow-right transition-transform group-hover/link:translate-x-1"></i>
+                                    <i
+                                        class="fa-solid fa-arrow-right transition-transform group-hover/link:translate-x-1"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </template>
-                
+
                 {{-- Empty State --}}
                 <div x-show="filteredEvents.length === 0" class="col-span-1 md:col-span-2 text-center py-20" x-cloak>
-                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-white/5 text-gray-400 dark:text-gray-500 mb-4">
+                    <div
+                        class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-white/5 text-gray-400 dark:text-gray-500 mb-4">
                         <i class="fa-solid fa-calendar-xmark text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white font-poppins">{{ app()->getLocale() == 'id' ? 'Belum ada event' : 'No events available' }}</h3>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">{{ app()->getLocale() == 'id' ? 'Nantikan event menarik dari kami selanjutnya.' : 'Stay tuned for our upcoming exciting events.' }}</p>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white font-poppins">
+                        {{ app()->getLocale() == 'id' ? 'Belum ada event' : 'No events available' }}</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
+                        {{ app()->getLocale() == 'id' ? 'Nantikan event menarik dari kami selanjutnya.' : 'Stay tuned for our upcoming exciting events.' }}
+                    </p>
                 </div>
             </div>
 
@@ -446,17 +475,18 @@
 
 
     {{-- ═══ SPONSOR 1 · 728×90 · di bawah SOLUTION SECTION ═══ --}}
+    {{--
     @php
-        $s1 = $sponsorsByPosition->get(1) ?? ($sponsorsBySize['728x90'] ?? collect())->values()->get(0) ?? ($sponsoredBannersBySize['728x90'] ?? collect())->values()->get(0);
+        $s1 =
+            $sponsorsByPosition->get(1) ??
+            (($sponsorsBySize['728x90'] ?? collect())->values()->get(0) ??
+                ($sponsoredBannersBySize['728x90'] ?? collect())->values()->get(0));
     @endphp
     <section class="bg-white dark:bg-[#0a0a0b] py-14 transition-colors duration-500">
-        <x-sponsor-banner
-            :id="$s1['id'] ?? null"
-            :href="$s1['link'] ?? $s1['link_sponsored'] ?? '#'"
-            image="https://acmiofficial.com/custom/Blog-2.jpg"
-            :brand="$s1['title'] ?? 'Sponsored'"
-            size="728x90" />
+        <x-sponsor-banner :id="$s1['id'] ?? null" :href="$s1['link'] ?? ($s1['link_sponsored'] ?? '#')" image="https://acmiofficial.com/custom/Blog-2.jpg"
+            :brand="$s1['title'] ?? 'Sponsored'" size="728x90" />
     </section>
+    --}}
 
 
     {{-- EXCLUSIVE MEMBERSHIP SECTION --}}
@@ -577,19 +607,19 @@
 
 
     {{-- ═══ SPONSOR 2 · 970×250 · di bawah EXCLUSIVE MEMBERSHIP ═══ --}}
+    {{--
     @php
-        $s2 = $sponsorsByPosition->get(2) ?? ($sponsorsBySize['970x250'] ?? collect())->values()->get(0) ?? ($sponsoredBannersBySize['970x250'] ?? collect())->values()->get(0);
+        $s2 =
+            $sponsorsByPosition->get(2) ??
+            (($sponsorsBySize['970x250'] ?? collect())->values()->get(0) ??
+                ($sponsoredBannersBySize['970x250'] ?? collect())->values()->get(0));
     @endphp
-    @if(!empty($s2['image']))
-    <section class="bg-gray-50 dark:bg-[#0c0c0e] py-16 transition-colors duration-500">
-        <x-sponsor-banner
-            :id="$s2['id'] ?? null"
-            :href="$s2['link'] ?? $s2['link_sponsored'] ?? '#'"
-            :image="$s2['image']"
-            :brand="$s2['title'] ?? 'Sponsored'"
-            :size="$s2['size'] ?? '970x250'" />
-    </section>
+    @if (!empty($s2['image']))
+        <section class="bg-gray-50 dark:bg-[#0c0c0e] py-16 transition-colors duration-500">
+            <x-sponsor-banner :id="$s2['id'] ?? null" :href="$s2['link'] ?? ($s2['link_sponsored'] ?? '#')" :image="$s2['image']" :brand="$s2['title'] ?? 'Sponsored'" :size="$s2['size'] ?? '970x250'" />
+        </section>
     @endif
+    --}}
 
 
     {{-- Swiper Script --}}
@@ -657,8 +687,9 @@
 
 
     {{-- PRODUK ANGGOTA SECTION --}}
-    <section class="bg-gray-50 dark:bg-[#050505] py-16 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative" id="produk-anggota"
-        x-data="{
+    <section
+        class="bg-gray-50 dark:bg-[#050505] py-16 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative"
+        id="produk-anggota" x-data="{
             search: '',
             category: 'Semua',
             products: @js($products),
@@ -683,8 +714,8 @@
             get totalPages() {
                 return Math.ceil(this.filteredProducts.length / this.perPage);
             }
-        }"
-        x-init="$watch('search', value => page = 1); $watch('category', value => page = 1)">
+        }" x-init="$watch('search', value => page = 1);
+        $watch('category', value => page = 1)">
 
         <div class="max-w-7xl mx-auto">
 
@@ -800,7 +831,8 @@
                 <a href="{{ app()->getLocale() == 'id' ? route('id.produk') : route('en.products') }}"
                     class="inline-flex items-center gap-3 bg-white dark:bg-gray-800 border-2 border-orange-100 dark:border-orange-500/20 text-orange-500 px-10 py-4 rounded-full text-xs font-black uppercase tracking-widest shadow-[0_15px_30px_rgba(255,107,0,0.15)] hover:bg-orange-500 hover:text-white dark:hover:bg-orange-500 transition-all duration-500 transform active:scale-95 group">
                     <span>{{ __('messages.products_view_more') }}</span>
-                    <i class="fa-solid fa-chevron-right text-[10px] transition-transform duration-500 group-hover:translate-x-1"></i>
+                    <i
+                        class="fa-solid fa-chevron-right text-[10px] transition-transform duration-500 group-hover:translate-x-1"></i>
                 </a>
             </div>
 
@@ -809,19 +841,20 @@
 
 
     {{-- ═══ SPONSOR 3 · 336×280 · di bawah PRODUK ANGGOTA ═══ --}}
+    {{--
     @php
-        $s3 = $sponsorsByPosition->get(3) ?? ($sponsorsBySize['336x280'] ?? collect())->values()->get(0) ?? ($sponsoredBannersBySize['336x280'] ?? collect())->values()->get(0);
+        $s3 =
+            $sponsorsByPosition->get(3) ??
+            (($sponsorsBySize['336x280'] ?? collect())->values()->get(0) ??
+                ($sponsoredBannersBySize['336x280'] ?? collect())->values()->get(0));
     @endphp
-    @if(!empty($s3['image']))
-    <section class="bg-gray-50 dark:bg-[#050505] py-16 transition-colors duration-500">
-        <x-sponsor-banner
-            :id="$s3['id'] ?? null"
-            :href="$s3['link'] ?? $s3['link_sponsored'] ?? '#'"
-            :image="$s3['image']"
-            :brand="$s3['title'] ?? 'Sponsored'"
-            :size="$s3['size'] ?? '336x280'" />
-    </section>
+    @if (!empty($s3['image']))
+        <section class="bg-gray-50 dark:bg-[#050505] py-16 transition-colors duration-500">
+            <x-sponsor-banner :id="$s3['id'] ?? null" :href="$s3['link'] ?? ($s3['link_sponsored'] ?? '#')" :image="$s3['image']" :brand="$s3['title'] ?? 'Sponsored'"
+                :size="$s3['size'] ?? '336x280'" />
+        </section>
     @endif
+    --}}
 
 
     {{-- TESTIMONIAL SECTION --}}
@@ -1034,19 +1067,20 @@
 
 
     {{-- ═══ SPONSOR 4 · 728×90 ═══ --}}
+    {{--
     @php
-        $s4 = $sponsorsByPosition->get(4) ?? ($sponsorsBySize['728x90'] ?? collect())->values()->get(1) ?? ($sponsoredBannersBySize['728x90'] ?? collect())->values()->get(1);
+        $s4 =
+            $sponsorsByPosition->get(4) ??
+            (($sponsorsBySize['728x90'] ?? collect())->values()->get(1) ??
+                ($sponsoredBannersBySize['728x90'] ?? collect())->values()->get(1));
     @endphp
-    @if(!empty($s4['image']))
-    <section class="bg-white dark:bg-[#0a0a0b] py-14 transition-colors duration-500">
-        <x-sponsor-banner
-            :id="$s4['id'] ?? null"
-            :href="$s4['link'] ?? $s4['link_sponsored'] ?? '#'"
-            :image="$s4['image']"
-            :brand="$s4['title'] ?? 'Sponsored'"
-            :size="$s4['size'] ?? '728x90'" />
-    </section>
+    @if (!empty($s4['image']))
+        <section class="bg-white dark:bg-[#0a0a0b] py-14 transition-colors duration-500">
+            <x-sponsor-banner :id="$s4['id'] ?? null" :href="$s4['link'] ?? ($s4['link_sponsored'] ?? '#')" :image="$s4['image']" :brand="$s4['title'] ?? 'Sponsored'"
+                :size="$s4['size'] ?? '728x90'" />
+        </section>
     @endif
+    --}}
 
 
     {{-- GALLERY SECTION --}}
@@ -1054,17 +1088,17 @@
         activeCategory: 'Semua',
         galleries: @js($gallery ?? []),
         isLoading: false,
-
+    
         // Lightbox state
         isOpen: false,
         currentIndex: 0,
-
+    
         // Computed property to get unique categories from the gallery data
         get categories() {
             const cats = this.galleries.map(item => item.category?.name).filter(Boolean);
             return ['Semua', ...new Set(cats)];
         },
-
+    
         // Computed property to get filtered and limited galleries (Max 5)
         get filteredGalleries() {
             let filtered = this.galleries;
@@ -1074,23 +1108,23 @@
             // Return only the first 5 (assumed to be the newest)
             return filtered.slice(0, 5);
         },
-
+    
         filter(category) {
             this.activeCategory = category;
         },
-
+    
         // Lightbox methods
         openLightbox(index) {
             this.currentIndex = index;
             this.isOpen = true;
             document.body.style.overflow = 'hidden';
         },
-
+    
         closeLightbox() {
             this.isOpen = false;
             document.body.style.overflow = 'auto';
         },
-
+    
         next() {
             if (this.currentIndex < this.filteredGalleries.length - 1) {
                 this.currentIndex++;
@@ -1098,7 +1132,7 @@
                 this.currentIndex = 0;
             }
         },
-
+    
         prev() {
             if (this.currentIndex > 0) {
                 this.currentIndex--;
@@ -1106,7 +1140,7 @@
                 this.currentIndex = this.filteredGalleries.length - 1;
             }
         },
-
+    
         init() {
             // Data provided server-side
         }
@@ -1190,7 +1224,8 @@
 
             {{-- Button Selengkapnya (Disesuaikan dengan kategori aktif) --}}
             <div class="text-center mt-20" data-aos="fade-up">
-                <a :href="'{{ app()->getLocale() == 'id' ? route('id.galeri') : route('en.gallery') }}' + (activeCategory !== 'Semua' ?
+                <a :href="'{{ app()->getLocale() == 'id' ? route('id.galeri') : route('en.gallery') }}' + (
+                    activeCategory !== 'Semua' ?
                     '?category=' + encodeURIComponent(activeCategory) : ' ')"
                     class="group inline-flex items-center gap-3 px-10 py-4 rounded-2xl bg-slate-900 dark:bg-orange-500 text-white font-bold font-poppins transition-all duration-500 hover:bg-orange-500 hover:shadow-xl hover:shadow-orange-500/20">
                     {{ __('messages.gallery_more') }}
@@ -1255,19 +1290,20 @@
 
 
     {{-- ═══ SPONSOR 5 · 970×250 · di bawah GALLERY ═══ --}}
+    {{--
     @php
-        $s5 = $sponsorsByPosition->get(5) ?? ($sponsorsBySize['970x250'] ?? collect())->values()->get(1) ?? ($sponsoredBannersBySize['970x250'] ?? collect())->values()->get(1);
+        $s5 =
+            $sponsorsByPosition->get(5) ??
+            (($sponsorsBySize['970x250'] ?? collect())->values()->get(1) ??
+                ($sponsoredBannersBySize['970x250'] ?? collect())->values()->get(1));
     @endphp
-    @if(!empty($s5['image']))
-    <section class="bg-white dark:bg-[#0a0a0b] py-16 transition-colors duration-500">
-        <x-sponsor-banner
-            :id="$s5['id'] ?? null"
-            :href="$s5['link'] ?? $s5['link_sponsored'] ?? '#'"
-            :image="$s5['image']"
-            :brand="$s5['title'] ?? 'Sponsored'"
-            :size="$s5['size'] ?? '970x250'" />
-    </section>
+    @if (!empty($s5['image']))
+        <section class="bg-white dark:bg-[#0a0a0b] py-16 transition-colors duration-500">
+            <x-sponsor-banner :id="$s5['id'] ?? null" :href="$s5['link'] ?? ($s5['link_sponsored'] ?? '#')" :image="$s5['image']" :brand="$s5['title'] ?? 'Sponsored'"
+                :size="$s5['size'] ?? '970x250'" />
+        </section>
     @endif
+    --}}
 
 
     {{-- INSTAGRAM FEED SECTION (TEMPORARILY COMMENTED OUT) --}}
@@ -1333,19 +1369,20 @@
 
 
     {{-- ═══ SPONSOR 6 · 300×250 · di bawah INSTAGRAM FEED ═══ --}}
+    {{--
     @php
-        $s6 = $sponsorsByPosition->get(6) ?? ($sponsorsBySize['300x250'] ?? collect())->values()->get(0) ?? ($sponsoredBannersBySize['300x250'] ?? collect())->values()->get(0);
+        $s6 =
+            $sponsorsByPosition->get(6) ??
+            (($sponsorsBySize['300x250'] ?? collect())->values()->get(0) ??
+                ($sponsoredBannersBySize['300x250'] ?? collect())->values()->get(0));
     @endphp
-    @if(!empty($s6['image']))
-    <section class="bg-white dark:bg-[#0a0a0b] py-16 transition-colors duration-500">
-        <x-sponsor-banner
-            :id="$s6['id'] ?? null"
-            :href="$s6['link'] ?? $s6['link_sponsored'] ?? '#'"
-            :image="$s6['image']"
-            :brand="$s6['title'] ?? 'Sponsored'"
-            :size="$s6['size'] ?? '300x250'" />
-    </section>
+    @if (!empty($s6['image']))
+        <section class="bg-white dark:bg-[#0a0a0b] py-16 transition-colors duration-500">
+            <x-sponsor-banner :id="$s6['id'] ?? null" :href="$s6['link'] ?? ($s6['link_sponsored'] ?? '#')" :image="$s6['image']" :brand="$s6['title'] ?? 'Sponsored'"
+                :size="$s6['size'] ?? '300x250'" />
+        </section>
     @endif
+    --}}
 
 
     {{-- FINAL CTA SECTION --}}
@@ -1426,7 +1463,9 @@
                 link_url: link.href,
                 page_location: window.location.pathname,
             });
-        }, { passive: true });
+        }, {
+            passive: true
+        });
     </script>
 
     {{-- CMS: tracking impression & click sponsored banners --}}

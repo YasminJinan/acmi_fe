@@ -63,12 +63,16 @@
                 <template x-for="event in filteredEvents" :key="event.id">
                     <div @click="window.location.href = '{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}'" class="cursor-pointer group bg-gray-50 dark:bg-[#111116] rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/5 transition-all duration-500 hover:border-orange-500/50 dark:hover:border-orange-500/30 hover:shadow-xl hover:shadow-orange-500/10 flex flex-col h-full" data-aos="fade-up">
                         
-                        {{-- Image Placeholder / Pattern --}}
-                        <div class="relative h-48 w-full bg-gray-200 dark:bg-[#1a1a24] overflow-hidden">
-                            <div class="absolute inset-0 bg-gradient-to-t from-gray-50 dark:from-[#111116] to-transparent z-10"></div>
+                        {{-- Image / Poster --}}
+                        <div class="relative h-80 sm:h-[420px] md:h-[480px] w-full bg-[#0d0d12] overflow-hidden flex items-center justify-center">
+                            <img :src="(event.title && event.title.toLowerCase().includes('talk')) ? 'https://acmiofficial.com/acmi-admin/uploads/galeri_image/1738116649_5aa07e2ad47b6b53757a.jpg' : '/assets/acmi-connect-event.jpeg'"
+                                 :alt="event.title"
+                                 loading="lazy"
+                                 class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-50/80 via-transparent dark:from-[#111116]/80 to-transparent z-10 pointer-events-none"></div>
                             
                             {{-- Event Type Badge --}}
-                            <div class="absolute top-5 left-5 z-20">
+                            <div class="absolute top-4 left-4 z-20">
                                 <span class="bg-orange-500 text-white text-[10px] font-black px-3 py-1.5 rounded-lg uppercase tracking-widest shadow-lg"
                                       x-text="event.type">
                                 </span>
@@ -76,13 +80,13 @@
                         </div>
 
                         {{-- Content --}}
-                        <div class="p-6 md:p-8 flex flex-col flex-grow relative z-20 -mt-8">
-                            <h3 class="text-xl md:text-2xl font-poppins font-bold text-gray-900 dark:text-white mb-3 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors"
+                        <div class="p-5 sm:p-6 flex flex-col flex-grow relative z-20">
+                            <h3 class="text-lg sm:text-xl font-poppins font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors leading-snug"
                                 x-text="event.title">
                             </h3>
                             
                             {{-- Meta Info --}}
-                            <div class="flex flex-wrap gap-x-4 gap-y-2 mb-4 text-xs font-poppins text-gray-600 dark:text-gray-400">
+                            <div class="flex flex-wrap gap-x-3 gap-y-1 mb-3 text-[11px] sm:text-xs font-poppins text-gray-600 dark:text-gray-400">
                                 <div class="flex items-center gap-1.5">
                                     <i class="fa-regular fa-clock text-orange-500"></i>
                                     <span x-text="new Date(event.starts_at.replace(' ', 'T')).toLocaleTimeString('{{ app()->getLocale() }}-{{ strtoupper(app()->getLocale()) }}', {hour: '2-digit', minute:'2-digit'}) + ' {{ app()->getLocale() == 'id' ? 'WIB' : '' }}'"></span>
@@ -93,10 +97,10 @@
                                 </div>
                             </div>
                             
-                            <p class="text-sm text-gray-600 dark:text-gray-400 font-poppins leading-relaxed mb-6 line-clamp-2" x-text="event.description"></p>
+                            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-poppins leading-relaxed mb-4 line-clamp-2" x-text="event.description"></p>
 
-                            <div class="mt-auto pt-5 border-t border-gray-200 dark:border-white/5 flex items-center justify-between">
-                                <div class="flex items-center gap-3 text-xs font-poppins text-gray-600 dark:text-gray-400">
+                            <div class="mt-auto pt-4 border-t border-gray-200 dark:border-white/5 flex items-center justify-between">
+                                <div class="flex items-center gap-3 text-[11px] sm:text-xs font-poppins text-gray-600 dark:text-gray-400">
                                     <div class="flex items-center gap-1.5">
                                         <i class="fa-solid fa-users text-gray-400 dark:text-gray-500"></i>
                                         <span x-text="event.attendees_count"></span>
@@ -107,7 +111,7 @@
                                     </div>
                                 </div>
                                 
-                                <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}" class="text-orange-600 dark:text-orange-500 hover:text-orange-700 dark:hover:text-orange-400 text-xs font-bold font-poppins flex items-center gap-2 group/link">
+                                <a href="{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}" class="text-orange-600 dark:text-orange-500 hover:text-orange-700 dark:hover:text-orange-400 text-xs font-bold font-poppins flex items-center gap-1.5 group/link">
                                     {{ app()->getLocale() == 'id' ? 'Daftar Sekarang' : 'Register Now' }}
                                     <i class="fa-solid fa-arrow-right transition-transform group-hover/link:translate-x-1"></i>
                                 </a>
