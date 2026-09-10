@@ -1,10 +1,21 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Archive;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+/**
+ * DIARSIPKAN & DINONAKTIFKAN — JANGAN DIJALANKAN.
+ *
+ * Model \App\Models\Event memakai koneksi 'pgsql_acmi', yaitu database
+ * PostgreSQL milik PIHAK KETIGA (ACMI Connect, 69.5.7.115) yang sudah berisi
+ * data produksi. Menjalankan seeder ini akan menulis 11 baris (id 4-14) ke
+ * database orang lain dan berpotensi menimpa / bentrok primary key.
+ *
+ * File ini disimpan HANYA sebagai data referensi. Namespace-nya sengaja
+ * diubah (Database\Seeders\Archive) dan run() melempar exception supaya
+ * tidak bisa dipanggil lewat `php artisan db:seed --class=...`.
+ */
 class EventSeeder extends Seeder
 {
     /**
@@ -12,6 +23,11 @@ class EventSeeder extends Seeder
      */
     public function run(): void
     {
+        throw new \RuntimeException(
+            'EventSeeder dinonaktifkan: model Event menulis ke PostgreSQL pihak ketiga (pgsql_acmi). '
+            . 'Lihat komentar di file database/seeders/archive/EventSeeder.php.'
+        );
+
         $events = [
             [
                 'id' => 13,

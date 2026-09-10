@@ -2,7 +2,8 @@
 
 return [
 
-
+'nav_profile' => 'Profil',
+'nav_members' => 'Anggota',
 // ── Membership Features ──────────────────────────────
     'membership_feature_1' => 'Akses penuh ke seluruh program ACMI',
     'membership_feature_2' => 'Undangan ke CEO roundtable bulanan',
