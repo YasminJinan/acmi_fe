@@ -253,25 +253,25 @@
                             <div class="space-y-6">
                                 <div class="flex items-center gap-4">
                                     <span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-bold transition-colors duration-300">03</span>
-                                    <h3 class="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-widest transition-colors duration-300">Akun Media Sosial</h3>
+                                    <h3 class="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-widest transition-colors duration-300">Akun Media Sosial <span class="text-gray-400 font-normal lowercase">(opsional)</span></h3>
                                     <div class="h-[1px] flex-grow bg-gray-100 dark:bg-white/10 transition-colors duration-300"></div>
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="space-y-2">
-                                        <input type="url" name="linkedin" value="{{ old('linkedin') }}" placeholder="LinkedIn Profile URL"
+                                        <input type="text" name="linkedin" value="{{ old('linkedin') }}" placeholder="LinkedIn Profile URL (Opsional)"
                                             class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
                                     </div>
                                     <div class="space-y-2">
-                                        <input type="text" name="instagram" value="{{ old('instagram') }}" placeholder="Akun Instagram"
+                                        <input type="text" name="instagram" value="{{ old('instagram') }}" placeholder="Akun Instagram (Opsional)"
                                             class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
                                     </div>
                                     <div class="space-y-2">
-                                        <input type="text" name="tiktok" value="{{ old('tiktok') }}" placeholder="Akun TikTok"
+                                        <input type="text" name="tiktok" value="{{ old('tiktok') }}" placeholder="Akun TikTok (Opsional)"
                                             class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
                                     </div>
                                     <div class="space-y-2">
-                                        <input type="text" name="facebook" value="{{ old('facebook') }}" placeholder="Akun Facebook"
+                                        <input type="text" name="facebook" value="{{ old('facebook') }}" placeholder="Akun Facebook (Opsional)"
                                             class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
                                     </div>
                                 </div>
@@ -281,17 +281,17 @@
                             <div class="space-y-6">
                                 <div class="flex items-center gap-4">
                                     <span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-bold transition-colors duration-300">04</span>
-                                    <h3 class="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-widest transition-colors duration-300">Motivasi & Referral</h3>
+                                    <h3 class="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-widest transition-colors duration-300">Motivasi & Referral <span class="text-gray-400 font-normal lowercase">(opsional)</span></h3>
                                     <div class="h-[1px] flex-grow bg-gray-100 dark:bg-white/10 transition-colors duration-300"></div>
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="space-y-2 md:col-span-2">
-                                        <textarea name="message" rows="4" placeholder="Mengapa anda tertarik bergabung dengan ACMI?*" required
+                                        <textarea name="message" rows="4" placeholder="Mengapa anda tertarik bergabung dengan ACMI? (Opsional)"
                                             class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600 resize-none">{{ old('message') }}</textarea>
                                     </div>
                                     <div class="space-y-2 md:col-span-2">
-                                        <input type="text" name="ceo_mm_batch" value="{{ old('ceo_mm_batch') }}" placeholder="CEO MM Batch" required
+                                        <input type="text" name="ceo_mm_batch" value="{{ old('ceo_mm_batch') }}" placeholder="CEO MM Batch (Opsional)"
                                             class="w-full px-6 py-4 bg-gray-50 dark:bg-white/5 border border-transparent dark:border-white/5 rounded-2xl focus:bg-white dark:focus:bg-white/10 focus:ring-4 focus:ring-orange-500/10 dark:focus:ring-orange-500/20 focus:border-orange-500 outline-none transition-all duration-300 font-poppins text-sm text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600">
                                     </div>
                                 </div>
