@@ -270,7 +270,15 @@
 
                         {{-- Image / Poster --}}
                         <div class="relative h-80 sm:h-[420px] md:h-[480px] w-full bg-[#0d0d12] overflow-hidden flex items-center justify-center">
-                            <img :src="(event.title && event.title.toLowerCase().includes('talk')) ? 'https://acmiofficial.com/acmi-admin/uploads/galeri_image/1738116649_5aa07e2ad47b6b53757a.jpg' : '/assets/acmi-connect-event.jpeg'"
+                            <img :src="
+                                   event.title && (event.title.toLowerCase().includes('menyusun strategi bisnis 2025') || event.title.toLowerCase().includes('talk'))
+                                     ? 'https://acmiofficial.com/acmi-admin/uploads/galeri_image/1738116649_5aa07e2ad47b6b53757a.jpg'
+                                     : event.title && event.title.toLowerCase().includes('acmi timur')
+                                     ? 'https://acmiofficial.com/assets/images/acmi_timur.jpeg'
+                                     : event.title && (event.title.toLowerCase().includes('networking & business matching') || event.title.toLowerCase().includes('connect'))
+                                     ? 'https://acmiofficial.com/assets/acmi-connect-event.jpeg'
+                                     : 'https://acmiofficial.com/assets/images/acmi_default.jpeg'
+                                 "
                                  :alt="event.title"
                                  loading="lazy"
                                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
