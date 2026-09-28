@@ -9,7 +9,7 @@ return [
     'membership_feature_1' => 'Akses penuh ke seluruh program ACMI',
     'membership_feature_2' => 'Undangan ke CEO roundtable bulanan',
     'membership_feature_3' => 'Masterclass eksklusif bersama para pakar global',
-    'membership_feature_4' => 'Networking dengan 500+ CEO Indonesia',
+    'membership_feature_4' => 'Networking dengan 480+ CEO Indonesia',
     'membership_feature_5' => 'Akses ke resource center dan industry insights',
     'membership_feature_6' => 'Prioritas untuk misi bisnis internasional',
 
@@ -191,7 +191,7 @@ return [
         'Akses penuh ke seluruh program ACMI',
         'CEO Roundtable bulanan',
         'Masterclass eksklusif dengan pakar global',
-        'Networking dengan 500+ CEO Indonesia',
+        'Networking dengan 480+ CEO Indonesia',
         'Business mission internasional',
         'Resource center & insight industri',
     ],
@@ -418,7 +418,7 @@ return [
     'btn_explore' => 'Eksplorasi Kegiatan Kami',
 
     // STATS
-    'stats_ceo' => 'Anggota CEO',
+    'stats_ceo' => 'Anggota',
     'stats_events' => 'Acara Tahunan',
     'stats_industry' => 'Industri',
 
@@ -536,7 +536,7 @@ eksekutif ACMI dari berbagai sektor industri.',
         'Exclusive invitation ke premium CEO gathering, executive dinner & private networking session',
         'Direct access ke mentor ACMI dan strategic business leaders',
         'Private masterclass bersama global experts dan top industry practitioners',
-        'Strategic networking dengan 500+ curated CEOs, founders, dan decision makers Indonesia',
+        'Strategic networking dengan 480+ curated CEOs, founders, dan decision makers Indonesia',
         'Access ke peluang kolaborasi lintas industri dan high-value business connections',
         'Priority invitation untuk global business trip, international business mission & executive delegation',
         'Exclusive access ke premium insights dan industry reports',

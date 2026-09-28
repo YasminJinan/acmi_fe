@@ -95,7 +95,7 @@
             <div class="mt-14 grid grid-cols-3 gap-4 max-w-3xl mx-auto">
                 @php
                     $stats = [
-                        ['target' => 500, 'suffix' => '+', 'label' => __('messages.stats_ceo')],
+                        ['target' => 480, 'suffix' => '+', 'label' => __('messages.stats_ceo')],
                         ['target' => 300, 'suffix' => '+', 'label' => __('messages.stats_events')],
                         ['target' => 100, 'suffix' => '+', 'label' => __('messages.stats_industry')],
                     ];
@@ -132,6 +132,7 @@
 
 
     {{-- PARTNER SECTION DINAMIS DARI CMS --}}
+    @if (!empty($partners) && count($partners) > 0)
     <section x-data="{
         partners: @js($partners ?? []),
         isLoading: false,
@@ -189,13 +190,9 @@
                 </div>
             </template>
 
-            {{-- Jika CMS masih kosong --}}
-            <template x-if="!isLoading && partners.length === 0">
-                <p class="text-center text-gray-500 text-sm font-poppins">Mitra belum ditambahkan.</p>
-            </template>
-
         </div>
     </section>
+    @endif
 
     {{-- EVENT SECTION --}}
     <section class="bg-white dark:bg-[#0a0a0b] py-20 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative"
@@ -269,11 +266,30 @@
                         data-aos="fade-up">
 
                         {{-- Image / Poster --}}
-                        <div class="relative h-80 sm:h-[420px] md:h-[480px] w-full bg-[#0d0d12] overflow-hidden flex items-center justify-center">
-                            <img :src="(event.title && event.title.toLowerCase().includes('talk')) ? 'https://acmiofficial.com/acmi-admin/uploads/galeri_image/1738116649_5aa07e2ad47b6b53757a.jpg' : '/assets/acmi-connect-event.jpeg'"
-                                 :alt="event.title"
-                                 loading="lazy"
-                                 class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
+                        <div class="relative h-80 sm:h-[420px] md:h-[480px] w-full bg-[#0d0d12] overflow-hidden flex items-center justify-center" x-data="{ imgFailed: false }">
+                            <template x-if="event.image_url && !imgFailed">
+                                <img :src="event.image_url"
+                                     :alt="event.title"
+                                     loading="lazy"
+                                     x-on:error="imgFailed = true"
+                                     class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
+                            </template>
+
+                            {{-- Fallback jika event tidak memiliki gambar atau gagal dimuat --}}
+                            <template x-if="!event.image_url || imgFailed">
+                                <div class="w-full h-full flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-slate-900 via-neutral-900 to-[#14151e] relative select-none">
+                                    <div class="absolute inset-0 bg-orange-500/[0.03]"></div>
+                                    <div class="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-orange-500 mb-4 shadow-xl z-10">
+                                        <span x-show="event.image_emoji" x-text="event.image_emoji" class="text-3xl"></span>
+                                        <i x-show="!event.image_emoji" class="fa-regular fa-image text-3xl opacity-60"></i>
+                                    </div>
+                                    <span class="z-10 text-[11px] font-bold text-gray-400 font-poppins uppercase tracking-widest px-4 py-1.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2">
+                                        <i class="fa-solid fa-image-slash text-orange-500/70 text-xs"></i>
+                                        <span>{{ app()->getLocale() == 'id' ? 'Gambar Tidak Tersedia' : 'No Image Available' }}</span>
+                                    </span>
+                                </div>
+                            </template>
+
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-gray-50/80 via-transparent dark:from-[#111116]/80 to-transparent z-10 pointer-events-none">
                             </div>
@@ -750,11 +766,27 @@
                         <div
                             class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
 
-                            {{-- Image --}}
-                            <div class="relative h-[180px] overflow-hidden">
-                                <img :src="product.image" :alt="product.title"
-                                    class="w-full h-full object-cover group-hover:scale-110 transition duration-[1.5s] ease-out">
-                                <div class="absolute top-4 left-4">
+                            {{-- Image (Foto Muka Pemilik Produk) --}}
+                            <div class="relative h-[180px] overflow-hidden bg-slate-100 dark:bg-[#151722]" x-data="{ imgFailed: false }">
+                                <template x-if="product.image && !imgFailed">
+                                    <img :src="product.image" :alt="product.title"
+                                        x-on:error="imgFailed = true"
+                                        class="w-full h-full object-cover object-top group-hover:scale-110 transition duration-[1.5s] ease-out">
+                                </template>
+
+                                {{-- Fallback jika profil pemilik produk tidak memiliki foto atau gagal dimuat --}}
+                                <template x-if="!product.image || imgFailed">
+                                    <div class="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-white/[0.03] dark:to-white/[0.07] relative select-none">
+                                        <div class="w-12 h-12 rounded-full bg-orange-500/10 dark:bg-orange-500/20 text-orange-500 flex items-center justify-center mb-2 border border-orange-500/20 shadow-sm">
+                                            <i class="fa-solid fa-user-tie text-lg"></i>
+                                        </div>
+                                        <span class="text-[10px] font-bold text-gray-500 dark:text-gray-400 font-poppins uppercase tracking-wider">
+                                            {{ app()->getLocale() == 'id' ? 'Foto Tidak Tersedia' : 'No Photo Available' }}
+                                        </span>
+                                    </div>
+                                </template>
+
+                                <div class="absolute top-4 left-4 z-10">
                                     <span
                                         class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-orange-600 dark:text-orange-400 text-[9px] px-3 py-1.5 rounded-lg font-black uppercase tracking-widest shadow-lg"
                                         x-text="Array.isArray(product.category) ? product.category[0] : product.category">
@@ -871,7 +903,7 @@
                 <div>
                     <p class="text-[10px] text-gray-400 uppercase font-black tracking-widest leading-none mb-1">Exclusive
                         Network</p>
-                    <p class="text-xs font-bold text-slate-900 dark:text-white leading-none">500+ CEO Members</p>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white leading-none">480+ {{ app()->getLocale() == 'id' ? 'Anggota' : 'CEO Members' }}</p>
                 </div>
             </div>
 

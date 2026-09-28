@@ -1,22 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Services\CmsApiService;
 
 class GalleryController extends Controller
 {
+    protected CmsApiService $cms;
+
+    public function __construct(?CmsApiService $cms = null)
+    {
+        $this->cms = $cms ?? new CmsApiService();
+    }
+
     public function index()
     {
-        $cms = new CmsApiService();
-        $gallery = $cms->getServices();
+        $gallery = $this->cms->getGallery();
 
         return view('gallery', compact('gallery'));
     }
-    
-    public function gallery() 
+
+    public function gallery()
     {
-        $gallery = $cms->getGallery();
-        
-        return view('gallery', compact('gallery'));
+        return $this->index();
     }
 }
+

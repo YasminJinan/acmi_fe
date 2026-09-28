@@ -21,20 +21,43 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
 
                 <div class="lg:col-span-6 space-y-7">
-                    <div class="rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800">
-                        <img src="{{ $product->image }}" alt="{{ $product->title }}" class="w-full h-[300px]  object-cover">
+                    <div class="rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800 bg-slate-100 dark:bg-[#111420]">
+                        @if (!empty($product->image))
+                            <img src="{{ $product->image }}" alt="{{ $product->title }}" class="w-full h-[320px] object-cover object-top"
+                                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                            <div class="hidden w-full h-[320px] flex flex-col items-center justify-center p-6 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-white/5 dark:to-white/10 select-none">
+                                <div class="w-20 h-20 rounded-full bg-orange-500/10 text-orange-500 flex items-center justify-center mb-3 text-3xl border border-orange-500/20 shadow-sm">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </div>
+                                <p class="text-xs font-bold text-gray-500 dark:text-gray-400 font-poppins uppercase tracking-wider">
+                                    {{ app()->getLocale() == 'id' ? 'Foto Profil Belum Tersedia' : 'Profile Photo Unavailable' }}
+                                </p>
+                            </div>
+                        @else
+                            <div class="w-full h-[320px] flex flex-col items-center justify-center p-6 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-white/5 dark:to-white/10 select-none">
+                                <div class="w-20 h-20 rounded-full bg-orange-500/10 text-orange-500 flex items-center justify-center mb-3 text-3xl border border-orange-500/20 shadow-sm">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </div>
+                                <p class="text-xs font-bold text-gray-500 dark:text-gray-400 font-poppins uppercase tracking-wider">
+                                    {{ app()->getLocale() == 'id' ? 'Foto Profil Belum Tersedia' : 'Profile Photo Unavailable' }}
+                                </p>
+                            </div>
+                        @endif
                     </div>
 
+                    @if (!empty($product->gallery) && count((array)$product->gallery) > 1)
                     <div class="grid grid-cols-2 gap-4">
                         @foreach ($product->gallery as $img)
-                            @if ($img !== $product->image)
-                                <div class="rounded-2xl overflow-hidden h-40 border border-gray-200 dark:border-gray-800">
+                            @if (!empty($img) && $img !== $product->image)
+                                <div class="rounded-2xl overflow-hidden h-40 border border-gray-200 dark:border-gray-800 bg-slate-100 dark:bg-white/5">
                                     <img src="{{ $img }}"
-                                        class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                                        class="w-full h-full object-cover hover:scale-105 transition duration-500"
+                                        onerror="this.parentElement.style.display='none';">
                                 </div>
                             @endif
                         @endforeach
                     </div>
+                    @endif
 
                     @if (!empty($product->features) && count((array) $product->features) > 0)
                     <div class="bg-white dark:bg-[#111420] border border-gray-200 dark:border-gray-800 rounded-3xl p-8 shadow-sm">
