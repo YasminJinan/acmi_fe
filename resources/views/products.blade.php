@@ -6,10 +6,10 @@
 
 @section('content')
 
-    {{-- SECTION PRODUK ANGGOTA --}}
-    <section
-        class="bg-gray-50 dark:bg-[#050505] pt-32 pb-16 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative"
-        x-data="{
+{{-- SECTION PRODUK ANGGOTA --}}
+<section
+    class="bg-gray-50 dark:bg-[#050505] pt-32 pb-16 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative"
+    x-data="{
             search: '',
             category: 'Semua',
             products: @js($products),
@@ -43,200 +43,200 @@
                 return Math.ceil(this.filteredProducts.length / this.perPage);
             }
         }" {{-- Jika user mengetik pencarian baru atau ganti kategori, halaman otomatis reset ke angka 1 --}}
-        x-init="$watch('search', value => page = 1); $watch('category', value => page = 1)">
+    x-init="$watch('search', value => page = 1); $watch('category', value => page = 1)">
 
-        {{-- Background Decoration --}}
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+    {{-- Background Decoration --}}
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div
+            class="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-orange-500/5 dark:bg-orange-500/10 rounded-full blur-[150px]">
+        </div>
+        <div
+            class="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-orange-600/5 dark:bg-orange-900/10 rounded-full blur-[100px]">
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+
+        {{-- Header --}}
+        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+
             <div
-                class="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-orange-500/5 dark:bg-orange-500/10 rounded-full blur-[150px]">
+                class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-xs font-semibold mb-6 border border-orange-100 dark:border-orange-500/20">
+                <i class="fa-solid fa-box-open animate-pulse"></i>
+                {{ __('messages.products_badge') }}
             </div>
-            <div
-                class="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-orange-600/5 dark:bg-orange-900/10 rounded-full blur-[100px]">
+
+            <h2 class="text-4xl md:text-5xl font-regular text-gray-900 dark:text-white leading-tight">
+                {{ __('messages.products_title_1') }} <br>
+                <span class="text-orange-500 font-serif italic font-bold">{{ __('messages.products_title_2') }}</span>
+            </h2>
+
+            <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm md:text-base">
+                {{ __('messages.products_desc') }}
+            </p>
+
+            {{-- Search & Filter --}}
+            <div class="mt-10 flex flex-col md:flex-row gap-4 justify-center">
+
+                <div class="relative group md:w-80">
+                    <i
+                        class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-orange-500 transition-colors"></i>
+                    <input type="text" x-model="search" placeholder="{{ __('messages.products_search_placeholder') }}"
+                        class="w-full pl-12 pr-6 py-4 rounded-2xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white transition-all">
+                </div>
+
+                <select x-model="category"
+                    class="px-6 py-4 rounded-2xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white cursor-pointer appearance-none">
+                    @foreach(__('messages.products_categories') as $value => $label)
+                        <option value="{{ $value }}">{{ $label }}</option>
+                    @endforeach
+                </select>
+
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto relative z-10">
+        {{-- Grid Produk (3 Kolom x 8 Baris = 24 Produk per Halaman) --}}
+        <div id="products-grid-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-            {{-- Header --}}
-            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
-
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-xs font-semibold mb-6 border border-orange-100 dark:border-orange-500/20">
-                    <i class="fa-solid fa-box-open animate-pulse"></i>
-                    {{ __('messages.products_badge') }}
-                </div>
-
-                <h2 class="text-4xl md:text-5xl font-regular text-gray-900 dark:text-white leading-tight">
-                    {{ __('messages.products_title_1') }} <br>
-                    <span class="text-orange-500 font-serif italic font-bold">{{ __('messages.products_title_2') }}</span>
-                </h2>
-
-                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm md:text-base">
-                    {{ __('messages.products_desc') }}
-                </p>
-
-                {{-- Search & Filter --}}
-                <div class="mt-10 flex flex-col md:flex-row gap-4 justify-center">
-
-                    <div class="relative group md:w-80">
-                        <i
-                            class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-orange-500 transition-colors"></i>
-                        <input type="text" x-model="search" placeholder="{{ __('messages.products_search_placeholder') }}"
-                            class="w-full pl-12 pr-6 py-4 rounded-2xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white transition-all">
-                    </div>
-
-                    <select x-model="category"
-                        class="px-6 py-4 rounded-2xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white cursor-pointer appearance-none">
-                        @foreach(__('messages.products_categories') as $value => $label)
-                            <option value="{{ $value }}">{{ $label }}</option>
-                        @endforeach
-                    </select>
-
-                </div>
-            </div>
-
-            {{-- Grid Produk (3 Kolom x 8 Baris = 24 Produk per Halaman) --}}
-            <div id="products-grid-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                {{-- LOOPING DIGANTI MENGGUNAKAN paginatedProducts --}}
-                <template x-for="product in paginatedProducts" :key="product.id">
-                    <div class="group flex flex-col" data-aos="fade-up">
-                        <div
-                            class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/20 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
-
-                            {{-- Image (Foto Muka Pemilik Produk) --}}
-                            <div class="relative h-[180px] overflow-hidden bg-slate-100 dark:bg-[#151722]"
-                                x-data="{ imgFailed: false }">
-
-                                {{-- Tampilkan gambar jika ada URL di salah satu property & tidak error --}}
-                                <template x-if="(product.image || product.image_url || product.photo) && !imgFailed">
-                                    <img :src="product.image || product.image_url || product.photo" :alt="product.title"
-                                        loading="lazy" x-on:error="imgFailed = true"
-                                        class="w-full h-full object-cover object-top group-hover:scale-110 transition duration-[1.5s] ease-out">
-                                </template>
-
-                                {{-- Fallback jika profil pemilik produk tidak memiliki foto atau gagal dimuat --}}
-                                <template x-if="(!product.image && !product.image_url && !product.photo) || imgFailed">
-                                    <div
-                                        class="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-white/[0.03] dark:to-white/[0.07] relative select-none">
-                                        <div
-                                            class="w-12 h-12 rounded-full bg-orange-500/10 dark:bg-orange-500/20 text-orange-500 flex items-center justify-center mb-2 border border-orange-500/20 shadow-sm">
-                                            <i class="fa-solid fa-user-tie text-lg"></i>
-                                        </div>
-                                        <span
-                                            class="text-[10px] font-bold text-gray-500 dark:text-gray-400 font-poppins uppercase tracking-wider">
-                                            {{ app()->getLocale() == 'id' ? 'Foto Tidak Tersedia' : 'No Photo Available' }}
-                                        </span>
-                                    </div>
-                                </template>
-
-                                <div class="absolute top-4 left-4 z-10">
-                                    <span
-                                        class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-orange-600 dark:text-orange-400 text-[9px] px-3 py-1.5 rounded-lg font-black uppercase tracking-widest shadow-lg"
-                                        x-text="Array.isArray(product.category) ? product.category[0] : product.category">
-                                    </span>
-                                </div>
-                            </div>
-
-                            {{-- Content --}}
-                            <div class="p-6 flex flex-col flex-grow">
-                                <h3 class="text-lg font-poppins font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-500 transition-colors line-clamp-1"
-                                    x-text="product.title">
-                                </h3>
-                                <p class="text-gray-500 dark:text-gray-400 text-xs mb-4 line-clamp-2 leading-relaxed"
-                                    x-text="product.description">
-                                </p>
-
-                                <div class="mt-auto">
-                                    {{-- Business Info --}}
-                                    <div
-                                        class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 mb-4 border border-transparent group-hover:border-orange-500/20 transition-all">
-                                        <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center text-[10px] font-black shadow-lg shadow-orange-500/20 flex-shrink-0"
-                                            x-text="product.ceo_name ? product.ceo_name.charAt(0) : '?'">
-                                        </div>
-                                        <div class="min-w-0">
-                                            <p class="text-gray-900 dark:text-gray-200 font-bold text-[11px] truncate"
-                                                x-text="product.company_name">
-                                            </p>
-                                            <p class="text-gray-400 text-[9px] uppercase tracking-tighter">
-                                                {{ __('messages.products_ceo_label') }}:
-                                                <span class="text-gray-500 dark:text-gray-300"
-                                                    x-text="product.ceo_name"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    {{-- Button --}}
-                                    <a :href="'{{ app()->getLocale() == 'id' ? '/id/produk/' : '/en/products/' }}' + product.slug"
-                                        class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
-                                        {{ __('messages.products_detail_btn') }}
-                                        <i
-                                            class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </template>
-
-                {{-- Empty State --}}
-                <div x-show="filteredProducts.length === 0" x-cloak class="col-span-3 text-center py-24">
+            {{-- LOOPING DIGANTI MENGGUNAKAN paginatedProducts --}}
+            <template x-for="product in paginatedProducts" :key="product.id">
+                <div class="group flex flex-col" data-aos="fade-up">
                     <div
-                        class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-white/5 text-gray-400 mb-6">
-                        <i class="fa-solid fa-magnifying-glass text-2xl"></i>
+                        class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/20 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
+
+                        {{-- Image (Foto Muka Pemilik Produk / Poster Produk) --}}
+                        <div class="relative h-[180px] overflow-hidden bg-slate-100 dark:bg-[#151722]" x-data="{ 
+                                    imgFailed: false,
+                                    get imgUrl() {
+                                        return product.image || product.image_url || product.photo || null;
+                                    }
+                                }">
+
+                            {{-- 1. Gambar Utama (Tampil jika URL ada dan TIDAK error) --}}
+                            <img x-show="imgUrl && imgUrl.trim() !== '' && !imgFailed" :src="imgUrl"
+                                :alt="product.title" loading="lazy" @error="imgFailed = true"
+                                class="w-full h-full object-cover object-top group-hover:scale-110 transition duration-[1.5s] ease-out">
+
+                            {{-- 2. Fallback UI (Tampil jika URL kosong ATAU gambar ERROR 404/broken) --}}
+                            <div x-show="!imgUrl || imgUrl.trim() === '' || imgFailed"
+                                class="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-white/[0.03] dark:to-white/[0.07] relative select-none">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-orange-500/10 dark:bg-orange-500/20 text-orange-500 flex items-center justify-center mb-2 border border-orange-500/20 shadow-sm">
+                                    <i class="fa-solid fa-user-tie text-lg"></i>
+                                </div>
+                                <span
+                                    class="text-[10px] font-bold text-gray-500 dark:text-gray-400 font-poppins uppercase tracking-wider">
+                                    {{ app()->getLocale() == 'id' ? 'Foto Tidak Tersedia' : 'No Photo Available' }}
+                                </span>
+                            </div>
+
+                            <div class="absolute top-4 left-4 z-10">
+                                <span
+                                    class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-orange-600 dark:text-orange-400 text-[9px] px-3 py-1.5 rounded-lg font-black uppercase tracking-widest shadow-lg"
+                                    x-text="Array.isArray(product.category) ? product.category[0] : product.category">
+                                </span>
+                            </div>
+                        </div>
+
+                        {{-- Content --}}
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-lg font-poppins font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-500 transition-colors line-clamp-1"
+                                x-text="product.title">
+                            </h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-xs mb-4 line-clamp-2 leading-relaxed"
+                                x-text="product.description">
+                            </p>
+
+                            <div class="mt-auto">
+                                {{-- Business Info --}}
+                                <div
+                                    class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 mb-4 border border-transparent group-hover:border-orange-500/20 transition-all">
+                                    <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center text-[10px] font-black shadow-lg shadow-orange-500/20 flex-shrink-0"
+                                        x-text="product.ceo_name ? product.ceo_name.charAt(0) : '?'">
+                                    </div>
+                                    <div class="min-w-0">
+                                        <p class="text-gray-900 dark:text-gray-200 font-bold text-[11px] truncate"
+                                            x-text="product.company_name">
+                                        </p>
+                                        <p class="text-gray-400 text-[9px] uppercase tracking-tighter">
+                                            {{ __('messages.products_ceo_label') }}:
+                                            <span class="text-gray-500 dark:text-gray-300"
+                                                x-text="product.ceo_name"></span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {{-- Button --}}
+                                <a :href="'{{ app()->getLocale() == 'id' ? '/id/produk/' : '/en/products/' }}' + product.slug"
+                                    class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
+                                    {{ __('messages.products_detail_btn') }}
+                                    <i
+                                        class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ __('messages.products_empty_title') }}
-                    </h3>
-                    <p class="text-gray-500 dark:text-gray-400 mt-2">{{ __('messages.products_empty_desc') }}</p>
                 </div>
+            </template>
 
-            </div>
-
-            {{-- NAVIGASI PAGINATION (COMPACT PREVIOUS / NEXT STYLE) --}}
-            <div x-show="totalPages > 1" x-cloak class="mt-16 flex justify-center items-center gap-4 md:gap-6"
-                data-aos="fade-up">
-                {{-- Tombol Previous --}}
-                <button @click="if(page > 1) page--" :disabled="page === 1"
-                    class="px-6 md:px-8 py-3.5 rounded-2xl border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 font-poppins font-bold text-sm md:text-base text-slate-800 dark:text-white transition-all duration-300 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none shadow-sm flex items-center justify-center cursor-pointer">
-                    Previous
-                </button>
-
-                {{-- Indikator Halaman (Page X of Y) --}}
+            {{-- Empty State --}}
+            <div x-show="filteredProducts.length === 0" x-cloak class="col-span-3 text-center py-24">
                 <div
-                    class="font-poppins font-semibold text-sm md:text-base text-slate-500 dark:text-gray-400 px-2 md:px-4 select-none">
-                    Page <span x-text="page" class="font-bold text-slate-900 dark:text-white"></span> of <span
-                        x-text="totalPages" class="font-bold text-slate-900 dark:text-white"></span>
+                    class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-white/5 text-gray-400 mb-6">
+                    <i class="fa-solid fa-magnifying-glass text-2xl"></i>
                 </div>
-
-                {{-- Tombol Next --}}
-                <button @click="if(page < totalPages) page++" :disabled="page === totalPages"
-                    class="px-6 md:px-8 py-3.5 rounded-2xl border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 font-poppins font-bold text-sm md:text-base text-slate-800 dark:text-white transition-all duration-300 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none shadow-sm flex items-center justify-center cursor-pointer">
-                    Next
-                </button>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ __('messages.products_empty_title') }}
+                </h3>
+                <p class="text-gray-500 dark:text-gray-400 mt-2">{{ __('messages.products_empty_desc') }}</p>
             </div>
 
         </div>
 
-        <style>
-            [x-cloak] {
-                display: none !important;
-            }
+        {{-- NAVIGASI PAGINATION (COMPACT PREVIOUS / NEXT STYLE) --}}
+        <div x-show="totalPages > 1" x-cloak class="mt-16 flex justify-center items-center gap-4 md:gap-6"
+            data-aos="fade-up">
+            {{-- Tombol Previous --}}
+            <button @click="if(page > 1) page--" :disabled="page === 1"
+                class="px-6 md:px-8 py-3.5 rounded-2xl border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 font-poppins font-bold text-sm md:text-base text-slate-800 dark:text-white transition-all duration-300 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none shadow-sm flex items-center justify-center cursor-pointer">
+                Previous
+            </button>
 
-            .custom-scrollbar::-webkit-scrollbar {
-                width: 6px;
-            }
+            {{-- Indikator Halaman (Page X of Y) --}}
+            <div
+                class="font-poppins font-semibold text-sm md:text-base text-slate-500 dark:text-gray-400 px-2 md:px-4 select-none">
+                Page <span x-text="page" class="font-bold text-slate-900 dark:text-white"></span> of <span
+                    x-text="totalPages" class="font-bold text-slate-900 dark:text-white"></span>
+            </div>
 
-            .custom-scrollbar::-webkit-scrollbar-track {
-                background: transparent;
-            }
+            {{-- Tombol Next --}}
+            <button @click="if(page < totalPages) page++" :disabled="page === totalPages"
+                class="px-6 md:px-8 py-3.5 rounded-2xl border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 font-poppins font-bold text-sm md:text-base text-slate-800 dark:text-white transition-all duration-300 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none shadow-sm flex items-center justify-center cursor-pointer">
+                Next
+            </button>
+        </div>
 
-            .custom-scrollbar::-webkit-scrollbar-thumb {
-                background: #f97316;
-                border-radius: 10px;
-            }
-        </style>
+    </div>
 
-    </section>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+    </style>
+
+</section>
 
 @endsection

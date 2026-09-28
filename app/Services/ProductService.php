@@ -28,9 +28,27 @@ class ProductService
      */
     public function getAcmiConnectProducts(): array
     {
-        $cacheKey = 'acmi_connect_products_v4';
+        // Cache key v5 agar cache lama otomatis ter-reset
+        $cacheKey = 'acmi_connect_products_v5';
         $fallbackKey = 'acmi_connect_products_fallback';
         $baseUrl = config('services.acmi_connect.url', 'https://acmi-connect-dev.hahabid.com');
+
+        // Helper function untuk merapikan URL & menyisipkan /storage/ jika belum ada
+        $formatImageUrl = function ($path) use ($baseUrl) {
+            if (empty($path))
+                return null;
+            $path = trim($path);
+
+            if (!str_starts_with($path, 'http://') && !str_starts_with($path, 'https://')) {
+                $path = ltrim($path, '/');
+                if (!str_starts_with($path, 'storage/')) {
+                    $path = 'storage/' . $path;
+                }
+                return rtrim($baseUrl, '/') . '/' . $path;
+            }
+
+            return $path;
+        };
 
         // 1. Kembalikan dari cache aktif jika tersedia
         if (Cache::has($cacheKey)) {
@@ -74,16 +92,11 @@ class ProductService
                 $slug = \Illuminate\Support\Str::slug($company . '-' . $row->user_id);
                 $category = trim($row->company_industry ?: 'Umum');
 
-                // Ekstrak fitur/poin dari deskripsi atau koma
                 $featuresRaw = explode(',', $row->company_product_detail);
                 $features = array_slice(array_filter(array_map('trim', $featuresRaw)), 0, 5);
 
-                // Gambar profil muka pemilik produk dari ACMI Connect (avatar_url)
-                $ownerPhoto = !empty($row->avatar_url) ? trim($row->avatar_url) : null;
-                if ($ownerPhoto && !str_starts_with($ownerPhoto, 'http://') && !str_starts_with($ownerPhoto, 'https://')) {
-                    $ownerPhoto = ltrim($ownerPhoto, '/');
-                    $ownerPhoto = rtrim($baseUrl, '/') . '/' . $ownerPhoto;
-                }
+                // Format URL Foto
+                $ownerPhoto = $formatImageUrl($row->avatar_url);
 
                 // Format URL Website
                 $website = $row->company_website;
@@ -111,7 +124,7 @@ class ProductService
                 ];
             }
 
-            // 2. Cek juga tabel member_product jika ada input produk khusus
+            // 2. Cek juga tabel member_product (Utamakan gambar produk `media.file_path`)
             $memberProducts = DB::connection('pgsql_acmi')
                 ->table('member_product')
                 ->leftJoin('product_category', 'member_product.category_id', '=', 'product_category.id')
@@ -138,11 +151,9 @@ class ProductService
 
             if ($memberProducts->isNotEmpty()) {
                 foreach ($memberProducts as $mp) {
-                    $ownerPhoto = !empty($mp->avatar_url) ? trim($mp->avatar_url) : (!empty($mp->image_path) ? trim($mp->image_path) : null);
-                    if ($ownerPhoto && !str_starts_with($ownerPhoto, 'http://') && !str_starts_with($ownerPhoto, 'https://')) {
-                        $ownerPhoto = ltrim($ownerPhoto, '/');
-                        $ownerPhoto = rtrim($baseUrl, '/') . '/' . $ownerPhoto;
-                    }
+                    // MENGUTAMAKAN image_path (foto produk) baru avatar_url (profil CEO)
+                    $rawImage = !empty($mp->image_path) ? $mp->image_path : $mp->avatar_url;
+                    $productImage = $formatImageUrl($rawImage);
 
                     $products[] = [
                         'id' => 'connect_mp_' . $mp->id,
@@ -157,147 +168,34 @@ class ProductService
                         'address' => $mp->address ?: '',
                         'email' => $mp->email ?: '',
                         'phone' => $mp->phone ?: '',
-                        'image' => $ownerPhoto,
-                        'images' => $ownerPhoto ? [$ownerPhoto] : [],
-                        'gallery' => $ownerPhoto ? [$ownerPhoto] : [],
+                        'image' => $productImage,
+                        'images' => $productImage ? [$productImage] : [],
+                        'gallery' => $productImage ? [$productImage] : [],
                         'source' => 'acmi_connect',
                     ];
                 }
             }
 
             if (!empty($products)) {
-                Cache::put($cacheKey, $products, 3600); // Simpan di cache normal 1 jam
-                Cache::forever($fallbackKey, $products); // Simpan permanen sebagai backup fallback
+                Cache::put($cacheKey, $products, 3600);
+                Cache::forever($fallbackKey, $products);
                 return $products;
             }
         } catch (\Exception $e) {
             Log::error('Gagal mengambil produk ACMI Connect: ' . $e->getMessage());
         }
 
-        // Jika query gagal/timeout, gunakan data backup fallback agar web tidak pernah kosong
         return Cache::get($fallbackKey, []);
     }
 
     /**
-     * Generator data dummy produk untuk testing grid 8x3 & 10 Halaman Pagination (240 Produk)
-     */
-    public function getDummyProducts(int $count = 240): array
-    {
-        $categories = ['Software', 'Teknologi', 'Energi', 'F&B', 'Manufaktur', 'Properti', 'Fintech', 'Konsultan', 'Logistik', 'Edukasi'];
-
-        $companyBases = [
-            'Inni Punya Indonesia',
-            'Surya Putra Swastika',
-            'Tri-Wall Indonesia',
-            'SSCX International',
-            'Nusantara Digital Teknindo',
-            'Indo Cloud Solusindo',
-            'Prima Agro Mandiri',
-            'Megah Sukses Jaya',
-            'Bina Talenta Indonesia',
-            'Sentra Logistik Medika',
-            'Sinar Abadi Energi',
-            'Cipta Harapan Niaga',
-            'Mitra Berkah Lestari',
-            'Graha Bangun Nusantara',
-            'Wahana Kreatif Asia',
-            'Indo Pay Sistem',
-            'Pangan Nusantara Gemilang',
-            'Solusi Otomasi Industri',
-            'Daya Gemilang Utama',
-            'Ventura Optima Indonesia',
-            'Integra Edukasi Bangsa',
-            'Garda Keamanan Cyber',
-            'Eco Green Tech',
-            'Media Utama Komunika',
-            'Logistik Ekspres Nusantara',
-            'Archipelagindo Kapital',
-            'Sehat Bersama Bangsa',
-            'Cemerlang Retailindo',
-            'Fast Food Indonesia Mandiri',
-            'BioTech Herbal Nusantara',
-            'Smart Analytics Asia',
-            'Halal Food Global',
-            'Robotik Nusantara',
-            'Investasi Karya Bersama',
-            'Trans Cargo Indonesia',
-            'EduTech Cerdas Indonesia',
-            'Artha Mandiri Sejahtera',
-            'Design Studio Nusantara',
-            'Global Export Import',
-            'Nusantara AI Solusindo',
-            'Bintang Asia Medika',
-            'Prakarsa Digital Utama',
-            'Cakra Daya Solusindo',
-            'Bakti Nusantara Energi',
-            'Cipta Karya Logistik',
-            'Samudra Jaya Perdana',
-            'Harapan Bangsa Edukasi',
-            'Wira Karya Tekno',
-            'Mitra Sejahtera Bersama',
-            'Kreatif Digital Media'
-        ];
-
-        $ceoFirst = ['RILLA', 'YUSUF', 'RIFKI', 'ANDI', 'SITI', 'BUDI', 'HENDRA', 'DEWI', 'AGUS', 'MAYA', 'DONI', 'FADHIL', 'RINA', 'CHANDRA', 'REZA', 'NITA', 'EKO', 'DINI', 'FAJAR', 'TANIA', 'DENI', 'FITRI', 'GITA', 'IRWAN', 'JOHAN', 'KARTIKA', 'LUKMAN', 'MIRA', 'NICHOLAS', 'OCTAVIA'];
-        $ceoLast = ['KUSUMA DEWI', 'ROMADHON', 'RIZAL', 'WIDJAJA', 'NURHALIZA', 'SANTOSO', 'WIJAYA', 'LESTARI', 'SETIAWAN', 'SAPUTRI', 'PRATAMA', 'MUHAMMAD', 'ANGGRAENI', 'KUSUMA', 'RAHARDIAN', 'SARI', 'PURWANTO', 'AMALIA', 'RIZKY', 'HARTO', 'GUNAWAN', 'HANDAYANI', 'GUSTAMA', 'KURNIAWAN', 'SETIABUDI', 'DEWI', 'HAKIM', 'LESMANA', 'SAPUTRA', 'PUTRI'];
-
-        $descriptions = [
-            'Penyedia solusi produk berkualitas tinggi dan layanan profesional terintegrasi untuk bisnis modern.',
-            'Layanan konsultasi dan pendampingan perusahaan untuk meningkatkan efektivitas, efisiensi, dan produktivitas operasional.',
-            'Platform teknologi inovatif berbasis AI untuk mempercepat transformasi digital industri di Indonesia.',
-            'Produsen kemasan korugasi dan solusi pembungkusan ramah lingkungan untuk rantai pasok manufaktur.',
-            'Layanan pengelolaan keuangan pintar dan pembiayaan usaha terpercaya untuk UMKM dan Korporasi.',
-            'Penyedia produk F&B olahan bernutrisi tinggi dengan sertifikasi mutu internasional.',
-            'Solusi logistik dan pergudangan terpadu dengan jangkauan pengiriman ke seluruh wilayah Nusantara.',
-            'Layanan pengembang properti dan konstruksi bangunan komersial yang berkelanjutan.',
-            'Infrastruktur cloud computing berkecapatan tinggi dan solusi keamanan siber terverifikasi aman.',
-            'Pengembangan aplikasi bisnis berbasis analitik data terintegrasi dan otomasi industri.'
-        ];
-
-        $products = [];
-        for ($i = 0; $i < $count; $i++) {
-            $baseIndex = $i % count($companyBases);
-            $cycle = floor($i / count($companyBases));
-            $companyName = 'PT ' . $companyBases[$baseIndex] . ($cycle > 0 ? ' Division ' . chr(65 + (int) ($cycle - 1)) : '');
-
-            $cat = $categories[$i % count($categories)];
-            $ceo = $ceoFirst[$i % count($ceoFirst)] . ' ' . $ceoLast[$i % count($ceoLast)];
-            $desc = $descriptions[$i % count($descriptions)];
-            $slug = \Illuminate\Support\Str::slug($companyName . '-' . ($i + 1));
-
-            $products[] = [
-                'id' => 'dummy_prod_' . ($i + 1),
-                'slug' => $slug,
-                'title' => $companyName,
-                'category' => [$cat],
-                'company_name' => $companyName,
-                'ceo_name' => $ceo,
-                'description' => $desc,
-                'features' => [$cat, 'Inovasi Bisnis', 'Ekosistem ACMI'],
-                'website' => 'https://example.com',
-                'address' => 'Jakarta, Indonesia',
-                'email' => 'info@' . \Illuminate\Support\Str::slug($companyName) . '.co.id',
-                'phone' => '+62 812-3456-' . sprintf('%04d', $i + 1),
-                'image' => null,
-                'images' => [],
-                'gallery' => [],
-                'source' => 'dummy',
-            ];
-        }
-
-        return $products;
-    }
-
-    /**
      * Gabungkan semua produk (CMS ACMI DB + ACMI Connect PostgreSQL)
-     * Tidak lagi menggabungkan dummy data
      */
     public function getAllProducts(): array
     {
         $cmsProducts = $this->getCmsProducts();
         $connectProducts = $this->getAcmiConnectProducts();
 
-        // Tandai sumber CMS jika belum ada
         $cmsProducts = collect($cmsProducts)->map(function ($item) {
             $item['source'] = 'acmi_cms';
             return $item;

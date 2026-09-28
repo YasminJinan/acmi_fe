@@ -13,8 +13,8 @@ class EventService
      */
     public function getEvents(): array
     {
-        // Ganti nama key cache atau hapus Cache jika masih tahap development biar data selalu fresh
-        return Cache::remember('acmi_connect_events_v3', 10, function () {
+        // Ubah key cache ke v4 biar cache lama ter-reset otomatis
+        return Cache::remember('acmi_connect_events_v4', 10, function () {
             try {
                 $events = DB::connection('pgsql_acmi')
                     ->table('events')
@@ -37,16 +37,22 @@ class EventService
                     ->get();
 
                 if ($events->isNotEmpty()) {
-                    // Domain tempat penyimpanan file gambar ACMI Connect
                     $baseUrl = config('services.acmi_connect.url', 'https://acmi-connect-dev.hahabid.com');
 
                     return $events->map(function ($event) use ($baseUrl) {
                         $image = !empty($event->banner_image) ? trim($event->banner_image) : null;
 
                         if ($image) {
-                            // Jika bukan URL lengkap http/https, tempelkan domain backend ACMI Connect
+                            // Jika path belum berawalan http/https
                             if (!str_starts_with($image, 'http://') && !str_starts_with($image, 'https://')) {
                                 $image = ltrim($image, '/');
+
+                                // Jika di DB path-nya belum ada kata 'storage/', tambahkan 'storage/'
+                                if (!str_starts_with($image, 'storage/')) {
+                                    $image = 'storage/' . $image;
+                                }
+
+                                // Gabungkan dengan Base URL ACMI Connect
                                 $image = rtrim($baseUrl, '/') . '/' . $image;
                             }
                         }
@@ -59,7 +65,7 @@ class EventService
                 Log::error('Gagal mengambil events dari database pgsql_acmi: ' . $e->getMessage());
             }
 
-            // Fallback data jika server remote sedang tidak dapat diakses / offline
+            // Fallback data jika server remote offline
             return [
                 [
                     'id' => 1,
