@@ -44,4 +44,8 @@ return [
         'instagram_url' => env('APIFY_INSTAGRAM_URL'),
     ],
 
+    'acmi_connect' => [
+        'url' => env('ACMI_CONNECT_URL', 'https://connect-api.acmiofficial.com'),
+    ],
+
 ];

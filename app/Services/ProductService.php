@@ -28,23 +28,20 @@ class ProductService
      */
     public function getAcmiConnectProducts(): array
     {
-        // Cache key v5 agar cache lama otomatis ter-reset
-        $cacheKey = 'acmi_connect_products_v5';
+        // Cache key v6 agar cache lama otomatis ter-reset
+        $cacheKey = 'acmi_connect_products_v6';
         $fallbackKey = 'acmi_connect_products_fallback';
-        $baseUrl = config('services.acmi_connect.url', 'https://acmi-connect-dev.hahabid.com');
+        $baseUrl = config('services.acmi_connect.url', 'https://connect-api.acmiofficial.com');
 
-        // Helper function untuk merapikan URL & menyisipkan /storage/ jika belum ada
+        // Helper function untuk merapikan URL
         $formatImageUrl = function ($path) use ($baseUrl) {
             if (empty($path))
                 return null;
             $path = trim($path);
 
             if (!str_starts_with($path, 'http://') && !str_starts_with($path, 'https://')) {
-                $path = ltrim($path, '/');
-                if (!str_starts_with($path, 'storage/')) {
-                    $path = 'storage/' . $path;
-                }
-                return rtrim($baseUrl, '/') . '/' . $path;
+                $path = '/' . ltrim($path, '/');
+                return rtrim($baseUrl, '/') . $path;
             }
 
             return $path;

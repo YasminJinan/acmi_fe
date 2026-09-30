@@ -13,8 +13,8 @@ class EventService
      */
     public function getEvents(): array
     {
-        // Ubah key cache ke v4 biar cache lama ter-reset otomatis
-        return Cache::remember('acmi_connect_events_v4', 10, function () {
+        // Ubah key cache ke v5 biar cache lama ter-reset otomatis
+        return Cache::remember('acmi_connect_events_v5', 10, function () {
             try {
                 $events = DB::connection('pgsql_acmi')
                     ->table('events')
@@ -37,23 +37,15 @@ class EventService
                     ->get();
 
                 if ($events->isNotEmpty()) {
-                    $baseUrl = config('services.acmi_connect.url', 'https://acmi-connect-dev.hahabid.com');
+                    $baseUrl = config('services.acmi_connect.url', 'https://connect-api.acmiofficial.com');
 
                     return $events->map(function ($event) use ($baseUrl) {
                         $image = !empty($event->banner_image) ? trim($event->banner_image) : null;
 
                         if ($image) {
-                            // Jika path belum berawalan http/https
                             if (!str_starts_with($image, 'http://') && !str_starts_with($image, 'https://')) {
-                                $image = ltrim($image, '/');
-
-                                // Jika di DB path-nya belum ada kata 'storage/', tambahkan 'storage/'
-                                if (!str_starts_with($image, 'storage/')) {
-                                    $image = 'storage/' . $image;
-                                }
-
-                                // Gabungkan dengan Base URL ACMI Connect
-                                $image = rtrim($baseUrl, '/') . '/' . $image;
+                                $image = '/' . ltrim($image, '/');
+                                $image = rtrim($baseUrl, '/') . $image;
                             }
                         }
 
