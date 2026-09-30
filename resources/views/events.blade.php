@@ -72,7 +72,7 @@
                                  :src="event.image_url"
                                  :alt="event.title"
                                  loading="lazy"
-                                 @error="imgFailed = true"
+                                 x-on:error="imgFailed = true"
                                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
 
                             {{-- 2. Fallback UI (Tampil jika URL kosong ATAU gambarnya ERROR 404/broken) --}}
