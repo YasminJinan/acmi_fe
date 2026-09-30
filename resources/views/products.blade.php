@@ -7,48 +7,52 @@
 @section('content')
 
 {{-- SECTION PRODUK ANGGOTA --}}
-<section class="bg-gray-50 dark:bg-[#050505] pt-32 pb-16 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative"
+<section
+    class="bg-gray-50 dark:bg-[#050505] pt-32 pb-16 px-6 md:px-10 transition-colors duration-500 overflow-hidden relative"
     x-data="{
-        search: '',
-        category: 'Semua',
-        products: @js($products),
-        page: 1,
-        perPage: 24,
-        
-        // Memfilter produk berdasarkan input search (Nama PT, CEO, Deskripsi) & kategori
-        get filteredProducts() {
-            const query = this.search.toLowerCase().trim();
-            return this.products.filter(p => {
-                const matchSearch = !query ||
-                    (p.title && p.title.toLowerCase().includes(query)) ||
-                    (p.company_name && p.company_name.toLowerCase().includes(query)) ||
-                    (p.ceo_name && p.ceo_name.toLowerCase().includes(query)) ||
-                    (p.description && p.description.toLowerCase().includes(query));
-                const matchCategory = this.category === 'Semua' ||
-                    (Array.isArray(p.category) ? p.category.includes(this.category) : p.category === this.category);
-                return matchSearch && matchCategory;
-            });
-        },
+            search: '',
+            category: 'Semua',
+            products: @js($products),
+            page: 1,
+            perPage: 24,
 
-        // Memotong hasil filter agar hanya tampil 6 item sesuai halaman aktif
-        get paginatedProducts() {
-            let start = (this.page - 1) * this.perPage;
-            let end = start + this.perPage;
-            return this.filteredProducts.slice(start, end);
-        },
+            // Memfilter produk berdasarkan input search (Nama PT, CEO, Deskripsi) & kategori
+            get filteredProducts() {
+                const query = this.search.toLowerCase().trim();
+                return this.products.filter(p => {
+                    const matchSearch = !query ||
+                        (p.title && p.title.toLowerCase().includes(query)) ||
+                        (p.company_name && p.company_name.toLowerCase().includes(query)) ||
+                        (p.ceo_name && p.ceo_name.toLowerCase().includes(query)) ||
+                        (p.description && p.description.toLowerCase().includes(query));
+                    const matchCategory = this.category === 'Semua' ||
+                        (Array.isArray(p.category) ? p.category.includes(this.category) : p.category === this.category);
+                    return matchSearch && matchCategory;
+                });
+            },
 
-        // Menghitung total jumlah halaman yang tersedia
-        get totalPages() {
-            return Math.ceil(this.filteredProducts.length / this.perPage);
-        }
-    }"
-    {{-- Jika user mengetik pencarian baru atau ganti kategori, halaman otomatis reset ke angka 1 --}}
+            // Memotong hasil filter agar hanya tampil item sesuai halaman aktif
+            get paginatedProducts() {
+                let start = (this.page - 1) * this.perPage;
+                let end = start + this.perPage;
+                return this.filteredProducts.slice(start, end);
+            },
+
+            // Menghitung total jumlah halaman yang tersedia
+            get totalPages() {
+                return Math.ceil(this.filteredProducts.length / this.perPage);
+            }
+        }" {{-- Jika user mengetik pencarian baru atau ganti kategori, halaman otomatis reset ke angka 1 --}}
     x-init="$watch('search', value => page = 1); $watch('category', value => page = 1)">
 
     {{-- Background Decoration --}}
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div class="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-orange-500/5 dark:bg-orange-500/10 rounded-full blur-[150px]"></div>
-        <div class="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-orange-600/5 dark:bg-orange-900/10 rounded-full blur-[100px]"></div>
+        <div
+            class="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-orange-500/5 dark:bg-orange-500/10 rounded-full blur-[150px]">
+        </div>
+        <div
+            class="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-orange-600/5 dark:bg-orange-900/10 rounded-full blur-[100px]">
+        </div>
     </div>
 
     <div class="max-w-7xl mx-auto relative z-10">
@@ -56,7 +60,8 @@
         {{-- Header --}}
         <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
 
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-xs font-semibold mb-6 border border-orange-100 dark:border-orange-500/20">
+            <div
+                class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500 text-xs font-semibold mb-6 border border-orange-100 dark:border-orange-500/20">
                 <i class="fa-solid fa-box-open animate-pulse"></i>
                 {{ __('messages.products_badge') }}
             </div>
@@ -74,9 +79,9 @@
             <div class="mt-10 flex flex-col md:flex-row gap-4 justify-center">
 
                 <div class="relative group md:w-80">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-orange-500 transition-colors"></i>
-                    <input type="text" x-model="search"
-                        placeholder="{{ __('messages.products_search_placeholder') }}"
+                    <i
+                        class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-orange-500 transition-colors"></i>
+                    <input type="text" x-model="search" placeholder="{{ __('messages.products_search_placeholder') }}"
                         class="w-full pl-12 pr-6 py-4 rounded-2xl bg-gray-100 dark:bg-white/5 border-none focus:ring-2 focus:ring-orange-500 dark:text-white transition-all">
                 </div>
 
@@ -96,14 +101,38 @@
             {{-- LOOPING DIGANTI MENGGUNAKAN paginatedProducts --}}
             <template x-for="product in paginatedProducts" :key="product.id">
                 <div class="group flex flex-col" data-aos="fade-up">
-                    <div class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/20 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
+                    <div
+                        class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/20 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
 
-                        {{-- Image --}}
-                        <div class="relative h-[180px] overflow-hidden">
-                            <img :src="product.image" :alt="product.title"
-                                class="w-full h-full object-cover group-hover:scale-110 transition duration-[1.5s] ease-out">
-                            <div class="absolute top-4 left-4">
-                                <span class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-orange-600 dark:text-orange-400 text-[9px] px-3 py-1.5 rounded-lg font-black uppercase tracking-widest shadow-lg"
+                        {{-- Image (Foto Muka Pemilik Produk / Poster Produk) --}}
+                        <div class="relative h-[180px] overflow-hidden bg-slate-100 dark:bg-[#151722]" x-data="{ 
+                                    imgFailed: false,
+                                    get imgUrl() {
+                                        return product.image || product.image_url || product.photo || null;
+                                    }
+                                }">
+
+                            {{-- 1. Gambar Utama (Tampil jika URL ada dan TIDAK error) --}}
+                            <img x-show="imgUrl && imgUrl.trim() !== '' && !imgFailed" :src="imgUrl"
+                                :alt="product.title" loading="lazy" @error="imgFailed = true"
+                                class="w-full h-full object-cover object-top group-hover:scale-110 transition duration-[1.5s] ease-out">
+
+                            {{-- 2. Fallback UI (Tampil jika URL kosong ATAU gambar ERROR 404/broken) --}}
+                            <div x-show="!imgUrl || imgUrl.trim() === '' || imgFailed"
+                                class="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-white/[0.03] dark:to-white/[0.07] relative select-none">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-orange-500/10 dark:bg-orange-500/20 text-orange-500 flex items-center justify-center mb-2 border border-orange-500/20 shadow-sm">
+                                    <i class="fa-solid fa-user-tie text-lg"></i>
+                                </div>
+                                <span
+                                    class="text-[10px] font-bold text-gray-500 dark:text-gray-400 font-poppins uppercase tracking-wider">
+                                    {{ app()->getLocale() == 'id' ? 'Foto Tidak Tersedia' : 'No Photo Available' }}
+                                </span>
+                            </div>
+
+                            <div class="absolute top-4 left-4 z-10">
+                                <span
+                                    class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-orange-600 dark:text-orange-400 text-[9px] px-3 py-1.5 rounded-lg font-black uppercase tracking-widest shadow-lg"
                                     x-text="Array.isArray(product.category) ? product.category[0] : product.category">
                                 </span>
                             </div>
@@ -120,7 +149,8 @@
 
                             <div class="mt-auto">
                                 {{-- Business Info --}}
-                                <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 mb-4 border border-transparent group-hover:border-orange-500/20 transition-all">
+                                <div
+                                    class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 mb-4 border border-transparent group-hover:border-orange-500/20 transition-all">
                                     <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center text-[10px] font-black shadow-lg shadow-orange-500/20 flex-shrink-0"
                                         x-text="product.ceo_name ? product.ceo_name.charAt(0) : '?'">
                                     </div>
@@ -130,7 +160,8 @@
                                         </p>
                                         <p class="text-gray-400 text-[9px] uppercase tracking-tighter">
                                             {{ __('messages.products_ceo_label') }}:
-                                            <span class="text-gray-500 dark:text-gray-300" x-text="product.ceo_name"></span>
+                                            <span class="text-gray-500 dark:text-gray-300"
+                                                x-text="product.ceo_name"></span>
                                         </p>
                                     </div>
                                 </div>
@@ -139,7 +170,8 @@
                                 <a :href="'{{ app()->getLocale() == 'id' ? '/id/produk/' : '/en/products/' }}' + product.slug"
                                     class="inline-flex items-center justify-center w-full py-3 bg-slate-900 dark:bg-white/10 text-white rounded-xl text-[11px] font-bold hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-500 group/btn">
                                     {{ __('messages.products_detail_btn') }}
-                                    <i class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
+                                    <i
+                                        class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover/btn:translate-x-1"></i>
                                 </a>
                             </div>
                         </div>
@@ -150,32 +182,35 @@
 
             {{-- Empty State --}}
             <div x-show="filteredProducts.length === 0" x-cloak class="col-span-3 text-center py-24">
-                <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-white/5 text-gray-400 mb-6">
+                <div
+                    class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-white/5 text-gray-400 mb-6">
                     <i class="fa-solid fa-magnifying-glass text-2xl"></i>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ __('messages.products_empty_title') }}</h3>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ __('messages.products_empty_title') }}
+                </h3>
                 <p class="text-gray-500 dark:text-gray-400 mt-2">{{ __('messages.products_empty_desc') }}</p>
             </div>
 
         </div>
 
         {{-- NAVIGASI PAGINATION (COMPACT PREVIOUS / NEXT STYLE) --}}
-        <div x-show="totalPages > 1" x-cloak class="mt-16 flex justify-center items-center gap-4 md:gap-6" data-aos="fade-up">
+        <div x-show="totalPages > 1" x-cloak class="mt-16 flex justify-center items-center gap-4 md:gap-6"
+            data-aos="fade-up">
             {{-- Tombol Previous --}}
-            <button @click="if(page > 1) page--" 
-                :disabled="page === 1"
+            <button @click="if(page > 1) page--" :disabled="page === 1"
                 class="px-6 md:px-8 py-3.5 rounded-2xl border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 font-poppins font-bold text-sm md:text-base text-slate-800 dark:text-white transition-all duration-300 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none shadow-sm flex items-center justify-center cursor-pointer">
                 Previous
             </button>
 
             {{-- Indikator Halaman (Page X of Y) --}}
-            <div class="font-poppins font-semibold text-sm md:text-base text-slate-500 dark:text-gray-400 px-2 md:px-4 select-none">
-                Page <span x-text="page" class="font-bold text-slate-900 dark:text-white"></span> of <span x-text="totalPages" class="font-bold text-slate-900 dark:text-white"></span>
+            <div
+                class="font-poppins font-semibold text-sm md:text-base text-slate-500 dark:text-gray-400 px-2 md:px-4 select-none">
+                Page <span x-text="page" class="font-bold text-slate-900 dark:text-white"></span> of <span
+                    x-text="totalPages" class="font-bold text-slate-900 dark:text-white"></span>
             </div>
 
             {{-- Tombol Next --}}
-            <button @click="if(page < totalPages) page++" 
-                :disabled="page === totalPages"
+            <button @click="if(page < totalPages) page++" :disabled="page === totalPages"
                 class="px-6 md:px-8 py-3.5 rounded-2xl border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 font-poppins font-bold text-sm md:text-base text-slate-800 dark:text-white transition-all duration-300 hover:border-orange-500 hover:text-orange-500 disabled:opacity-30 disabled:pointer-events-none shadow-sm flex items-center justify-center cursor-pointer">
                 Next
             </button>
@@ -184,10 +219,22 @@
     </div>
 
     <style>
-        [x-cloak] { display: none !important; }
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #f97316; border-radius: 10px; }
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
     </style>
 
 </section>

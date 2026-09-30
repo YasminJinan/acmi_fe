@@ -20,7 +20,7 @@ class HomeController extends Controller
         $headerData = $cms->getHeader();
         $faqs = $cms->getFaqs();
         $gallery = $cms->getGallery();
-        $partners = $cms->getPartners();
+        $partners = []; // Dikosongkan sementara sesuai request
         $sponsors = collect($cms->getSponsors());
         $sponsorsByPosition = $sponsors->filter(fn($s) => !empty($s['position']))->keyBy('position');
         $sponsorsBySize = $sponsors->filter(fn($s) => empty($s['position']))->groupBy('size');
@@ -78,12 +78,8 @@ class HomeController extends Controller
         $posts = collect([]);
         $testimonials = $cms->getTestimonials();
 
-        try {
-            $events = \App\Models\Event::whereNull('deleted_at')->orderBy('starts_at', 'asc')->get();
-        } catch (\Throwable $e) {
-            Log::error('Gagal mengambil events dari database pgsql_acmi: ' . $e->getMessage());
-            $events = collect();
-        }
+        $eventService = new \App\Services\EventService();
+        $events = $eventService->getEvents();
 
         return view('welcome', compact('headerData', 'posts', 'products', 'faqs', 'gallery', 'partners', 'testimonials', 'events', 'sponsorsBySize', 'sponsorsByPosition', 'sponsoredBannersBySize'));
     }

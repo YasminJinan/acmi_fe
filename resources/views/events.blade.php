@@ -63,28 +63,30 @@
                 <template x-for="event in filteredEvents" :key="event.id">
                     <div @click="window.location.href = '{{ app()->getLocale() == 'id' ? route('id.gabung') : route('en.join') }}'" class="cursor-pointer group bg-gray-50 dark:bg-[#111116] rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/5 transition-all duration-500 hover:border-orange-500/50 dark:hover:border-orange-500/30 hover:shadow-xl hover:shadow-orange-500/10 flex flex-col h-full" data-aos="fade-up">
                         
-                        {{-- Image / Poster --}}
-                        <div class="relative h-80 sm:h-[420px] md:h-[480px] w-full bg-[#0d0d12] overflow-hidden flex items-center justify-center">
-                            <img :src="
-                                   event.title && (event.title.toLowerCase().includes('menyusun strategi bisnis 2025') || event.title.toLowerCase().includes('talk'))
-                                     ? 'https://acmiofficial.com/acmi-admin/uploads/galeri_image/1738116649_5aa07e2ad47b6b53757a.jpg'
-                                     : event.title && event.title.toLowerCase().includes('acmi timur')
-                                     ? 'https://acmiofficial.com/assets/images/acmi_timur.jpeg'
-                                     : event.title && (event.title.toLowerCase().includes('networking & business matching') || event.title.toLowerCase().includes('connect'))
-                                     ? 'https://acmiofficial.com/assets/acmi-connect-event.jpeg'
-                                     : 'https://acmiofficial.com/assets/images/acmi_default.jpeg'
-                                 "
+                        {{-- Image / Poster Event --}}
+                        <div class="relative h-80 sm:h-[420px] md:h-[480px] w-full bg-[#0d0d12] overflow-hidden flex items-center justify-center" 
+                             x-data="{ imgFailed: false }">
+                            
+                            {{-- 1. Gambar Utama (Tampil jika URL ada dan TIDAK error) --}}
+                            <img x-show="event.image_url && event.image_url.trim() !== '' && !imgFailed"
+                                 :src="event.image_url"
                                  :alt="event.title"
                                  loading="lazy"
+                                 x-on:error="imgFailed = true"
                                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-gray-50/80 via-transparent dark:from-[#111116]/80 to-transparent z-10 pointer-events-none"></div>
-                            
-                            {{-- Event Type Badge --}}
-                            <div class="absolute top-4 left-4 z-20">
-                                <span class="bg-orange-500 text-white text-[10px] font-black px-3 py-1.5 rounded-lg uppercase tracking-widest shadow-lg"
-                                      x-text="event.type">
+
+                            {{-- 2. Fallback UI (Tampil jika URL kosong ATAU gambarnya ERROR 404/broken) --}}
+                            <div x-show="!event.image_url || event.image_url.trim() === '' || imgFailed" 
+                                 class="w-full h-full flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-slate-900 via-neutral-900 to-[#14151e] relative select-none">
+                                <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-orange-500 mb-3 shadow-xl z-10">
+                                    <i class="fa-regular fa-image text-2xl opacity-60"></i>
+                                </div>
+                                <span class="z-10 text-[11px] font-bold text-gray-400 font-poppins uppercase tracking-widest px-3 py-1 rounded-full bg-white/5 border border-white/10 flex items-center gap-2">
+                                    <i class="fa-solid fa-image-slash text-orange-500/70 text-xs"></i>
+                                    <span>{{ app()->getLocale() == 'id' ? 'Gambar Tidak Tersedia' : 'No Image Available' }}</span>
                                 </span>
                             </div>
+
                         </div>
 
                         {{-- Content --}}
