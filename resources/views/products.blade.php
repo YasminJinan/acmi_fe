@@ -114,7 +114,7 @@
 
                             {{-- 1. Gambar Utama (Tampil jika URL ada dan TIDAK error) --}}
                             <img x-show="imgUrl && imgUrl.trim() !== '' && !imgFailed" :src="imgUrl"
-                                :alt="product.title" loading="lazy" @error="imgFailed = true"
+                                :alt="product.title" loading="lazy" x-on:error="imgFailed = true"
                                 class="w-full h-full object-cover object-top group-hover:scale-110 transition duration-[1.5s] ease-out">
 
                             {{-- 2. Fallback UI (Tampil jika URL kosong ATAU gambar ERROR 404/broken) --}}

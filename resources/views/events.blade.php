@@ -12,9 +12,8 @@
             get filteredEvents() {
                 const now = new Date();
                 return this.events.filter(e => {
-                    // Fix date parsing for cross-browser support (replace space with T)
-                    const dateStr = e.starts_at ? e.starts_at.replace(' ', 'T') : '';
-                    const eventDate = new Date(dateStr);
+                    const eventDate = e.starts_at ? new Date(e.starts_at) : null;
+                    if (!eventDate || isNaN(eventDate.getTime())) return true;
                     if (this.filter === 'upcoming') return eventDate >= now;
                     if (this.filter === 'past') return eventDate < now;
                     return true;
@@ -99,7 +98,7 @@
                             <div class="flex flex-wrap gap-x-3 gap-y-1 mb-3 text-[11px] sm:text-xs font-poppins text-gray-600 dark:text-gray-400">
                                 <div class="flex items-center gap-1.5">
                                     <i class="fa-regular fa-clock text-orange-500"></i>
-                                    <span x-text="new Date(event.starts_at.replace(' ', 'T')).toLocaleTimeString('{{ app()->getLocale() }}-{{ strtoupper(app()->getLocale()) }}', {hour: '2-digit', minute:'2-digit'}) + ' {{ app()->getLocale() == 'id' ? 'WIB' : '' }}'"></span>
+                                    <span x-text="new Date(event.starts_at).toLocaleTimeString('{{ app()->getLocale() }}-{{ strtoupper(app()->getLocale()) }}', {hour: '2-digit', minute:'2-digit'}) + ' {{ app()->getLocale() == 'id' ? 'WIB' : '' }}'"></span>
                                 </div>
                                 <div class="flex items-center gap-1.5">
                                     <i class="fa-solid fa-location-dot text-orange-500"></i>

@@ -13,8 +13,8 @@ class EventService
      */
     public function getEvents(): array
     {
-        // Ubah key cache ke v5 biar cache lama ter-reset otomatis
-        return Cache::remember('acmi_connect_events_v5', 10, function () {
+        // Ubah key cache ke v6 biar cache lama ter-reset otomatis
+        return Cache::remember('acmi_connect_events_v6', 10, function () {
             try {
                 $events = DB::connection('pgsql_acmi')
                     ->table('events')
@@ -50,6 +50,8 @@ class EventService
                         }
 
                         $event->image_url = $image;
+                        $event->starts_at = $event->starts_at ? \Carbon\Carbon::parse($event->starts_at)->toISOString() : null;
+                        $event->ends_at = $event->ends_at ? \Carbon\Carbon::parse($event->ends_at)->toISOString() : null;
                         return (array) $event;
                     })->all();
                 }
