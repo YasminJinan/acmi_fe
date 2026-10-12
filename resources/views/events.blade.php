@@ -66,7 +66,7 @@
                         <div class="relative h-80 sm:h-[420px] md:h-[480px] w-full bg-[#0d0d12] overflow-hidden flex items-center justify-center" 
                              x-data="{ imgFailed: false }">
                             
-                            {{-- 1. Gambar Utama (Tampil jika URL ada dan TIDAK error) --}}
+                        {{-- 1. Gambar Utama (Tampil jika URL ada dan TIDAK error) --}}
                             <img x-show="event.image_url && event.image_url.trim() !== '' && !imgFailed"
                                  :src="event.image_url"
                                  :alt="event.title"
