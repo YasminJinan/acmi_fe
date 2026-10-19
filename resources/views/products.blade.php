@@ -16,10 +16,19 @@
             page: 1,
             perPage: 24,
 
-            // Memfilter produk berdasarkan input search (Nama PT, CEO, Deskripsi) & kategori
+            // Mengecek apakah produk memiliki foto yang valid
+            hasValidPhoto(p) {
+                const img = p.image || p.image_url || p.photo || '';
+                if (!img || typeof img !== 'string') return false;
+                const trimmed = img.trim();
+                return trimmed !== '' && !['-', 'null', 'undefined', 'none', 'n/a'].includes(trimmed.toLowerCase());
+            },
+
+            // Memfilter produk berdasarkan input search (Nama PT, CEO, Deskripsi) & kategori,
+            // serta menempatkan produk yang memiliki foto di posisi paling atas
             get filteredProducts() {
                 const query = this.search.toLowerCase().trim();
-                return this.products.filter(p => {
+                const matched = this.products.filter(p => {
                     const matchSearch = !query ||
                         (p.title && p.title.toLowerCase().includes(query)) ||
                         (p.company_name && p.company_name.toLowerCase().includes(query)) ||
@@ -28,6 +37,14 @@
                     const matchCategory = this.category === 'Semua' ||
                         (Array.isArray(p.category) ? p.category.includes(this.category) : p.category === this.category);
                     return matchSearch && matchCategory;
+                });
+
+                // Urutkan: Produk berfoto tampil di awal, produk tanpa foto di akhir
+                return matched.sort((a, b) => {
+                    const aHas = this.hasValidPhoto(a);
+                    const bHas = this.hasValidPhoto(b);
+                    if (aHas === bHas) return 0;
+                    return aHas ? -1 : 1;
                 });
             },
 
@@ -105,21 +122,33 @@
                         class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/20 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
 
                         {{-- Image (Foto Muka Pemilik Produk / Poster Produk) --}}
-                        <div class="relative h-[180px] overflow-hidden bg-slate-100 dark:bg-[#151722]" x-data="{ 
+                        <div class="relative h-[200px] overflow-hidden bg-slate-100 dark:bg-[#111420] flex items-center justify-center" x-data="{ 
                                     imgFailed: false,
                                     get imgUrl() {
-                                        return product.image || product.image_url || product.photo || null;
+                                        const url = product.image || product.image_url || product.photo || null;
+                                        if (!url || typeof url !== 'string') return null;
+                                        const trimmed = url.trim();
+                                        return ['-', 'null', 'undefined', 'none', 'n/a'].includes(trimmed.toLowerCase()) ? null : trimmed;
                                     }
                                 }">
 
-                            {{-- 1. Gambar Utama (Tampil jika URL ada dan TIDAK error) --}}
-                            <img x-show="imgUrl && imgUrl.trim() !== '' && !imgFailed" :src="imgUrl"
-                                :alt="product.title" loading="lazy" @error="imgFailed = true"
-                                class="w-full h-full object-cover object-top group-hover:scale-110 transition duration-[1.5s] ease-out">
+                            {{-- 1. Ambient Blurred Background (Mengisi boundary container dengan tone warna foto asli agar serasi & elegan) --}}
+                            <div x-show="imgUrl && !imgFailed" class="absolute inset-0 overflow-hidden pointer-events-none select-none">
+                                <img :src="imgUrl"
+                                    alt=""
+                                    aria-hidden="true"
+                                    class="w-full h-full object-cover blur-2xl scale-125 opacity-35 dark:opacity-30">
+                                <div class="absolute inset-0 bg-slate-900/10 dark:bg-black/40"></div>
+                            </div>
 
-                            {{-- 2. Fallback UI (Tampil jika URL kosong ATAU gambar ERROR 404/broken) --}}
-                            <div x-show="!imgUrl || imgUrl.trim() === '' || imgFailed"
-                                class="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-white/[0.03] dark:to-white/[0.07] relative select-none">
+                            {{-- 2. Gambar Utama / Foto Profil (Tampil penuh tanpa terpotong dahi, menjaga aspek rasio asli & terpusat) --}}
+                            <img x-show="imgUrl && !imgFailed" :src="imgUrl"
+                                :alt="product.title" loading="lazy" x-on:error="imgFailed = true"
+                                class="relative z-[2] w-full h-full object-contain object-center p-3 group-hover:scale-105 transition-transform duration-500 ease-out drop-shadow-sm">
+
+                            {{-- 3. Fallback UI (Tampil jika URL kosong ATAU gambar ERROR 404/broken) --}}
+                            <div x-show="!imgUrl || imgFailed"
+                                class="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-white/[0.03] dark:to-white/[0.07] relative select-none z-[1]">
                                 <div
                                     class="w-12 h-12 rounded-full bg-orange-500/10 dark:bg-orange-500/20 text-orange-500 flex items-center justify-center mb-2 border border-orange-500/20 shadow-sm">
                                     <i class="fa-solid fa-user-tie text-lg"></i>
