@@ -413,7 +413,7 @@
                     <div class="group">
                         <p
                             class="text-4xl md:text-5xl font-black text-gray-950 dark:text-white font-poppins group-hover:text-orange-600 dark:group-hover:text-orange-500 transition-colors duration-300">
-                            10<span class="text-orange-600 dark:text-orange-500">+</span>
+                            5<span class="text-orange-600 dark:text-orange-500">+</span>
                         </p>
                         <p
                             class="text-[11px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest mt-3 flex items-center gap-1.5">

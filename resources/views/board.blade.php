@@ -158,12 +158,10 @@
 
             @php
                 $milestones = [
-                    ['year' => '2014', 'title' => __('messages.milestone_2014_title'), 'desc' => __('messages.milestone_2014_desc')],
-                    ['year' => '2016', 'title' => __('messages.milestone_2016_title'), 'desc' => __('messages.milestone_2016_desc')],
-                    ['year' => '2018', 'title' => __('messages.milestone_2018_title'), 'desc' => __('messages.milestone_2018_desc')],
-                    ['year' => '2020', 'title' => __('messages.milestone_2020_title'), 'desc' => __('messages.milestone_2020_desc')],
-                    ['year' => '2022', 'title' => __('messages.milestone_2022_title'), 'desc' => __('messages.milestone_2022_desc')],
-                    ['year' => '2024', 'title' => __('messages.milestone_2024_title'), 'desc' => __('messages.milestone_2024_desc')]
+                    ['year' => '2021', 'title' => __('messages.milestone_2021_title'), 'desc' => __('messages.milestone_2021_desc')],
+                    ['year' => '2025', 'title' => __('messages.milestone_2025_title'), 'desc' => __('messages.milestone_2025_desc')],
+                    ['year' => '2026', 'title' => __('messages.milestone_2026_title'), 'desc' => __('messages.milestone_2026_desc')],
+                    ['year' => '2028', 'title' => __('messages.milestone_2028_title'), 'desc' => __('messages.milestone_2028_desc')]
                 ];
             @endphp
 
