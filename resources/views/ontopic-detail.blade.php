@@ -8,7 +8,7 @@
 @section('canonical', url()->current())
 
 {{-- Ini og_image yang benar --}}
-@section('og_image', $article['og_image_url'] ?? $article['thumbnail_url'] ?? asset('assets/logo-acmi-new.svg'))
+@section('og_image', $article['og_image_url'] ?? $article['thumbnail_url'] ?? asset('assets/logo-primary.png'))
 
 {{-- Ini section schema yang tadi hilang, kita kembalikan ya --}}
 @section('schema')
@@ -17,7 +17,7 @@
             '@context' => 'https://schema.org',
             '@type' => 'Article',
             'headline' => $article['title'] ?? 'Artikel',
-            'image' => $article['thumbnail_url'] ?? asset('assets/logo-acmi-new.svg'),
+            'image' => $article['thumbnail_url'] ?? asset('assets/logo-primary.png'),
             'author' => [
                 '@type' => 'Person',
                 'name' => $article['author'] ?? 'Admin ACMI',
@@ -27,7 +27,7 @@
                 'name' => 'ACMI',
                 'logo' => [
                     '@type' => 'ImageObject',
-                    'url' => asset('assets/logo-acmi-new.svg'),
+                    'url' => asset('assets/logo-primary.png'),
                 ],
             ],
             'datePublished' => $article['published_at'] ?? now()->toIso8601String(),

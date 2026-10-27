@@ -86,10 +86,10 @@
     <link rel="alternate" hreflang="x-default" href="{{ $enUrl }}" />
     <link rel="canonical" href="{{ $canonical }}">
     {{-- Favicon --}}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
-    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
-    <link rel="apple-touch-icon" href="{{ asset('images/favicon.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=2">
+    <link rel="icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}?v=2">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}?v=2">
+    <link rel="apple-touch-icon" href="{{ asset('assets/images/favicon.png') }}?v=2">
 
     <meta property="og:type" content="{{ $ogType }}">
     <meta property="og:title" content="@yield('title', 'ACMI - Asosiasi CEO Mastermind Indonesia')">
@@ -118,7 +118,7 @@
       "name": "Asosiasi CEO Mastermind Indonesia",
       "alternateName": "ACMI",
       "url": "{{ config('app.url') }}",
-      "logo": "{{ asset('logo-acmi-new') }}",
+      "logo": "{{ asset('assets/logo-primary.png') }}",
       "description": "Komunitas eksklusif CEO dan pemimpin bisnis di Indonesia. Wadah terbaik untuk networking, berbagi ilmu, dan mengeksplorasi kolaborasi strategis."
     }
     </script>

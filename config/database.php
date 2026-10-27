@@ -112,6 +112,9 @@ return [
             'prefix_indexes' => true,
             'search_path'    => 'public',
             'sslmode'        => env('PGSQL_ACMI_SSLMODE', 'prefer'),
+            'options'        => [
+                \PDO::ATTR_TIMEOUT => 2,
+            ],
         ],
 
         'sqlsrv' => [
