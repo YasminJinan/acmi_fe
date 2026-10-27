@@ -701,8 +701,14 @@
             products: @js($products),
             page: 1,
             perPage: 6,
+            hasValidPhoto(p) {
+                const img = p.image || p.image_url || p.photo || '';
+                if (!img || typeof img !== 'string') return false;
+                const trimmed = img.trim();
+                return trimmed !== '' && !['-', 'null', 'undefined', 'none', 'n/a'].includes(trimmed.toLowerCase());
+            },
             get filteredProducts() {
-                return this.products.filter(p => {
+                const matched = this.products.filter(p => {
                     const title = p.title || '';
                     const company = p.company_name || '';
                     const matchSearch = title.toLowerCase().includes(this.search.toLowerCase()) ||
@@ -710,6 +716,13 @@
                     const matchCategory = this.category === 'Semua' ||
                         (Array.isArray(p.category) ? p.category.includes(this.category) : p.category === this.category);
                     return matchSearch && matchCategory;
+                });
+
+                return matched.sort((a, b) => {
+                    const aHas = this.hasValidPhoto(a);
+                    const bHas = this.hasValidPhoto(b);
+                    if (aHas === bHas) return 0;
+                    return aHas ? -1 : 1;
                 });
             },
             get paginatedProducts() {
@@ -766,24 +779,40 @@
                             class="relative bg-white dark:bg-white/5 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1.5 flex flex-col h-full">
 
                             {{-- Image (Foto Muka Pemilik Produk) --}}
-                            <div class="relative h-[180px] overflow-hidden bg-slate-100 dark:bg-[#151722]" x-data="{ imgFailed: false }">
-                                <template x-if="product.image && !imgFailed">
-                                    <img :src="product.image" :alt="product.title"
-                                        x-on:error="imgFailed = true"
-                                        class="w-full h-full object-cover object-top group-hover:scale-110 transition duration-[1.5s] ease-out">
-                                </template>
+                            <div class="relative h-[200px] overflow-hidden bg-slate-100 dark:bg-[#111420] flex items-center justify-center" x-data="{ 
+                                    imgFailed: false,
+                                    get imgUrl() {
+                                        const url = product.image || product.image_url || product.photo || null;
+                                        if (!url || typeof url !== 'string') return null;
+                                        const trimmed = url.trim();
+                                        return ['-', 'null', 'undefined', 'none', 'n/a'].includes(trimmed.toLowerCase()) ? null : trimmed;
+                                    }
+                                }">
 
-                                {{-- Fallback jika profil pemilik produk tidak memiliki foto atau gagal dimuat --}}
-                                <template x-if="!product.image || imgFailed">
-                                    <div class="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-white/[0.03] dark:to-white/[0.07] relative select-none">
-                                        <div class="w-12 h-12 rounded-full bg-orange-500/10 dark:bg-orange-500/20 text-orange-500 flex items-center justify-center mb-2 border border-orange-500/20 shadow-sm">
-                                            <i class="fa-solid fa-user-tie text-lg"></i>
-                                        </div>
-                                        <span class="text-[10px] font-bold text-gray-500 dark:text-gray-400 font-poppins uppercase tracking-wider">
-                                            {{ app()->getLocale() == 'id' ? 'Foto Tidak Tersedia' : 'No Photo Available' }}
-                                        </span>
+                                {{-- 1. Ambient Blurred Background --}}
+                                <div x-show="imgUrl && !imgFailed" class="absolute inset-0 overflow-hidden pointer-events-none select-none">
+                                    <img :src="imgUrl"
+                                        alt=""
+                                        aria-hidden="true"
+                                        class="w-full h-full object-cover blur-2xl scale-125 opacity-35 dark:opacity-30">
+                                    <div class="absolute inset-0 bg-slate-900/10 dark:bg-black/40"></div>
+                                </div>
+
+                                {{-- 2. Gambar Utama / Foto Profil --}}
+                                <img x-show="imgUrl && !imgFailed" :src="imgUrl"
+                                    :alt="product.title" loading="lazy" x-on:error="imgFailed = true"
+                                    class="relative z-[2] w-full h-full object-contain object-center p-3 group-hover:scale-105 transition-transform duration-500 ease-out drop-shadow-sm">
+
+                                {{-- 3. Fallback jika profil pemilik produk tidak memiliki foto atau gagal dimuat --}}
+                                <div x-show="!imgUrl || imgFailed"
+                                    class="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-white/[0.03] dark:to-white/[0.07] relative select-none z-[1]">
+                                    <div class="w-12 h-12 rounded-full bg-orange-500/10 dark:bg-orange-500/20 text-orange-500 flex items-center justify-center mb-2 border border-orange-500/20 shadow-sm">
+                                        <i class="fa-solid fa-user-tie text-lg"></i>
                                     </div>
-                                </template>
+                                    <span class="text-[10px] font-bold text-gray-500 dark:text-gray-400 font-poppins uppercase tracking-wider">
+                                        {{ app()->getLocale() == 'id' ? 'Foto Tidak Tersedia' : 'No Photo Available' }}
+                                    </span>
+                                </div>
 
                                 <div class="absolute top-4 left-4 z-10">
                                     <span

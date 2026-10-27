@@ -16,7 +16,10 @@ class HomeController extends Controller
         $cms = new CmsApiService();
 
         $productService = new \App\Services\ProductService($cms);
-        $products = collect($productService->getAllProducts())->shuffle()->values()->all();
+        $allProducts = $productService->getAllProducts();
+        $withPhoto = collect($allProducts)->filter(fn($p) => $productService->hasValidImage($p))->shuffle();
+        $withoutPhoto = collect($allProducts)->filter(fn($p) => !$productService->hasValidImage($p))->shuffle();
+        $products = $withPhoto->concat($withoutPhoto)->values()->all();
         $headerData = $cms->getHeader();
         $faqs = $cms->getFaqs();
         $gallery = $cms->getGallery();

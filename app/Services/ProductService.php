@@ -28,8 +28,8 @@ class ProductService
      */
     public function getAcmiConnectProducts(): array
     {
-        // Cache key v6 agar cache lama otomatis ter-reset
-        $cacheKey = 'acmi_connect_products_v6';
+        // Cache key v7 agar cache lama otomatis ter-reset
+        $cacheKey = 'acmi_connect_products_v7';
         $fallbackKey = 'acmi_connect_products_fallback';
         $baseUrl = config('services.acmi_connect.url', 'https://connect-api.acmiofficial.com');
 
@@ -38,6 +38,10 @@ class ProductService
             if (empty($path))
                 return null;
             $path = trim($path);
+
+            if (in_array(strtolower($path), ['-', 'null', 'undefined', 'none', 'n/a'])) {
+                return null;
+            }
 
             if (!str_starts_with($path, 'http://') && !str_starts_with($path, 'https://')) {
                 $path = '/' . ltrim($path, '/');
@@ -186,7 +190,21 @@ class ProductService
     }
 
     /**
+     * Cek apakah produk memiliki gambar/foto profil valid
+     */
+    public function hasValidImage(array $product): bool
+    {
+        $img = $product['image'] ?? $product['image_url'] ?? $product['photo'] ?? $product['thumbnail'] ?? null;
+        if (empty($img) || !is_string($img)) {
+            return false;
+        }
+        $trimmed = trim($img);
+        return $trimmed !== '' && !in_array(strtolower($trimmed), ['-', 'null', 'undefined', 'none', 'n/a']);
+    }
+
+    /**
      * Gabungkan semua produk (CMS ACMI DB + ACMI Connect PostgreSQL)
+     * dan urutkan sehingga produk dengan foto profil/gambar berada di atas.
      */
     public function getAllProducts(): array
     {
@@ -198,7 +216,22 @@ class ProductService
             return $item;
         })->all();
 
-        return array_merge($cmsProducts, $connectProducts);
+        $allProducts = array_merge($cmsProducts, $connectProducts);
+
+        // Sort: produk yang memiliki foto profil diutamakan di paling atas (grid teratas),
+        // sedangkan produk tanpa foto (placeholder) dipindahkan ke bagian bawah.
+        return collect($allProducts)
+            ->sort(function ($a, $b) {
+                $hasA = $this->hasValidImage($a);
+                $hasB = $this->hasValidImage($b);
+
+                if ($hasA === $hasB) {
+                    return 0;
+                }
+                return $hasA ? -1 : 1;
+            })
+            ->values()
+            ->all();
     }
 
     /**
