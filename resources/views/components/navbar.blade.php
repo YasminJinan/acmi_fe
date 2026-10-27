@@ -46,11 +46,11 @@
         <div class="flex-shrink-0">
             <a href="{{ url('/') }}" class="block hover:opacity-80 transition-opacity"
                 aria-label="ACMI — kembali ke beranda">
-                <img x-show="isDark" x-cloak src="{{ asset('assets/logo_light.png') }}"
+                <img x-show="isDark" x-cloak src="{{ asset('assets/logo-navbar-dark.png') }}"
                     class="object-contain transition-all duration-300"
                     :class="scrolled ? 'h-8 md:h-9' : 'h-9 md:h-11'" alt="Logo ACMI" />
 
-                <img x-show="!isDark" src="{{ asset('assets/logo-acmi-new.svg') }}"
+                <img x-show="!isDark" src="{{ asset('assets/logo-navbar.png') }}"
                     class="object-contain transition-all duration-300"
                     :class="scrolled ? 'h-8 md:h-9' : 'h-9 md:h-11'" alt="Logo ACMI" />
             </a>

@@ -6,18 +6,16 @@
 
             {{-- Brand Column --}}
             <div class="md:col-span-5">
-                <div class="flex items-center gap-4 mb-8">
-                    <div
-                        class="w-12 h-12 bg-orange-500 rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-orange-500/20 transform rotate-3 hover:rotate-0 transition-transform duration-300">
-                        A
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-2xl text-slate-900 dark:text-white leading-none tracking-tight">ACMI
-                        </h3>
-                        <p
-                            class="text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-1.5 font-semibold italic">
-                            Asosiasi CEO Mastermind Indonesia</p>
-                    </div>
+                <div class="mb-8">
+                    {{-- Mode Gelap (Teks Putih) --}}
+                    <img x-show="isDark" x-cloak src="{{ asset('assets/logo-navbar-dark.png') }}"
+                        class="h-11 md:h-12 w-auto object-contain transition-all duration-300"
+                        alt="Logo ACMI" />
+
+                    {{-- Mode Terang (Teks Default / Hitam) --}}
+                    <img x-show="!isDark" src="{{ asset('assets/logo-navbar.png') }}"
+                        class="h-11 md:h-12 w-auto object-contain transition-all duration-300"
+                        alt="Logo ACMI" />
                 </div>
                 <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed max-w-sm mb-8 font-poppins">
                     {{ __('messages.hero_desc') }}
