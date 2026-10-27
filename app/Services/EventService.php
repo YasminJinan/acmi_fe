@@ -16,6 +16,11 @@ class EventService
         // Ubah key cache ke v6 biar cache lama ter-reset otomatis
         return Cache::remember('acmi_connect_events_v6', 10, function () {
             try {
+                // Lewati koneksi jika server remote baru saja gagal (lihat ProductService)
+                if (Cache::has('pgsql_acmi_down')) {
+                    throw new \RuntimeException('pgsql_acmi ditandai offline, koneksi dilewati.');
+                }
+
                 $events = DB::connection('pgsql_acmi')
                     ->table('events')
                     ->leftJoin('media', 'events.banner_media_id', '=', 'media.id')
@@ -56,6 +61,9 @@ class EventService
                     })->all();
                 }
             } catch (\Throwable $e) {
+                if (!Cache::has('pgsql_acmi_down')) {
+                    Cache::put('pgsql_acmi_down', true, 300);
+                }
                 Log::error('Gagal mengambil events dari database pgsql_acmi: ' . $e->getMessage());
             }
 
