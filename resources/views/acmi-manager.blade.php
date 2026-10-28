@@ -60,8 +60,8 @@
             ['role' => __('messages.org_role_deputy_president'),   'name' => 'Dara Zam Chairyah',      'lead' => true],
             ['role' => __('messages.org_role_secgen'),             'name' => 'Sonny Arca Adryanto',    'lead' => true],
             ['role' => __('messages.org_role_treasurer'),          'name' => 'Lim Erwin Hartono',      'lead' => true],
-            ['role' => __('messages.org_role_deputy_secgen_1'),    'name' => 'Deasi T. Widyastuti'],
-            ['role' => __('messages.org_role_deputy_secgen_2'),    'name' => null],
+            ['role' => __('messages.org_role_deputy_secgen_1'),    'name' => 'Candra Arief S.'],
+            ['role' => __('messages.org_role_deputy_secgen_2'),    'name' => 'Deasi T. Widyastuti'],
             ['role' => __('messages.org_role_deputy_treasurer_1'), 'name' => 'Raga Birhatihin Al Fath'],
             ['role' => __('messages.org_role_deputy_treasurer_2'), 'name' => 'Suryani'],
         ];
@@ -106,7 +106,7 @@
                 'director' => ['role' => __('messages.org_role_dir_membership'), 'name' => 'Paula Meliana'],
                 'deputies' => [
                     ['role' => __('messages.org_role_dep_member_mgmt'), 'name' => 'Yandi Hermawan'],
-                    ['role' => __('messages.org_role_dep_compliance'),  'name' => null],
+                    ['role' => __('messages.org_role_dep_compliance'),  'name' => 'Kristina Anggraeni'],
                     ['role' => __('messages.org_role_dep_legal'),       'name' => 'Husni Farid Abdat'],
                     ['role' => __('messages.org_role_dep_bond'),        'name' => 'M. Zulkifli'],
                 ],
@@ -153,7 +153,7 @@
                 'members' => [
                     ['role' => __('messages.org_role_reg_secretary'),    'name' => 'M. Khudori Bix'],
                     ['role' => __('messages.org_role_reg_treasurer'),    'name' => 'Marylia Rahmawati'],
-                    ['role' => __('messages.org_role_reg_dir_learning'), 'name' => 'Bimo Yunianto'],
+                    ['role' => __('messages.org_role_reg_dir_learning'), 'name' => null],
                     ['role' => __('messages.org_role_reg_dir_network'),  'name' => 'Taufiq Ichsani'],
                     ['role' => __('messages.org_role_reg_dir_member'),   'name' => 'Fajarini'],
                     ['role' => __('messages.org_role_reg_dir_bisdev'),   'name' => 'Suyono'],
@@ -165,7 +165,7 @@
                 'lead'    => ['role' => __('messages.org_role_reg_director'), 'name' => 'Sukis Widjajanti'],
                 'members' => [
                     ['role' => __('messages.org_role_reg_secretary'),    'name' => 'Dedy Pratama'],
-                    ['role' => __('messages.org_role_reg_treasurer'),    'name' => 'Dedy Pratama'],
+                    ['role' => __('messages.org_role_reg_treasurer'),    'name' => 'Adi Darmawan'],
                     ['role' => __('messages.org_role_reg_dir_learning'), 'name' => 'Indra Rinaldy'],
                     ['role' => __('messages.org_role_reg_dir_network'),  'name' => 'Achmad Arief'],
                     ['role' => __('messages.org_role_reg_dir_member'),   'name' => 'Soesanto Hartono'],
@@ -399,9 +399,15 @@
                             <span class="text-[10px] font-black uppercase tracking-wider text-gray-400 dark:text-gray-500 leading-tight">
                                 {{ $m['role'] }}
                             </span>
-                            <span class="text-[13px] font-bold text-gray-800 dark:text-white font-poppins text-right leading-snug group-hover:text-orange-500 transition-colors duration-300">
-                                {{ $m['name'] }}
-                            </span>
+                            @if($m['name'])
+                                <span class="text-[13px] font-bold text-gray-800 dark:text-white font-poppins text-right leading-snug group-hover:text-orange-500 transition-colors duration-300">
+                                    {{ $m['name'] }}
+                                </span>
+                            @else
+                                <span class="text-[13px] font-semibold text-gray-400 dark:text-gray-600 font-poppins text-right leading-snug italic">
+                                    {{ __('messages.org_vacant') }}
+                                </span>
+                            @endif
                         </li>
                         @endforeach
                     </ul>

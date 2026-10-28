@@ -111,8 +111,7 @@ return [
             'prefix'         => '',
             'prefix_indexes' => true,
             'search_path'    => 'public',
-            'sslmode'        => env('PGSQL_ACMI_SSLMODE', 'prefer'),
-        ],
+            'sslmode'        => env('PGSQL_ACMI_SSLMODE', 'prefer'),        ],
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',

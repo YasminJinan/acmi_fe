@@ -59,9 +59,17 @@ class ProductService
             }
         }
 
+        // 2. Jika server remote baru saja gagal, langsung pakai fallback agar halaman tidak hang
+        if (Cache::has('pgsql_acmi_down')) {
+            return Cache::get($fallbackKey, []);
+        }
+
         $products = [];
 
         try {
+            // Konek dulu secara eksplisit: jika gagal, berhenti di sini tanpa retry tambahan dari query
+            DB::connection('pgsql_acmi')->getPdo();
+
             // 1. Ambil dari profil bisnis anggota ACMI Connect (user_profiles)
             $profiles = DB::connection('pgsql_acmi')
                 ->table('user_profiles')
@@ -183,6 +191,8 @@ class ProductService
                 return $products;
             }
         } catch (\Exception $e) {
+            // Tandai offline 5 menit supaya request berikutnya tidak menunggu timeout lagi
+            Cache::put('pgsql_acmi_down', true, 300);
             Log::error('Gagal mengambil produk ACMI Connect: ' . $e->getMessage());
         }
 

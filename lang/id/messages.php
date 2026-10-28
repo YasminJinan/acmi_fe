@@ -293,18 +293,14 @@ return [
     'history_footer' => '"Sejarah adalah fondasi, masa depan adalah tujuan kami."',
 
     // Milestone Details
-    'milestone_2014_title' => 'Pendirian ACMI',
-    'milestone_2014_desc' => 'ACMI didirikan oleh 12 CEO visioner Indonesia dengan misi sinergi ekonomi.',
-    'milestone_2016_title' => '100 CEO Pertama',
-    'milestone_2016_desc' => 'Pertumbuhan pesat hingga mencapai 100 anggota dari berbagai industri strategis.',
-    'milestone_2018_title' => 'Business Mission',
-    'milestone_2018_desc' => 'Peluncuran program ekspansi global dengan kunjungan bisnis ke 5 negara.',
-    'milestone_2020_title' => 'Digital Transformation',
-    'milestone_2020_desc' => 'Adaptasi pandemi melalui peluncuran platform networking virtual eksklusif.',
-    'milestone_2022_title' => 'Ekspansi Masif',
-    'milestone_2022_desc' => 'Anggota melampaui 300 CEO, mencakup ekspansi ke 15 sektor industri berbeda.',
-    'milestone_2024_title' => 'Annual Summit Terbesar',
-    'milestone_2024_desc' => 'Puncak perayaan dengan 500+ peserta dari pemimpin puncak perusahaan nasional.',
+    'milestone_2021_title' => 'Pendirian ACMI',
+    'milestone_2021_desc' => 'ACMI didirikan pada 22 April 2021 sebagai wadah bagi pengusaha, CEO, dan pemimpin bisnis untuk belajar, berjejaring, dan berkembang bersama dengan semangat "Teman Bantu Teman".',
+    'milestone_2025_title' => 'Empat Pilar Strategis',
+    'milestone_2025_desc' => 'ACMI memasuki fase pertumbuhan baru periode 2025–2028 dengan empat pilar: Learn, Connect, Ecosystem, dan Scale Up.',
+    'milestone_2026_title' => 'Ekosistem Digital ACMI',
+    'milestone_2026_desc' => 'Peluncuran LMS "ACMI Business Fundamental", program induksi ACMI Begin, serta website & aplikasi ACMI Connect.',
+    'milestone_2028_title' => 'Target 2028',
+    'milestone_2028_desc' => '1.000 anggota aktif, Rp 1 triliun transaksi & kolaborasi antar anggota, serta Happiness & Engagement anggota minimal 8/10.',
 
     // News/Feed Page (Main Feed)
     'feed_title' => 'Untuk Mu',
@@ -383,7 +379,7 @@ return [
     'about_title_1' => 'Memimpin',
     'about_title_2' => 'Sinergi Bisnis',
     'about_title_3' => 'Indonesia',
-    'about_desc' => '<strong class="text-gray-900 dark:text-white font-semibold">ACMI (Asosiasi CEO Masterind Indonesia)</strong> adalah wadah eksklusif bagi para pemimpin puncak untuk bersinergi dan mendorong akselerasi ekonomi nasional.',
+    'about_desc' => '<strong class="text-gray-900 dark:text-white font-semibold">ACMI (Asosiasi CEO Mastermind Indonesia)</strong> adalah wadah eksklusif bagi para pemimpin puncak untuk bersinergi dan mendorong akselerasi ekonomi nasional.',
     
     // VISION & MISSION
     'vm_badge' => 'Aktivitas & Fondasi',
@@ -392,14 +388,14 @@ return [
     'vm_desc' => 'Landasan pacu ACMI dalam menciptakan ekosistem kolaboratif bagi para pemimpin bisnis untuk bersinergi membangun Indonesia.',
     
     'vision_title' => 'Visi',
-    'vision_text' => 'Menjadi komunitas CEO paling berpengaruh di Indonesia yang mendorong sinergi bisnis, inovasi, dan pertumbuhan ekonomi nasional melalui kolaborasi pemimpin berkualitas.',
-    
+    'vision_text' => 'Menjadi ekosistem pengusaha unggul di Indonesia — tempat para pengusaha belajar, berjejaring, dan berkembang bersama secara berkelanjutan.',
+
     'mission_title' => 'Misi',
     'missions' => [
-        'Memfasilitasi jaringan strategis antar CEO Indonesia.',
-        'Menyediakan program pengembangan kepemimpinan.',
-        'Mendorong inovasi dan kolaborasi bisnis.',
-        'Memperkuat suara pemimpin dalam kebijakan nasional.'
+        'Learn — Program pengembangan kapasitas melalui A Talk: Speak Your Brand, Podcast ACMI, LMS "ACMI Business Fundamental", dan program induksi ACMI Begin.',
+        'Connect — Kegiatan networking yang positif dan berkelanjutan melalui Gerebek Kantor Teman, Weekend Business Seminar, CEO Mastermind, dan event nasional.',
+        'Ecosystem — Ekosistem keanggotaan yang akrab, bahagia, dan tertata dengan menjaga engagement, happiness, dan tata kelola.',
+        'Scale Up — Dukungan bisnis & kolaborasi profesional untuk mengembangkan usaha, mencari mitra strategis, mendapatkan investor, dan berkolaborasi nyata.'
     ],
 
     // NAV
@@ -532,14 +528,14 @@ eksekutif ACMI dari berbagai sektor industri.',
     'membership_desc' => 'ACMI menghadirkan ekosistem privat bagi para CEO, founder, investor, dan executive leaders untuk membangun koneksi strategis, memperluas peluang kolaborasi, dan bertumbuh bersama dalam lingkungan bisnis yang terkurasi dan bernilai tinggi.',
     
     'membership_features' => [
-        'Full privileged access ke seluruh program dan ecosystem ACMI',
-        'Exclusive invitation ke premium CEO gathering, executive dinner & private networking session',
-        'Direct access ke mentor ACMI dan strategic business leaders',
-        'Private masterclass bersama global experts dan top industry practitioners',
-        'Strategic networking dengan 480+ curated CEOs, founders, dan decision makers Indonesia',
-        'Access ke peluang kolaborasi lintas industri dan high-value business connections',
-        'Priority invitation untuk global business trip, international business mission & executive delegation',
-        'Exclusive access ke premium insights dan industry reports',
+        'Akses penuh ke seluruh program 4 pilar ACMI: Learn, Connect, Ecosystem, dan Scale Up',
+        'Edukasi bisnis lewat A Talk: Speak Your Brand, Podcast ACMI, dan LMS "ACMI Business Fundamental"',
+        'Program induksi ACMI Begin dengan sertifikat digital resmi ACMI',
+        'Networking dengan 480+ anggota lewat Gerebek Kantor Teman, Weekend Business Seminar, dan CEO Mastermind',
+        'Akses ke Meet the Investor dan program pendampingan ACMI Accelerator',
+        'Kolaborasi & referal sehat antar anggota dengan semangat "Teman Bantu Teman"',
+        'Kesempatan ikut International Business Trip ACMI',
+        'Kebersamaan lewat ACMI Sport, ACMI Club, dan event nasional (HUT, RUA, Bukber, 17an)',
     ],
 
     'membership_cta_title' => 'Ajukan Profil Anda',

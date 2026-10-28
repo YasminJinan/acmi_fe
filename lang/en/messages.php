@@ -299,18 +299,14 @@ executives across diverse industries.',
     'history_footer' => '"History is our foundation, the future is our destination."',
 
     // Milestone Details
-    'milestone_2014_title' => 'ACMI Foundation',
-    'milestone_2014_desc' => 'ACMI was established by 12 visionary Indonesian CEOs with a mission of economic synergy.',
-    'milestone_2016_title' => 'First 100 CEOs',
-    'milestone_2016_desc' => 'Rapid growth reaching 100 members from various strategic industries.',
-    'milestone_2018_title' => 'Business Mission',
-    'milestone_2018_desc' => 'Launch of the global expansion program with business delegations to 5 countries.',
-    'milestone_2020_title' => 'Digital Transformation',
-    'milestone_2020_desc' => 'Pandemic adaptation through the launch of an exclusive virtual networking platform.',
-    'milestone_2022_title' => 'Massive Expansion',
-    'milestone_2022_desc' => 'Membership surpassed 300 CEOs, covering expansion into 15 different industry sectors.',
-    'milestone_2024_title' => 'Largest Annual Summit',
-    'milestone_2024_desc' => 'The peak celebration with 500+ participants from national corporate top leaders.',
+    'milestone_2021_title' => 'ACMI Founded',
+    'milestone_2021_desc' => 'ACMI was founded on 22 April 2021 as a home for entrepreneurs, CEOs, and business leaders to learn, connect, and grow together in the spirit of "Teman Bantu Teman".',
+    'milestone_2025_title' => 'Four Strategic Pillars',
+    'milestone_2025_desc' => 'ACMI entered a new growth phase for 2025–2028 with four pillars: Learn, Connect, Ecosystem, and Scale Up.',
+    'milestone_2026_title' => 'ACMI Digital Ecosystem',
+    'milestone_2026_desc' => 'Launch of the "ACMI Business Fundamental" LMS, the ACMI Begin induction program, and the ACMI Connect website & app.',
+    'milestone_2028_title' => '2028 Targets',
+    'milestone_2028_desc' => '1,000 active members, Rp 1 trillion in member transactions & collaborations, and member Happiness & Engagement of at least 8/10.',
      // News/Feed Page (Main Feed)
     'feed_title' => 'For you',
     'feed_subtitle' => 'Special coverage and curated news selected for you today.',
@@ -396,14 +392,14 @@ executives across diverse industries.',
     'vm_desc' => 'ACMI\'s runway in creating a collaborative ecosystem for business leaders to synergize in building Indonesia.',
     
     'vision_title' => 'Vision',
-    'vision_text' => 'To become the most influential CEO community in Indonesia that drives business synergy, innovation, and national economic growth through high-quality leadership collaboration.',
-    
+    'vision_text' => 'To become Indonesia\'s leading entrepreneur ecosystem — a place where entrepreneurs learn, connect, and grow together sustainably.',
+
     'mission_title' => 'Mission',
     'missions' => [
-        'Facilitating strategic networks among Indonesian CEOs.',
-        'Providing leadership development programs.',
-        'Encouraging business innovation and collaboration.',
-        'Strengthening the voice of leaders in national policy.'
+        'Learn — Capacity-building programs through A Talk: Speak Your Brand, ACMI Podcast, the "ACMI Business Fundamental" LMS, and the ACMI Begin induction program.',
+        'Connect — Positive, sustainable networking through Gerebek Kantor Teman, Weekend Business Seminar, CEO Mastermind, and national events.',
+        'Ecosystem — A warm, happy, and well-governed membership ecosystem that nurtures engagement, happiness, and good governance.',
+        'Scale Up — Business support & professional collaboration to grow businesses, find strategic partners, secure investors, and collaborate for real.'
     ],
 
     // NAV
@@ -519,14 +515,14 @@ executives across diverse industries.',
     'membership_desc' => 'ACMI presents a private ecosystem for CEOs, founders, investors, and executive leaders to build strategic connections, expand collaborative opportunities, and grow together in a curated, high-value business environment.',
     
     'membership_features' => [
-        'Full privileged access to all ACMI programs and ecosystem',
-        'Exclusive invitation to premium CEO gatherings, executive dinners & private networking sessions',
-        'Direct access to ACMI mentors and strategic business leaders',
-        'Private masterclasses with global experts and top industry practitioners',
-        'Strategic networking with 480+ curated CEOs, founders, and decision makers in Indonesia',
-        'Access to cross-industry collaboration opportunities and high-value business connections',
-        'Priority invitation for global business trips, international business missions & executive delegations',
-        'Exclusive access to premium insights and industry reports',
+        'Full access to all programs across ACMI\'s 4 pillars: Learn, Connect, Ecosystem, and Scale Up',
+        'Business education through A Talk: Speak Your Brand, ACMI Podcast, and the "ACMI Business Fundamental" LMS',
+        'ACMI Begin induction program with an official ACMI digital certificate',
+        'Networking with 480+ members through Gerebek Kantor Teman, Weekend Business Seminar, and CEO Mastermind',
+        'Access to Meet the Investor and the ACMI Accelerator mentoring program',
+        'Healthy collaboration & referrals between members in the spirit of "Teman Bantu Teman"',
+        'Opportunity to join the ACMI International Business Trip',
+        'Togetherness through ACMI Sport, ACMI Club, and national events (Anniversary, RUA, Iftar, Independence Day)',
     ],
 
     'membership_cta_title' => 'Submit Your Profile',
