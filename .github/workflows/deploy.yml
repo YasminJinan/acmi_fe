@@ -67,6 +67,7 @@ jobs:
             --exclude='*.zip' \
             --exclude='DAFTAR_FITUR_BAST_ACMI.md' \
             --exclude='INSTRUKSI_AGENT_SERVER_CICD.md' \
+            --exclude='vercel.json' \
             --exclude='fe_out.html' \
             ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/
 
