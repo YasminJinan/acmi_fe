@@ -1,0 +1,92 @@
+name: Deploy ACMI FE to Production
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  workflow_dispatch: # Bisa juga di-trigger manual lewat tab Actions di GitHub
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build & Deploy via SSH
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 2. Setup PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, pdo_pgsql, pgsql, dom, filter, gd, json, curl, zip, bcmath
+          coverage: none
+
+      - name: 3. Install Composer Dependencies (Production)
+        run: composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+
+      - name: 4. Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: 5. Install NPM & Build Vite Assets (Tailwind v4)
+        run: |
+          npm ci --ignore-scripts
+          npm run build
+
+      - name: 6. Setup SSH Key & Known Hosts
+        run: |
+          mkdir -p ~/.ssh
+          printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p ${{ secrets.SSH_PORT || 22 }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: 7. Sync Files ke Server (rsync via SSH)
+        run: |
+          rsync -rlptz --no-o --no-g \
+            -e "ssh -i ~/.ssh/id_ed25519 -p ${{ secrets.SSH_PORT || 22 }} -o StrictHostKeyChecking=no" \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='node_modules/' \
+            --exclude='tests/' \
+            --exclude='.env' \
+            --exclude='.env.*' \
+            --exclude='storage/' \
+            --exclude='public/storage' \
+            --exclude='public/sitemap.xml' \
+            --exclude='public/.well-known/' \
+            --exclude='database/*.sqlite*' \
+            --exclude='database/acmi_db.sql' \
+            --exclude='*.zip' \
+            --exclude='DAFTAR_FITUR_BAST_ACMI.md' \
+            --exclude='INSTRUKSI_AGENT_SERVER_CICD.md' \
+            --exclude='fe_out.html' \
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/
+
+      - name: 8. Refresh Cache Laravel di Server
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -p ${{ secrets.SSH_PORT || 22 }} -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            set -e
+            cd ${{ secrets.DEPLOY_PATH }}
+
+            # Bersihkan & perbarui cache konfigurasi/route/view setelah file baru ter-upload
+            php artisan optimize:clear
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+
+            # Pastikan permission storage & bootstrap/cache tetap bisa ditulis oleh web server (www-data)
+            if id "www-data" &>/dev/null; then
+              chown -R www-data:www-data storage bootstrap/cache
+            fi
+            chmod -R ug+rwX storage bootstrap/cache
+
+            echo "✅ Deployment ACMI FE selesai!"
+          EOF

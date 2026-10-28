@@ -15,7 +15,7 @@ class CacheInstagramImages extends Command
 
     public function handle()
     {
-        $apiUrl = env('APIFY_INSTAGRAM_URL');
+        $apiUrl = config('services.apify.instagram_url');
         $response = Http::timeout(15)->get($apiUrl);
 
         if (!$response->successful()) {

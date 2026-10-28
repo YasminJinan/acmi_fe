@@ -13,7 +13,7 @@ class CmsApiService
 
     public function __construct()
     {
-        $baseUrl = rtrim(config('services.cms.api_url') ?: (config('services.cms.url') ?: env('CMS_API_URL', 'http://localhost:8000/api/public')), '/');
+        $baseUrl = rtrim(config('services.cms.api_url') ?: (config('services.cms.url') ?: 'http://localhost:8000/api/public'), '/');
 
         // otomatis pastikan path /api/public selalu ada jika belum disertakan di .env
         if (!empty($baseUrl) && !str_contains($baseUrl, '/api/public')) {

@@ -36,7 +36,7 @@ return [
     ],
 
     'cms' => [
-        'api_url'        => env('CMS_API_URL'),
+        'api_url'        => env('CMS_API_URL', 'http://localhost:8000/api/public'),
         'webhook_secret' => env('CMS_WEBHOOK_SECRET'),
     ],
 
